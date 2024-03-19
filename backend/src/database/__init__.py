@@ -3,4 +3,4 @@ from config import config
 
 
 client = motor.motor_asyncio.AsyncIOMotorClient(config.get("MONGO_URI"))
-db = client[config["DB_NAME"]]
+db = client[config["MONGODB_NAME"]]
