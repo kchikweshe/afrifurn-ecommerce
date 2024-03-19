@@ -62,4 +62,4 @@ def authenticate_user(fake_db, username: str, password: str):
 
 
 def check_user(user: UserSignupSchema):
-    ...
+    pass
