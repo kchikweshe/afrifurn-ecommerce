@@ -26,10 +26,10 @@ class CommonModel(BaseModel):
     updated_at: Optional[datetime]=datetime.now()
 
    
-def ResponseModel(data:any=None, message:str=''):
+def ResponseModel(data:any=None, message:str='',code:Optional[int]=200):
     return {
         "data": data,
-        "code": 200,
+        "code": code,
         "message": message,
     }
 

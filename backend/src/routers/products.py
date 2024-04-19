@@ -1,12 +1,12 @@
 import os
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Body, File, Form, HTTPException, UploadFile, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from models.products import Category, Dimensions, Level1Category, Level2Category, Product, Variant
-from  models.common import CommonModel
+from models.products import Category, Dimensions, Level1Category, Level2Category, Price, Product, Variant
+from  models.common import CommonModel, ErrorResponseModel, ResponseModel
 from database import db
 from datetime import datetime
 from bson import ObjectId
@@ -31,53 +31,56 @@ async def get_products():
 
 
 
-@router.post("/product/", response_model=Product)
+@router.post("/", response_model=Any)
 async def create_product(
         name: str = Form(...),
-         category: Category = Form(...),
-         level1_category: Level1Category = Form(...),
-
-         level2category: Level2Category = Form(...),
+        category: str = Form(...),
+        price_of_item:float=Form(...),
          description: str=Form(...),
-        dimensions: Dimensions=Form(...),
-        variants:list[Variant]=Form(...)
-    , image: UploadFile = File(...)):
+         currency_code:str=Form(...),
+           width: float = Form(gt=0),
+    height: float = Form(gt=0),
+    depth: float = Form(gt=0, optional=True) , # Optional depth
+    weight: float = Form(gt=0))->Any:
     # Validate image (optional)
-    # ...
-
-    # Create image directory if it doesn't exist
-    os.makedirs(IMAGES_DIR, exist_ok=True)
-
-    # Generate a unique filename for the image
-    file_extension = image.filename.split(".")[-1]
-    filename = f"{name}_{variants[0].color}.{file_extension}"  # Example filename format
-    file_path = os.path.join(IMAGES_DIR, filename)
-
+    # ..
     try:
-        with open(file_path, "wb") as f:
-            contents = await image.read()
-            f.write(contents)
+        category_id = ObjectId(category)
+      
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+    try:
+        parent_category = await db['level2_categories'].find_one({"_id": category_id})
+        currency = await db['currencies'].find_one({"code": currency_code})
+    except  Exception as e:
+        raise HTTPException(status_code=500,detail=f"Error.{e}")
+   
+    if parent_category is None:
+        return ErrorResponseModel(error=404,code=404,message="Category not found")
+    if currency is None:
+        return ErrorResponseModel(error=404,code=404,message="Currency not found")
+    
+    dimensions= Dimensions(
+        depth=depth,
+        height=height,
+        weight=weight,
+        width=width
+    )
+    price=Price(
+        value=price_of_item,currency=currency
+    )
+    product=Product(
+        name=name,
+        description=description,
+        category=parent_category,
+        price=price,
+        dimensions=dimensions
+    )
+     # Insert product into database
+    inserted_product =  await db["products"].insert_one(product.dict())
+    # data = product.copy(update={"id": str(inserted_product.inserted_id)})
 
-            product = Product(
-            name=name,
-            category=category,
-            description=description,
-            dimensions=dimensions,
-            variants=variants,
-            # Optional image field, assuming you've added it to the model
-            image=filename
-        )
-        # Update product model with the image path
-        product.variants[0].image = filename
-
-        # Insert product into database
-        inserted_product =  await db["products"].insert_one(product)
-        return inserted_product.insertedid
-
-    except Exception as e:
-        raise RuntimeError(f"Error saving image: {e}") from e
-
-
+    return ResponseModel(data=None,code=201,message="Product added successfully")
 
 @router.put('/{id}')
 async def update_product(id: str, product: Product = Body(...)):

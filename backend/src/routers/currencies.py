@@ -1,12 +1,12 @@
 import os
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Body, File, Form, HTTPException, UploadFile, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from models.products import Category, Currency, Dimensions, Level1Category, Level2Category, Product, Variant
-from  models.common import CommonModel
+from  models.common import CommonModel, ResponseModel
 from database import db
 from datetime import datetime
 from bson import ObjectId
@@ -15,11 +15,16 @@ router = APIRouter(
     prefix="/currencies", 
     tags=["Currencies"]
 )
-@router.post("/currencies/", response_model=Currency)
-async def create_currency(currency: Currency):
-    insert_result = await db["currencies"].insert_one(currency.dict(exclude_unset=True))
-    inserted_id = insert_result.inserted_id
-    return currency.copy(update={"id": inserted_id})
+@router.post("/currencies/", response_model=Any)
+async def create_currency(code: str = Form(..., min_length=0),
+    symbol: str = Form(..., min_length=1)):
+
+    currency=Currency(code=code,symbol=symbol)
+    try:
+         await db["currencies"].insert_one(currency.dict(exclude_unset=True))
+    except:
+        raise HTTPException(status_code='500',detail="Failed to save currency")
+    return ResponseModel(data=None,code=201,message="Currency saved successfully")
 @router.get("/currencies/{currency_id}", response_model=Currency)
 async def get_currency(currency_id: str):
     currency = await db["currencies"].find_one({"_id": ObjectId(currency_id)})

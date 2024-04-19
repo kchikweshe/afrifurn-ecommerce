@@ -1,3 +1,4 @@
+from typing import List, Optional
 from fastapi import FastAPI, File, UploadFile, Request
 from pydantic import  Field
 import motor.motor_asyncio
@@ -10,11 +11,14 @@ class Dimensions(CommonModel):
     height: float = Field(gt=0)
     depth: float = Field(gt=0, optional=True)  # Optional depth
     weight: float = Field(gt=0)
-
+class Color(CommonModel):
+    name:str
+    color_code:str
 class Variant(CommonModel):
-    color: str = Field(..., min_length=3, max_length=20)
+    color: Color 
     quantity_in_stock: int = Field(gt=0)
-    image: UploadFile = File(...)
+    product_id:str
+    images: List[str]|None = List[str]
 
 class Currency(CommonModel):
     code: str = Field(..., min_length=3, max_length=3)
@@ -35,11 +39,11 @@ class Level2Category(CommonModel):
 
 class Product(CommonModel):
     name: str = Field(..., min_length=3, max_length=50)
-    description: str = Field(..., min_length=3, max_length=50)
+    description: str = Field(..., min_length=3)
     category: Level2Category = Field(...)
     dimensions: Dimensions=Field(...)
-    variants: list[Variant]
+    # variants: list[Variant]
     is_new: bool = True
     is_archived:bool=False
     price: Price=Field(...)
-    discount: float = Field(ge=0, le=100)  #
+    discount: Optional[float] =None#
