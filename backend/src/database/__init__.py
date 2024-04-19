@@ -1,6 +1,8 @@
-import motor.motor_asyncio
+import os
+import motor
 from config import config
 
 
-client = motor.motor_asyncio.AsyncIOMotorClient(config.get("MONGO_URI"))
-db = client[config["MONGODB_NAME"]]
+client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"])
+
+db = client.get_database(config['DB_NAME'])

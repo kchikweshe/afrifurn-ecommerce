@@ -1,3 +1,4 @@
+import uuid
 from pydantic import BaseModel, Field
 from datetime import datetime
 from bson import ObjectId
@@ -16,17 +17,22 @@ class PyObjectId(ObjectId):
         return ObjectId(v)
 
     @classmethod
-    def __modify_schema__(cls, field_schema):
+    def __get_pydantic_json_schema__(cls, field_schema):
         field_schema.update(type="string")
 
 
 class CommonModel(BaseModel):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
+    created_at: Optional[datetime]=datetime.now()
+    updated_at: Optional[datetime]=datetime.now()
 
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = { ObjectId: lambda v: str(v) }
-        media_type = "application/json"
+   
+def ResponseModel(data:any=None, message:str=''):
+    return {
+        "data": data,
+        "code": 200,
+        "message": message,
+    }
+
+
+def ErrorResponseModel(error, code, message):
+    return {"error": error, "code": code, "message": message}

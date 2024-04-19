@@ -29,7 +29,7 @@ services:
       dockerfile: ./Dockerfile   # Adjust the path to the Dockerfile
     restart: always
     ports:
-      - 8000:8000
+      - 6590:6590
     env_file:
       - ./.env
     depends_on:
