@@ -21,10 +21,11 @@ async def create_currency(code: str = Form(..., min_length=0),
 
     currency=Currency(code=code,symbol=symbol)
     try:
-         await db["currencies"].insert_one(currency.dict(exclude_unset=True))
+         await db["currencies"].insert_one(currency.model_dump(
+        by_alias=True, exclude=["id"])) # type: ignore
     except:
-        raise HTTPException(status_code='500',detail="Failed to save currency")
-    return ResponseModel(data=None,code=201,message="Currency saved successfully")
+        raise HTTPException(status_code=500,detail="Failed to save currency")
+    return ResponseModel(data={},code=201,message="Currency saved successfully")
 @router.get("/currencies/{currency_id}", response_model=Currency)
 async def get_currency(currency_id: str):
     currency = await db["currencies"].find_one({"_id": ObjectId(currency_id)})
