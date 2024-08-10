@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 from fastapi import APIRouter, Form, HTTPException
 
 from models.product_attributes import Material
@@ -6,7 +6,7 @@ from  models.common import ResponseModel
 from database import db
 
 router = APIRouter(
-    prefix="/material", 
+    prefix="/materials", 
     tags=["Materials"]
 )
 @router.post("/", response_model=Any)
@@ -27,6 +27,12 @@ async def create(name: str = Form(..., min_length=0),
 @router.get("/{name}", response_model=Material)
 async def get_one(name: str):
     data = await db["materials"].find_one({"name": name})
+    if not data:
+        raise HTTPException(status_code=404, detail="Material not found")
+    return data
+@router.get("/", response_model=List[Material])
+async def get_all():
+    data = await db["materials"].find().to_list(length=None)
     if not data:
         raise HTTPException(status_code=404, detail="Material not found")
     return data

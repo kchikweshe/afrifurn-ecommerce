@@ -1,22 +1,17 @@
-import asyncio
 import os
 from typing import Any, List, Optional
-from fastapi import APIRouter, Body, File, Form, HTTPException, Query, UploadFile, status
-from fastapi.responses import Response
+from fastapi import APIRouter, Form, HTTPException, Query
 from httpcore import NetworkError
 from pydantic import ValidationError
 from pymongo import ReturnDocument
-from bson.json_util import dumps
 
 from models.products import Dimensions, Product
 from  models.common import ErrorResponseModel, ResponseModel
 from database import db
 from bson import ObjectId
 
-from dto.models import ProductFilter
-from routers.product_variants import allowed_file, convert_to_webp, readImage, save_image
-DEFAULT_IMAGES_DIR = "static/product/"  # Default image storage directory
-IMAGES_DIR = os.getenv("PRODUCT_IMAGES_DIR", DEFAULT_IMAGES_DIR)  # Read from environment variable
+from services.product import IMAGES_DIR, extract_product_information, fetch_one, filter_one_product, filter_products, insert_into_db
+
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
 
@@ -27,19 +22,7 @@ router = APIRouter(
 
 
 
-async def filter_products(p:dict):
-
-    print(p)
-    try:
-         products =  await db["products"].find(p).to_list(length=None)
-          # Convert MongoDB documents to Python dictionaries
-         products_data = [product for product in products]
-        # Convert Python dictionaries to JSON format
-         products_json = dumps(products_data)
-    except  Exception as e:
-        print("Error: ",e)
-    return products_json
-@router.get("/products/filter")
+@router.get("/filter",response_model=List[Product])
 async def filter_products_route(
     start_price: float = Query(None, description="Depth of the product"),
     end_price: float = Query(None, description="Depth of the product"),
@@ -50,7 +33,13 @@ async def filter_products_route(
     depth: float = Query(None, description="Depth of the product"),
     height: float = Query(None, description="Height of the product"),
     material: str = Query(None, description="Material of the product"),
-    category: str = Query(None, description="Category of the product")
+    category: str = Query(None, description="Category of the product"),
+    page: int = Query(1, description="Page number"),
+    page_size: int = Query(10, description="Number of products per page"),
+    sort_by: str = Query("_id", description="Field to sort by"),
+    sort_order: int = Query(1, description="Sort order (1 for ascending, -1 for descending)"),
+ name: str = Query(None, description="Name of the product"),
+
 ):
     """
     Filters products based on the provided parameters.
@@ -68,18 +57,27 @@ async def filter_products_route(
     Returns:
         dict: A dictionary containing a success message and the filtered products.
     """
-    if(start_price>=end_price):
-        return ResponseModel(message="Start price cannot be greater or equal than end price. ")
-    query_criteria:dict = {"price": {"$gte": start_price, "$lte": end_price}}
+
+     # Calculate skip and limit for pagination
+    skip = (page - 1) * page_size
+    limit = page_size
+    query_criteria:dict =  {}
 
     try:
         # Define query criteria for price and other attributes
+        if start_price and end_price:
+            if(start_price>=end_price):
+                return ResponseModel(message="Start price cannot be greater or equal than end price. ")
+            query_criteria["price"] =  {"$gte": start_price, "$lte": end_price}
+        if name:
+            query_criteria["name"] ={"$regex": name,"$options": "i"}
+
         if color:
-            query_criteria["color.color_code"] = color
+            query_criteria["variants.color.color_code"] = color.replace("%23","#")
         if width:
             query_criteria["dimensions.width"] = width
         if length:
-            query_criteria["dimensions.length"] = length
+            query_criteria["dimensions.length"] = {"$gte": length}
         if depth:
             query_criteria["dimensions.depth"] = depth
         if height:
@@ -97,10 +95,64 @@ async def filter_products_route(
     # Perform filtering and return products
     try:
         # This part will depend on how you retrieve products in your application
-        filtered_products = await filter_products(query_criteria)  # Added 'await' keyword
+        filtered_products =  await filter_products(
+                                              filters=  query_criteria,
+                                              page=page,
+                                              page_size=page_size,
+                                              skip=skip,
+                                              limit=limit,
+                                              sort_by=sort_by,
+                                              sort_order=sort_order
+
+                                                  )  # Added 'await' keyword
         if filtered_products is None:
             raise HTTPException(status_code=500, detail="Failed to retrieve products")
-        return {"message": "Products filtered with provided parameters", "products": filtered_products}
+        return filtered_products
+    except NetworkError as ne:
+        # Network error handling
+        raise HTTPException(status_code=503, detail="Service unavailable, please try again later")
+    except Exception as e:
+        print(e.__cause__)
+        # Exception handling
+        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+
+
+@router.get("/", response_model=List[Product])
+async def get_products():
+    try:
+         products =  await db["products"].find().to_list(length=None)
+    except  Exception as e:
+        print(e)
+    return products
+
+@router.get("/filter-one",response_model=Product)
+async def filter_product(
+    id:str=Query(None, description="Id of the product"),
+ name: str = Query(None, description="Name of the product"),
+): 
+    query_criteria:dict =  {}
+    if name:
+        query_criteria["name"] ={"$regex": name,"$options": "i"}
+    if id:
+        query_criteria["_id"] =id
+
+
+    # Perform filtering and return products
+    try:
+        # This part will depend on how you retrieve products in your application
+
+        filtered_product = await filter_one_product(
+                    query_criteria
+
+        )  # Added 'await' keyword
+        if filtered_product is None:
+            raise HTTPException(status_code=500, detail="Failed to retrieve product")
+        result = await db['products'].update_one({"_id": filtered_product['_id']}, {"$inc": {"views": 1}})
+
+    # Check if the document was found and updated
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Product not found")
+        print('Product views count updated')
     except NetworkError as ne:
         # Network error handling
         raise HTTPException(status_code=503, detail="Service unavailable, please try again later")
@@ -108,19 +160,7 @@ async def filter_products_route(
         print(e)
         # Exception handling
         raise HTTPException(status_code=500, detail="Internal server error")
-
-
-@router.get("/", response_model=List[Product])
-async def get_products():
-    try:
-         products =  await db["products"].find().to_list(length=None)
-        
-
-    except  Exception as e:
-        print(e)
-    return products
-
-
+    return filtered_product
 
 @router.post("/", response_model=Any, response_model_by_alias=False)
 async def create_product(
@@ -130,9 +170,7 @@ async def create_product(
     description: str = Form(...),
     currency_code: str = Form(...),
     width: float = Form(gt=0),
-    color_code: str = Form(...),
-    quantity: int = Form(gt=0),
-    images: List[UploadFile] = [],
+    colors: List[str] = Form(...),
     height: float = Form(gt=0),
     length: float = Form(gt=0),
     depth: Optional[float|None] = Form(gt=0,default=None),
@@ -167,10 +205,7 @@ async def create_product(
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid ObjectId format")
 
-    parent_category, currency, material, color = await extract_data(currency_code, material_data, category_id,color_code)
-    print("Image count : ",images.count)
-    if len(images)==0:
-        return ResponseModel( code=400, message=f"No images provided for the product")
+    parent_category, currency, material, color = await extract_product_information(currency_code, material_data, category_id,colors)
 
 
     if parent_category is None:
@@ -180,66 +215,29 @@ async def create_product(
     if material is None:
         return ResponseModel( code=404, message=f"Material {material_id} not found")
 
-
-    if color is None:
-        return ErrorResponseModel(error=color_code, code=404, message="Color not found.")
+    for color in colors:
+        if color is None:
+            return ErrorResponseModel(error=colors, code=404, message="Color not found.")
 
     dimensions = Dimensions(depth=depth, height=height, weight=weight, width=width,length=length)
 
-    product = Product(name=name, color=color, description=description, 
+    product = Product(name=name,  description=description, 
                       currency=currency,
                       material=material,
-                      quantity_in_stock=quantity,
+                      colors=colors,
                       category=parent_category, price=price, dimensions=dimensions)
 
-    inserted_product = await insert_into_db(name="products",product=product)
-    file_paths = []
-
-    
-
-    tasks = [process_image(image,i,inserted_product) for i, image in enumerate(images)]
-    file_paths = await asyncio.gather(*tasks)
-
-    data = {
-        k: v for k, v in product.model_dump(by_alias=True).items() if v is not None
-    }
+    inserted_product = await insert_into_db(name="products",item=product)
     if inserted_product is None:
         raise HTTPException(status_code=500, detail={f'Error. {inserted_product}'})
-    data["images"] = file_paths
-    data["_id"] = inserted_product.inserted_id
-    update_result = await update_existing_product(data)
-    print("Update: ", update_result)
+
 
     return ResponseModel(data={}, code=201, message="Product added successfully")
 
-async def process_image(image:UploadFile,i:int,inserted_product:Any):
-        """
-Process an uploaded image file.
 
-Parameters:
-- image (UploadFile): The uploaded image file.
-- i (int): The index of the image in the list of images.
-- inserted_product (Any): The inserted product object.
 
-Returns:
-- str: The file path where the processed image is saved.
+# ... (Other mocks and functions remain the same)
 
-Raises:
-- HTTPException: If the file extension is not allowed.
-
-"""
-        if not allowed_file(image.filename):
-            raise HTTPException(status_code=400, detail="Only PNG, JPG, and JPEG files are allowed")
-
-        contents = await image.read()
-        img = readImage(contents)
-
-        webp_contents = convert_to_webp(img)
-        filename = f"{inserted_product.inserted_id}image{i}.webp"
-        file_path = os.path.join(IMAGES_DIR, filename)
-
-        save_image(webp_contents, file_path)
-        return file_path
 async def update_existing_product(data)->str:
     """
 Process an uploaded image file.
@@ -262,22 +260,6 @@ Raises:
         return_document=ReturnDocument.AFTER,
     )
 
-async def insert_into_db(name:str,product:Product):
-  
-    inserted_object = await db[f'{name}'].insert_one(product.model_dump(exclude=["id"])) # type: ignore
-    return inserted_object
-
-async def extract_data(currency_code, material_id, category_id,color_code):
-    print(type(material_id))
-    parent_category = await fetch_one(collection_name="level2_categories",value=category_id)
-    currency = await fetch_one(collection_name="currencies",key='code',value=currency_code)
-    material=await fetch_one(collection_name='materials',value=material_id)
-    color = await fetch_one(collection_name='colors',key='color_code',value=color_code)
-
-    return parent_category,currency,material,color
-
-def fetch_one(collection_name:str,key:str="_id",value:str=''):
-    return db[collection_name].find_one({key: value})
 
 
 

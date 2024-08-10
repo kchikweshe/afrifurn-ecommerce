@@ -3,6 +3,6 @@ import motor
 from config import config
 
 
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"])
+client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"]) # type: ignore
 
 db = client.get_database(config['DB_NAME'])

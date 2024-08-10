@@ -16,7 +16,7 @@ file_path_2 = 'static/product/663e74a7f859d62c6fe1c23bimage1.webp'
 def client():
     # Create a test client using your framework's test utilities
     # Replace this with the appropriate code for your framework
-    from main import afrifurn_app as app
+    from main import app as app
     with TestClient(app) as client:
         yield client
 

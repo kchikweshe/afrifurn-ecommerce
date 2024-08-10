@@ -1,15 +1,12 @@
-from typing import Any, List, Union
-from uuid import UUID
-import uuid
+from typing import Any, List
 
 from bson import ObjectId
-from bson.binary import Binary
-from pydantic import Field
-from models.common import ErrorResponseModel, PyObjectId, ResponseModel
-from fastapi import APIRouter, Body, Form, HTTPException
+from models.common import ErrorResponseModel, ResponseModel
+from fastapi import APIRouter, Form, HTTPException
 
 from models.products import Category, Level1Category, Level2Category
 from database import db
+from services.product import filter_one
 
 router = APIRouter(prefix="/categories", tags=["Categories"]
 )
@@ -89,11 +86,52 @@ async def get_category(category_id: str):
     # Query the category using the converted ObjectId
     category = await categories_collection.find_one({"_id": obj_id})
 
-    if category:
-        return category
-    else:
+    if category is None:
         raise HTTPException(status_code=404, detail="Category not found")
+        
+    return category
+@router.get("/categories/{name}", response_model=Category)
+async def filter_category(name: str):
+    try:
+      category=  await filter_one(filters={"name":name},collection_name="categories")
 
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="Invalid category")
+
+    # Query the category using the converted ObjectId
+     
+
+    if category is None:
+        raise HTTPException(status_code=404, detail="Category not found")
+        
+    return category
+
+
+@router.get("/level1-categories/{name}", response_model=Level1Category)
+async def filter_level_one_level_one_category(name: str):
+    try:
+      category=await filter_one(filters={"name":name},collection_name="level1_categories")
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="Invalid category")
+    if category is None:
+        raise HTTPException(status_code=404, detail="Category not found")
+        
+    return category
+@router.get("/level2-categories/{name}", response_model=Level2Category)
+async def filter_level_two_category(name: str):
+    try:
+      category=  await filter_one(filters={"name":name},collection_name="level2_categories")
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="Invalid category")
+
+     
+
+    if category is None:
+        raise HTTPException(status_code=404, detail="Category not found")
+        
+    return category
 @router.get("/level-2", response_model=List[Level2Category])
 async def get_level2_categories():
     level2_categories = await db["level2_categories"].find().to_list(length=None)
@@ -104,3 +142,15 @@ async def get_level2_categories():
 async def get_level1_categories():
     level1_categories = await db["level1_categories"].find().to_list(length=None)
     return level1_categories
+
+@router.get("/level-1/{category_id}", response_model=List[Level1Category])
+async def get_level1_categories_by_category(category_id:str):
+    cid=ObjectId(category_id)
+    level1_categories = await db["level1_categories"].find({'category._id':category_id}).to_list(length=None)
+    return level1_categories
+@router.get("/level-2/{category_id}", response_model=List[Level2Category])
+async def get_level2_categories_by_level_one_category(category_id:str):
+    cid=ObjectId(category_id)
+
+    level2_categories = await db["level2_categories"].find({'category._id':category_id}).to_list(length=None)
+    return level2_categories
