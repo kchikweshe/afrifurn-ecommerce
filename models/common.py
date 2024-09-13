@@ -11,6 +11,8 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 class CommonModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     is_archived:bool=False
+    short_name: Optional[str] = Field(default=None)
+
 
     created_at: Optional[datetime]=datetime.now()
     updated_at: Optional[datetime]=datetime.now()

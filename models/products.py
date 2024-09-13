@@ -19,10 +19,22 @@ class Color(CommonModel):
     name: str
     color_code: str
     image: Optional[str] 
+    class Settings:
+        name = "colors"
+        indexes = [
+            IndexModel([("name", ASCENDING)], unique=True),
+            IndexModel([("short_name", ASCENDING)], unique=True)
+        ]
 
 class Currency(CommonModel):
     code: str = Field(..., min_length=3, max_length=3)
     symbol: str = Field(..., min_length=1)
+    class Settings:
+        name = "currencies"
+        indexes = [
+            IndexModel([("name", ASCENDING)], unique=True),
+            IndexModel([("short_name", ASCENDING)], unique=True)
+        ]
 
 
 class Category(CommonModel):
@@ -72,7 +84,13 @@ class Product(CommonModel):
     
     def updateViews(self):
         self.views+=1
+        
    
-    
+    class Settings:
+        name = "products"
+        indexes = [
+            IndexModel([("name", ASCENDING)], unique=True),
+            IndexModel([("short_name", ASCENDING)], unique=True)
+        ]
 
 

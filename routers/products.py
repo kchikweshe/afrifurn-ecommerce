@@ -26,7 +26,7 @@ router = APIRouter(
 async def filter_products_route(
     start_price: float = Query(None, description="Depth of the product"),
     end_price: float = Query(None, description="Depth of the product"),
-
+   short_name=Query(None, description="Color of the product"),
     color: str = Query(None, description="Color of the product"),
     width: float = Query(None, description="Width of the product"),
     length: float = Query(None, description="Length of the product"),
@@ -65,26 +65,30 @@ async def filter_products_route(
 
     try:
         # Define query criteria for price and other attributes
-        if start_price and end_price:
+        if start_price is not None and end_price is not None:
             if(start_price>=end_price):
-                return ResponseModel(message="Start price cannot be greater or equal than end price. ")
+                return ResponseModel(message="Start price cannot be greater than or equal to end price. ")
             query_criteria["price"] =  {"$gte": start_price, "$lte": end_price}
-        if name:
+        if name is not None:
             query_criteria["name"] ={"$regex": name,"$options": "i"}
-
-        if color:
+        # if category:
+        #     query_criteria["category.short_name"] = category
+        if short_name is not None:
+            query_criteria["short_name"] ={"$regex": short_name
+                                           ,"$options": "i"}
+        if color is not None:
             query_criteria["variants.color.color_code"] = color.replace("%23","#")
-        if width:
+        if width is not None:
             query_criteria["dimensions.width"] = width
-        if length:
+        if length is not None:
             query_criteria["dimensions.length"] = {"$gte": length}
-        if depth:
+        if depth is not None:
             query_criteria["dimensions.depth"] = depth
-        if height:
+        if height is not None:
             query_criteria["dimensions.height"] = height
-        if material:
+        if material is not None:
             query_criteria["material.name"] = material
-        if category:
+        if category is not None:
             query_criteria["category.id"] = category
             # Use the provided parameters to filter products
 
@@ -107,10 +111,11 @@ async def filter_products_route(
                                                   )  # Added 'await' keyword
         if filtered_products is None:
             raise HTTPException(status_code=500, detail="Failed to retrieve products")
+        print("Filtered products: ",len(filtered_products))
         return filtered_products
     except NetworkError as ne:
         # Network error handling
-        raise HTTPException(status_code=503, detail="Service unavailable, please try again later")
+        raise HTTPException(status_code=503, detail=f"Service unavailable, please try again later. {ne}")
     except Exception as e:
         print(e.__cause__)
         # Exception handling
@@ -128,13 +133,16 @@ async def get_products():
 @router.get("/filter-one",response_model=Product)
 async def filter_product(
     id:str=Query(None, description="Id of the product"),
- name: str = Query(None, description="Name of the product"),
+    short_name: str = Query(None, description="Short name of the product"),
+    name: str = Query(None, description="Name of the product"),
 ): 
     query_criteria:dict =  {}
     if name:
         query_criteria["name"] ={"$regex": name,"$options": "i"}
     if id:
         query_criteria["_id"] =id
+    if short_name:
+        query_criteria["short_name"] = short_name
 
 
     # Perform filtering and return products
@@ -165,6 +173,7 @@ async def filter_product(
 @router.post("/", response_model=Any, response_model_by_alias=False)
 async def create_product(
     name: str = Form(...),
+    short_name:str=Form(),
     category: str = Form(...),
     price: float = Form(...),
     description: str = Form(...),
@@ -222,6 +231,7 @@ async def create_product(
     dimensions = Dimensions(depth=depth, height=height, weight=weight, width=width,length=length)
 
     product = Product(name=name,  description=description, 
+                      short_name=short_name,
                       currency=currency,
                       material=material,
                       colors=colors,
@@ -236,7 +246,6 @@ async def create_product(
 
 
 
-# ... (Other mocks and functions remain the same)
 
 async def update_existing_product(data)->str:
     """

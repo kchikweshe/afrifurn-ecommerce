@@ -1,10 +1,11 @@
-from typing import List
+from typing import Any, List
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi import APIRouter, HTTPException, Form, UploadFile, File
 from typing import List
 from bson import ObjectId
 import asyncio
 
+from models.common import ResponseModel
 from models.products import Color, ProductVariant
 from database import db
 from services.image import process_image
@@ -51,13 +52,13 @@ async def archive(collection_name:str,item_id: ObjectId):
         return {"message": "Variant not found or already archived"}
     return {"message": "Variant archived successfully"}
 # Create a ProductVariant
-@router.post("{product_id}/variants", response_model=ProductVariant)
+@router.post("{product_id}/variants", response_model=Any, response_model_by_alias=False)
 async def create_product_variant(
     product_id: str,
     color_code: str = Form(...),
     quantity_in_stock: int = Form(...),
     images: List[UploadFile] = File(...)
-) -> ProductVariant:
+) -> Any:
     """
     Handles the creation of a new product variant by processing input data, validating the product ID,
     processing and saving images, fetching color details, and inserting the variant into the database.
@@ -78,7 +79,7 @@ async def create_product_variant(
 
     image_paths = await asyncio.gather(*[process_image(image, i, product_id, IMAGES_DIR) for i, image in enumerate(images)])
 
-    color = await fetch_one('colors', key='color_code', value=color_code)
+    color = await fetch_one(collection_name='colors', key='color_code', value=color_code)
     variant = ProductVariant(product_id=str(product_obj_id), color=color, images=image_paths, quantity_in_stock=quantity_in_stock)
 
     inserted_variant = await insert_into_db(name="variants", item=variant)
@@ -93,8 +94,8 @@ async def create_product_variant(
 
     if not product:
         raise HTTPException(status_code=500, detail="Error updating product with new variant")
+    return ResponseModel(data={}, code=201, message="Product variant added successfully")
 
-    return product
 # Get a ProductVariant
 @router.get("{product_id}/variants/{variant_id}", response_model=ProductVariant)
 async def get_product_variant(product_id: str, variant_id: str):

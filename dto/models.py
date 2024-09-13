@@ -5,6 +5,7 @@ from pydantic import BaseModel, ValidationError
 class Filter(BaseModel):
     is_archived:bool=True
     name:str
+    short_name: Optional[str]
 
 class ProductFilter(Filter):
     startPrice: Optional[float]

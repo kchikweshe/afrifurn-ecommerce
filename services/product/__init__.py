@@ -71,11 +71,11 @@ async def filter_products(filters:dict,page:int,page_size:int,skip:int,limit:int
         print("Error: ",e)
     return products
 
-@lru_cache(maxsize=None)
-async def filter_items(collection_name:str, p:dict, page:int, page_size:int, skip:int, limit:int, sort_by:str, sort_order:int):
+# @lru_cache(maxsize=None)
+async def filter_items(collection_name:str, filters:dict, page:int, page_size:int, skip:int, limit:int, sort_by:str, sort_order:int):
     print("Fetching: ",collection_name)
     try:
-        items = await db[collection_name].find(p).skip(skip).limit(limit).sort(sort_by, sort_order).to_list(length=None)
+        items = await db[collection_name].find(filters).skip(skip).limit(limit).sort(sort_by, sort_order).to_list(length=None)
     except Exception as e:
         print("Error: ", e)
     return items
@@ -113,7 +113,7 @@ async def filter_one(filters: dict,collection_name:str) -> Any:
         logging.error(f"Unexpected Error: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
     
-async def update_document(collection_name: str, filter_criteria: dict, update_data: dict) -> bool:
+async def update_document(collection_name: str, filter_criteria: dict, update_data: dict) -> bool|None:
     """
     Update a document in the specified collection.
 
@@ -130,4 +130,7 @@ async def update_document(collection_name: str, filter_criteria: dict, update_da
             return False
         return result.modified_count > 0
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to update document: {str(e)}")
+        raise HTTPException(status_code=89, detail=f"Failed to update document: {str(e)}")
+
+
+    
