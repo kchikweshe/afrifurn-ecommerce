@@ -1,20 +1,23 @@
 from typing import Any, List
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi import APIRouter, HTTPException, Form, UploadFile, File
 from typing import List
 from bson import ObjectId
 import asyncio
 
+from dependencies.dependencies import get_color_service, get_product_variant_service
 from models.common import ResponseModel
-from models.products import Color, ProductVariant
+from models.products import ProductVariant
 from database import db
-from services.image import process_image
-from services.product import IMAGES_DIR, fetch_one, insert_into_db
-
-
+from constants.paths import PRODUCT_IMAGES_DIR
+from services.image_processor import WebPImageProcessor
+from services.color_service import ColorService
+from services.product_variant_service import ProductVariantService
 collection=db["products"]
 variants = db["variants"]
 colors = db["colors"]
+
+image_processor = WebPImageProcessor()
 
 router = APIRouter(
     prefix="/product/variant", 
@@ -33,15 +36,6 @@ async def update_variant_in_db(product_id: ObjectId, variant_id: ObjectId, varia
     # Mock implementation of updating a variant in the database.
     return {"modified_count": 1}
 
-async def get_variant_from_db(product_id: ObjectId, variant_id: ObjectId):
-    # Mock implementation of retrieving a variant from the database.
-    return ProductVariant(
-        color=Color(name="Red", color_code="#FF0000", image="red_color_image.jpg"),
-        images=["image1.jpg", "image2.jpg"],
-        quantity_in_stock=10,
-        product_id="12dwenkn2"
-    )
-
 async def archive(collection_name:str,item_id: ObjectId):
     # Updated implementation to archive a variant in the database.
     result = await db[collection_name].update_one(
@@ -51,61 +45,66 @@ async def archive(collection_name:str,item_id: ObjectId):
     if result.modified_count == 0:
         return {"message": "Variant not found or already archived"}
     return {"message": "Variant archived successfully"}
+
+async def process_images(images: List[UploadFile], product_id: str) -> List[str]:
+    """Process multiple images in parallel using the WebP image processor"""
+    return await asyncio.gather(
+        *[image_processor.process_image(image, i, product_id, PRODUCT_IMAGES_DIR) 
+          for i, image in enumerate(images)]
+    )
+
 # Create a ProductVariant
-@router.post("{product_id}/variants", response_model=Any, response_model_by_alias=False)
+@router.post("{product_id}/variants/", response_model=Any, response_model_by_alias=False)
 async def create_product_variant(
     product_id: str,
     color_code: str = Form(...),
     quantity_in_stock: int = Form(...),
-    images: List[UploadFile] = File(...)
+    images: List[UploadFile] = File(...),
+    color_service: ColorService = Depends(get_color_service),
+    product_variant_service: ProductVariantService = Depends(get_product_variant_service)
 ) -> Any:
     """
-    Handles the creation of a new product variant by processing input data, validating the product ID,
-    processing and saving images, fetching color details, and inserting the variant into the database.
-
-    Args:
-        product_id (str): The ID of the product to which the variant belongs.
-        color_code (str): The color code of the variant.
-        quantity_in_stock (int): The quantity of the variant in stock.
-        images (List[UploadFile]): A list of image files to be processed and saved.
-
-    Returns:
-        ProductVariant: Object containing the details of the newly created variant, including image paths.
+    Create a new product variant with associated images and color.
+    Images will be automatically converted to WebP format.
     """
     try:
         product_obj_id = ObjectId(product_id)
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid product ID format")
 
-    image_paths = await asyncio.gather(*[process_image(image, i, product_id, IMAGES_DIR) for i, image in enumerate(images)])
+    image_paths = await process_images(images, product_id)
 
-    color = await fetch_one(collection_name='colors', key='color_code', value=color_code)
-    variant = ProductVariant(product_id=str(product_obj_id), color=color, images=image_paths, quantity_in_stock=quantity_in_stock)
+    color = await color_service.filter(filters={"color_code": color_code})
+    variant = ProductVariant(product_id=str(product_obj_id), color_id=color[0].color_code, images=image_paths, quantity_in_stock=quantity_in_stock)
 
-    inserted_variant = await insert_into_db(name="variants", item=variant)
+    inserted_variant = await product_variant_service.create(item=variant)
     if not inserted_variant:
         raise HTTPException(status_code=500, detail="Error inserting variant")
-    variant.id=str(inserted_variant.inserted_id)
-    # Update the products collection with the new variant
-    product = await db["products"].find_one_and_update(
-        {"_id": product_obj_id},
-        {"$push": {"variants": variant.model_dump()}}
+   
+    # Update the products collection using the base service
+    product = await product_variant_service.update_related_document(
+        collection_name="products",
+        filter_query={"_id": product_obj_id},
+        update_query={"$push": {"product_variants": variant.model_dump()}}
     )
 
     if not product:
         raise HTTPException(status_code=500, detail="Error updating product with new variant")
-    return ResponseModel(data={}, code=201, message="Product variant added successfully")
+    
+    return ResponseModel(status_code=201, message="Product variant added successfully", class_name="ProductVariant", number_of_data_items=1)
 
 # Get a ProductVariant
 @router.get("{product_id}/variants/{variant_id}", response_model=ProductVariant)
-async def get_product_variant(product_id: str, variant_id: str):
+async def get_product_variant(product_id: str, variant_id: str,
+                              product_variant_service: ProductVariantService = Depends(get_product_variant_service)
+                              ):
     try:
         product_obj_id = ObjectId(product_id)
         variant_obj_id = ObjectId(variant_id)
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid ID format")
 
-    variant = await fetch_one('variants', variant_id)
+    variant = await product_variant_service.filter_one(filters={"_id": variant_obj_id})
     if not variant:
         raise HTTPException(status_code=404, detail="Variant not found")
 
@@ -125,8 +124,3 @@ async def soft_delete_product_variant(product_id: str, variant_id: str):
         raise HTTPException(status_code=404, detail="Variant not found or already deleted")
 
     return {"message": "Variant deleted successfully"}
-
-# # Mock function to simulate image processing
-# async def process_image(image: UploadFile, index: int = 0, inserted_product: dict = None):
-#     # Mock image processing function
-#     return f"/path/to/{image.filename}"

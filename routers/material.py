@@ -1,17 +1,19 @@
 from typing import Any, List
-from fastapi import APIRouter, Form, HTTPException
+from fastapi import APIRouter, Depends, Form, HTTPException
 
+from dependencies.dependencies import get_material_service
 from models.product_attributes import Material
 from  models.common import ResponseModel
 from database import db
+from services.material_service import MaterialService
 
 router = APIRouter(
     prefix="/materials", 
     tags=["Materials"]
 )
-@router.post("/", response_model=Any)
+@router.post("/", response_model=ResponseModel)
 async def create(name: str = Form(..., min_length=0),
- 
+  material_service: MaterialService = Depends(get_material_service)
 
     ):
     
@@ -19,11 +21,12 @@ async def create(name: str = Form(..., min_length=0),
         name=name,
     )
     try:
-         await db["materials"].insert_one(material.model_dump(
-        by_alias=True, exclude=["id"])) # type: ignore
+        is_created = await material_service.create(material)
+        if not is_created:
+            raise HTTPException(status_code=500,detail="Failed to save material type")
+        return ResponseModel.create(status_code=201, message="Material saved successfully", class_name="Material")
     except:
         raise HTTPException(status_code=500,detail="Failed to save material type")
-    return ResponseModel(data={},code=201,message="Material saved successfully")
 @router.get("/{name}", response_model=Material)
 async def get_one(name: str):
     data = await db["materials"].find_one({"name": name})

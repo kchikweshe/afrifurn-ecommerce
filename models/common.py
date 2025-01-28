@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field
 from datetime import datetime
-from typing import Annotated, Optional
+from typing import Annotated, Optional, Any
 from pydantic import (
     BaseModel,
     BeforeValidator,
@@ -21,12 +21,22 @@ class CommonModel(BaseModel):
         arbitrary_types_allowed=True)
 
    
-def ResponseModel(data:dict={}, message:str='',code:Optional[int]=200):
-    return {
-        "data": data,
-        "code": code,
-        "message": message,
-    }
+class ResponseModel(BaseModel):
+    class_name: Optional[str]=None
+    data: Any=None
+    status_code: int
+    number_of_data_items: int
+    message: str
+
+    @classmethod
+    def create(cls, *, class_name: str="", data: Any=None, status_code: int = 200, message: str = "Success"):
+        return cls(
+            class_name=class_name,
+            data=data,
+            status_code=status_code,
+            number_of_data_items=len(data) if isinstance(data, (list, tuple)) else 1 if data else 0,
+            message=message
+        )
 
 
 def ErrorResponseModel(error, code, message):

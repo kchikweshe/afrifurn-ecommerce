@@ -1,69 +1,30 @@
-from pydantic import BaseModel
 from typing import List, Optional
-
-from models.common import CommonModel
-from models.products import Product
-from services.product import create_document
+from pydantic import Field
+from .common import CommonModel
+from .products import Product, ProductVariant
 
 class CartItem(CommonModel):
     product: Product
-    quantity: int
+    variant_id: str
+    quantity: int = Field(gt=0)
+    unit_price: float
+    total_price: float
+
+    def calculate_total(self):
+        if self.product.discount:
+            discounted_price = self.unit_price * (1 - self.product.discount)
+            self.total_price = discounted_price * self.quantity
+        else:
+            self.total_price = self.unit_price * self.quantity
 
 class Cart(CommonModel):
     user_id: str
     items: List[CartItem] = []
+    total_amount: float = 0
+
+    def calculate_total(self):
+        self.total_amount = sum(item.total_price for item in self.items)
+
+    class Settings:
+        name = "carts"
     
-
-    def clear(self):
-        """Clear all items from the cart."""
-        self.items.clear()
-
-    
-    def add_items_to_cart(self, product: Product,quantity:int):
-        """Add items to the cart. If the item already exists, update its quantity."""
-        for item in self.items:
-            if item.product.name == product.name:
-                item.quantity += quantity
-                break
-        else:
-            cart_item=CartItem(product=product,quantity=quantity)
-            data=create_document(
-                collection_name="cart_item",
-                document=cart_item
-            )
-            self.items.append(cart_item)
-
-    def calculate_total(self) -> float:
-        """Calculate the total price of all items in the cart."""
-        return sum(item.product.price * item.quantity for item in self.items)
-
-    def remove_items_from_cart(self, product_name: str) -> Optional[CartItem]:
-        """Remove an item from the cart by product name."""
-        for item in self.items:
-            if item.product.name == product_name:
-                self.items.remove(item)
-                return item
-        return None
-    
-    def size(self)->int:
-        return len(self.items)
-    def is_empty(self)->bool:
-        return len(self.items)==0
-    def pop_cart_items_by_ids(self, ids_to_pop):
-        """
-        Removes items from existing_list if their id matches any id in ids_to_pop.
-
-        :param existing_list: List of dictionaries or objects containing 'id' keys or attributes.
-        :param ids_to_pop: List of string IDs to be removed from the existing_list.
-        :return: The updated existing list.
-        """
-       
-        # Iterate over the list in reverse order to avoid index issues while removing items
-        for i in range(len(self.items) - 1, -1, -1):
-            item = self.items[i]
-            # Assuming the item is a dictionary with an 'id' key
-            if item.id in ids_to_pop:
-                self.items.pop(i)
-
-        return self.items
-       

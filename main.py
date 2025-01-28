@@ -10,6 +10,8 @@ import uvicorn
 from config.eureka import lifespan
 from middlewares.cors import apply_cors_middleware
 from routers import api_router
+from routers.level1_routes import router as level1_router  # Import level 1 router
+from routers.level2_routes import router as level2_router  # Import level 2 router
 from fastapi.middleware.cors import CORSMiddleware
 
 # Configure logging
@@ -17,6 +19,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(lifespan=lifespan)
+
 # Function to read the banner from file
 def read_banner():
     with open('banner.txt', 'r') as f:
@@ -46,24 +49,22 @@ async def startup_event():
     logger.info(info)
 
 origins = [
-
-    "http://localhost:3000",
+    "http://localhost:8004",
+    "http://localhost:8090"
 ]
+
 image_dir = Path(__file__).parent / "product_images"
 
-directory=StaticFiles(directory='static')
-app.mount("/static",directory , name="images")
+directory = StaticFiles(directory='static')
+app.mount("/static", directory, name="images")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# Configuring routers
 app.include_router(api_router)
-
 if __name__ == "__main__":
     uvicorn.run("main:app")
