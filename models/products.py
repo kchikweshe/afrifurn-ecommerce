@@ -142,7 +142,7 @@ class ProductPipeline:
     
                 {
                     "$match": {
-                    "category.short_name":name}},
+                    "category.name":name}},
                 {
                     "$group": {
                         "_id": "$category.name",

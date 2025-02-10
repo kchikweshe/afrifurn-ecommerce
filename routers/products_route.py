@@ -5,23 +5,12 @@ import logging
 
 from models.products import CategoryProducts, Dimensions, Product, ProductPipeline
 from models.common import ErrorResponseModel, ResponseModel
-from services import category_service
-from services.level_2_category_service import Level2CategoryService
-from services.product_service import ProductService
 from utils.query_builder import build_product_query
 from utils.validators import validate_product_data, validate_object_ids
 from database import db
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
-# Inject ProductService with required repositories
-product_service = ProductService(
-    repository=db["products"],
-    color_repository=db["colors"],
-    material_repository=db["materials"],
-    currency_repository=db["currencies"],
-    level2category_repository=db["categories"]
-)
 
 @router.get("/filter", response_model=ResponseModel)
 async def filter_products_route(
@@ -61,23 +50,34 @@ async def filter_products_route(
 
             },
             category=category,
-            
         )
+        
+        # Add default criteria
+        query_criteria["is_archived"] = False
+        
+        logging.info(f"Query criteria: {query_criteria}")
 
-     
+        # Get products with a pipeline to properly handle nested objects
+        pipeline = [
+            {"$match": query_criteria},
+            {
+                "$addFields": {
+                    "category._id": "$category.id",
+                    "category.level_one_category._id": "$category.level_one_category.id",
+                    "category.level_one_category.category._id": "$category.level_one_category.category.id",
+                    "dimensions._id": "$dimensions.id"
+                }
+            },
+            {"$sort": {sort_by: sort_order}},
+            {"$skip": skip},
+            {"$limit": page_size}
+        ]
         
-        # products = await product_service.filter(
-        #     filters=query_criteria,
-        #     skip=skip,
-        #     limit=page_size,
-        #     sort_by=sort_by,
-        #     sort_order=sort_order
-        # )
-        cursor =  db['products'].find(query_criteria).limit(page_size).skip(skip).sort(sort_by, sort_order)
-        
+        logging.info(f"Pipeline: {pipeline}")
+        cursor = db['products'].aggregate(pipeline)
+        products = [Product(**item) async for item in cursor]
+        logging.info(f"Found {len(products)} products")
             
-        products= [Product(**item) for item in await cursor.to_list(length=None)]
-            # validate the type of the results
         return ResponseModel.create(
             class_name="Product",
             data=products,
@@ -105,10 +105,10 @@ async def filter_product(
     }
 
     try:
-        product:Product|None = await product_service.filter_one(query_criteria)
+        product:Product|None = await db["products"].find_one(query_criteria)
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
-        updated=await product_service.increment_product_views(str(product["_id"]))
+        updated=await db["products"].update_one({"_id":product["_id"]}, {"$inc": {"views": 1}})
         if not updated:
              raise HTTPException(status_code=500, detail="Internal server error")
         product["_id"]= str(product["_id"])
@@ -123,6 +123,7 @@ async def filter_product(
 
 @router.post("/", response_model=ResponseModel)
 async def create_product(
+    id: Optional[str] = None ,
     name: str = Query(...),
     short_name: str = Query(...),
     category: str = Query(...),
@@ -166,7 +167,7 @@ async def create_product(
             dimensions=dimensions
         )
 
-        inserted_product = await product_service.create(product)
+        inserted_product = await db["products"].insert_one(product.model_dump())
         if not inserted_product:
             raise HTTPException(status_code=500, detail="Failed to create product")
 
@@ -182,18 +183,19 @@ async def create_product(
         logging.error(f"Error creating product: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.get("/by-level-two-category", response_model=ResponseModel)
+@router.get("/by-level-two-category/filter", response_model=ResponseModel)
 async def get_products_by_level_two_category(
     short_name: str = Query(..., description="Level 2 category name"),
     limit: int = Query(10, description="Number of products to return")
 ):
     """Get products by Level 2 category name"""
     try:
-        pipeline:list = ProductPipeline.get_products_by_level_two_category_name(short_name, limit)
-        products = await product_service.aggregate(pipeline)  # Assuming you have an aggregate method
+        products = await db["products"].find({"category.name":short_name}).to_list(limit)# Assuming you have an aggregate method
+        # products= [CategoryProducts(**product) for product in products]
+        data=[Product(**product) for product in products]
         return ResponseModel.create(
             class_name="Product",
-            data=products or [],
+            data=data,
             message="Products retrieved successfully"
         )
     except Exception as e:
@@ -208,7 +210,8 @@ async def get_products_by_level_one_category(
     """Get products by Level 1 category name"""
     try:
         pipeline = ProductPipeline.get_products_by_level_one_category_name(name, limit)
-        products = await product_service.aggregate(pipeline)  # Assuming you have an aggregate method
+        products =  await db["products"].aggregate(pipeline).to_list(length=None)   # Assuming you have an aggregate method
+        products= [CategoryProducts(**product) for product in products]
         return ResponseModel.create(
             class_name="Product",
             data=products or [],
@@ -223,7 +226,7 @@ async def get_products_by_category(category_name:str):
     """Get products grouped by category"""
     try:
         pipeline = ProductPipeline.get_products_by_category(name=category_name)
-        category_products = await product_service.aggregate(pipeline)
+        category_products =  db["products"].aggregate(pipeline)
         
         if category_products is None:
             raise HTTPException(status_code=404, detail="No products found for the specified category")

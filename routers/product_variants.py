@@ -4,15 +4,17 @@ from fastapi import APIRouter, HTTPException, Form, UploadFile, File
 from typing import List
 from bson import ObjectId
 import asyncio
+import logging
 
-from dependencies.dependencies import get_color_service, get_product_variant_service
 from models.common import ResponseModel
-from models.products import ProductVariant
+from models.products import Color, ProductVariant
 from database import db
 from constants.paths import PRODUCT_IMAGES_DIR
 from services.image_processor import WebPImageProcessor
-from services.color_service import ColorService
-from services.product_variant_service import ProductVariantService
+from services.repository.product_variant_repository import ProductVariantRepository
+from services.repository.product_repository import ProductRepository
+from services.repository.color_repository import ColorRepository
+
 collection=db["products"]
 variants = db["variants"]
 colors = db["colors"]
@@ -24,8 +26,10 @@ router = APIRouter(
     tags=["Product Variant"]
 )
 
-
-
+# Initialize repositories and processors
+variant_repository = ProductVariantRepository()
+product_repository = ProductRepository()
+color_repository = ColorRepository()
 
 # Mock database functions
 async def insert_variant_into_db(product_id: ObjectId, variant: ProductVariant):
@@ -46,81 +50,110 @@ async def archive(collection_name:str,item_id: ObjectId):
         return {"message": "Variant not found or already archived"}
     return {"message": "Variant archived successfully"}
 
-async def process_images(images: List[UploadFile], product_id: str) -> List[str]:
+async def process_images(images: List[UploadFile], product_id: str, color_code: str) -> List[str]:
     """Process multiple images in parallel using the WebP image processor"""
     return await asyncio.gather(
-        *[image_processor.process_image(image, i, product_id, PRODUCT_IMAGES_DIR) 
+        *[image_processor.process_image(image, i, product_id, PRODUCT_IMAGES_DIR,color_code) 
           for i, image in enumerate(images)]
     )
 
-# Create a ProductVariant
-@router.post("{product_id}/variants/", response_model=Any, response_model_by_alias=False)
+@router.post("/product/{product_id}", response_model=ResponseModel, response_model_by_alias=False)
 async def create_product_variant(
     product_id: str,
     color_code: str = Form(...),
     quantity_in_stock: int = Form(...),
     images: List[UploadFile] = File(...),
-    color_service: ColorService = Depends(get_color_service),
-    product_variant_service: ProductVariantService = Depends(get_product_variant_service)
 ) -> Any:
-    """
-    Create a new product variant with associated images and color.
-    Images will be automatically converted to WebP format.
-    """
+    """Create a new product variant with associated images and color"""
     try:
-        product_obj_id = ObjectId(product_id)
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid product ID format")
+        # Validate product ID
+        try:
+            product_obj_id = ObjectId(product_id)
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Invalid product ID format")
 
-    image_paths = await process_images(images, product_id)
-
-    color = await color_service.filter(filters={"color_code": color_code})
-    variant = ProductVariant(product_id=str(product_obj_id), color_id=color[0].color_code, images=image_paths, quantity_in_stock=quantity_in_stock)
-
-    inserted_variant = await product_variant_service.create(item=variant)
-    if not inserted_variant:
-        raise HTTPException(status_code=500, detail="Error inserting variant")
-   
-    # Update the products collection using the base service
-    product = await product_variant_service.update_related_document(
-        collection_name="products",
-        filter_query={"_id": product_obj_id},
-        update_query={"$push": {"product_variants": variant.model_dump()}}
-    )
-
-    if not product:
-        raise HTTPException(status_code=500, detail="Error updating product with new variant")
     
-    return ResponseModel(status_code=201, message="Product variant added successfully", class_name="ProductVariant", number_of_data_items=1)
+        # Get color
+        color = await color_repository.get_color_by_code(color_code)
+        if not color:
+            raise HTTPException(status_code=404, detail="Color not found")
+    # Process images
+        image_paths = await process_images(images, product_id,color.color_code)
 
-# Get a ProductVariant
+        # Create variant
+        variant = ProductVariant(
+            product_id=str(product_obj_id),
+            color_id=color.color_code,
+            images=image_paths,
+            quantity_in_stock=quantity_in_stock
+        )
+
+        # Save variant
+        inserted_id = await db["variants"].insert_one(variant.model_dump())
+        if not inserted_id:
+            raise HTTPException(status_code=500, detail="Failed to create variant")
+
+        # Update product
+        updated = await db["products"].update_one(
+            {"_id": product_obj_id},    {"$push": {"product_variants": variant.model_dump()}})
+        if not updated:
+            raise HTTPException(status_code=500, detail="Failed to update product with variant")
+
+        return ResponseModel.create(
+            class_name="ProductVariant",
+            data=variant.model_dump(),
+            message="Product variant created successfully"
+        )
+
+    except Exception as e:
+        logging.error(f"Failed to create product variant: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create product variant")
+
 @router.get("{product_id}/variants/{variant_id}", response_model=ProductVariant)
 async def get_product_variant(product_id: str, variant_id: str,
-                              product_variant_service: ProductVariantService = Depends(get_product_variant_service)
                               ):
     try:
-        product_obj_id = ObjectId(product_id)
-        variant_obj_id = ObjectId(variant_id)
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid ID format")
+        # Validate IDs
+        try:
+            product_obj_id = ObjectId(product_id)
+            variant_obj_id = ObjectId(variant_id)
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Invalid ID format")
 
-    variant = await product_variant_service.filter_one(filters={"_id": variant_obj_id})
-    if not variant:
-        raise HTTPException(status_code=404, detail="Variant not found")
+        # Get variant
+        variant = await variant_repository.get_variant(variant_obj_id)
+        if not variant:
+            raise HTTPException(status_code=404, detail="Variant not found")
 
-    return variant
+        return variant
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Failed to get product variant: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get product variant")
 
-# Soft Delete a ProductVariant
-@router.delete("{product_id}/variants/{variant_id}", response_model=dict)
+@router.delete("{product_id}/variants/{variant_id}", response_model=ResponseModel)
 async def soft_delete_product_variant(product_id: str, variant_id: str):
+    """Soft delete a product variant"""
     try:
-        product_obj_id = ObjectId(product_id)
-        variant_obj_id = ObjectId(variant_id)
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid ID format")
+        # Validate IDs
+        try:
+            product_obj_id = ObjectId(product_id)
+            variant_obj_id = ObjectId(variant_id)
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Invalid ID format")
 
-    delete_result = await archive(collection_name="variants",item_id= variant_obj_id)
-    if delete_result["modified_count"] == 0:
-        raise HTTPException(status_code=404, detail="Variant not found or already deleted")
+        # Archive variant
+        archived = await variant_repository.archive_variant(variant_obj_id)
+        if not archived:
+            raise HTTPException(status_code=404, detail="Variant not found or already archived")
 
-    return {"message": "Variant deleted successfully"}
+        return ResponseModel.create(
+            class_name="ProductVariant",
+            message="Product variant archived successfully"
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Failed to archive product variant: {e}")
+        raise HTTPException(status_code=500, detail="Failed to archive product variant")

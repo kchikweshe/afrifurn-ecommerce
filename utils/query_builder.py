@@ -31,9 +31,9 @@ def build_product_query(
     materials_list = json.loads(materials)
     
     if colors_list:
-        query_criteria["variants.color.name"] = {"$in": colors_list}
+        query_criteria["product_variants.color_id"] = {"$in": colors_list}
     if materials_list:
-        query_criteria["material.name"] = {"$in": materials_list}
+        query_criteria["material"] = {"$in": materials_list}
     
     # Dimensions
     for dim, value in dimensions.items():

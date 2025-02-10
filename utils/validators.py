@@ -2,7 +2,6 @@ from typing import Dict, List, Tuple
 from bson import ObjectId
 from fastapi import HTTPException
 
-from services.product_service import ProductService
 
 def validate_object_ids(*ids: str) -> Dict[str, ObjectId]:
     """Validate and convert string IDs to ObjectIds"""
@@ -17,7 +16,6 @@ async def validate_product_data(
     material_id: ObjectId,
     category_id: ObjectId,
     colors: List[str],
-    product_service: ProductService
 ) -> Dict:
     """Validate and retrieve related product data"""
     # Get all related data

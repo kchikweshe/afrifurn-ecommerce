@@ -11,18 +11,41 @@ class BaseRepository(Generic[T]):
         self.db = db
         self.model_class = model_class
         self.collection_name = collection_name
-
-    async def insert_one(self, data: T) ->bool|None:
+    async def insert_one(self, data: T, id: Optional[str] = None) -> bool:
         try:
-            result = await self.db[self.collection_name].insert_one(data)
-            return result.inserted_id is not None
+            collection = self.db[self.collection_name]
+
+            if id:
+                # If ID is provided, update the existing document
+                result = await collection.update_one(
+                    {"_id": ObjectId(id)},  # Filter by ID
+                    {"$set": data},         # Update with the new data
+                    upsert=False            # Do not insert if the document doesn't exist
+                )
+                return result.modified_count > 0  # True if the document was updated
+            else:
+                # If no ID is provided, insert a new document
+                result = await collection.insert_one(data)
+                return result.inserted_id is not None  # True if the document was inserted
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Repository error: Failed to create or update {self.collection_name}"
+            )
+    async def fetch_all(self) -> List[T]:
+        try:
+            docs = await self.db[self.collection_name].find().to_list(length=None)
+            return [self.model_class(**doc) for doc in docs]
         except Exception as e:
             raise HTTPException(status_code=500, 
-                              detail=f"Repository error: Failed to create {self.collection_name}")
-
-    async def get_by_id(self, id: str) -> Optional[dict]:
+                              detail=f"Repository error: Failed to fetch {self.collection_name}. {e}")
+    async def get_by_id(self, id: str) -> Optional[T]:
         try:
-            return await self.db[self.collection_name].find_one({"_id": ObjectId(id)})
+            doc = await self.db[self.collection_name].find_one({"_id": ObjectId(id)})
+            if doc:
+                return self.model_class(**doc)
+            return None
         except Exception as e:
             raise HTTPException(status_code=500, 
                               detail=f"Repository error: Failed to fetch {self.collection_name}. {e}")
@@ -35,7 +58,7 @@ class BaseRepository(Generic[T]):
             return None
         except Exception as e:
             raise HTTPException(status_code=500, 
-                              detail=f"Repository error: Failed to fetch {self.collection_name}")
+                              detail=f"Repository error: Failed to fetch {self.collection_name}: {e}")
 
     def filter(
         self,
@@ -85,20 +108,20 @@ class BaseRepository(Generic[T]):
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Repository error: Failed to delete {self.collection_name}")
 
-    async def find_one(self, filter_query: dict) -> Optional[T]:
-        """Fetch a single document from specified collection using filter query"""
-        try:
-            # Convert _id to ObjectId if present in filter
-            if '_id' in filter_query:
-                filter_query['_id'] = ObjectId(filter_query['_id'])
+    # async def find_one(self, filter_query: dict) -> Optional[T]:
+    #     """Fetch a single document from specified collection using filter query"""
+    #     try:
+    #         # Convert _id to ObjectId if present in filter
+    #         if '_id' in filter_query:
+    #             filter_query['_id'] = ObjectId(filter_query['_id'])
             
-            doc = await self.db[self.collection_name].find_one(filter_query)
-            if doc:
-                return self.model_class(**doc)
-            return None
-        except Exception as e:
-            raise HTTPException(status_code=404, 
-                              detail=f"Document not found in {self.collection_name}")
+    #         doc = await self.db[self.collection_name].find_one(filter_query)
+    #         if doc:
+    #             return self.model_class(**doc)
+    #         return None
+    #     except Exception as e:
+    #         raise HTTPException(status_code=404, 
+    #                           detail=f"Document not found in {self.collection_name}")
     async def aggregate(self, pipeline: list) -> list:
         """
         Execute an aggregation pipeline on the products collection.
