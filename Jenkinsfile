@@ -6,9 +6,19 @@ pipeline {
         DOCKER_CONTAINER = 'afrifurn-ecommerce-container'
 
         DOCKER_TAG = 'latest'
+        DOCKER_SOCKET = 'sudo usermod -aG docker jenkins'
     }
 
     stages {
+        stage('Setup') {
+            steps {
+                script {
+                    // Ensure Jenkins user has Docker permissions
+                    sh 'sudo chmod 666 /var/run/docker.sock'
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 // Get code from repository
