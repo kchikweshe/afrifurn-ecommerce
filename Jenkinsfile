@@ -59,7 +59,7 @@ pipeline {
             echo 'Pipeline succeeded! Application is deployed.'
         }
         failure {
-            echo 'Pipeline failed! Check the logs for details.'
+            echo 'Pipeline failed! Check the logs for details..'
         }
         always {
             // Clean up workspace
