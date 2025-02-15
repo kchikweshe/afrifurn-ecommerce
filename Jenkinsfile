@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "docker buildx build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
