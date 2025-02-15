@@ -17,7 +17,7 @@ class BaseRepository(Generic[T]):
 
             if id:
                 # If ID is provided, update the existing document
-                result = await collection.update_one(
+                result =  collection.update_one(
                     {"_id": ObjectId(id)},  # Filter by ID
                     {"$set": data},         # Update with the new data
                     upsert=False            # Do not insert if the document doesn't exist
@@ -25,7 +25,7 @@ class BaseRepository(Generic[T]):
                 return result.modified_count > 0  # True if the document was updated
             else:
                 # If no ID is provided, insert a new document
-                result = await collection.insert_one(data)
+                result =  collection.insert_one(data)
                 return result.inserted_id is not None  # True if the document was inserted
 
         except Exception as e:
@@ -35,14 +35,14 @@ class BaseRepository(Generic[T]):
             )
     async def fetch_all(self) -> List[T]:
         try:
-            docs = await self.db[self.collection_name].find().to_list(length=None)
+            docs =  self.db[self.collection_name].find()
             return [self.model_class(**doc) for doc in docs]
         except Exception as e:
             raise HTTPException(status_code=500, 
                               detail=f"Repository error: Failed to fetch {self.collection_name}. {e}")
     async def get_by_id(self, id: str) -> Optional[T]:
         try:
-            doc = await self.db[self.collection_name].find_one({"_id": ObjectId(id)})
+            doc =  self.db[self.collection_name].find_one({"_id": ObjectId(id)})
             if doc:
                 return self.model_class(**doc)
             return None
@@ -52,7 +52,7 @@ class BaseRepository(Generic[T]):
 
     async def find_one(self, filter_query: dict) -> Optional[T]:
         try:
-            doc = await self.db[self.collection_name].find_one(filter_query)
+            doc =  self.db[self.collection_name].find_one(filter_query)
             if doc:
                 return self.model_class(**doc)
             return None
@@ -77,7 +77,7 @@ class BaseRepository(Generic[T]):
             if sort_by:
                 cursor = cursor.sort(sort_by, sort_order)
             
-            results= [self.model_class(**item) for item in  cursor.to_list(length=None)]
+            results= [self.model_class(**item) for item in  cursor]
             # validate the type of the results
             if not all(isinstance(item, self.model_class) for item in results):
                 
@@ -90,7 +90,7 @@ class BaseRepository(Generic[T]):
 
     async def update(self, id: str, update_data: dict) -> bool:
         try:
-            result = await self.db[self.collection_name].update_one(
+            result =  self.db[self.collection_name].update_one(
                 {"_id": ObjectId(id)},
                 {"$set": update_data}
             )
@@ -102,7 +102,7 @@ class BaseRepository(Generic[T]):
     # delete method should be a soft delete
     async def delete(self, id: str) -> bool:
         try:
-            result = await self.db[self.collection_name].update_one(
+            result =  self.db[self.collection_name].update_one(
                 {"_id": ObjectId(id)}, {"$set": {"is_archived": True}})
             return result.modified_count > 0
         except Exception as e:
@@ -115,7 +115,7 @@ class BaseRepository(Generic[T]):
     #         if '_id' in filter_query:
     #             filter_query['_id'] = ObjectId(filter_query['_id'])
             
-    #         doc = await self.db[self.collection_name].find_one(filter_query)
+    #         doc =  self.db[self.collection_name].find_one(filter_query)
     #         if doc:
     #             return self.model_class(**doc)
     #         return None
@@ -133,7 +133,7 @@ class BaseRepository(Generic[T]):
             list: The results of the aggregation.
         """
         try:
-            results = await self.db[self.collection_name].aggregate(pipeline).to_list(length=None)
+            results =  list(self.db[self.collection_name].aggregate(pipeline))
             return results
         except Exception as e:
             logging.error(f"Error executing aggregation: {e}")

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import config
 
-origins = config.get("CORS", "http://localhost:8090").split(",")
+origins = config["CORS_ORIGINS"].split(",")
 print("cors: ", origins)
 
 def apply_cors_middleware(app: FastAPI):

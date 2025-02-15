@@ -1,9 +1,8 @@
-import os
-import motor
-import motor.motor_asyncio
-from config import config
+
+from pymongo import MongoClient
+from config import MONGO_URI, DB_NAME
 
 
-client = motor.motor_asyncio.AsyncIOMotorClient(config["MONGO_URI"]) 
-db = client.get_database(config['DB_NAME'])
+client = MongoClient(MONGO_URI) 
+db = client.get_database(DB_NAME)
 

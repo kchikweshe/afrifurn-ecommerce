@@ -6,10 +6,11 @@ from pathlib import Path
 import re
 from typing import Any, List, Optional
 from PIL import Image
+from dotenv import load_dotenv
 from fastapi import HTTPException, UploadFile
 
 from constants.paths import COLOR_IMAGES_DIR
-
+load_dotenv()
 class ImageProcessor(ABC):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
     
@@ -52,7 +53,7 @@ class ImageProcessor(ABC):
     async def process_images(self,images: List[UploadFile], product_id: str,folder,color_code: str) -> List[str]:
         """Process multiple images in parallel using the WebP image processor"""
         return await asyncio.gather(
-            *[self.process_image(image, i, product_id, folder) 
+            *[self.process_image(image, i, product_id, folder,color_code) 
             for i, image in enumerate(images)]
         )
 

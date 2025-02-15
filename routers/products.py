@@ -55,7 +55,7 @@ async def filter_products_route(
         )
         
         skip = (page - 1) * page_size
-        products = await product_repo.filter(
+        products =  product_repo.filter(
             filter_query=query_criteria,
             skip=skip,
             limit=page_size,

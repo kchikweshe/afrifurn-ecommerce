@@ -101,9 +101,10 @@ async def get_level2_categories_by_level_one_category(category_id: str):
             raise HTTPException(status_code=400, detail="Invalid ObjectId format")
 
         # Get categories
-        categories = await level2_category_repository.fetch_all(
+        categories =  level2_category_repository.filter(
             {"level_one_category._id": category_id_obj}
         )
+        print("categories",categories)
         return categories
     except HTTPException:
         raise
@@ -115,9 +116,9 @@ async def get_level2_categories_by_level_one_category(category_id: str):
 async def get_level2_categories_by_level_one_category_name(category_name: str):
     """Get level 2 categories by level 1 category name"""
     try:
-        categories =  await db["level2_categories"].find(
+        categories =  level2_category_repository.filter(
             {"level_one_category.short_name": category_name}
-        ).to_list(length=None)
+        )
         return categories
     except Exception as e:
         logging.error(f"Failed to get level 2 categories by level 1 category name: {e}")

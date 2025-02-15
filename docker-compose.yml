@@ -41,6 +41,8 @@ services:
     depends_on:
       - mongo
       - eureka-service
+    environment:
+      HOST_IP: ${HOST_IP}  # Use the HOST_IP from the .env file
   auth-service:
     image: afrifurn-auth-service   # Adjust the path to the Dockerfile
     # restart: always
