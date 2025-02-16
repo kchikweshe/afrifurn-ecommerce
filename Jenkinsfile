@@ -6,11 +6,21 @@ pipeline {
         DOCKER_CONTAINER = 'afrifurn-ecommerce-container'
 
         DOCKER_TAG = 'latest'
-        DOCKER_SOCKET = 'sudo usermod -aG docker jenkins'
     }
 
     stages {
-  
+        stage('Setup Docker Permissions') {
+            steps {
+                script {
+                    // Add jenkins user to docker group and fix permissions
+                    sh '''
+                        sudo usermod -aG docker jenkins
+                        sudo chown jenkins:jenkins /home/afrifurn/.docker
+                        sudo chmod 666 /var/run/docker.sock
+                    '''
+                }
+            }
+        }
 
         stage('Checkout') {
             steps {
@@ -22,8 +32,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image
-                    sh "docker  build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    // Build the Docker image with sudo
+                    sh "sudo docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
@@ -41,14 +51,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Stop existing container if it exists
+                    // Stop existing container if it exists using sudo
                     sh '''
-                        docker ps -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty docker stop
-                        docker ps -a -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty docker rm
+                        sudo docker ps -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty sudo docker stop
+                        sudo docker ps -a -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty sudo docker rm
                     '''
                     
-                    // Run new container
-                    sh "docker run -d -p 8000:8000 --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    // Run new container with sudo
+                    sh "sudo docker run -d -p 8000:8000 --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
         }
