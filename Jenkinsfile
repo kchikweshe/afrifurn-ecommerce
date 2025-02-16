@@ -6,7 +6,7 @@ pipeline {
         DOCKER_CONTAINER = 'afrifurn-ecommerce-container'
 
         DOCKER_TAG = 'latest'
-        DOCKER_SOCKET = 'sudo usermod -aG docker jenkins'
+        DOCKER_SOCKET = 'usermod -aG docker jenkins'
     }
 
     stages {
