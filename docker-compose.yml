@@ -21,16 +21,16 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: afrifurn
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
       ME_CONFIG_MONGODB_SERVER: mongo
-    container_name: mongo-express-ui
+  
 
   eureka-service:
     image: afrifurn-eureka-service  
     ports:
       - 8761:8761
-    container_name: eureka-server
+    
 
   api-gateway-service:
     image: afrifurn-api-gateway-service
@@ -38,10 +38,10 @@ services:
       - eureka-service  
     ports:
       - 8090:8090
-    container_name: api-gateway
+    
 
   service:
-    image: afrifurn-ecommerce-production   # Adjust the path to the Dockerfile
+    image: kchikweshe/afrifurn-ecommerce-production   # Adjust the path to the Dockerfile
     # restart: always
     ports:
       - 8000:8000
@@ -51,7 +51,7 @@ services:
       - eureka-service
     environment:
       HOST_IP: ${HOST_IP}  # Use the HOST_IP from the .env file
-    container_name: ecommerce-service
+    
  
       
 
