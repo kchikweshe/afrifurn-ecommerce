@@ -3,7 +3,7 @@ secrets:
   MONGODB_PASSWORD:
     external: true
 services:
-  mongo:
+  afrifurn-mongodb:
     image: mongo
     secrets:
       - MONGODB_PASSWORD
@@ -14,9 +14,9 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data_container:/data/db
-    container_name: mongodb
+    container_name: afrifurn-mongodb
 
-  mongo-express:
+  afrifurn-mongo-express:
     image: mongo-express
     ports:
       - 8081:8081
@@ -27,13 +27,13 @@ services:
   
 
   eureka-service:
-    image: afrifurn-eureka-service  
+    image: kchikweshe/afrifurn-eureka-service  
     ports:
       - 8761:8761
     
 
   api-gateway-service:
-    image: afrifurn-api-gateway-service
+    image: kchikweshe/afrifurn-api-gateway-service
     depends_on:
       - eureka-service  
     ports:
