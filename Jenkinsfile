@@ -53,7 +53,7 @@ pipeline {
                     sh 'docker-compose down --remove-orphans || true'
                     
                     // Start all services using docker-compose
-                    sh 'docker-compose up -d'
+                    sh 'docker stack deploy -c docker-compose.yml afrifurn-ecommerce-production'
                 }
             }
         }
