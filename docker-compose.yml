@@ -11,6 +11,7 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data_container:/data/db
+    container_name: mongodb
 
   mongo-express:
     image: mongo-express
@@ -20,19 +21,24 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
       ME_CONFIG_MONGODB_SERVER: mongo
+    container_name: mongo-express-ui
+
   eureka-service:
     image: afrifurn-eureka-service  
     ports:
       - 8761:8761
+    container_name: eureka-server
+
   api-gateway-service:
-      image: afrifurn-api-gateway-service
-      depends_on:
-        - eureka-service  
-      ports:
-        - 8090:8090
+    image: afrifurn-api-gateway-service
+    depends_on:
+      - eureka-service  
+    ports:
+      - 8090:8090
+    container_name: api-gateway
 
   service:
-    image: afrifurn-ecommerce-service   # Adjust the path to the Dockerfile
+    image: afrifurn-ecommerce-api   # Adjust the path to the Dockerfile
     # restart: always
     ports:
       - 8000:8000
@@ -43,14 +49,8 @@ services:
       - eureka-service
     environment:
       HOST_IP: ${HOST_IP}  # Use the HOST_IP from the .env file
-  auth-service:
-    image: afrifurn-auth-service   # Adjust the path to the Dockerfile
-    # restart: always
-    ports:
-      - 8002:8002
-    depends_on:
-      - eureka-service
-      - mongo
+    container_name: ecommerce-service
+ 
       
 
 volumes:

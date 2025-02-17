@@ -2,28 +2,29 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'afrifurn-ecommerce-api'
-        DOCKER_CONTAINER = 'afrifurn-ecommerce-container'
-
+        // Update environment variables for all services
+        EUREKA_IMAGE = 'afrifurn-eureka-service'
+        GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
+        ECOMMERCE_IMAGE = 'afrifurn-ecommerce-api'
         DOCKER_TAG = 'latest'
-        DOCKER_SOCKET = 'usermod -aG docker jenkins'
     }
 
     stages {
-  
-
         stage('Checkout') {
             steps {
-                // Get code from repositor
                 checkout scm
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Docker Images') {
             steps {
                 script {
-                    // Build the Docker image
-                    sh "docker  build --tag ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    // Build all required service images
+                    sh """
+                        docker build -f eureka-service/Dockerfile -t ${EUREKA_IMAGE}:${DOCKER_TAG} ./eureka-service
+                        docker build -f api-gateway/Dockerfile -t ${GATEWAY_IMAGE}:${DOCKER_TAG} ./api-gateway
+                        docker build -f ecommerce-service/Dockerfile -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
+                    """
                 }
             }
         }
@@ -31,9 +32,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Add your test commands here
                     echo 'Running tests...'
-                    // Example: sh 'python -m pytest'
+                    // Add your test commands here
                 }
             }
         }
@@ -41,14 +41,19 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Stop existing container if it exists
+                    // Ensure .env file exists for docker-compose
                     sh '''
-                        docker ps -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty docker stop
-                        docker ps -a -f name=${DOCKER_CONTAINER} -q | xargs --no-run-if-empty docker rm
+                        if [ ! -f .env ]; then
+                            echo "Error: .env file not found"
+                            exit 1
+                        fi
                     '''
                     
-                    // Run new container
-                    sh "docker run -d -p 8000:8000 --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    // Stop existing containers and remove them
+                    sh 'docker-compose down --remove-orphans || true'
+                    
+                    // Start all services using docker-compose
+                    sh 'docker-compose up -d'
                 }
             }
         }
@@ -56,13 +61,12 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline succeeded! Application is deployed.'
+            echo 'Pipeline succeeded! All services are deployed.'
         }
         failure {
-            echo 'Pipeline failed! Check the logs for details..'
+            echo 'Pipeline failed! Check the logs for details.'
         }
         always {
-            // Clean up workspace
             cleanWs()
         }
     }
