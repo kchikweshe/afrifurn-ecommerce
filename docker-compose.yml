@@ -1,12 +1,15 @@
 version: '3.1'
+secrets:
+  MONGODB_PASSWORD:
+    external: true
 services:
   mongo:
     image: mongo
-    env_file:
-      - ./.env
+    secrets:
+      - MONGODB_PASSWORD
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGODB_PASSWORD_FILE: /run/secrets/MONGODB_PASSWORD
+      MONGO_DB_NAME: afrifurn
     ports:
       - 27017:27017
     volumes:
@@ -38,12 +41,12 @@ services:
     container_name: api-gateway
 
   service:
-    image: afrifurn-ecommerce-api   # Adjust the path to the Dockerfile
+    image: afrifurn-ecommerce-production   # Adjust the path to the Dockerfile
     # restart: always
     ports:
       - 8000:8000
     env_file:
-      - ./.env
+        - .env
     depends_on:
       - mongo
       - eureka-service
