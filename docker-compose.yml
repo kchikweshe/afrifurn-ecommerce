@@ -30,6 +30,8 @@ services:
     image: kchikweshe/afrifurn-eureka-service  
     ports:
       - 8761:8761
+    expose:
+      - "8761"
     
 
   api-gateway-service:
@@ -38,6 +40,12 @@ services:
       - eureka-service  
     ports:
       - 8090:8090
+    expose:
+      - "8090"
+    environment:
+      EUREKA_CLIENT_ENABLED: true
+      EUREKA_CLIENT_SERVICE_URL: http://eureka-service:8761/eureka
+      EUREKA_CLIENT_SERVICE_NAME: afrifurn-eureka-service
     
 
   service:
@@ -47,10 +55,14 @@ services:
       - 8000:8000
     
     depends_on:
-      - mongo
+      - afrifurn-mongodb
       - eureka-service
+      - api-gateway-service
     environment:
-      HOST_IP: ${HOST_IP}  # Use the HOST_IP from the .env file
+      HOST_IP: ${HOST_IP} 
+      EUREKA_CLIENT_ENABLED: true
+      EUREKA_CLIENT_SERVICE_URL: http://eureka-service:8761/eureka
+      EUREKA_CLIENT_SERVICE_NAME: afrifurn-ecommerce-production
     
  
       
