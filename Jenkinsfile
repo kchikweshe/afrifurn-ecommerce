@@ -41,12 +41,9 @@ pipeline {
                     //         exit 1
                     //     fi
                     // '''
-                    
-                    // Stop existing containers and remove them
-                    sh 'docker compose down --remove-orphans || true'
-                    
+                   
                     // Start all services using docker-compose
-                    sh 'docker compose up '
+                    sh 'docker compose up -d'
                 }
             }
         }
