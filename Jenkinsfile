@@ -43,7 +43,7 @@ pipeline {
                     // '''
                    
                     // Start all services using docker-compose
-                    sh 'docker compose up -d'
+                    sh 'docker compose up'
                 }
             }
         }
