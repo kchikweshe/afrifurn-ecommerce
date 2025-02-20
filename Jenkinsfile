@@ -18,12 +18,9 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    // Build ecommerce service image
-                    sh """
-                        docker compose up --build -d
+                  sh """
+                        docker compose up  -d
                     """
-                }
             }
         }
 
