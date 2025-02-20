@@ -38,11 +38,20 @@ pipeline {
                         # Debug information
                         echo "Docker version:"
                         docker --version
-                        echo "Docker Compose version:"
-                        docker compose version || docker-compose --version
+                        echo "Docker Swarm status:"
+                        docker info | grep Swarm
                         
-                        # Try deployment
-                        /usr/local/bin/docker compose up -d || /usr/bin/docker compose up -d || docker-compose up -d
+                        # Initialize swarm if not already in swarm mode
+                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
+                            docker swarm init || true
+                        fi
+                        
+                        # Deploy the stack
+                        docker stack deploy -c docker-compose.yml afrifurn --with-registry-auth
+                        
+                        # Wait a bit and check stack status
+                        sleep 10
+                        docker stack ps afrifurn
                     '''
                 }
             }
