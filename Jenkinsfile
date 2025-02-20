@@ -34,18 +34,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Ensure .env file exists for docker-compose
-                    // sh '''
-                    //     if [ ! -f .env ]; then
-                    //         echo "Error: .env file not found"
-                    //         exit 1
-                    //     fi
-                    // '''
-                   
-                    // Start all services using docker-compose
-                    sh 'docker compose --help'
-                    sh 'docker --version'
-                    sh 'docker-compose up -d'
+                    sh '''
+                        # Debug information
+                        echo "Docker version:"
+                        docker --version
+                        echo "Docker Compose version:"
+                        docker compose version || docker-compose --version
+                        
+                        # Try deployment
+                        /usr/local/bin/docker compose up -d || /usr/bin/docker compose up -d || docker-compose up -d
+                    '''
                 }
             }
         }
