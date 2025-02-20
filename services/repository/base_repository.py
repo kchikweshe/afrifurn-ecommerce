@@ -31,7 +31,7 @@ class BaseRepository(Generic[T]):
         except Exception as e:
             raise HTTPException(
                 status_code=500,
-                detail=f"Repository error: Failed to create or update {self.collection_name}"
+                detail=f"Repository error: Failed to create or update {self.collection_name}. {e}"
             )
     async def fetch_all(self) -> List[T]:
         try:

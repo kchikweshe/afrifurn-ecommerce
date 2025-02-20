@@ -48,7 +48,8 @@ async def create_level2_category(
         image_paths = await image_processor.process_images(
             images=images,
             product_id=short_name,
-            folder=LEVEL_THREE_IMAGES_DIR
+            folder=LEVEL_THREE_IMAGES_DIR,
+            color_code=None
         )
 
         # Create level 2 category

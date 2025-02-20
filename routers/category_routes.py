@@ -2,7 +2,7 @@ import logging
 from bson import ObjectId
 from fastapi import APIRouter, HTTPException, File, UploadFile
 from typing import List, Any, Optional
-
+from database import db
 from constants.paths import LEVEL_ONE_IMAGES_DIR
 from models.products import Category
 from services.repository.category_repository import CategoryRepository
@@ -33,7 +33,7 @@ async def get_category(category_id: str):
         raise HTTPException(status_code=400, detail="Invalid category ID")
 
     try:
-        category = await category_repository.fetch_one({"_id": obj_id})
+        category =  db["categories"].find_one({"_id": obj_id})
         if category is None:
             raise HTTPException(status_code=404, detail="Category not found")
         return category
@@ -47,7 +47,7 @@ async def get_category(category_id: str):
 async def filter_category(name: str):
     """Get a category by name"""
     try:
-        category = await category_repository.fetch_one({"name": name})
+        category =  db["categories"].find_one({"name": name})
         if not category:
             raise HTTPException(status_code=404, detail="Category not found")
         return category
@@ -71,7 +71,8 @@ async def create_category(
         image_paths = await image_processor.process_images(
             images=images,
             product_id=name.lower(),
-            folder=LEVEL_ONE_IMAGES_DIR
+            folder=LEVEL_ONE_IMAGES_DIR,
+            color_code=None
         )
 
         # Create category object
@@ -87,7 +88,7 @@ async def create_category(
             category.id = id
 
         # Insert category
-        inserted = await category_repository.insert_one(category.model_dump())
+        inserted =  db["categories"].insert_one(category.model_dump())
         if not inserted:
             raise HTTPException(status_code=500, detail="Failed to create category")
 

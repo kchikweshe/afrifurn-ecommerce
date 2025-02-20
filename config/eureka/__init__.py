@@ -22,6 +22,8 @@ import fastapi
 
 logger = logging.getLogger(__name__)
 load_dotenv()
+env=os.environ
+
 
 def read_banner():
     with open('banner.txt', 'r') as f:
@@ -46,19 +48,19 @@ def get_app_info() -> Dict[str, str | int]:
         'banner': banner,
         'fastapi_version': fastapi.__version__,
         'python_version': f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
-        'host': os.getenv("HOST_IP", DEFAULT_HOST),
-        'port': int(os.getenv("PORT", DEFAULT_PORT))
+        'host': env.get("HOST_IP", DEFAULT_HOST),
+        'port': int(env.get("PORT", DEFAULT_PORT))
     }
 @asynccontextmanager
 async def lifespan(app: fastapi.FastAPI):
-    host = os.getenv("HOST_IP", DEFAULT_HOST)
+    host = env.get("HOST_IP", DEFAULT_HOST)
     # Startup logic
     banner = read_banner()
     fastapi_version = get_fastapi_version()
     python_version = get_python_version()
     port = 8000  # Default port, you can change this or make it configurable
     await eureka_client.init_async(
-            eureka_server=f"http://{host}:8761/eureka/",
+            eureka_server=env.get("EUREKA_CLIENT_SERVICE_URL", "http://eureka-service:8761/eureka/"),
             app_name="product-service",
             instance_port=8000,
             instance_host=host

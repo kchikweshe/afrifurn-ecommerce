@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends, Form, Body, HTTPException, Query
-from typing import Any, List, Optional
+from fastapi import APIRouter, Form, HTTPException, Query
+from typing import List, Optional
 from bson import ObjectId
 import logging
 
 from models.products import CategoryProducts, Dimensions, Product, ProductPipeline
-from models.common import ErrorResponseModel, ResponseModel
+from models.common import ResponseModel
 from utils.query_builder import build_product_query
-from utils.validators import validate_product_data, validate_object_ids
 from database import db
 
 router = APIRouter(prefix="/products", tags=["Products"])

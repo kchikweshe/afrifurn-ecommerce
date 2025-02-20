@@ -3,7 +3,7 @@ from fastapi import APIRouter, Form, File, UploadFile
 from typing import List, Any, Optional
 from bson import ObjectId
 from fastapi.exceptions import HTTPException
-
+from database import db
 from constants.paths import LEVEL_TWO_IMAGES_DIR
 from models.common import ErrorResponseModel
 from models.products import Level1Category
@@ -69,7 +69,8 @@ async def create_level1_category(
         image_paths = await image_processor.process_images(
             images=images,
             product_id=short_name,
-            folder=LEVEL_TWO_IMAGES_DIR
+            folder=LEVEL_TWO_IMAGES_DIR,
+            color_code=None
         )
 
         # Create level 1 category
@@ -117,7 +118,7 @@ async def get_level1_categories_by_category(category_id: str):
             raise HTTPException(status_code=400, detail="Invalid ObjectId format")
 
         # Get categories
-        categories = await db["level1_categories"].find(
+        categories =  db["level1_categories"].find(
             {"category._id": category_id_obj}
         )
         return categories

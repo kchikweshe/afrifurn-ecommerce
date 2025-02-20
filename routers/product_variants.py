@@ -42,7 +42,7 @@ async def update_variant_in_db(product_id: ObjectId, variant_id: ObjectId, varia
 
 async def archive(collection_name:str,item_id: ObjectId):
     # Updated implementation to archive a variant in the database.
-    result = await db[collection_name].update_one(
+    result =  db[collection_name].update_one(
         {"_id": item_id},
         {"$set": {f"is_archived": True}}
     )
@@ -89,12 +89,12 @@ async def create_product_variant(
         )
 
         # Save variant
-        inserted_id = await db["variants"].insert_one(variant.model_dump())
+        inserted_id =  db["variants"].insert_one(variant.model_dump())
         if not inserted_id:
             raise HTTPException(status_code=500, detail="Failed to create variant")
 
         # Update product
-        updated = await db["products"].update_one(
+        updated =  db["products"].update_one(
             {"_id": product_obj_id},    {"$push": {"product_variants": variant.model_dump()}})
         if not updated:
             raise HTTPException(status_code=500, detail="Failed to update product with variant")
@@ -121,7 +121,7 @@ async def get_product_variant(product_id: str, variant_id: str,
             raise HTTPException(status_code=400, detail="Invalid ID format")
 
         # Get variant
-        variant = await variant_repository.get_variant(variant_obj_id)
+        variant =  db["variants"].find_one({"_id": variant_obj_id})
         if not variant:
             raise HTTPException(status_code=404, detail="Variant not found")
 
@@ -144,7 +144,7 @@ async def soft_delete_product_variant(product_id: str, variant_id: str):
             raise HTTPException(status_code=400, detail="Invalid ID format")
 
         # Archive variant
-        archived = await variant_repository.archive_variant(variant_obj_id)
+        archived = await archive("variants",variant_obj_id)
         if not archived:
             raise HTTPException(status_code=404, detail="Variant not found or already archived")
 

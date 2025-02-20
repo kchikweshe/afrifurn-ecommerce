@@ -16,18 +16,16 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Images') {
-        //     steps {
-        //         script {
-        //             // Build all required service images
-        //             sh """
-        //                 docker build -f eureka-service/Dockerfile -t ${EUREKA_IMAGE}:${DOCKER_TAG} ./eureka-service
-        //                 docker build -f api-gateway/Dockerfile -t ${GATEWAY_IMAGE}:${DOCKER_TAG} ./api-gateway
-        //                 docker build -f ecommerce-service/Dockerfile -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build ecommerce service image
+                    sh """
+                        docker build -f ecommerce-service/Dockerfile -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
+                    """
+                }
+            }
+        }
 
         stage('Test') {
             steps {
@@ -50,10 +48,10 @@ pipeline {
                     // '''
                     
                     // Stop existing containers and remove them
-                    sh 'docker-compose down --remove-orphans || true'
+                    sh 'docker compose down --remove-orphans || true'
                     
                     // Start all services using docker-compose
-                    sh 'docker stack deploy -c docker-compose.yml afrifurn-ecommerce-production'
+                    sh 'docker compose up -d'
                 }
             }
         }

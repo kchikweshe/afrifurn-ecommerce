@@ -30,7 +30,7 @@ class ImageProcessor(ABC):
     def _read_image(self, contents: bytes) -> Image.Image:
         return Image.open(BytesIO(contents))
     
-    async def process_image(self, image: UploadFile, i: int, inserted_item: Any, directory: str,color_code: str) -> str:
+    async def process_image(self, image: UploadFile, i: int, inserted_item: Any, directory: str,color_code: Optional[str]) -> str:
         """Process an uploaded image file and save it in a product-specific folder."""
         if not image.filename or not self._allowed_file(image.filename):
             raise HTTPException(status_code=400, detail="Only PNG, JPG, and JPEG files are allowed")
@@ -38,7 +38,7 @@ class ImageProcessor(ABC):
         contents = await image.read()
         img = self._read_image(contents)
         converted_contents = self.convert_image(img)
-        color_folder = os.path.join(directory, color_code.replace("#", ""))
+        color_folder = os.path.join(directory, color_code.replace("#", "") if color_code else "")
 
         os.makedirs(color_folder, exist_ok=True)
 
@@ -50,7 +50,7 @@ class ImageProcessor(ABC):
 
         self.save_image(converted_contents, file_path)
         return file_path
-    async def process_images(self,images: List[UploadFile], product_id: str,folder,color_code: str) -> List[str]:
+    async def process_images(self,images: List[UploadFile], product_id: str,folder,color_code: Optional[str]) -> List[str]:
         """Process multiple images in parallel using the WebP image processor"""
         return await asyncio.gather(
             *[self.process_image(image, i, product_id, folder,color_code) 

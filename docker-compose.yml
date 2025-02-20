@@ -1,41 +1,52 @@
-version: '3.1'
-secrets:
-  MONGODB_PASSWORD:
-    external: true
+version: '3.6'
 services:
   afrifurn-mongodb:
     image: mongo
-    secrets:
-      - MONGODB_PASSWORD
+    env_file:
+      - ./.env
+    networks:
+      - afrifurn-network
     environment:
-      MONGODB_PASSWORD_FILE: /run/secrets/MONGODB_PASSWORD
-      MONGO_DB_NAME: afrifurn
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_DB_NAME: ${MONGO_DB_NAME}
+      MONGO_HOST: ${MONGO_HOST}
+      MONGO_PORT: ${MONGO_PORT}
+
     ports:
-      - 27017:27017
+      - ${MONGO_PORT}:27017
     volumes:
       - mongodb_data_container:/data/db
     container_name: afrifurn-mongodb
 
   afrifurn-mongo-express:
     image: mongo-express
+
+    networks:
+      - afrifurn-network
     ports:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: afrifurn
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
-      ME_CONFIG_MONGODB_SERVER: mongo
-  
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mypassword
+      ME_CONFIG_MONGODB_SERVER: afrifurn-mongodb
+    depends_on:
+      - afrifurn-mongodb
 
   eureka-service:
     image: kchikweshe/afrifurn-eureka-service  
+    networks:
+      - afrifurn-network
     ports:
       - 8761:8761
     expose:
       - "8761"
-    
 
   api-gateway-service:
     image: kchikweshe/afrifurn-api-gateway-service
+    networks:
+      - afrifurn-network
     depends_on:
       - eureka-service  
     ports:
@@ -43,29 +54,54 @@ services:
     expose:
       - "8090"
     environment:
-      EUREKA_CLIENT_ENABLED: true
-      EUREKA_CLIENT_SERVICE_URL: http://eureka-service:8761/eureka
-      EUREKA_CLIENT_SERVICE_NAME: afrifurn-eureka-service
-    
+      EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED}
+      EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL}
+      EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME}
+      server.port: 8090
+      HOST_IP: 5.189.146.192
+      EUREKA_HOST: ${EUREKA_HOST}
 
   service:
-    image: kchikweshe/afrifurn-ecommerce-production   # Adjust the path to the Dockerfile
-    # restart: always
+    image: kchikweshe/afrifurn-ecommerce-production
+    networks:
+      - afrifurn-network
     ports:
       - 8000:8000
-    
     depends_on:
       - afrifurn-mongodb
       - eureka-service
       - api-gateway-service
+    env_file:
+      - ./.env
     environment:
-      HOST_IP: ${HOST_IP} 
-      EUREKA_CLIENT_ENABLED: true
-      EUREKA_CLIENT_SERVICE_URL: http://eureka-service:8761/eureka
-      EUREKA_CLIENT_SERVICE_NAME: afrifurn-ecommerce-production
-    
- 
+      HOST_IP: ${HOST_IP}
+      EUREKA_HOST: ${EUREKA_HOST}
+      EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED}
+      EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL}
+      EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_HOST: ${MONGO_HOST}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB_NAME: ${MONGO_DB_NAME}
+      MONGO_USER: ${MONGO_USER}
+      CORS_ORIGINS: ${CORS_ORIGINS}
       
+  afrifurn-frontend:
+    image: kchikweshe/afrifurn-frontend
+    networks:
+      - afrifurn-network
+    ports:
+      - 3000:3000
+    environment:
+      HOST_IP: ${HOST_IP}
+      NEXT_PUBLIC_API_GATEWAY: http://5.189.146.192:8090/api/v1
+
+
 
 volumes:
   mongodb_data_container:
+
+networks:
+  afrifurn-network:
+    driver: bridge
+

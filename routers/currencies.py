@@ -2,7 +2,7 @@ import logging
 from typing import List, Any
 from fastapi import APIRouter, Form, HTTPException
 from bson import ObjectId
-
+from database import db
 from models.products import Currency
 from models.common import ResponseModel
 from services.repository.currency_repository import CurrencyRepository
@@ -26,7 +26,7 @@ async def create_currency(
         currency = Currency(code=code, symbol=symbol)
         
         # Save currency
-        created = await currency_repository.create_currency(currency)
+        created =  db["currencies"].insert_one(currency.model_dump())
         if not created:
             raise HTTPException(status_code=500, detail="Failed to save currency")
 
@@ -52,7 +52,7 @@ async def get_currency(currency_id: str):
             raise HTTPException(status_code=400, detail="Invalid currency ID")
 
         # Get currency
-        currency = await currency_repository.get_currency(currency_obj_id)
+        currency =  db["currencies"].find_one({"_id": currency_obj_id})
         if not currency:
             raise HTTPException(status_code=404, detail="Currency not found")
 
@@ -67,7 +67,7 @@ async def get_currency(currency_id: str):
 async def get_currencies():
     """Get all currencies"""
     try:
-        currencies = await currency_repository.fetch_all()
+        currencies =  db["currencies"].find()
         return currencies
     except Exception as e:
         logging.error(f"Failed to get currencies: {e}")
@@ -84,15 +84,15 @@ async def update_currency(currency_id: str, currency_updates: Currency):
             raise HTTPException(status_code=400, detail="Invalid currency ID")
 
         # Update currency
-        updated = await currency_repository.update_currency(
-            currency_obj_id,
-            currency_updates.model_dump(exclude_unset=True)
+        updated =  db['currencies'].update_one(
+          {"_id": currency_obj_id},
+          {"$set": currency_updates.model_dump(exclude_unset=True)}
         )
         if not updated:
             raise HTTPException(status_code=404, detail="Currency not found")
 
         # Get updated currency
-        currency = await currency_repository.get_currency(currency_obj_id)
+        currency =  db["currencies"].find_one({"_id": currency_obj_id})
         if not currency:
             raise HTTPException(status_code=404, detail="Currency not found")
 
