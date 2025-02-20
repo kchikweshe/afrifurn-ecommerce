@@ -5,7 +5,7 @@ pipeline {
         // Update environment variables for all services
         EUREKA_IMAGE = 'afrifurn-eureka-service'
         GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
-        ECOMMERCE_IMAGE = 'afrifurn-ecommerce-api'
+        ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
         DOCKER_TAG = 'latest'
     }
 
@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Build ecommerce service image
                     sh """
-                        docker build -f ecommerce-service/Dockerfile -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
+                        docker build -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
                     """
                 }
             }
