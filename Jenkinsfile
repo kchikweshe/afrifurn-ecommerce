@@ -16,11 +16,11 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                  sh 'docker-compose build'
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //           sh 'docker-compose build'
+        //     }
+        // }
 
         stage('Test') {
             steps {
@@ -46,7 +46,7 @@ pipeline {
                     sh 'docker compose down --remove-orphans || true'
                     
                     // Start all services using docker-compose
-                    sh 'docker compose up -d'
+                    sh 'docker-compose up -d'
                 }
             }
         }
