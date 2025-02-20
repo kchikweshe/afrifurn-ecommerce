@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Build ecommerce service image
                     sh """
-                        docker build -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} .
+                        docker compose up --build -d
                     """
                 }
             }
