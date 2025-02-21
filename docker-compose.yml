@@ -33,8 +33,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: afrifurn
       ME_CONFIG_MONGODB_ADMINPASSWORD: mypassword
       ME_CONFIG_MONGODB_SERVER: afrifurn-mongodb
-    deploy:
-      replicas: 1
+   
     depends_on:
       - afrifurn-mongodb
 
@@ -55,6 +54,8 @@ services:
       - afrifurn-network
     ports:
       - 8090:8090
+    env_file:
+      - ./.env
     environment:
       EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED}
       EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL}
