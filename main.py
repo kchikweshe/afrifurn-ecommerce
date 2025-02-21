@@ -49,4 +49,5 @@ async def startup_event() -> None:
     Running on: http://{app_info['host']}:{app_info['port']}
     """)
 
-    
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
