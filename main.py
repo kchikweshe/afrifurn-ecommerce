@@ -33,6 +33,7 @@ def create_app() -> FastAPI:
     apply_cors_middleware(app)
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     app.include_router(api_router)
+    
     return app
 
 app = create_app()
@@ -48,11 +49,4 @@ async def startup_event() -> None:
     Running on: http://{app_info['host']}:{app_info['port']}
     """)
 
-if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",
-        host=str(get_app_info()['host']),
-        port=int(get_app_info()['port']),
-        
-    )
     
