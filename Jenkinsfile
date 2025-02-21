@@ -45,7 +45,7 @@ pipeline {
                         if [ "$(docker info | grep Swarm | grep inactive)" ]; then
                             docker swarm init || true
                         fi
-                        docker-compose down
+                        docker rm $(docker ps -a -q)
                         # Deploy the stack
                         docker stack deploy -c docker-compose.yml afrifurn --with-registry-auth
                         
