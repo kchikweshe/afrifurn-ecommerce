@@ -105,7 +105,8 @@ services:
     
     environment:
       HOST_IP: ${HOST_IP}
-      NEXT_PUBLIC_API_GATEWAY: http://5.189.146.192:8090/api/v1
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      NEXT_PUBLIC_API_GATEWAY: ${NEXT_PUBLIC_API_GATEWAY}
  
 volumes:
   mongodb_data_container:
