@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   afrifurn-mongodb:
     image: mongo
@@ -40,6 +40,15 @@ services:
       - afrifurn-network
     ports:
       - 8761:8761
+    env_file:
+      - ./.env
+    environment:
+      EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED}
+      EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL}
+      EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME}
+      server.port: 8761
+      HOST_IP: 5.189.146.192
+      EUREKA_HOST: ${EUREKA_HOST}
 
 
   api-gateway-service:
