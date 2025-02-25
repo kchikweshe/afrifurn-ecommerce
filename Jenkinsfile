@@ -16,11 +16,7 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //           sh 'docker-compose build'
-        //     }
-        // }
+
 
         stage('Test') {
             steps {
@@ -31,26 +27,40 @@ pipeline {
             }
         }
 
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker build -t kchikweshe/afrifurn-ecommerce-production:latest .
+                '''
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                sh '''
+                    docker push kchikweshe/afrifurn-ecommerce-production:latest
+                '''
+            }
+        }
+
+        stage('Swarm Init') {
+            steps {
+                sh '''
+                        # Initialize swarm if not already in swarm mode
+                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
+                            docker swarm init || true
+                        fi                '''
+            }
+        }
+        
         stage('Deploy') {
             steps {
                 script {
                     sh '''
-                        # Debug information
-                        echo "Docker version:"
-                        docker --version
-                        echo "Docker Swarm status:"
-                        docker info | grep Swarm
-                        
-                        # Initialize swarm if not already in swarm mode
-                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
-                            docker swarm init || true
-                        fi
+          
                         # Deploy the stack
                         docker stack deploy -c docker-compose.yml afrifurn --with-registry-auth
-                        
-                        # Wait a bit and check stack status
-                        sleep 10
-                        docker stack ps afrifurn
+                 
                     '''
                 }
             }
