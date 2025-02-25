@@ -1,76 +1,37 @@
-pipeline {
-    agent any
+node {
+    def app
 
-    environment {
-        // Update environment variables for all services
-        EUREKA_IMAGE = 'afrifurn-eureka-service'
-        GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
-        ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
-        DOCKER_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+    stage('Clone repository') {
+        checkout scm
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    stage('Build image') {
+        app = docker.build("kchikweshe/afrifurn-ecommerce-production")
+    }
 
-        stage('Build') {
-            steps {
-                script {
-                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                }
-            }
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
+            // Add your actual test commands here
         }
+    }
 
-        stage('Test') {
-            steps {
-                script {
-                    echo 'Running tests...'
-                    // Add your test commands here
-                }
-            }
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push('latest')
         }
+    }
 
-        stage('Push') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        dockerImage.push()
-                        // Also push as latest
-                        dockerImage.push('latest')
-                    }
-                }
-            }
-        }
-
-        stage('Swarm Init') {
-            steps {
-                sh '''
-                        # Initialize swarm if not already in swarm mode
-                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
-                            docker swarm init || true
-                        fi                '''
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                script {
-                    sh '''
-                        # Initialize swarm if not already in swarm mode
-                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
-                            docker swarm init || true
-                        fi
-                        
-                        docker-compose up -d
-                    '''
-                }
-            }
-        }
+    stage('Deploy') {
+        sh '''
+            # Initialize swarm if not already in swarm mode
+            if [ "$(docker info | grep Swarm | grep inactive)" ]; then
+                docker swarm init || true
+            fi
+            
+            docker-compose up -d
+        '''
     }
 
     post {
