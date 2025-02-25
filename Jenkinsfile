@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    docker build -t kchikweshe/afrifurn-ecommerce-production:latest .
+                    docker build --tag kchikweshe/afrifurn-ecommerce-production:latest .
                 '''
             }
         }
