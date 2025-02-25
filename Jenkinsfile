@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    docker buildx build . -t kchikweshe/afrifurn-ecommerce-production:latest
+                    docker buildx build . --platform linux/amd64 -t kchikweshe/afrifurn-ecommerce-production:latest
                 '''
             }
         }
