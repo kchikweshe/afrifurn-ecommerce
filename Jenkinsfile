@@ -7,6 +7,7 @@ pipeline {
         GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
         ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
         DOCKER_TAG = 'latest'
+        DOCKER_CREDS = credentials('docker-hub-credentials')
     }
 
     stages {
@@ -15,8 +16,6 @@ pipeline {
                 checkout scm
             }
         }
-
-
 
         stage('Test') {
             steps {
@@ -28,24 +27,42 @@ pipeline {
             }
         }
 
-        }
-
-        stage('Build Docker Image') {
+        stage('Build Docker Images') {
             steps {
-                sh '''
-                    docker-compose up 
-                '''
+                script {
+                    try {
+                        parallel(
+                            eureka: {
+                                sh "docker build -t ${EUREKA_IMAGE}:${DOCKER_TAG} ./eureka-service"
+                            },
+                            gateway: {
+                                sh "docker build -t ${GATEWAY_IMAGE}:${DOCKER_TAG} ./api-gateway"
+                            },
+                            ecommerce: {
+                                sh "docker build -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} ."
+                            }
+                        )
+                    } catch (Exception e) {
+                        error "Failed to build Docker images: ${e.message}"
+                    }
+                }
             }
         }
+
         stage('Deploy') {
             steps {
-                sh '''
-                    docker push kchikweshe/afrifurn-ecommerce-production:latest
-                '''
+                script {
+                    try {
+                        sh '''
+                            docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}
+                            docker push ${ECOMMERCE_IMAGE}:${DOCKER_TAG}
+                        '''
+                    } catch (Exception e) {
+                        error "Failed to push Docker image: ${e.message}"
+                    }
+                }
             }
         }
-
-        
     }
 
     post {
@@ -59,3 +76,4 @@ pipeline {
             cleanWs()
         }
     }
+}
