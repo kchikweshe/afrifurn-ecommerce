@@ -7,7 +7,6 @@ pipeline {
         GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
         ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
         DOCKER_TAG = 'latest'
-        DOCKER_CREDS = credentials('docker-hub-credentials')
     }
 
     stages {
@@ -32,12 +31,7 @@ pipeline {
                 script {
                     try {
                         parallel(
-                            eureka: {
-                                sh "docker build -t ${EUREKA_IMAGE}:${DOCKER_TAG} ./eureka-service"
-                            },
-                            gateway: {
-                                sh "docker build -t ${GATEWAY_IMAGE}:${DOCKER_TAG} ./api-gateway"
-                            },
+                    
                             ecommerce: {
                                 sh "docker build -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} ."
                             }
