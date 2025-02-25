@@ -54,7 +54,6 @@ pipeline {
                 script {
                     try {
                         sh '''
-                            docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}
                             docker push ${ECOMMERCE_IMAGE}:${DOCKER_TAG}
                         '''
                     } catch (Exception e) {
