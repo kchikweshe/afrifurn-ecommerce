@@ -1,37 +1,55 @@
-node {
-    def app
+pipeline {
+    agent any
 
-    stage('Clone repository') {
-        checkout scm
+    environment {
+        // Update environment variables for all services
+        EUREKA_IMAGE = 'afrifurn-eureka-service'
+        GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
+        ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
+        DOCKER_TAG = 'latest'
     }
 
-    stage('Build image') {
-        app = docker.build("kchikweshe/afrifurn-ecommerce-production")
-    }
-
-    stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-            // Add your actual test commands here
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
         }
-    }
 
-    stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push('latest')
+
+
+        stage('Test') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    // Add your test commands here
+                }
+            }
         }
-    }
+        stage('Login to Docker Hub') {
+            steps {
+                sh '''
+                    docker login -u kchikweshe -p $DOCKER_PASSWORD
+                '''
+            }
+        }
 
-    stage('Deploy') {
-        sh '''
-            # Initialize swarm if not already in swarm mode
-            if [ "$(docker info | grep Swarm | grep inactive)" ]; then
-                docker swarm init || true
-            fi
-            
-            docker-compose up -d
-        '''
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker-compose up 
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker push kchikweshe/afrifurn-ecommerce-production:latest
+                '''
+            }
+        }
+
+        
     }
 
     post {
