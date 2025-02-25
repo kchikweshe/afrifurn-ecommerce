@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/kchikweshe/afrifurn-ecommerce-production.git'
+                checkout scm
             }
         }
 
@@ -71,7 +71,7 @@ pipeline {
                 }
             }
         }
-    }       
+    }
 
     post {
         success {
