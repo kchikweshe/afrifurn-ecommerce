@@ -6,17 +6,25 @@ pipeline {
         EUREKA_IMAGE = 'afrifurn-eureka-service'
         GATEWAY_IMAGE = 'afrifurn-api-gateway-service'
         ECOMMERCE_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
-        DOCKER_TAG = 'latest'
+        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = 'kchikweshe/afrifurn-ecommerce-production'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'master', url: 'https://github.com/kchikweshe/afrifurn-ecommerce-production.git'
             }
         }
 
-
+        stage('Build') {
+            steps {
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                }
+            }
+        }
 
         stage('Test') {
             steps {
@@ -27,19 +35,15 @@ pipeline {
             }
         }
 
-
-        stage('Build Docker Image') {
+        stage('Push') {
             steps {
-                sh '''
-                    docker buildx build . --platform linux/amd64 -t kchikweshe/afrifurn-ecommerce-production:latest
-                '''
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                sh '''
-                    docker push kchikweshe/afrifurn-ecommerce-production:latest
-                '''
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        dockerImage.push()
+                        // Also push as latest
+                        dockerImage.push('latest')
+                    }
+                }
             }
         }
 
@@ -57,14 +61,17 @@ pipeline {
             steps {
                 script {
                     sh '''
-          
+                        # Initialize swarm if not already in swarm mode
+                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
+                            docker swarm init || true
+                        fi
+                        
                         docker-compose up -d
-                 
                     '''
                 }
             }
         }
-    }
+    }       
 
     post {
         success {
