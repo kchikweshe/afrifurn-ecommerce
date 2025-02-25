@@ -16,43 +16,45 @@ pipeline {
             }
         }
 
+        // stage('Build Docker Image') {
+        //     steps {
+        //           sh 'docker-compose build'
+        //     }
+        // }
+
         stage('Test') {
             steps {
                 script {
                     echo 'Running tests...'
-                    sh 'whoami'
                     // Add your test commands here
                 }
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Deploy') {
             steps {
                 script {
-                    try {
-                        parallel(
-                    
-                            ecommerce: {
-                                sh "docker build -t ${ECOMMERCE_IMAGE}:${DOCKER_TAG} ."
-                            }
-                        )
-                    } catch (Exception e) {
-                        error "Failed to build Docker images: ${e.message}"
-                    }
+                    sh '''
+                        # Debug information
+                        echo "Docker version:"
+                        docker --version
+                        echo "Docker Swarm status:"
+                        docker info | grep Swarm
+                        
+                        # Initialize swarm if not already in swarm mode
+                        if [ "$(docker info | grep Swarm | grep inactive)" ]; then
+                            docker swarm init || true
+                        fi
+                        # Deploy the stack
+                        docker stack deploy -c docker-compose.yml afrifurn --with-registry-auth
+                        
+                        # Wait a bit and check stack status
+                        sleep 10
+                        docker stack ps afrifurn
+                    '''
                 }
             }
         }
-
-      stage('Deploy') {
-    steps {
-        script {
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                sh 'docker push ${ECOMMERCE_IMAGE}:${DOCKER_TAG}'
-            }
-        }
-    }
-}
     }
 
     post {
@@ -66,4 +68,4 @@ pipeline {
             cleanWs()
         }
     }
-}
+} 
