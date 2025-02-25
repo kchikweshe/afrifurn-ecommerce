@@ -31,7 +31,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    docker build --tag kchikweshe/afrifurn-ecommerce-production:latest .
+                    docker --version
+                    docker build -t kchikweshe/afrifurn-ecommerce-production:latest .
                 '''
             }
         }
@@ -58,8 +59,7 @@ pipeline {
                 script {
                     sh '''
           
-                        # Deploy the stack
-                        docker stack deploy -c docker-compose.yml afrifurn --with-registry-auth
+                        docker-compose up -d
                  
                     '''
                 }
