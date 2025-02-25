@@ -43,7 +43,7 @@ services:
     env_file:
       - ./.env
     environment:
-      - EUREKA_CLIENT_ENABLED= ${EUREKA_CLIENT_ENABLED:-true}
+      - EUREKA_CLIENT_ENABLED=true
       - EUREKA_CLIENT_SERVICE_URL= http://eureka-service:8761/eureka
       - EUREKA_CLIENT_SERVICE_NAME= afrifurn-ecommerce-production
       - server.port= 8761
