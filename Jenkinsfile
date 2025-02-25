@@ -43,19 +43,16 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    try {
-                        sh '''
-                            docker push ${ECOMMERCE_IMAGE}:${DOCKER_TAG}
-                        '''
-                    } catch (Exception e) {
-                        error "Failed to push Docker image: ${e.message}"
-                    }
-                }
+      stage('Deploy') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                sh 'docker push ${ECOMMERCE_IMAGE}:${DOCKER_TAG}'
             }
         }
+    }
+}
     }
 
     post {
