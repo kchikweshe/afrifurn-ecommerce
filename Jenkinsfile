@@ -34,16 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh '''
-                        # Debug information
-                        echo "Docker version:"
-                        docker --version
-                      '''
-                        docker-compose up -d
-                        # Wait a bit and check stack status
-                        // sleep 10
-                        // docker stack ps afrifurn
-                    '''
+                    sh 'docker-compose up -d'
                 }
             }
         }
