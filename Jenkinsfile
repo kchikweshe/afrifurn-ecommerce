@@ -22,16 +22,12 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
+                    sh 'whoami'
                     // Add your test commands here
                 }
             }
         }
-        stage('Login to Docker Hub') {
-            steps {
-                sh '''
-                    docker login -u kchikweshe -p $DOCKER_PASSWORD
-                '''
-            }
+
         }
 
         stage('Build Docker Image') {
