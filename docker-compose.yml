@@ -43,12 +43,12 @@ services:
     env_file:
       - ./.env
     environment:
-      - EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED:-true}
-      - EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
-      - EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
-      - server.port: 8761
-      - HOST_IP: ${HOST_IP:-5.189.146.192}
-      - EUREKA_HOST: ${EUREKA_HOST:-eureka-service}
+      - EUREKA_CLIENT_ENABLED= ${EUREKA_CLIENT_ENABLED:-true}
+      - EUREKA_CLIENT_SERVICE_URL= ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
+      - EUREKA_CLIENT_SERVICE_NAME= ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
+      - server.port= 8761
+      - HOST_IP= ${HOST_IP:-5.189.146.192}
+      - EUREKA_HOST= ${EUREKA_HOST:-eureka-service}
 
 
   api-gateway-service:
@@ -60,12 +60,12 @@ services:
     env_file:
       - ./.env
     environment:
-      - EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED:-true}
-      - EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
-      - EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
-      - server.port: 8090
-      - HOST_IP: ${HOST_IP:-5.189.146.192}
-      - EUREKA_HOST: ${EUREKA_HOST:-eureka-service}
+      - EUREKA_CLIENT_ENABLED= ${EUREKA_CLIENT_ENABLED:-true}
+      - EUREKA_CLIENT_SERVICE_URL= ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
+      - EUREKA_CLIENT_SERVICE_NAME= ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
+      - server.port= 8090
+      - HOST_IP= ${HOST_IP:-5.189.146.192}
+      - EUREKA_HOST= ${EUREKA_HOST:-eureka-service}
    
     depends_on:
       - eureka-service
@@ -79,17 +79,17 @@ services:
     env_file:
       - ./.env
     environment:
-      - HOST_IP: ${HOST_IP:-5.189.146.192}
-      - EUREKA_HOST: ${EUREKA_HOST:-eureka-service}
-      - EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED:-true}
-      - EUREKA_CLIENT_SERVICE_URL: ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
-      - EUREKA_CLIENT_SERVICE_NAME: ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
-      - MONGODB_PASSWORD: ${MONGODB_PASSWORD:-mypassword}
-      - MONGO_HOST: ${MONGO_HOST:-5.189.146.192}
-      - MONGO_PORT: ${MONGO_PORT:-27017}
-      - MONGO_DB_NAME: ${MONGO_DB_NAME:-afrifurn}
-      - MONGO_USER: ${MONGO_USER:-kchikweshe}
-      - CORS_ORIGINS: ${CORS_ORIGINS:-http://5.189.146.192:8090,http://5.189.146.192:3000,http://localhost:8090,http://localhost:3000}
+      - HOST_IP= ${HOST_IP:-5.189.146.192}
+      - EUREKA_HOST= ${EUREKA_HOST:-eureka-service}
+      - EUREKA_CLIENT_ENABLED= ${EUREKA_CLIENT_ENABLED:-true}
+      - EUREKA_CLIENT_SERVICE_URL= ${EUREKA_CLIENT_SERVICE_URL:-http://eureka-service:8761/eureka}
+      - EUREKA_CLIENT_SERVICE_NAME= ${EUREKA_CLIENT_SERVICE_NAME:-afrifurn-ecommerce-production}
+      - MONGODB_PASSWORD= ${MONGODB_PASSWORD:-mypassword}
+      - MONGO_HOST= ${MONGO_HOST:-5.189.146.192}
+      - MONGO_PORT= ${MONGO_PORT:-27017}
+      - MONGO_DB_NAME= ${MONGO_DB_NAME:-afrifurn}
+      - MONGO_USER= ${MONGO_USER:-kchikweshe}
+      - CORS_ORIGINS= ${CORS_ORIGINS:-http://5.189.146.192:8090,http://5.189.146.192:3000,http://localhost:8090,http://localhost:3000}
  
     depends_on:
       - afrifurn-mongodb
