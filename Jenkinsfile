@@ -47,8 +47,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed! Check the logs for details.'
-            sh 'docker stack rm afrifurn-stack'
-            sh 'docker-compose down'
+       
         }
         always {
             cleanWs()
