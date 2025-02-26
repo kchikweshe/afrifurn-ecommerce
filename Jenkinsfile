@@ -34,7 +34,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker swarm init'
                     sh 'docker stack deploy --compose-file docker-compose.yml afrifurn-stack'
                 }
             }
