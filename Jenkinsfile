@@ -34,9 +34,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    sh 'docker stack rm afrifurn-stack'
+
                     sh 'docker-compose down'
-                    sh 'docker-compose up'
-                    
+                    sh 'docker stack deploy --compose-file docker-compose.yml afrifurn-stack'
                 }
             }
         }
@@ -48,6 +49,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed! Check the logs for details.'
+            sh 'docker stack rm afrifurn-stack'
             sh 'docker-compose down'
         }
         always {
