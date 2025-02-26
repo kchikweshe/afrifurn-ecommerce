@@ -34,9 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker stack rm afrifurn-stack'
 
-                    sh 'docker-compose down'
                     sh 'docker stack deploy --compose-file docker-compose.yml afrifurn-stack'
                 }
             }
