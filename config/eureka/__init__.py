@@ -60,7 +60,7 @@ async def lifespan(app: fastapi.FastAPI):
     python_version = get_python_version()
     port = 8000  # Default port, you can change this or make it configurable
     await eureka_client.init_async(
-            eureka_server=env.get("EUREKA_CLIENT_SERVICE_URL", "http://eureka-service:8761/eureka/"),
+            eureka_server="http://5.189.146.192:8761/eureka/",
             app_name="product-service",
             instance_port=8000,
             instance_host=host

@@ -1,12 +1,7 @@
 import logging
-from pathlib import Path
-import sys
-from typing import Dict
-import os
 from dotenv import load_dotenv
 
 from fastapi import FastAPI
-import fastapi
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
@@ -14,6 +9,7 @@ from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from middlewares.cors import apply_cors_middleware
 from routers import api_router
+import database
 
 #
 # Configure logging
@@ -41,6 +37,7 @@ app = create_app()
 @app.on_event("startup")
 async def startup_event() -> None:
     """Log application startup information"""
+    # Database is automatically initialized when imported
     app_info = get_app_info()
     logger.info(f"""
     {app_info['banner']}
