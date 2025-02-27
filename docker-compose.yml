@@ -16,7 +16,8 @@ services:
 
   afrifurn-mongo-express:
     image: mongo-express
-
+    env_file:
+      - .env
     ports:
       - 8081:8081
     
