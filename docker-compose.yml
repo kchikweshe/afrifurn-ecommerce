@@ -2,8 +2,10 @@ version: '3.8'
 services:
   afrifurn-mongodb:
     image: mongo
-    env_file:
-      - ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=kchikweshe
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
+      - MONGO_INITDB_ROOT_AUTH_SOURCE=admin
     networks:
       - afrifurn-network
     ports:
