@@ -5,9 +5,6 @@ services:
     env_file:
       - ./.env
 
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     networks:
       - afrifurn-network
     ports:
@@ -20,10 +17,9 @@ services:
 
     ports:
       - 8081:8081
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USER}
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}
-      - ME_CONFIG_MONGODB_SERVER=afrifurn-mongodb
+    env_file:
+      - ./.env
+
     networks:
       - afrifurn-network
    
@@ -38,12 +34,6 @@ services:
       - 8761:8761
     env_file:
       - ./.env
-    environment:
-      - EUREKA_CLIENT_ENABLED=true
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE}
-      - EUREKA_CLIENT_SERVICE_NAME=afrifurn-ecommerce-production
-      - HOST_IP=${HOST_IP}
-      - EUREKA_HOST=${HOST_IP}
 
 
   api-gateway-service:
@@ -54,11 +44,8 @@ services:
     env_file:
       - .env
     environment:
-      - EUREKA_CLIENT_ENABLED=true
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://5.189.146.192:8761/eureka/
-      - EUREKA_CLIENT_SERVICE_NAME=afrifurn-ecommerce-production
-      - HOST_IP=5.189.146.192
-      - EUREKA_HOST=5.189.146.192
+      - EUREKA_CLIENT_SERVICE_NAME=api-gateway-service
+    
    
     depends_on:
       - eureka-service
@@ -69,18 +56,7 @@ services:
       - 8000:8000
     env_file:
       - ./.env
-    environment:
-      - HOST_IP=${HOST_IP}
-      - EUREKA_HOST=${EUREKA_HOST}
-      - EUREKA_CLIENT_ENABLED=${EUREKA_CLIENT_ENABLED}
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE}
-      - EUREKA_CLIENT_SERVICE_NAME=${EUREKA_CLIENT_SERVICE_NAME}
-      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-      - MONGO_HOST=${MONGO_HOST}
-      - MONGO_PORT=${MONGO_PORT}
-      - MONGO_DB_NAME=${MONGO_DB_NAME}
-      - MONGO_USER=${MONGO_USER}
-      - CORS_ORIGINS=${CORS_ORIGINS}
+ 
     networks:
       - afrifurn-network
     depends_on:
@@ -94,10 +70,8 @@ services:
     ports:
       - 3000:3000
     
-    environment:
-      - HOST_IP=${HOST_IP}
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-      - NEXT_PUBLIC_API_GATEWAY=${NEXT_PUBLIC_API_GATEWAY}
+    env_file:
+      - ./.env
     networks:
       - afrifurn-network  
  
