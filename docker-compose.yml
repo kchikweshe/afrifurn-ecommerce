@@ -65,6 +65,7 @@ services:
 
   product-service:
     build: .
+    image: kchikweshe/afrifurn-ecommerce-production
     ports:
       - 8000:8000
     env_file:
