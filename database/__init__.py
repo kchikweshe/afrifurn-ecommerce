@@ -35,5 +35,6 @@ except ValueError as ve:
     raise
 except Exception as e:
     logging.error(f"\033[91m====================== Error connecting to MongoDB ======================\033[0m")
+    logging.error(f"\033[91m====================== {str(e)} ======================\033[0m")
     raise
 
