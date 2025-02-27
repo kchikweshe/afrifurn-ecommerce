@@ -20,7 +20,6 @@ try:
     MONGO_USER = get_required_env("MONGO_USER", "afrifurn")
     MONGO_PASSWORD = get_required_env("MONGODB_PASSWORD")  # No default for password
 
-    print(MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_PORT, MONGO_DB_NAME)
     # Construct MongoDB URI without logging credentials
     MONGO_URI = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB_NAME}"
     logging.info(f"Attempting to connect to MongoDB at {MONGO_HOST}:{MONGO_PORT}/{MONGO_DB_NAME}")
