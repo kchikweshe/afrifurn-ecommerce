@@ -64,7 +64,7 @@ services:
       - eureka-service
 
   product-service:
-    image: kchikweshe/afrifurn-ecommerce-production
+    image: kchikweshe/afrifurn-product-service
     ports:
       - 8000:8000
     env_file:
