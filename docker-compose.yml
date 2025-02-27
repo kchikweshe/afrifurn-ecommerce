@@ -64,7 +64,6 @@ services:
       - eureka-service
 
   product-service:
-    build: .
     image: kchikweshe/afrifurn-ecommerce-production
     ports:
       - 8000:8000
