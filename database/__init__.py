@@ -9,7 +9,7 @@ load_dotenv()
 def get_required_env(key: str, default: str | None = None) -> str:
     value = os.getenv(key, default)
     if not value:
-        raise ValueError(f"Missing required environment variable: {key}")
+        raise ValueError(f"Missing  required environment variable: {key}")
     return value
 
 # Get MongoDB connection details from environment variables
