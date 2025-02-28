@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Get CORS origins from environment variable or use default
-origins = os.getenv("CORS_ORIGINS", "")
+# Get CORS origins from environment variable and convert to list
+origins_str = os.getenv("CORS_ORIGINS", "http://localhost:3000")
+origins = [origin.strip() for origin in origins_str.split(",") if origin.strip()]
+
 print("CORS origins configured:", origins)
 
 def apply_cors_middleware(app: FastAPI):

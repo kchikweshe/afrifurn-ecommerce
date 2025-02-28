@@ -1,5 +1,6 @@
 import logging
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
@@ -26,7 +27,13 @@ load_dotenv()
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application"""
     app = FastAPI(lifespan=lifespan)
-    apply_cors_middleware(app)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://5.189.146.192:3000"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     app.include_router(api_router)
     
