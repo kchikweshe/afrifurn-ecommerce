@@ -72,8 +72,9 @@ services:
     ports:
       - 3000:3000
     
-    env_file:
-      - ./.env.frontend
+    environment:
+      - HOST_IP=5.189.146.192
+    
     networks:
       - afrifurn-network  
  
