@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker stack deploy --compose-file docker-compose.yml afrifurn'
+                    sh 'docker stack deploy --with-registry-auth --compose-file docker-compose.yml afrifurn'
                 }
             }
         }
