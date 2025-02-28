@@ -58,21 +58,6 @@ services:
       - 8000:8000
     env_file:
       - ./.env
-    deploy:
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: start-first
-      rollback_config:
-        parallelism: 1
-        delay: 10s
-        order: start-first
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
  
     networks:
       - afrifurn-network

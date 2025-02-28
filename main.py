@@ -29,7 +29,7 @@ def create_app() -> FastAPI:
     app = FastAPI(lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://5.189.146.192:3000"],
+        allow_origins=["http://5.189.146.192:3000,http://5.189.146.192:8090"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
