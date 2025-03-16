@@ -21,7 +21,7 @@ import sys
 import fastapi
 
 logger = logging.getLogger(__name__)
-load_dotenv(dotenv_path=".env.development")
+load_dotenv(dotenv_path=".env.production")
 env=os.environ
 
 
