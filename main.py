@@ -1,4 +1,5 @@
 import logging
+import os
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -8,7 +9,6 @@ import uvicorn
 
 from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
-from middlewares.cors import apply_cors_middleware
 from routers import api_router
 import database
 
@@ -21,7 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-load_dotenv()
+load_dotenv(dotenv_path=".env.development")
 
 
 def create_app() -> FastAPI:
@@ -29,7 +29,7 @@ def create_app() -> FastAPI:
     app = FastAPI(lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://5.189.146.192:3000,http://5.189.146.192:8090"],
+        allow_origins=os.getenv("CORS_ORIGINS",'').split(","),
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -43,15 +43,29 @@ app = create_app()
 
 @app.on_event("startup")
 async def startup_event() -> None:
-    """Log application startup information"""
-    # Database is automatically initialized when imported
-    app_info = get_app_info()
-    logger.info(f"""
-    {app_info['banner']}
-    Framework: FastAPI {app_info['fastapi_version']}
-    Python: {app_info['python_version']}
-    Running on: http://{app_info['host']}:{app_info['port']}
-    """)
+    """Log application startup information and environment variables"""
+    try:
+        # Database is automatically initialized when imported
+        app_info = get_app_info()
+        logger.info(f"""
+        {app_info['banner']}
+        Framework: FastAPI {app_info['fastapi_version']}
+        Python: {app_info['python_version']}
+        Running on: http://{app_info['host']}:{app_info['port']}
+        """)
+        
+        # Log environment variables
+        logger.info("Environment Variables in use:")
+        for key, value in os.environ.items():
+            # Mask sensitive information
+            if any(sensitive in key.lower() for sensitive in ['password', 'secret', 'key', 'token']):
+                logger.info(f"{key}: ********")
+            else:
+                logger.info(f"{key}: {value}")
+                
+    except Exception as e:
+        logger.error(f"Error during startup: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

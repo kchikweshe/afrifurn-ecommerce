@@ -99,7 +99,7 @@ async def filter_product(
         k: v for k, v in {
             "name": {"$regex": name, "$options": "i"} if name else None,
             "_id": id,
-            "short_name": short_name
+            "short_name": {"$regex": short_name, "$options": "i"}
         }.items() if v is not None
     }
 

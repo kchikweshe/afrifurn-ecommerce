@@ -17,7 +17,7 @@ services:
   afrifurn-mongo-express:
     image: mongo-express
     env_file:
-      - .env
+      - .env.production
     ports:
       - 8081:8081
     
@@ -35,7 +35,7 @@ services:
     ports:
       - 8761:8761
     env_file:
-      - ./.env
+      - ./.env.production
 
 
   api-gateway-service:
@@ -44,7 +44,7 @@ services:
     ports:
       - 8090:8090
     env_file:
-      - .env
+      - .env.production
     environment:
       - EUREKA_CLIENT_SERVICE_NAME=api-gateway-service
     
@@ -57,7 +57,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./.env
+      - ./.env.production
  
     networks:
       - afrifurn-network

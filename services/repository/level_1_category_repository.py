@@ -40,7 +40,8 @@ class Level1CategoryRepository(BaseRepository[Level1Category]):
                     inserted_item=category_id,
 
                     i=i,
-                    directory=category_folder
+                    directory=category_folder,
+                    color_code=None
                 )
                 saved_paths.append(file_path)
 
@@ -62,10 +63,10 @@ class Level1CategoryRepository(BaseRepository[Level1Category]):
 
             # If images are provided, save them
             if images:
-                image_paths = await self.save_category_images(images, str(category.id))
+                image_paths = await self.save_category_images(images, category.short_name)
                 # Update the category with image paths
                 category.images = image_paths
-                await self.update(str(category.id), category.model_dump())
+                await self.update(str(is_created), category.model_dump())
 
             return True
  

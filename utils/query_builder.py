@@ -24,7 +24,7 @@ def build_product_query(
     if name:
         query_criteria["name"] = {"$regex": name, "$options": "i"}
     if short_name:
-        query_criteria["category.short_name"] = {"$regex": short_name, "$options": "i"}
+        query_criteria["short_name"] = {"$regex": short_name, "$options": "i"}
     
     # Arrays
     colors_list = json.loads(colors)

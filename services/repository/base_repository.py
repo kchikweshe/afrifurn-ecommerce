@@ -1,5 +1,5 @@
 import logging
-from typing import Generic, TypeVar, List, Optional, Type
+from typing import Generic, TypeVar, List, Optional, Type, Union
 from fastapi import HTTPException
 from pydantic import BaseModel
 from bson import ObjectId
@@ -11,22 +11,14 @@ class BaseRepository(Generic[T]):
         self.db = db
         self.model_class = model_class
         self.collection_name = collection_name
-    async def insert_one(self, data: T, id: Optional[str] = None) -> bool:
+    async def insert_one(self, data: T, id: Optional[str] = None) ->str:
         try:
             collection = self.db[self.collection_name]
 
-            if id:
-                # If ID is provided, update the existing document
-                result =  collection.update_one(
-                    {"_id": ObjectId(id)},  # Filter by ID
-                    {"$set": data},         # Update with the new data
-                    upsert=False            # Do not insert if the document doesn't exist
-                )
-                return result.modified_count > 0  # True if the document was updated
-            else:
-                # If no ID is provided, insert a new document
-                result =  collection.insert_one(data)
-                return result.inserted_id is not None  # True if the document was inserted
+
+            # If no ID is provided, insert a new document
+            result =  collection.insert_one(data)
+            return result.inserted_id   # True if the document was inserted
 
         except Exception as e:
             raise HTTPException(
@@ -97,7 +89,7 @@ class BaseRepository(Generic[T]):
             return result.modified_count > 0
         except Exception as e:
             raise HTTPException(status_code=500, 
-                              detail=f"Repository error: Failed to update {self.collection_name}") 
+                              detail=f"Repository error: Failed to update {self.collection_name} \n {e}") 
         
     # delete method should be a soft delete
     async def delete(self, id: str) -> bool:

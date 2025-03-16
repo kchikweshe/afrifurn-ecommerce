@@ -8,10 +8,7 @@
             "module": "uvicorn",
             "args": [
                 "main:app",
-                "--host",
-                "192.168.100.6",
-                "--port",
-                "8000",
+                
                 "--reload"
             ],
             "jinja": true,
