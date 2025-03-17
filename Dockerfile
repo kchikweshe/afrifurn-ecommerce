@@ -39,6 +39,5 @@ EXPOSE 8000
 # Run as non-root user for better security
 RUN adduser --disabled-password --no-create-home appuser
 USER appuser
-
 # Command to run the FastAPI app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "5.189.146.192", "--port", "8000"]

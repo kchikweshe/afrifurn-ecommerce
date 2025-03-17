@@ -40,12 +40,12 @@ services:
 
   api-gateway-service:
     image: kchikweshe/afrifurn-api-gateway-service
-
+    networks:
+      - afrifurn-network
     ports:
       - 8090:8090
     env_file:
-      - api-gateway/env.production
-    
+      - api-gateway/.env.production
     depends_on:
       - eureka-service
 
