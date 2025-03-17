@@ -69,7 +69,7 @@ services:
       - .env.frontend
     ports:
       - 3000:3000
-    command: npm run start -- -H 0.0.0.0
+    command: npm run start -- -H 5.189.146.192
     networks:
       - afrifurn-network  
  
