@@ -35,7 +35,7 @@ services:
     ports:
       - 8761:8761
     env_file:
-      - ./.env.production
+      - .env.production
 
 
   api-gateway-service:
@@ -44,11 +44,8 @@ services:
     ports:
       - 8090:8090
     env_file:
-      - .env.production
-    environment:
-      - EUREKA_CLIENT_SERVICE_NAME=api-gateway-service
+      - api-gateway/env.production
     
-   
     depends_on:
       - eureka-service
 
