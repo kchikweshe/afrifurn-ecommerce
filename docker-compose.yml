@@ -72,10 +72,6 @@ services:
     ports:
       - 3000:3000
     command: npm run start
-
-    environment:
-      - NEXT_HOST_IP=5.189.146.192
-    
     networks:
       - afrifurn-network  
  
