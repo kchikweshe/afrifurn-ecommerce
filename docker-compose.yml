@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   afrifurn-mongodb:
+    container_name: afrifurn-mongodb
     image: mongo
  
     environment:
@@ -15,6 +16,7 @@ services:
       - mongodb_data_container:/data/db
 
   afrifurn-mongo-express:
+    container_name: afrifurn-mongo-express
     image: mongo-express
     env_file:
       - .env.production
@@ -29,6 +31,7 @@ services:
       - afrifurn-mongodb
 
   eureka-service:
+    container_name: eureka-service
     image: kchikweshe/afrifurn-eureka-service  
     networks:
       - afrifurn-network
@@ -39,6 +42,7 @@ services:
 
 
   api-gateway-service:
+    container_name: api-gateway
     image: kchikweshe/afrifurn-api-gateway-service
     networks:
       - afrifurn-network
@@ -50,6 +54,7 @@ services:
       - eureka-service
 
   product-service:
+    container_name: afrifurn-product-service
     image: kchikweshe/afrifurn-product-service
     ports:
       - 8000:8000
@@ -64,14 +69,16 @@ services:
       - api-gateway-service
 
   afrifurn-frontend:
+    container_name: afrifurn-frontend
+    
     image: kchikweshe/afrifurn-frontend
     env_file:
       - .env.frontend
     ports:
       - 3000:3000
-    command: npm run start -- -H 5.189.146.192
     networks:
-      - afrifurn-network  
+      - afrifurn-network 
+     
  
 volumes:
   mongodb_data_container:
@@ -80,4 +87,5 @@ volumes:
 networks:
   afrifurn-network:
     driver: overlay
+    external: true
 
