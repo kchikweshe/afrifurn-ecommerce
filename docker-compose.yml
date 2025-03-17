@@ -49,7 +49,8 @@ services:
     ports:
       - 8090:8090
     env_file:
-      - api-gateway/.env.production
+      - .env.gateway
+    
     depends_on:
       - eureka-service
 
