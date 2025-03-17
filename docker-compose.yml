@@ -87,6 +87,6 @@ volumes:
 
 networks:
   afrifurn-network:
-    driver: overlay
+    
 
 
