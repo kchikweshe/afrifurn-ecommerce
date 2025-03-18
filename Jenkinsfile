@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    echo '$USER -- $HOME'
+                    echo "$USER -- $HOME"
                     // Add your test commands here
                 }
             }
