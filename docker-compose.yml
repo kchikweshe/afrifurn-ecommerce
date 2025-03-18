@@ -28,7 +28,7 @@ services:
       - afrifurn-mongodb
   eureka-service:
     container_name: eureka-service
-    image: kchikweshe/afrifurn-api-gateway-service
+    image: kchikweshe/afrifurn-eureka-service
     build:
       context: ./eureka-server
       dockerfile: ./eureka-server/Dockerfile
@@ -41,7 +41,6 @@ services:
   api-gateway-service:
     container_name: api-gateway
     image: kchikweshe/afrifurn-api-gateway-service
-
     build:
       context: ./api-gateway
       dockerfile: ./api-gateway/Dockerfile
