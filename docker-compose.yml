@@ -30,7 +30,7 @@ services:
     container_name: eureka-service
     build:
       context: ./eureka-server
-      dockerfile: ./eureka-server/Dockerfile
+      dockerfile: Dockerfile
     networks:
       - afrifurn-network
     ports:
@@ -41,7 +41,7 @@ services:
     
     build:
       context: ./api-gateway
-      dockerfile: ./api-gateway/Dockerfile
+      dockerfile: Dockerfile
     networks:
       - afrifurn-network
     ports:
