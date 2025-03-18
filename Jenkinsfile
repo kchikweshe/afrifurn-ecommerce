@@ -10,15 +10,7 @@ pipeline {
             }
         }
         
-        stage('Setup Docker Permissions') {
-            steps {
-                script {
-                    sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown afrifurn:docker ~/.docker'
-                    sh 'sudo su - afrifurn'
-                 
-                }
-            }
-        }
+       
 
         // stage('Build Docker Image') {
         //     steps {
@@ -26,14 +18,7 @@ pipeline {
         //     }
         // }
 
-        stage('Test') {
-            steps {
-                script {
-                    echo "$USER -- $HOME"
-                    // Add your test commands here
-                }
-            }
-        }
+    
           stage('Build') {
             steps {
                 script {
