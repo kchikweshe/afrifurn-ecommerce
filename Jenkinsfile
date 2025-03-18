@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown afrifurn:docker ~/.docker'
-                    sh 'id'  // Print user info for verification
                     sh 'sudo su - afrifurn'
+                 
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
           stage('Build') {
             steps {
                 script {
-                    sh 'docker compose -f docker-compose.yml build'
+                    sh 'docker compose build'
                     // Add your test commands here
                 }
             }
