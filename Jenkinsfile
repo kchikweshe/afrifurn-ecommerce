@@ -22,7 +22,7 @@ pipeline {
           stage('Build') {
             steps {
                 script {
-                    sh 'docker-compose up --build'
+                    sh 'sudo docker-compose up --build'
                     // Add your test commands here
                 }
             }
