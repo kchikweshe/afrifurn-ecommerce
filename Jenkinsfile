@@ -28,7 +28,7 @@ pipeline {
           stage('Build') {
             steps {
                 script {
-                    sh 'docker-compose --build'
+                    sh 'docker-compose build'
                     // Add your test commands here
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // sh 'docker stack deploy --with-registry-auth --compose-file docker-compose.yml afrifurn'
-                    sh 'docker compose up'
+                    sh 'docker-compose up -d'
                 }
             }
         }
