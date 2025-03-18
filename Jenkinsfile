@@ -28,7 +28,7 @@ pipeline {
           stage('Build') {
             steps {
                 script {
-                    sh 'docker compose build'
+                    sh 'docker-compose --build'
                     // Add your test commands here
                 }
             }
