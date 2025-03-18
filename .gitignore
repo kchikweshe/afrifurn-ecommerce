@@ -379,5 +379,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+# Service account credentials
+**/serviceAccountKey.json
+**/*firebase-adminsdk*.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,node,macos,linux,windows
