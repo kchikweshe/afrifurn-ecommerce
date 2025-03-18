@@ -15,6 +15,7 @@ pipeline {
                 script {
                     sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown afrifurn:docker ~/.docker'
                     sh 'id'  // Print user info for verification
+                    sh 'sudo su - afrifurn'
                 }
             }
         }
