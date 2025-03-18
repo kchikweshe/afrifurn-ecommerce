@@ -75,8 +75,7 @@ services:
       
       args:
         - NEXT_HOST_IP=api-gateway
-    env_file:
-      - .env.frontend
+ 
     ports:
       - 3000:3000
     networks:
