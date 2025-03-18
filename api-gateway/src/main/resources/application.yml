@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:  
+      globalcors:
+          cors-configurations:
+            '[/**]':
+              allowedOrigins: 
+              - "https://docs.spring.io"
+              - "http://afrifurn-frontend:3000"
+              allowedHeaders: '*'
+              maxAge: 30
+              allowedMethods:
+              - GET
+              - POST
+              
+            
+      routes:
+        - id: product-service
+          uri: http://afrifurn-product-service:8000
+          predicates:
+            - Path=/product-service/api/v1/**
+        - id: auth-service
+          uri: http://afrifurn-product-service:8002
+          predicates:
+            - Path=/auth/api/v1/**
+        - id: order-service
+          uri: http://afrifurn-product-service:8004
+          predicates:
+            - Path=/orders/api/v1/** 
+
+server:
+  port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: EUREKA_URI:http://eureka-service:8761/eureka

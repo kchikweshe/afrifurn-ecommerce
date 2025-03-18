@@ -30,6 +30,15 @@ pipeline {
                 }
             }
         }
+          stage('Build') {
+            steps {
+                script {
+                    sh 'docker network create afrifurn-network'
+                    sh 'docker-compose  build'
+                    // Add your test commands here
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {

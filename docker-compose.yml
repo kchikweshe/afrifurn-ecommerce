@@ -22,46 +22,46 @@ services:
       - .env.production
     ports:
       - 8081:8081
-    
-
     networks:
       - afrifurn-network
-   
     depends_on:
       - afrifurn-mongodb
-
   eureka-service:
     container_name: eureka-service
-    image: kchikweshe/afrifurn-eureka-service  
+    build:
+      image: kchikweshe/afrifurn-api-gateway-service
+      context: ./api-gateway
+      dockerfile: ./api-gateway/Dockerfile
     networks:
       - afrifurn-network
     ports:
       - 8761:8761
     env_file:
       - .env.production
-
-
   api-gateway-service:
     container_name: api-gateway
-    image: kchikweshe/afrifurn-api-gateway-service
+    build:
+      image: kchikweshe/afrifurn-api-gateway-service
+      context: ./api-gateway
+      dockerfile: ./api-gateway/Dockerfile
     networks:
       - afrifurn-network
     ports:
       - 8090:8090
     env_file:
-      - .env.gateway
-    
+      - ./api-gateway/.env.gateway
     depends_on:
       - eureka-service
-
   product-service:
     container_name: afrifurn-product-service
-    image: kchikweshe/afrifurn-product-service
+    build: 
+      image: kchikweshe/afrifurn-product-service
+      context: ./
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     env_file:
       - .env.production
- 
     networks:
       - afrifurn-network
     depends_on:
@@ -71,8 +71,12 @@ services:
 
   afrifurn-frontend:
     container_name: afrifurn-frontend
-    
-    image: kchikweshe/afrifurn-frontend
+    build: 
+      image: kchikweshe/afrifurn-frontend
+      context: ./afrifurn-frontend
+      dockerfile: ./afrifurn-frontend/Dockerfile
+      args:
+        NEXT_HOST_IP: ${NEXT_HOST_IP}
     env_file:
       - .env.frontend
     ports:
