@@ -10,6 +10,14 @@ pipeline {
             }
         }
         
+        stage('Setup Docker Permissions') {
+            steps {
+                script {
+                    sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown john:docker ~/.docker'
+                    sh 'id'  // Print user info for verification
+                }
+            }
+        }
 
         // stage('Build Docker Image') {
         //     steps {
@@ -28,7 +36,7 @@ pipeline {
           stage('Build') {
             steps {
                 script {
-                    sh 'docker-compose -f docker-compose.yml build'
+                    sh 'docker compose -f docker-compose.yml build'
                     // Add your test commands here
                 }
             }
@@ -38,7 +46,7 @@ pipeline {
             steps {
                 script {
                     // sh 'docker stack deploy --with-registry-auth --compose-file docker-compose.yml afrifurn'
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                 }
             }
         }
