@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    echo 'Running tests...'
+                    echo '$USER -- $HOME'
                     // Add your test commands here
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     // sh 'docker stack deploy --with-registry-auth --compose-file docker-compose.yml afrifurn'
-                    sh 'docker compose up -d'
+                    sh 'docker compose up'
                 }
             }
         }
