@@ -35,8 +35,7 @@ services:
       - afrifurn-network
     ports:
       - 8761:8761
-    env_file:
-      - .env.production
+    
   api-gateway-service:
     container_name: api-gateway
     
