@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
-import { formatPrice } from '@/lib/utils/format';
+import { formatPrice } from '@/tools/utils/format';
 import { PRODUCT_IMAGE_URLS } from '@/data/urls';
 
 const CartItem = ({ item, onRemove }: { item: any; onRemove: (id: string) => void }) => (

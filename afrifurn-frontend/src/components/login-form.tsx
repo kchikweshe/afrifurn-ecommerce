@@ -1,5 +1,5 @@
 'use client'
-import { cn } from "@/lib/utils"
+import { cn } from "@/tools/utils"
 import {
   Card,
   CardContent,
