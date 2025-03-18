@@ -71,7 +71,7 @@ services:
     container_name: afrifurn-frontend
     build: 
       context: ./afrifurn-frontend
-      dockerfile: ./afrifurn-frontend/Dockerfile
+      dockerfile: Dockerfile
       
       args:
         - NEXT_HOST_IP=api-gateway
