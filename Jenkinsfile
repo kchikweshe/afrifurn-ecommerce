@@ -37,7 +37,7 @@ pipeline {
                     // Add your test commands here
                 }
             }
-        },
+        }
 
         stage('Deploy') {
             steps {
