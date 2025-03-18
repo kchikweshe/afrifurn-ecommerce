@@ -13,7 +13,7 @@ pipeline {
         stage('Setup Docker Permissions') {
             steps {
                 script {
-                    sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown john:docker ~/.docker'
+                    sh 'sudo chown afrifurn:docker ~/.docker || mkdir -p ~/.docker && sudo chown afrifurn:docker ~/.docker'
                     sh 'id'  // Print user info for verification
                 }
             }
