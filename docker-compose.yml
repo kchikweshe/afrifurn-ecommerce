@@ -28,8 +28,9 @@ services:
       - afrifurn-mongodb
   eureka-service:
     container_name: eureka-service
+    image: kchikweshe/afrifurn-api-gateway-service
     build:
-      image: kchikweshe/afrifurn-api-gateway-service
+      
       context: ./api-gateway
       dockerfile: ./api-gateway/Dockerfile
     networks:
@@ -40,8 +41,9 @@ services:
       - .env.production
   api-gateway-service:
     container_name: api-gateway
+    image: kchikweshe/afrifurn-api-gateway-service
+
     build:
-      image: kchikweshe/afrifurn-api-gateway-service
       context: ./api-gateway
       dockerfile: ./api-gateway/Dockerfile
     networks:
@@ -54,8 +56,9 @@ services:
       - eureka-service
   product-service:
     container_name: afrifurn-product-service
+    image: kchikweshe/afrifurn-product-service
     build: 
-      image: kchikweshe/afrifurn-product-service
+      
       context: ./
       dockerfile: Dockerfile
     ports:
@@ -71,12 +74,12 @@ services:
 
   afrifurn-frontend:
     container_name: afrifurn-frontend
+    image: kchikweshe/afrifurn-frontend
     build: 
-      image: kchikweshe/afrifurn-frontend
       context: ./afrifurn-frontend
       dockerfile: ./afrifurn-frontend/Dockerfile
       args:
-        NEXT_HOST_IP: ${NEXT_HOST_IP}
+        NEXT_HOST_IP: api-gateway
     env_file:
       - .env.frontend
     ports:
