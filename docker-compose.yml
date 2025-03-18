@@ -38,28 +38,26 @@ services:
     
   api-gateway-service:
     container_name: api-gateway
-    
     build:
       context: ./api-gateway
       dockerfile: Dockerfile
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
     networks:
       - afrifurn-network
     ports:
       - 8090:8090
-    env_file:
-      - ./api-gateway/.env.gateway
     depends_on:
       - eureka-service
   product-service:
     container_name: afrifurn-product-service
-    
     build: 
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - 8000:8000
     env_file:
       - .env.production
+    ports:
+      - 8000:8000
     networks:
       - afrifurn-network
     depends_on:
