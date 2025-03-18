@@ -30,9 +30,8 @@ services:
     container_name: eureka-service
     image: kchikweshe/afrifurn-api-gateway-service
     build:
-      
-      context: ./api-gateway
-      dockerfile: ./api-gateway/Dockerfile
+      context: ./eureka-server
+      dockerfile: ./eureka-server/Dockerfile
     networks:
       - afrifurn-network
     ports:
@@ -41,9 +40,8 @@ services:
       - .env.production
   api-gateway-service:
     container_name: api-gateway
-    image: kchikweshe/afrifurn-api-gateway-service
-
     build:
+      image: kchikweshe/afrifurn-api-gateway-service
       context: ./api-gateway
       dockerfile: ./api-gateway/Dockerfile
     networks:
@@ -58,7 +56,6 @@ services:
     container_name: afrifurn-product-service
     image: kchikweshe/afrifurn-product-service
     build: 
-      
       context: ./
       dockerfile: Dockerfile
     ports:
@@ -74,12 +71,15 @@ services:
 
   afrifurn-frontend:
     container_name: afrifurn-frontend
-    image: kchikweshe/afrifurn-frontend
     build: 
       context: ./afrifurn-frontend
       dockerfile: ./afrifurn-frontend/Dockerfile
+      
       args:
-        NEXT_HOST_IP: api-gateway
+        - NEXT_HOST_IP=${NEXT_HOST_IP}
+    
+    image: kchikweshe/afrifurn-frontend
+
     env_file:
       - .env.frontend
     ports:
