@@ -52,7 +52,7 @@ services:
   product-service:
     container_name: afrifurn-product-service
     build: 
-      context: ./
+      context: ./product-service
       dockerfile: Dockerfile
     env_file:
       - .env.production
