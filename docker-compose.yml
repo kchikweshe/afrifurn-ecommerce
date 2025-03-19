@@ -55,7 +55,7 @@ services:
       context: ./product-service
       dockerfile: Dockerfile
     env_file:
-      - .env.production
+      - ./product-service/.env.production
     ports:
       - 8000:8000
     networks:
@@ -68,7 +68,7 @@ services:
   afrifurn-frontend:
     container_name: afrifurn-frontend
     env_file:
-      - .env.frontend
+      - ./product-service/.env.frontend
     build: 
       context: ./afrifurn-frontend
       dockerfile: Dockerfile
