@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'sudo docker-compose down'
+                    sh 'sudo docker-compose down  --remove-orphans'
                     sh 'sudo docker-compose up -d'
                 }
             }
