@@ -40,4 +40,4 @@ EXPOSE 80
 RUN adduser --disabled-password --no-create-home appuser
 USER appuser
 # Command to run the FastAPI app
-CMD ["fastapi", "run", "main.py", "--port", "80"]
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]
