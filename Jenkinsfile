@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-  
-
     stages {
         stage('Checkout') {
             steps {
@@ -10,20 +8,10 @@ pipeline {
             }
         }
         
-       
-
-        // stage('Build Docker Image') {
-        //     steps {
-        //           sh 'docker-compose build'
-        //     }
-        // }
-
-    
-          stage('Build') {
+        stage('Build') {
             steps {
                 script {
-                    sh 'sudo docker-compose up --build -d'
-                    // Add your test commands here
+                    sh 'sudo docker-compose build'
                 }
             }
         }
@@ -31,8 +19,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // sh 'docker stack deploy --with-registry-auth --compose-file docker-compose.yml afrifurn'
-                    sh 'docker-compose up -d'
+                    sh 'sudo docker-compose down'
+                    sh 'sudo docker-compose up -d'
                 }
             }
         }
@@ -44,7 +32,6 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed! Check the logs for details.'
-       
         }
         always {
             cleanWs()

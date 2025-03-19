@@ -10,6 +10,7 @@ spring:
               allowedOrigins: 
               - "https://docs.spring.io"
               - "http://afrifurn-frontend:3000"
+              - "http://afri-furn.co.zw:3000"
               allowedHeaders: '*'
               maxAge: 30
               allowedMethods:
@@ -19,15 +20,15 @@ spring:
             
       routes:
         - id: product-service
-          uri: http://afrifurn-product-service:8000
+          uri: http://afrifurn-product-service:80
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
-          uri: http://afrifurn-product-service:8002
+          uri: http://afrifurn-auth-service:8002
           predicates:
             - Path=/auth/api/v1/**
         - id: order-service
-          uri: http://afrifurn-product-service:8004
+          uri: http://afrifurn-order-service:8004
           predicates:
             - Path=/orders/api/v1/** 
       discovery:
@@ -47,6 +48,6 @@ eureka:
 
 # CORS configuration for external access
 cors:
-  allowed-origins: http://5.189.146.192:3000
+  allowed-origins: http://afrifurn.co.zw:3000
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: "*"

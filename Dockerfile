@@ -34,10 +34,10 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY . .
 
 # Expose the port
-EXPOSE 8000
+EXPOSE 80
 
 # Run as non-root user for better security
 RUN adduser --disabled-password --no-create-home appuser
 USER appuser
 # Command to run the FastAPI app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["fastapi", "run", "main.py", "--port", "80"]
