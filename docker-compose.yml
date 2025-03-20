@@ -69,8 +69,7 @@ services:
 
   afrifurn-frontend:
     container_name: afrifurn-frontend
-    env_file:
-      - ./product-service/.env.frontend
+    
     build: 
       context: ./afrifurn-frontend
       dockerfile: Dockerfile
