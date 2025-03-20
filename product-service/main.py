@@ -3,7 +3,7 @@ import os
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from routers import api_router
