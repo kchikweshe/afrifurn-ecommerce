@@ -51,7 +51,7 @@ services:
       - eureka-service
   product-service:
     container_name: afrifurn-product-service
-    command: "uvicorn main:app --proxy-headers  --port 8000"
+    command: "uvicorn main:app --proxy-headers --host www.afri-furn.co.zw --port 8000"
     build: 
       context: ./product-service
       dockerfile: Dockerfile
