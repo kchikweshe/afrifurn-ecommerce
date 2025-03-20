@@ -9,8 +9,7 @@ spring:
             '[/**]':
               allowedOrigins: 
               - "https://docs.spring.io"
-              - "http://afrifurn-frontend:3000"
-              - "http://afri-furn.co.zw:3000"
+              - "http://www.afri-furn.co.zw:3000"
               allowedHeaders: '*'
               maxAge: 30
               allowedMethods:
@@ -20,15 +19,15 @@ spring:
             
       routes:
         - id: product-service
-          uri: http://afrifurn-product-service:80
+          uri: http://www.afri-furn.co.zw:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
-          uri: http://afrifurn-auth-service:8002
+          uri: http://www.afri-furn.co.zw:8002
           predicates:
             - Path=/auth/api/v1/**
         - id: order-service
-          uri: http://afrifurn-order-service:8004
+          uri: http://www.afri-furn.co.zw:8004
           predicates:
             - Path=/orders/api/v1/** 
       discovery:
