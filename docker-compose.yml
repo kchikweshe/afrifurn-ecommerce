@@ -84,12 +84,14 @@ services:
   nginx:
     container_name: nginx
     image: nginx:latest
+    build: 
+      context: ./nginx
     ports:
       - 80:80
     networks:
       - afrifurn-network
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
  
 volumes:
   mongodb_data_container:
