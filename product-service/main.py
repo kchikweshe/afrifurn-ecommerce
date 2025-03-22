@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from prometheus_client import Counter, Histogram
 from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from routers import api_router
@@ -46,10 +45,6 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
-
-# Define custom metrics
-REQUEST_COUNT = Counter('request_count', 'Total request count')
-REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency in seconds')
 
 @app.middleware("http")
 async def log_structured_requests(request: Request, call_next):
