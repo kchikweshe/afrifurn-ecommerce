@@ -20,11 +20,12 @@ pipeline {
             steps {
                 script {
                     sh 'sudo docker-compose down  --remove-orphans'
-                    // sh 'sudo docker-compose up -d'
+                    sh 'sudo docker-compose up -d'
                 }
             }
         }
     }
+
 
     post {
         success {
