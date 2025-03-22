@@ -1,21 +1,30 @@
+import json
 import logging
 import os
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from prometheus_client import Counter, Histogram
 from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from routers import api_router
 import database
+from fastapi.logger import logger as fastapi_logger
+from starlette_exporter import PrometheusMiddleware, handle_metrics
 
 #
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+
+class StructuredLogger(logging.Logger):
+    def _log(self, level, msg, args, exc_info=None, extra=None, stack_info=False):
+        if extra is None:
+            extra = {}
+        extra['app_name'] = 'MyFastAPIApp'
+        super()._log(level, json.dumps(msg) if isinstance(msg, dict) else msg, args, exc_info, extra, stack_info)
+
+
+logging.setLoggerClass(StructuredLogger)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
@@ -39,13 +48,34 @@ def create_app() -> FastAPI:
 
 app = create_app()
 
+app.add_middleware(PrometheusMiddleware)
+app.add_route("/metrics", handle_metrics)
+# Define custom metrics
+REQUEST_COUNT = Counter('request_count', 'Total request count')
+REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency in seconds')
+
+@app.middleware("http")
+async def log_structured_requests(request: Request, call_next):
+    logger.info({
+        "event": "request",
+        "method": request.method,
+        "url": str(request.url),
+        "headers": dict(request.headers),
+        "client": request.client.host
+    })
+    response = await call_next(request)
+    logger.info({
+        "event": "response",
+        "status_code": response.status_code
+    })
+    return response
 @app.on_event("startup")
 async def startup_event() -> None:
     """Log application startup information and environment variables"""
     try:
         # Database is automatically initialized when imported
         app_info = get_app_info()
-        logger.info(f"""
+        logging.info(f"""
         {app_info['banner']}
         Framework: FastAPI {app_info['fastapi_version']}
         Python: {app_info['python_version']}
@@ -53,16 +83,16 @@ async def startup_event() -> None:
         """)
         
         # Log environment variables
-        logger.info("Environment Variables in use:")
+        logging.info("Environment Variables in use:")
         for key, value in os.environ.items():
             # Mask sensitive information
             if any(sensitive in key.lower() for sensitive in ['password', 'secret', 'key', 'token']):
-                logger.info(f"{key}: ********")
+                logging.info(f"{key}: ********")
             else:
-                logger.info(f"{key}: {value}")
+                logging.info(f"{key}: {value}")
                 
     except Exception as e:
-        logger.error(f"Error during startup: {str(e)}")
+        logging.error(f"Error during startup: {str(e)}")
         raise
 
 # if __name__ == "__main__":
