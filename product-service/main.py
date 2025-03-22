@@ -12,7 +12,6 @@ from constants.paths import STATIC_DIR
 from routers import api_router
 import database
 from fastapi.logger import logger as fastapi_logger
-from starlette_exporter import PrometheusMiddleware, handle_metrics
 
 #
 
@@ -48,8 +47,6 @@ def create_app() -> FastAPI:
 
 app = create_app()
 
-app.add_middleware(PrometheusMiddleware)
-app.add_route("/metrics", handle_metrics)
 # Define custom metrics
 REQUEST_COUNT = Counter('request_count', 'Total request count')
 REQUEST_LATENCY = Histogram('request_latency_seconds', 'Request latency in seconds')
