@@ -88,7 +88,8 @@ services:
     build: 
       context: ./nginx
     ports:
-      - 8088:80
+      - 80:80
+      - 443:443
     networks:
       - afrifurn-network
     volumes:
