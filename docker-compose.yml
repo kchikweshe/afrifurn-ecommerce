@@ -92,13 +92,21 @@ services:
     networks:
       - afrifurn-network
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
- 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    certbot:
+      image: certbot/certbot
+      container_name: certbot
+      volumes: 
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/www:/var/www/certbot
+      command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
+  
 volumes:
   fastapi:
     driver: local
   mongodb_data_container:
     driver: local
+    
 
 networks:
   afrifurn-network:
