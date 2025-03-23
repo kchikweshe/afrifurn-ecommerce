@@ -102,7 +102,7 @@ services:
      volumes: 
        - ./certbot/conf:/etc/letsencrypt
        - ./certbot/www:/var/www/certbot
-     command: certbot certonly --webroot -w /var/www/certbot --force-renewal --email kchikweshe@gmail.com -d www.afri-furn.co.zw --agree-tos
+     command: sudo certbot certonly --webroot -w /var/www/certbot --force-renewal --email kchikweshe@gmail.com -d www.afri-furn.co.zw --agree-tos
 
 volumes: 
   fastapi:
