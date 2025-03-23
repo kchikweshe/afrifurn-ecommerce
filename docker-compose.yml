@@ -95,8 +95,8 @@ services:
     volumes:
     
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      # - ./certbot/conf:/etc/letsencrypt
+      # - ./certbot/www:/var/www/certbot
   certbot:
      image: certbot/certbot
      container_name: certbot
