@@ -100,6 +100,8 @@ services:
   certbot:
      image: certbot/certbot
      container_name: certbot
+     port:
+      -8088:80
      networks:
       - afrifurn-network
      volumes: 
