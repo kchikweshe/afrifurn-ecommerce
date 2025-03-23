@@ -88,7 +88,7 @@ services:
     build: 
       context: ./nginx
     ports:
-      - 80:80
+      - 8088:80
       - 443:443
     networks:
       - afrifurn-network
@@ -100,8 +100,7 @@ services:
   certbot:
      image: certbot/certbot
      container_name: certbot
-     ports:
-        - 8088:80
+
      networks:
       - afrifurn-network
      volumes: 
