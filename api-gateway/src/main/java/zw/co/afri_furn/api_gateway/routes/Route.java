@@ -13,8 +13,8 @@ public class Route {
 
         @Bean
         public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-                String hostIp = "www.afri-furn.co.zw";
-                String orderIP = "www.afri-furn.co.zw";
+                String hostIp = "afri-furn.co.zw";
+                String orderIP = "afri-furn.co.zw";
 
                 return builder.routes()
                                 .route("auth-service", r -> r.path("/auth")
