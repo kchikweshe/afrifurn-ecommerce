@@ -19,7 +19,7 @@ spring:
             
       routes:
         - id: product-service
-          uri: http://afri-furn.co.zw:8000
+          uri: https://afri-furn.co.zw:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
