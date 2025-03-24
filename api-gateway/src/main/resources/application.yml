@@ -19,15 +19,15 @@ spring:
             
       routes:
         - id: product-service
-          uri: https://www.afri-furn.co.zw:8000
+          uri: http://product-service:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
-          uri: https://www.afri-furn.co.zw:8002
+          uri: http://auth-service:8002
           predicates:
             - Path=/auth/api/v1/**
         - id: order-service
-          uri: https://www.afri-furn.co.zw:8004
+          uri: http://order-service:8004
           predicates:
             - Path=/orders/api/v1/** 
       discovery:
