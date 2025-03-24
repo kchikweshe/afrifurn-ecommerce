@@ -6,10 +6,7 @@ spring:
     gateway:  
       httpclient:
         ssl:
-        handshake-timeout-millis: 10000
-          close-notify-flush-timeout-millis: 3000
-          close-notify-read-timeout-millis: 0
-          trustedX509Certificates:
+        trustedX509Certificates:
           - /app/ssl/fullchain1.pem
       globalcors:
           cors-configurations:
