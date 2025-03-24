@@ -20,7 +20,7 @@ public class Route {
                                 .route("auth-service", r -> r.path("/auth")
                                                 .uri("http://" + hostIp + ":8002/auth/api/v1/**"))
                                 .route("product-service", r -> r.path("/product-service/api/v1/**")
-                                                .uri("https://" + hostIp + ":8000/api/v1/**"))
+                                                .uri("http://" + hostIp + ":8000/api/v1/**"))
                                 .route("order-service", r -> r.path("/order")
                                                 .uri("http://" + orderIP + ":8004/"))
                                 .build();
