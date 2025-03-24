@@ -19,15 +19,15 @@ spring:
             
       routes:
         - id: product-service
-          uri: http://www.afri-furn.co.zw:8000
+          uri: https://www.afri-furn.co.zw:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
-          uri: http://www.afri-furn.co.zw:8002
+          uri: https://www.afri-furn.co.zw:8002
           predicates:
             - Path=/auth/api/v1/**
         - id: order-service
-          uri: http://www.afri-furn.co.zw:8004
+          uri: https://www.afri-furn.co.zw:8004
           predicates:
             - Path=/orders/api/v1/** 
       discovery:
@@ -41,7 +41,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka-service:8761/eureka/
+      defaultZone: https://eureka-service:8761/eureka/
   instance:
     preferIpAddress: true
 
