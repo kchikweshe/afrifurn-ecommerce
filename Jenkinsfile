@@ -8,19 +8,19 @@ pipeline {
             }
         }
         
-        // stage('Build') {
-        //     steps {
-        //         script {
-        //             sh 'sudo docker-compose build'
-        //         }
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                script {
+                    sh 'sudo docker-compose build'
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {
                 script {
                     sh 'sudo docker-compose down  --remove-orphans'
-                    // sh 'sudo docker-compose up -d'
+                    sh 'sudo docker-compose up -d'
                 }
             }
         }
