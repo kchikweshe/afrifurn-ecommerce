@@ -1,7 +1,7 @@
 import { HOST_IP } from "@/data/urls";
 import axios from "axios";
 
-export const API_GATEWAY = `https://${HOST_IP}`;
+export const API_GATEWAY = `http://${HOST_IP}`;
 export const api_version:string="/api/v1"
 
 
