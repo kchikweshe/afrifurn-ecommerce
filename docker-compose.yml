@@ -107,7 +107,7 @@ services:
      volumes: 
        - ./certbot/conf:/etc/letsencrypt
        - ./certbot/www:/var/www/certbot
-     command: certonly --standalone -d afri-furn.co.zw -d www.afri-furn.co.zw
+     command: certonly --standalone -d afri-furn.co.zw -d www.afri-furn.co.zw  --force-interactive --agree-tos
   
 volumes: 
   fastapi:
