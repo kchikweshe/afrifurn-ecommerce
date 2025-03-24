@@ -100,13 +100,14 @@ services:
   certbot:
      image: certbot/certbot
      container_name: certbot
-     user: root
+     
+     
      networks:
       - afrifurn-network
      volumes: 
        - ./certbot/conf:/etc/letsencrypt
        - ./certbot/www:/var/www/certbot
-     command: certonly --standalone  --email kchikweshe@gmail.com -d afri-furn.co.zw -d www.afri-furn.co.zw --agree-tos -v
+     command: certonly --standalone -d afri-furn.co.zw -d www.afri-furn.co.zw
   
 volumes: 
   fastapi:
