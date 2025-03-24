@@ -4,12 +4,23 @@ spring:
 
   cloud:
     gateway:  
+      httpclient:
+        ssl:
+          handshake-timeout-millis: 10000
+          close-notify-flush-timeout-millis: 3000
+          close-notify-read-timeout-millis: 0
+          trustedX509Certificates:
+          - cert1.pem
+          - cert2.pem
       globalcors:
           cors-configurations:
             '[/**]':
               allowedOrigins: 
               - "https://docs.spring.io"
               - "http://www.afri-furn.co.zw:3000"
+              - "https://www.afri-furn.co.zw:3000"
+              - "https://afrifurn.co.zw:3000"
+              - "https://afrifurn.co.zw"
               allowedHeaders: '*'
               maxAge: 30
               allowedMethods:
@@ -19,15 +30,15 @@ spring:
             
       routes:
         - id: product-service
-          uri: http://afri-furn.co.zw:8000
+          uri: https://afri-furn.co.zw:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
-          uri: http://auth-service:8002
+          uri: https://auth-service:8002
           predicates:
             - Path=/auth/api/v1/**
         - id: order-service
-          uri: http://order-service:8004
+          uri: https://order-service:8004
           predicates:
             - Path=/orders/api/v1/** 
       discovery:
@@ -47,6 +58,6 @@ eureka:
 
 # CORS configuration for external access
 cors:
-  allowed-origins: http://afrifurn.co.zw:3000
+  allowed-origins: https://afrifurn.co.zw:3000,https://afrifurn.co.zw
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: "*"
