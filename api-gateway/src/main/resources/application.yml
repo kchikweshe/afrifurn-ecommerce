@@ -6,8 +6,9 @@ spring:
     gateway:  
       httpclient:
         ssl:
-        trustedX509Certificates:
-          - /app/ssl/fullchain1.pem
+          trustedX509Certificates:
+            - /app/ssl/fullchain1.pem
+            - /app/ssl/privykey1.pem
       globalcors:
           cors-configurations:
             '[/**]':
