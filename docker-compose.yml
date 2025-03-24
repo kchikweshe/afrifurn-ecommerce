@@ -98,9 +98,7 @@ services:
       - afrifurn-network
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /etc/letsencrypt/live/afri-furn.co.zw/archive/afri-furn.co.zw/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
-      - /etc/letsencrypt/live/afri-furn.co.zw/archive/afri-furn.co.zw/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
-
+      - /etc/letsencrypt/archive/afri-furn.co.zw:/etc/nginx/ssl:ro
       # - ./data/certbot/conf:/etc/letsencrypt
       # - ./data/certbot/www:/var/www/certbot
 
