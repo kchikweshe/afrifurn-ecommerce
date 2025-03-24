@@ -87,6 +87,10 @@ services:
     image: nginx:latest
     build: 
       context: ./nginx
+    depends_on:
+      - api-gateway
+      - afrifurn-frontend
+      - eureka-service
     ports:
       - 80:80
       - 443:443
