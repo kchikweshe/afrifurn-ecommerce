@@ -41,11 +41,7 @@ spring:
 
 server:
   port: 8090
-  ssl:
-    enabled: true
-    certificate: ${SERVER_SSL_CERTIFICATE}
-    certificate-private-key: ${SERVER_SSL_CERTIFICATE_PRIVATE_KEY}
-    protocol: TLS
+ 
 
 eureka:
   client:
