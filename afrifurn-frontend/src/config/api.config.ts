@@ -1,7 +1,10 @@
 import { HOST_IP } from "@/data/urls";
 import axios from "axios";
 
-export const API_GATEWAY = `https://${HOST_IP}`;
+// Use the actual domain instead of HOST_IP for production
+export const API_GATEWAY = process.env.NODE_ENV === 'production' 
+  ? 'https://afri-furn.co.zw'
+  : `https://${HOST_IP}`;
 export const api_version:string="/api/v1"
 
 
