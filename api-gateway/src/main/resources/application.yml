@@ -6,9 +6,9 @@ spring:
     gateway:  
       httpclient:
         ssl:
+          useInsecureTrustManager: true  # For development only
           trustedX509Certificates:
-            - /app/ssl/fullchain1.pem
-            - /app/ssl/privkey1.pem
+            - classpath:ssl/fullchain1.pem
       globalcors:
           cors-configurations:
             '[/**]':
@@ -49,7 +49,7 @@ server:
     enabled: true
     certificate: ${SERVER_SSL_CERTIFICATE}
     certificate-private-key: ${SERVER_SSL_CERTIFICATE_PRIVATE_KEY}
-    protocol: ${SERVER_SSL_PROTOCOL}
+    protocol: TLS
 
 eureka:
   client:
