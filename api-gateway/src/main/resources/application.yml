@@ -4,11 +4,7 @@ spring:
 
   cloud:
     gateway:  
-      httpclient:
-        ssl:
-          useInsecureTrustManager: true  # For development only
-          trustedX509Certificates:
-            - classpath:ssl/fullchain1.pem
+     
       globalcors:
           cors-configurations:
             '[/**]':
@@ -27,7 +23,7 @@ spring:
             
       routes:
         - id: product-service
-          uri: https://afri-furn.co.zw:8000
+          uri: http://afri-furn.co.zw:8000
           predicates:
             - Path=/product-service/api/v1/**
         - id: auth-service
