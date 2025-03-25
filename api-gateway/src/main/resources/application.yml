@@ -8,7 +8,7 @@ spring:
         ssl:
           trustedX509Certificates:
             - /app/ssl/fullchain1.pem
-            - /app/ssl/privykey1.pem
+            - /app/ssl/privkey1.pem
       globalcors:
           cors-configurations:
             '[/**]':
