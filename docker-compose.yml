@@ -45,8 +45,11 @@ services:
       dockerfile: Dockerfile
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
-      - SERVER_SSL_KEY_STORE=/app/ssl/privkey1.pem
-      - SERVER_SSL_CERT_STORE=/app/ssl/fullchain1.pem
+      - SERVER_SSL_ENABLED=true
+      - SERVER_SSL_CERTIFICATE=/app/ssl/fullchain1.pem
+      - SERVER_SSL_CERTIFICATE_PRIVATE_KEY=/app/ssl/privkey1.pem
+      - SERVER_SSL_PROTOCOL=TLS
+      - SERVER_PORT=8090
     networks:
       - afrifurn-network
     ports:
