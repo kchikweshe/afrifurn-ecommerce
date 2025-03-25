@@ -26,7 +26,7 @@ logging.setLoggerClass(StructuredLogger)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-load_dotenv(dotenv_path=".env.development")
+load_dotenv(dotenv_path=".env.production")
 
 
 def create_app() -> FastAPI:
