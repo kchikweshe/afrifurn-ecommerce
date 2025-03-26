@@ -51,7 +51,7 @@ async def filter_products_route(
             colors=colors,
             materials=materials,
             dimensions=dimensions.model_dump(),
-            category=category
+            category_short_name=category
         )
         
         skip = (page - 1) * page_size
