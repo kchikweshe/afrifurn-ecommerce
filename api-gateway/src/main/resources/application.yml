@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:  
+     
+      globalcors:
+          cors-configurations:
+            '[/**]':
+              allowedOrigins: 
+              - "https://docs.spring.io"
+              - "http://www.afri-furn.co.zw:3000"
+              - "https://www.afri-furn.co.zw:3000"
+              - "https://afrifurn.co.zw:3000"
+              - "https://afrifurn.co.zw"
+              allowedHeaders: '*'
+              maxAge: 30
+              allowedMethods:
+              - GET
+              - POST
+              
+            
+      routes:
+        - id: product-service
+          uri: http://afrifurn-produce-service
+          predicates:
+            - Path=/product-service/api/v1/**
+        - id: auth-service
+          uri: https://auth-service:8002
+          predicates:
+            - Path=/auth/api/v1/**
+        - id: order-service
+          uri: https://order-service:8004
+          predicates:
+            - Path=/orders/api/v1/** 
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+server:
+  port: 8090
+ 
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://eureka-service:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+# CORS configuration for external access
+cors:
+  allowed-origins: https://afrifurn.co.zw:3000,https://afrifurn.co.zw
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
