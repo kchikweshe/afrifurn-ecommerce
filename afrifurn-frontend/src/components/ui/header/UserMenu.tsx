@@ -41,18 +41,13 @@ const UserMenu = ({ userImage, userName }: UserMenuProps) => {
         className="rounded-full w-10 h-10 hover:bg-gray-100"
         onClick={() => router.push('/login')}
       >
-    <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full w-10 h-10 hover:bg-gray-100"
-        >
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={userImage?.toString() || ""} alt={userName?.toString() || ""} />
-            <AvatarFallback>
-              {userName ? userName[0].toUpperCase() : <UserCircle className="h-6 w-6 text-gray-700" />}
-            </AvatarFallback>
-          </Avatar>
-        </Button>      </Button>
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={userImage?.toString() || ""} alt={userName?.toString() || ""} />
+          <AvatarFallback>
+            {userName ? userName[0].toUpperCase() : <UserCircle className="h-6 w-6 text-gray-700" />}
+          </AvatarFallback>
+        </Avatar>
+      </Button>
     )
   }
 

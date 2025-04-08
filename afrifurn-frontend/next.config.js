@@ -4,25 +4,25 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: process.env.NEXT_HOST_IP || 'api-gateway',
-        port: '8090',
+        hostname: process.env.NEXT_PUBLIC_URL || 'api-gateway',
+        port: '8000',
         pathname: '/static/**',
       },
       {
         protocol: 'http',
-        hostname: process.env.NEXT_HOST_IP,
+        hostname: process.env.NEXT_PUBLIC_URL,
         port: '8000',
         pathname: '/**',
       },
       {
         protocol: 'http',
-        hostname: process.env.NEXT_HOST_IP || 'api-gateway',
+        hostname: process.env.NEXT_PUBLIC_URL || 'api-gateway',
         port: '3000',
         pathname: '/**',
       },
       {
         protocol: 'http',
-        hostname: process.env.NEXT_HOST_IP || 'localhost',
+        hostname: process.env.NEXT_PUBLIC_URL || 'localhost',
         port: '3000',
         pathname: '/**',
       },

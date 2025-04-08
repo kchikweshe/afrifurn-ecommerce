@@ -1,37 +1,30 @@
+from functools import lru_cache
 import json
 import logging
 import os
+import sys
+import time
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+import uvicorn
+import uvicorn.logging
 from config.eureka import get_app_info, lifespan
+from config.settings import Settings
 from constants.paths import STATIC_DIR
 from routers import api_router
 import database
 from fastapi.logger import logger as fastapi_logger
 
-#
-
-class StructuredLogger(logging.Logger):
-    def _log(self, level, msg, args, exc_info=None, extra=None, stack_info=False):
-        if extra is None:
-            extra = {}
-        extra['app_name'] = 'MyFastAPIApp'
-        super()._log(level, json.dumps(msg) if isinstance(msg, dict) else msg, args, exc_info, extra, stack_info)
-
-
-logging.setLoggerClass(StructuredLogger)
-logger = logging.getLogger(__name__)
-
-# Load environment variables
-load_dotenv(dotenv_path=".env.production")
 
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application"""
     app = FastAPI(lifespan=lifespan)
+    
     app.add_middleware(
         CORSMiddleware,
         allow_origins=os.getenv("CORS_ORIGINS",'').split(","),
@@ -45,22 +38,48 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
+# Configure logging
+logging.basicConfig(level=logging.INFO,
+                        force=True , # Override any existing configuration
+                            
+                     filename='app.log', 
+                     filemode='a', 
+                     format='%(asctime)s - %(levelname)s - %(message)s'
+                     )
+logger = logging.getLogger(__name__)
+# Create a middleware class for logging
+class LoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        # Log request info
+        request_id = f"{time.time()}"
+        request_path = request.url.path
+        client_host = request.client.host if request.client else "unknown"
+        
+        logger.info(f"Request started - ID: {request_id} | Path: {request_path} | Client: {client_host}")
+        
+        # Record start time
+        start_time = time.time()
+        
+        # Process the request and get the response
+        try:
+            response = await call_next(request)
+            
+            # Calculate processing time
+            process_time = time.time() - start_time
+            
+            # Log response info
+            logger.info(
+                f"Request completed - ID: {request_id} | Status: {response.status_code} | "
+                f"Duration: {process_time:.4f}s"
+            )
+            
+            return response
+        except Exception as e:
+            # Log any exceptions that occur
+            logger.error(f"Request failed - ID: {request_id} | Error: {str(e)}")
+            raise
+app.add_middleware(LoggingMiddleware)
 
-@app.middleware("http")
-async def log_structured_requests(request: Request, call_next):
-    logger.info({
-        "event": "request",
-        "method": request.method,
-        "url": str(request.url),
-        "headers": dict(request.headers),
-        "client": request.client.host
-    })
-    response = await call_next(request)
-    logger.info({
-        "event": "response",
-        "status_code": response.status_code
-    })
-    return response
 @app.on_event("startup")
 async def startup_event() -> None:
     """Log application startup information and environment variables"""
@@ -75,7 +94,7 @@ async def startup_event() -> None:
         """)
         
         # Log environment variables
-        logging.info("Environment Variables in use:")
+        logging.info("++++++++++++++++++Environment Variables in use:==\n")
         for key, value in os.environ.items():
             # Mask sensitive information
             if any(sensitive in key.lower() for sensitive in ['password', 'secret', 'key', 'token']):
@@ -87,5 +106,6 @@ async def startup_event() -> None:
         logging.error(f"Error during startup: {str(e)}")
         raise
 
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="0.0.0.0", port=8000)
+if __name__ == "__main__":
+    
+    uvicorn.run(app, host="0.0.0.0", port=8000)

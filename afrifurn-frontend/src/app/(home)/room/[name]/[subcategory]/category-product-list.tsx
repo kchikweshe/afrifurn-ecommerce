@@ -118,7 +118,7 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
                             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
                                 {currentProducts?.map((product) => (
                                     <Link href={'/products/' + product.short_name} key={product._id}>
-                                        <ProductCard product={product} />
+                                        <ProductCard key={product._id }product={product} />
                                     </Link>
                                 ))}
                             </div>

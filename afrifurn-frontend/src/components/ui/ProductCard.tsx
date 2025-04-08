@@ -44,9 +44,9 @@ export const ProductCard = ({ product }: { product: Product }) => {
         <p className="text-sm text-gray-600 mb-1">${product?.price?.toFixed(2)}</p>
         <div className="flex items-center space-x-2">
             <div className="flex space-x-1">
-                {product.product_variants?.map(variant => (
+                {product.product_variants?.map((variant,i) => (
                     <div
-                        key={variant.name}
+                        key={i}
                         className="w-4 h-4 rounded-full border border-gray-300"
                         style={{ backgroundColor: variant.color_id }}
                         // title={variant.color}

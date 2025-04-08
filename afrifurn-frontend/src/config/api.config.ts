@@ -4,7 +4,7 @@ import axios from "axios";
 // Use the actual domain instead of HOST_IP for production
 export const API_GATEWAY = process.env.NODE_ENV === 'production' 
   ? 'https://afri-furn.co.zw/api'
-  : `https://${HOST_IP}`;
+  : `http://${HOST_IP}`;
 export const api_version:string="/api/v1"
 
 

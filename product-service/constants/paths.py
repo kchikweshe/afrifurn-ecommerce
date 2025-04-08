@@ -1,5 +1,5 @@
 import os
-
+ENV=".env"
 # Base paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.relpath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, "static")

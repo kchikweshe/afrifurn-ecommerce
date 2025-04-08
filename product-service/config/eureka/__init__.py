@@ -5,24 +5,24 @@ from fastapi.concurrency import asynccontextmanager
 import py_eureka_client.eureka_client as eureka_client
 from typing import Dict
 import os
-from dotenv import load_dotenv
-
-
+from config.settings import get_settings
 your_rest_server_port = 8000
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
 STATIC_DIR = "static"
 BANNER_FILE = "banner.txt"
 
+settings=get_settings()
+
+
 
 import logging
 from contextlib import asynccontextmanager
 import sys
 import fastapi
-
 logger = logging.getLogger(__name__)
-load_dotenv(dotenv_path=".env.production")
-env=os.environ
+# load_dotenv(dotenv_path=ENV)
+# env=os.environ
 
 
 def read_banner():
@@ -48,21 +48,21 @@ def get_app_info() -> Dict[str, str | int]:
         'banner': banner,
         'fastapi_version': fastapi.__version__,
         'python_version': f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
-        'host': env.get("HOST_IP", DEFAULT_HOST),
-        'port': int(env.get("PORT", DEFAULT_PORT))
+        'host':settings.host_ip, # type: ignore
+        'port': int(settings.port) # type: ignore
     }
 @asynccontextmanager
 async def lifespan(app: fastapi.FastAPI):
-    host = env.get("HOST_IP", DEFAULT_HOST)
+    host = settings.host_ip # type: ignore
     # Startup logic
     banner = read_banner()
     fastapi_version = get_fastapi_version()
     python_version = get_python_version()
     port = 8000  # Default port, you can change this or make it configurable
     await eureka_client.init_async(
-            eureka_server="http://afri-furn.co.zw:8761/eureka/",
+            eureka_server=settings.eureka_client_service_url, # type: ignore
             app_name="product-service",
-            instance_port=8000,
+            instance_port=int(settings.server_port), # type: ignore
             instance_host=host
     )
     info = f"""

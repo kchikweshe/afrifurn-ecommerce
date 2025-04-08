@@ -1,13 +1,12 @@
-from pydantic_settings import BaseSettings
-
+from dataclasses import dataclass
+from functools import lru_cache
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    app_name: str = "AfriFurn Product Service"
-    admin_email: str
-    database_url: str
-    secret_key: str
-    allowed_hosts: list = ["*"]
-    debug: bool = False
 
-    class Config:
-        env_file = ".env"
+
+    model_config = SettingsConfigDict(env_file=".env",extra='allow')
+@lru_cache()
+def get_settings() -> Settings:
+    """Create and cache settings instance"""
+    return Settings()

@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'sudo docker-compose build'
+                    sh ' docker-compose build'
                 }
             }
         }
@@ -19,8 +19,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'sudo docker-compose down  --remove-orphans'
-                    sh 'sudo docker-compose up -d'
+                    sh ' docker-compose down  --remove-orphans'
+                    sh ' docker-compose up -d'
                 }
             }
         }

@@ -2,34 +2,32 @@ import logging
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
-
-load_dotenv(dotenv_path=".env.production",override=True)
-
-# Helper function to validate environment variables
-def get_required_env(key: str, default: str | None = None) -> str:
-    value = os.getenv(key, default)
-    if not value:
-        raise ValueError(f"Missing  required environment variable: {key}")
-    return value
-
-# Get MongoDB connection details from environment variables
+from config.settings import get_settings
+# Connect to MongoDB using settings from get_settings function
 try:
-    MONGO_HOST = get_required_env("MONGO_HOST", "localhost")
-    MONGO_PORT = get_required_env("MONGO_PORT", "27017")
-    MONGO_DB_NAME = get_required_env("MONGO_DB_NAME", "afrifurn")
-    MONGO_USER = get_required_env("MONGO_USER", "afrifurn")
-    MONGO_PASSWORD = get_required_env("MONGODB_PASSWORD", "mypassword")  # No default for password
-    print(f"=================== MONGO_PASSWORD: {MONGO_PASSWORD} =====================")
-    print(f"=================== MONGO_HOST: {MONGO_HOST} =====================")
-    print(f"=================== MONGO_PORT: {MONGO_PORT} =====================")
-    print(f"=================== MONGO_DB_NAME: {MONGO_DB_NAME} =====================")
-    print(f"=================== MONGO_USER: {MONGO_USER} =====================")
-    # Construct MongoDB URI without logging credentials
-    MONGO_URI = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB_NAME}"
+    settings = get_settings()
+    mongo_host=settings.mongo_host # type: ignore
+    mongo_password=settings.mongodb_password # type: ignore
+    mongo_port=settings.mongo_port # type: ignore
+    mongo_user=settings.mongo_user # type: ignore
+    mongo_db_name=settings.mongo_db_name # type: ignore
+    
+
+
+
+    # Print connection details (consider removing in production)
+    print(f"=================== MONGO_PASSWORD: {mongo_password} =====================")
+    print(f"=================== MONGO_HOST: {mongo_host} =====================")
+    print(f"=================== MONGO_PORT: {mongo_port} =====================")
+    print(f"=================== MONGO_DB_NAME: {mongo_db_name} =====================")
+    print(f"=================== MONGO_USER: {mongo_user} =====================")
+
+    # Construct MongoDB URI
+    MONGO_URI = f"mongodb://{mongo_user}:{mongo_password}@{mongo_host}:{mongo_port}/{mongo_db_name}"
     logging.info(f"=================== MONGO_URI: {MONGO_URI} =====================")
 
     client = MongoClient(MONGO_URI)
-    db = client.get_database(MONGO_DB_NAME)
+    db = client.get_database(mongo_db_name)
     # Test the connection
     client.server_info()
     logging.info("\033[92m====================== Successfully connected to MongoDB ======================\033[0m")

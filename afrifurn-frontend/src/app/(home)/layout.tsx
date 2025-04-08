@@ -36,11 +36,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className="flex-1">
-                <Suspense fallback={<LoadingState/>}>
-                  {children}
-                </Suspense>
-                <Toaster />
-              </main>
+    <DataProvider>
+    <CartProvider>
+      <Header logoUrl={logoUrl} />
+<main >
+  {children}
+</main>
+<Footer/>
+
+    </CartProvider>
+  </DataProvider>
   );
 }
