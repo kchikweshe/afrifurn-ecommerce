@@ -6,5 +6,6 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "java.compile.nullAnalysis.mode": "automatic",
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
