@@ -1,0 +1,139 @@
+[{
+  "_id": {
+    "$oid": "6686b68a5541c7cf3ed34f62"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "Brookhill",
+  "color_code": "#d6c5a3",
+  "image": "static/product/brookhill.jpg"
+},
+{
+  "_id": {
+    "$oid": "6686bd1b5541c7cf3ed34f63"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "Folkstone Grey",
+  "color_code": "#cfd0ce",
+  "image": "static/product/folkstone-grey.jpg"
+},
+{
+  "_id": {
+    "$oid": "6686be795541c7cf3ed34f64"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "Cappuccino",
+  "color_code": "#f3eac3",
+  "image": "static/product/cappuccino.jpg"
+},
+{
+  "_id": {
+    "$oid": "6686bf315541c7cf3ed34f65"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "Walnut",
+  "color_code": "#624f48",
+  "image": "static/product/walnut.jpg"
+},
+{
+  "_id": {
+    "$oid": "6686c0995541c7cf3ed34f66"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "White",
+  "color_code": "#ffffff",
+  "image": "static/product/white.jpg"
+},
+{
+  "_id": {
+    "$oid": "6686c0b85541c7cf3ed34f67"
+  },
+  "is_archived": false,
+  "created_at": {
+    "$date": "2024-07-04T16:49:28.775Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-04T16:49:28.776Z"
+  },
+  "name": "Black",
+  "color_code": "#0d0d0d",
+  "image": "static/product/black.jpg"
+},
+{
+  "_id": {
+    "$oid": "66db2ba359c1f33bc0754e25"
+  },
+  "is_archived": false,
+  "short_name": null,
+  "created_at": {
+    "$date": "2024-09-05T11:32:28.530Z"
+  },
+  "updated_at": {
+    "$date": "2024-09-05T11:32:28.530Z"
+  },
+  "name": "Pine",
+  "color_code": "#fec76j",
+  "image": "static/colors/pine.jpg"
+},
+{
+  "_id": {
+    "$oid": "67214e74315fc7d8334250ed"
+  },
+  "is_archived": false,
+  "short_name": null,
+  "created_at": {
+    "$date": "2024-10-29T14:49:49.168Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-29T14:49:49.168Z"
+  },
+  "name": "Kirkwall",
+  "color_code": "#c9b195",
+  "image": "static/colors/kirkwall.jpg"
+},
+{
+  "_id": {
+    "$oid": "6797e7024d045947bbbe4d7b"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "created_at": {
+    "$date": "2025-01-27T21:50:00.591Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-27T21:50:00.591Z"
+  },
+  "name": "Havard Cherry",
+  "color_code": "#A51C30",
+  "image": "C:\\Users\\kombo\\Documents\\GitHub\\afrifurn-ecommerce\\static\\images\\colors\\havard-cherry.jpg"
+}]

@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "678baf2cc8ecd5bc994edc60"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "home",
+  "created_at": {
+    "$date": "2025-01-18T15:34:51.731Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-18T15:34:51.732Z"
+  },
+  "name": "Home",
+  "description": "Home Furniture",
+  "images": [
+    "static\\images\\categories\\level-one\\home\\0.webp",
+    "static\\images\\categories\\level-one\\home\\1.webp",
+    "static\\images\\categories\\level-one\\home\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "678bb151c8ecd5bc994edc61"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "office",
+  "created_at": {
+    "$date": "2025-01-18T15:34:51.731Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-18T15:34:51.732Z"
+  },
+  "name": "office",
+  "description": "Office Furniture",
+  "images": [
+    "static\\images\\categories\\level-one\\office\\0.webp",
+    "static\\images\\categories\\level-one\\office\\1.webp",
+    "static\\images\\categories\\level-one\\office\\2.webp"
+  ]
+}]

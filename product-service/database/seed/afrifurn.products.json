@@ -1,0 +1,264 @@
+[{
+  "_id": {
+    "$oid": "67eed7b3c2f0d5fe393d6e3f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "4d-savannah-chest",
+  "name": "4D Savannah Chest",
+  "description": "Multicolored 4 drawer chest.",
+  "category": {
+    "id": "679ce2fbb50d498d99a59191",
+    "is_archived": false,
+    "short_name": "chest-of-drawers",
+    "name": "Chest of Drawers",
+    "description": "Stunning Chest of drawers of all sizes",
+    "images": [
+      "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
+      "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
+      "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "679ce016c4a46633d8d871ae",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+      "images": [
+        "static\\images\\categories\\level-two\\bedroom\\0.webp",
+        "static\\images\\categories\\level-two\\bedroom\\1.webp",
+        "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 350,
+    "height": 1000,
+    "depth": 950,
+    "length": 1000,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 250,
+  "currency": "USD",
+  "color_codes": [
+    "#624f48",
+    "#cfd0ce"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 5,
+      "product_id": "67eed7b3c2f0d5fe393d6e3f",
+      "images": [
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\0.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\1.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\2.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\3.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\4.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 5,
+      "product_id": "67eed7b3c2f0d5fe393d6e3f",
+      "images": [
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\0.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\1.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\2.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\3.webp",
+        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\4.webp"
+      ]
+    }
+  ],
+  "discount": null,
+  "views": 0,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "67eee82ec2f0d5fe393d6e41"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "maita-2-door",
+  "name": "Maita 2 Door",
+  "description": "2 Door melamine tv stand suitable for at most 55inch televisions. ",
+  "category": {
+    "id": "679b902cda26810c5e3a5f1c",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "TV Stands",
+    "description": "From basic  to premium , there are plenty to choose from all types.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "679b8f63da26810c5e3a5f1b",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room furniture",
+      "images": [
+        "static\\images\\categories\\level-two\\living-room\\0.webp",
+        "static\\images\\categories\\level-two\\living-room\\1.webp",
+        "static\\images\\categories\\level-two\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 350,
+    "height": 450,
+    "depth": 400,
+    "length": 1500,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 150,
+  "currency": "USD",
+  "color_codes": [
+    "#ffffff",
+    "#0d0d0d",
+    "#d6c5a3",
+    "#c9b195"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#ffffff",
+      "quantity_in_stock": 10,
+      "product_id": "67eee82ec2f0d5fe393d6e41",
+      "images": [
+        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\0.webp",
+        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\1.webp",
+        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\2.webp",
+        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\3.webp",
+        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\4.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#0d0d0d",
+      "quantity_in_stock": 5,
+      "product_id": "67eee82ec2f0d5fe393d6e41",
+      "images": [
+        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\0.webp",
+        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\1.webp",
+        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\2.webp",
+        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\3.webp",
+        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\4.webp"
+      ]
+    }
+  ],
+  "discount": null,
+  "views": 1,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "67eee944c2f0d5fe393d6e42"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "savannah-pine-steel",
+  "name": "Savannah Pine and Steel Tv Stand",
+  "description": "Simple, elegant but strong tv stand with steel legs.",
+  "category": {
+    "id": "679b902cda26810c5e3a5f1c",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "TV Stands",
+    "description": "From basic  to premium , there are plenty to choose from all types.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "679b8f63da26810c5e3a5f1b",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room furniture",
+      "images": [
+        "static\\images\\categories\\level-two\\living-room\\0.webp",
+        "static\\images\\categories\\level-two\\living-room\\1.webp",
+        "static\\images\\categories\\level-two\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 350,
+    "height": 340,
+    "depth": 300,
+    "length": 1500,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 280,
+  "currency": "USD",
+  "color_codes": [
+    "#fec76j"
+  ],
+  "product_variants": [],
+  "discount": null,
+  "views": 1,
+  "material": "66db2ae059c1f33bc0754e22"
+}]

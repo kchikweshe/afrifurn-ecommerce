@@ -1,0 +1,484 @@
+[{
+  "_id": {
+    "$oid": "679b902cda26810c5e3a5f1c"
+  },
+  "is_archived": false,
+  "short_name": "tv-stands",
+  "created_at": {
+    "$date": "2025-01-30T16:29:58.343Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-30T16:29:58.343Z"
+  },
+  "name": "TV Stands",
+  "description": "From basic  to premium , there are plenty to choose from all types.",
+  "images": [
+    "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+    "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+    "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+  ],
+  "level_one_category": {
+    "_id": "679b8f63da26810c5e3a5f1b",
+    "is_archived": false,
+    "short_name": "living-room",
+    "created_at": {
+      "$date": "2025-01-30T16:29:58.343Z"
+    },
+    "updated_at": {
+      "$date": "2025-01-30T16:29:58.343Z"
+    },
+    "category": {
+      "_id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "created_at": {
+        "$date": "2025-01-18T15:34:51.731Z"
+      },
+      "updated_at": {
+        "$date": "2025-01-18T15:34:51.732Z"
+      },
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Living Room",
+    "description": "Living room furniture",
+    "images": [
+      "static\\images\\categories\\level-two\\living-room\\0.webp",
+      "static\\images\\categories\\level-two\\living-room\\1.webp",
+      "static\\images\\categories\\level-two\\living-room\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "679ce2fbb50d498d99a59191"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "chest-of-drawers",
+  "name": "Chest of Drawers",
+  "description": "Stunning Chest of drawers of all sizes",
+  "images": [
+    "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
+    "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
+    "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "679ce016c4a46633d8d871ae",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+    "images": [
+      "static\\images\\categories\\level-two\\bedroom\\0.webp",
+      "static\\images\\categories\\level-two\\bedroom\\1.webp",
+      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "679ce361b50d498d99a59192"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "bedsides",
+  "name": "Bedside Pedestals",
+  "description": "Beautiful bedside tables",
+  "images": [
+    "static\\images\\categories\\level-three\\bedsides\\0.webp",
+    "static\\images\\categories\\level-three\\bedsides\\1.webp",
+    "static\\images\\categories\\level-three\\bedsides\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "679ce016c4a46633d8d871ae",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+    "images": [
+      "static\\images\\categories\\level-two\\bedroom\\0.webp",
+      "static\\images\\categories\\level-two\\bedroom\\1.webp",
+      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "679ce3d0b50d498d99a59193"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "shoe-racks",
+  "name": "Shoe Racks",
+  "description": "Beautiful shoe racks with elegant, minimalistic design.",
+  "images": [
+    "static\\images\\categories\\level-three\\shoe-racks\\0.webp",
+    "static\\images\\categories\\level-three\\shoe-racks\\1.webp",
+    "static\\images\\categories\\level-three\\shoe-racks\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "679ce016c4a46633d8d871ae",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+    "images": [
+      "static\\images\\categories\\level-two\\bedroom\\0.webp",
+      "static\\images\\categories\\level-two\\bedroom\\1.webp",
+      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "679cedceecf2365084c6cd6f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "coffee-tables",
+  "name": "Coffee Tables",
+  "description": "Beautiful coffee tables with elegant, minimalistic design.",
+  "images": [
+    "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
+    "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
+    "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "679b8f63da26810c5e3a5f1b",
+    "is_archived": false,
+    "short_name": "living-room",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Living Room",
+    "description": "Living room furniture",
+    "images": [
+      "static\\images\\categories\\level-two\\living-room\\0.webp",
+      "static\\images\\categories\\level-two\\living-room\\1.webp",
+      "static\\images\\categories\\level-two\\living-room\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67c9925e587c7b81e878ae30"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "shelving",
+  "name": "Shelving",
+  "description": "For all your shelving needs",
+  "images": [
+    "static\\images\\categories\\level-three\\shelving\\0.webp",
+    "static\\images\\categories\\level-three\\shelving\\1.webp",
+    "static\\images\\categories\\level-three\\shelving\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67c99181587c7b81e878ae2e",
+    "is_archived": false,
+    "short_name": "storage",
+    "category": {
+      "id": "678bb151c8ecd5bc994edc61",
+      "is_archived": false,
+      "short_name": "office",
+      "name": "office",
+      "description": "Office Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\office\\0.webp",
+        "static\\images\\categories\\level-one\\office\\1.webp",
+        "static\\images\\categories\\level-one\\office\\2.webp"
+      ]
+    },
+    "name": "Storage",
+    "description": "storage",
+    "images": [
+      "static\\images\\categories\\level-one\\storage\\storage\\0.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67c9a3ab083fd5d535d2ced4"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "desks",
+  "name": "Desks",
+  "description": "For all your desk furniture",
+  "images": [
+    "static/images/categories/level-three/desks/0.webp",
+    "static/images/categories/level-three/desk/1.webp",
+    "static/images/categories/level-three/desks/2.webp",
+    "static/images/categories/level-three/desks/3.webp"
+  ],
+  "level_one_category": {
+    "id": "67c992d5587c7b81e878ae31",
+    "is_archived": false,
+    "short_name": "tables",
+    "category": {
+      "id": "678bb151c8ecd5bc994edc61",
+      "is_archived": false,
+      "short_name": "office",
+      "name": "office",
+      "description": "Office Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\office\\0.webp",
+        "static\\images\\categories\\level-one\\office\\1.webp",
+        "static\\images\\categories\\level-one\\office\\2.webp"
+      ]
+    },
+    "name": "Tables",
+    "description": "Tables",
+    "images": [
+      "static\\images\\categories\\level-one\\tables\\tables\\0.webp",
+      "static\\images\\categories\\level-one\\tables\\tables\\1.webp",
+      "static\\images\\categories\\level-one\\tables\\tables\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67eed26fc2f0d5fe393d6e3a"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "tv-stands",
+  "name": "Tv Stands",
+  "description": "Beautiful tv stands in melamine and pine wood variants.",
+  "images": [
+    "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+    "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+    "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67eebf21c2f0d5fe393d6e38",
+    "is_archived": false,
+    "short_name": "living-room",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Living Room",
+    "description": "Living room decor including tv stands, coffee tables and much more.",
+    "images": [
+      "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+      "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+      "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67eed30dc2f0d5fe393d6e3b"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "coffee-tables",
+  "name": "Coffee Tables",
+  "description": "Beautiful coffee tables in melamine and pine wood variants.",
+  "images": [
+    "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
+    "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
+    "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67eebf21c2f0d5fe393d6e38",
+    "is_archived": false,
+    "short_name": "living-room",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Living Room",
+    "description": "Living room decor including tv stands, coffee tables and much more.",
+    "images": [
+      "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+      "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+      "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67eed3adc2f0d5fe393d6e3c"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "bedsides",
+  "name": "Bedside Pedestals",
+  "description": "For your bedroom, by your side.",
+  "images": [
+    "static\\images\\categories\\level-three\\bedsides\\0.webp",
+    "static\\images\\categories\\level-three\\bedsides\\1.webp",
+    "static\\images\\categories\\level-three\\bedsides\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67eec026c2f0d5fe393d6e39",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+    "images": [
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67eed401c2f0d5fe393d6e3d"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "chest-of-drawers",
+  "name": "Chest of Drawers",
+  "description": "Beautiful, rich colored chest of drawers.",
+  "images": [
+    "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
+    "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
+    "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67eec026c2f0d5fe393d6e39",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+    "images": [
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "67eed619c2f0d5fe393d6e3e"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "headboards",
+  "name": "Headboards",
+  "description": "Fancy but affordable headboard designs.",
+  "images": [
+    "static\\images\\categories\\level-three\\headboards\\0.webp",
+    "static\\images\\categories\\level-three\\headboards\\1.webp",
+    "static\\images\\categories\\level-three\\headboards\\2.webp"
+  ],
+  "level_one_category": {
+    "id": "67eec026c2f0d5fe393d6e39",
+    "is_archived": false,
+    "short_name": "bedroom",
+    "category": {
+      "id": "678baf2cc8ecd5bc994edc60",
+      "is_archived": false,
+      "short_name": "home",
+      "name": "Home",
+      "description": "Home Furniture",
+      "images": [
+        "static\\images\\categories\\level-one\\home\\0.webp",
+        "static\\images\\categories\\level-one\\home\\1.webp",
+        "static\\images\\categories\\level-one\\home\\2.webp"
+      ]
+    },
+    "name": "Bedroom",
+    "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+    "images": [
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+    ]
+  }
+}]

@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "67c99181587c7b81e878ae2e"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "storage",
+  "category": {
+    "id": "678bb151c8ecd5bc994edc61",
+    "is_archived": false,
+    "short_name": "office",
+    "name": "office",
+    "description": "Office Furniture",
+    "images": [
+      "static\\images\\categories\\level-one\\office\\0.webp",
+      "static\\images\\categories\\level-one\\office\\1.webp",
+      "static\\images\\categories\\level-one\\office\\2.webp"
+    ]
+  },
+  "name": "Storage",
+  "description": "storage",
+  "images": [
+    "static\\images\\categories\\level-one\\storage\\storage\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67c991fe587c7b81e878ae2f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "decor",
+  "category": {
+    "id": "678bb151c8ecd5bc994edc61",
+    "is_archived": false,
+    "short_name": "office",
+    "name": "office",
+    "description": "Office Furniture",
+    "images": [
+      "static\\images\\categories\\level-one\\office\\0.webp",
+      "static\\images\\categories\\level-one\\office\\1.webp",
+      "static\\images\\categories\\level-one\\office\\2.webp"
+    ]
+  },
+  "name": "Decor",
+  "description": "Office decorations",
+  "images": [
+    "static\\images\\categories\\level-one\\decor\\decor\\0.webp",
+    "static\\images\\categories\\level-one\\decor\\decor\\1.webp",
+    "static\\images\\categories\\level-one\\decor\\decor\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67c992d5587c7b81e878ae31"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "tables",
+  "category": {
+    "id": "678bb151c8ecd5bc994edc61",
+    "is_archived": false,
+    "short_name": "office",
+    "name": "office",
+    "description": "Office Furniture",
+    "images": [
+      "static\\images\\categories\\level-one\\office\\0.webp",
+      "static\\images\\categories\\level-one\\office\\1.webp",
+      "static\\images\\categories\\level-one\\office\\2.webp"
+    ]
+  },
+  "name": "Tables",
+  "description": "Tables",
+  "images": [
+    "static\\images\\categories\\level-one\\tables\\tables\\0.webp",
+    "static\\images\\categories\\level-one\\tables\\tables\\1.webp",
+    "static\\images\\categories\\level-one\\tables\\tables\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67eebf21c2f0d5fe393d6e38"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "living-room",
+  "category": {
+    "id": "678baf2cc8ecd5bc994edc60",
+    "is_archived": false,
+    "short_name": "home",
+    "name": "Home",
+    "description": "Home Furniture",
+    "images": [
+      "static\\images\\categories\\level-one\\home\\0.webp",
+      "static\\images\\categories\\level-one\\home\\1.webp",
+      "static\\images\\categories\\level-one\\home\\2.webp"
+    ]
+  },
+  "name": "Living Room",
+  "description": "Living room decor including tv stands, coffee tables and much more.",
+  "images": [
+    "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+    "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+    "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67eec026c2f0d5fe393d6e39"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "bedroom",
+  "category": {
+    "id": "678baf2cc8ecd5bc994edc60",
+    "is_archived": false,
+    "short_name": "home",
+    "name": "Home",
+    "description": "Home Furniture",
+    "images": [
+      "static\\images\\categories\\level-one\\home\\0.webp",
+      "static\\images\\categories\\level-one\\home\\1.webp",
+      "static\\images\\categories\\level-one\\home\\2.webp"
+    ]
+  },
+  "name": "Bedroom",
+  "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+  "images": [
+    "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+    "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+    "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+  ]
+}]

@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "66226ae4d95eef5ee34a4094"
+  },
+  "code": "USD",
+  "symbol": "$"
+},
+{
+  "_id": {
+    "$oid": "66226affd95eef5ee34a4095"
+  },
+  "code": "ZWG",
+  "symbol": "ZiG"
+}]
