@@ -14,8 +14,8 @@ COPY pom.xml ./
 # Copy the source code into the container
 COPY src ./src
 
-# Run the Maven build to package the application
-RUN mvn clean package -DskipTests
+# # Run the Maven build to package the application
+# RUN mvn clean package -DskipTests
 
 # Use JDK 22 for the runtime stage
 FROM eclipse-temurin:22-jdk-jammy
