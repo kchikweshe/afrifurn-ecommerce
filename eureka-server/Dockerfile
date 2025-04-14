@@ -15,7 +15,7 @@ COPY pom.xml ./
 COPY src ./src
 
 # Run the Maven build to package the application
-RUN mvn -o package -DskipTests
+RUN mvn  package -DskipTests
 
 # Use JDK 22 for the runtime stage
 FROM eclipse-temurin:22-jdk-jammy
