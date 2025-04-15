@@ -1,5 +1,5 @@
 # Use a Maven image with JDK 22 for the build stage
-FROM maven:3.9.6-eclipse-temurin-22 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY pom.xml ./
 COPY src ./src
 
 # Run the Maven build to package the application
-RUN mvn  package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Use JDK 22 for the runtime stage
 FROM eclipse-temurin:21-jdk-jammy

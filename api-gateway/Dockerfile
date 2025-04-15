@@ -1,5 +1,5 @@
 # Use a Maven image with JDK 22 for the build stage
-FROM maven:3.9.6-eclipse-temurin-22 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
