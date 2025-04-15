@@ -14,7 +14,6 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-# Use JDK 22 for the runtime stage
 FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
