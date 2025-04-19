@@ -11,19 +11,13 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh ' docker compose build'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
                     sh ' docker compose down  --remove-orphans'
                     sh ' docker compose up -d'
                 }
             }
         }
+
+    
     }
 
 
