@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { ShoppingCart, Heart } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
 import {  Product, ProductVariant } from '@/types'
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { DataContext } from "@/data/data.context"
 import { PRODUCT_IMAGE_URLS } from "@/data/urls"
 
@@ -57,6 +57,8 @@ export function ProductDetails({
     window.open(whatsappUrl, '_blank')
   }, [product, selectedVariant, getColorName])
 
+  const [activeTab, setActiveTab] = useState<'features' | 'dimensions' | 'material'>('features');
+
   if(!state){
     return <div>
       State is null
@@ -65,7 +67,7 @@ export function ProductDetails({
   const{currencies,colors,materials}=state
 
   return (
-    <div className="lg:w-1/2 space-y-6 container mx-auto px-4">
+    <div className="lg:w-1/2 space-y-4 container mx-auto px-4">
       {/* Product Header Section */}
       <div className="border-b pb-4">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">{product.name}</h1>
@@ -140,30 +142,40 @@ export function ProductDetails({
         </div>
       </div>
 
-      {/* Description Card */}
-      <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-        <h2 className="text-lg font-semibold mb-2">Description</h2>
-        <p className="text-gray-700 leading-relaxed">{product.description}</p>
+      {/* Tabs Section */}
+      <div className="flex space-x-2 border-b">
+        <button 
+          className={`py-1 px-2 text-sm ${activeTab === 'features' ? 'font-bold border-b-2 border-primary' : ''}`} 
+          onClick={() => setActiveTab('features')}
+        >
+          Features
+        </button>
+        <button 
+          className={`py-1 px-2 text-sm ${activeTab === 'dimensions' ? 'font-bold border-b-2 border-primary' : ''}`} 
+          onClick={() => setActiveTab('dimensions')}
+        >
+          Dimensions
+        </button>
+        <button 
+          className={`py-1 px-2 text-sm ${activeTab === 'material' ? 'font-bold border-b-2 border-primary' : ''}`} 
+          onClick={() => setActiveTab('material')}
+        >
+          Material
+        </button>
       </div>
 
-      {/* Product Details Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-          <h2 className="text-lg font-semibold mb-2">Material</h2>
-          <p className="text-gray-700 flex items-center">
-            <span className="mr-2 text-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-              </svg>
-            </span>
-            {getMaterialName(product!.material!.toString())}
-          </p>
+      {/* Tab Content */}
+      {activeTab === 'features' && (
+        <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 shadow-sm">
+          <h2 className="text-lg font-semibold mb-1">Description</h2>
+          <p className="text-gray-700 leading-relaxed text-sm">{product.description}</p>
         </div>
-
+      )}
+      {activeTab === 'dimensions' && (
         <Card className="bg-gray-50 shadow-sm border-gray-100">
-          <CardContent className="p-4">
-            <h2 className="text-lg font-semibold mb-2">Dimensions</h2>
-            <div className="grid grid-cols-2 gap-3 text-sm">
+          <CardContent className="p-2">
+            <h2 className="text-lg font-semibold mb-1">Dimensions</h2>
+            <div className="grid grid-cols-2 gap-2 text-sm">
               <p className="flex items-center text-gray-700"><span className="font-medium mr-1">Length:</span> {product.dimensions.length}mm</p>
               <p className="flex items-center text-gray-700"><span className="font-medium mr-1">Width:</span> {product.dimensions.width}mm</p>
               <p className="flex items-center text-gray-700"><span className="font-medium mr-1">Height:</span> {product.dimensions.height}mm</p>
@@ -172,7 +184,22 @@ export function ProductDetails({
             </div>
           </CardContent>
         </Card>
-      </div>
+      )}
+      {activeTab === 'material' && (
+        <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 shadow-sm">
+          <h2 className="text-lg font-semibold mb-1">Material</h2>
+          <p className="text-gray-700 flex items-center text-sm">
+            <span className="mr-1 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+              </svg>
+            </span>
+            {getMaterialName(product!.material!.toString())}
+          </p>
+        </div>
+      )}
+
+
 
       {/* Action Buttons */}
       <div className="flex flex-col gap-3 pt-4 sticky bottom-0 bg-white pb-4 border-t mt-4">

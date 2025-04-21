@@ -105,10 +105,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onClose }) => {
                                             setSearchTerm('');
                                         }}
                                     >
-                                        {product.product_variants[0].images[0] && (
+                                        {product.product_variants[0]?.images[0] && (
                                             <div className="relative flex-shrink-0 w-14 h-14 overflow-hidden rounded-lg">
                                                 <Image
-                                                    src={PRODUCT_IMAGE_URLS + product.product_variants[0].images[0]}
+                                                    src={PRODUCT_IMAGE_URLS + product?.product_variants[0]?.images[0]}
                                                     alt={product.name}
                                                     fill
                                                     className="object-cover transition-transform duration-300 group-hover:scale-110"
