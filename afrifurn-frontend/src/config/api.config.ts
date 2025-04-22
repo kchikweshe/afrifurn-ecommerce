@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Use the actual domain instead of HOST_IP for production
 export const API_GATEWAY = process.env.NODE_ENV === 'production' 
-  ? 'http://localhost:8090/api'
+  ? 'http://api-gateway:8090/api'
   : `http://${HOST_IP}`;
 export const api_version:string="/api/v1"
 
