@@ -11,6 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh 'whoami'
+                    
                     sh ' docker compose build'
                 }
             }
