@@ -16,9 +16,6 @@ from config.eureka import get_app_info, lifespan
 from config.settings import Settings
 from constants.paths import STATIC_DIR
 from routers import api_router
-import database
-from fastapi.logger import logger as fastapi_logger
-
 
 
 def create_app() -> FastAPI:
