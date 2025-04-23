@@ -11,9 +11,9 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_container:/data/db
+      -  mongodb_data_container:/data/db
       - ./product-service/database/seed:/data 
-       - ./mongo-init.js:/docker-entrypoint-initdb.d/01-mongo-init.js
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/01-mongo-init.js
       - ./import-data.sh:/docker-entrypoint-initdb.d/02-import-data.sh # Mount directory containing the JSON seed files
 
 
