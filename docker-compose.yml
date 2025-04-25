@@ -122,7 +122,7 @@ volumes:
   fastapi:
     driver: local
   mongodb_data_container:
-    driver: local
+
     
 
 networks:
