@@ -12,7 +12,8 @@ services:
       - 27017:27017
     volumes:
       -  mongodb_data_container:/data/db
-      - ./product-service/database/seed:/data 
+      - ./product-service/database/seed:/docker-entrypoint-initdb.d
+
 
 
   afrifurn-mongo-express:
