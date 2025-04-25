@@ -13,6 +13,7 @@ services:
     volumes:
       -  mongodb_data_container:/data/db
     restart: unless-stopped
+    command: mongod --repair --auth
 
 
   afrifurn-mongo-express:
