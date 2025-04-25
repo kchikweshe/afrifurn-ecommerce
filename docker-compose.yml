@@ -69,6 +69,7 @@ services:
       - 8000:8000
     networks:
       - afrifurn-network
+    restart: unless-stopped
     
     depends_on:
       - afrifurn-mongodb
