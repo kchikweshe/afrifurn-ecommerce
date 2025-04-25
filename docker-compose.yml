@@ -2,7 +2,7 @@
 services:
   afrifurn-mongodb:
     container_name: afrifurn-mongodb
-    image: mongo:latest
+    image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=kchikweshe
       - MONGO_INITDB_ROOT_PASSWORD=mypassword
@@ -12,9 +12,7 @@ services:
       - 27017:27017
     volumes:
       -  mongodb_data_container:/data/db
-      - ./product-service/database/seed:/data
-      - ./product-service/database/seed/import-data.sh:/docker-entrypoint-initdb.d/import-data.sh
-    command: mongod --auth --repair
+
     restart: unless-stopped
 
 
