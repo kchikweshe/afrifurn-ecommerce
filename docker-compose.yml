@@ -12,8 +12,8 @@ services:
       - 27017:27017
     volumes:
       -  mongodb_data_container:/data/db
-      - ./product-service/database/seed/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
-      - ./product-service/database/seed:/data:
+      - ./product-service/database/seed/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ./product-service/database/seed:/data
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
