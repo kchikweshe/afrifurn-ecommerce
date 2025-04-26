@@ -2,7 +2,7 @@
 set -e
 
 # MongoDB connection details
-MONGO_HOST="localhost"
+MONGO_HOST="afrifurn-mongodb"
 MONGO_PORT="27017"
 MONGO_USER="kchikweshe"
 MONGO_PASSWORD="mypassword"
