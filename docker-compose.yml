@@ -2,7 +2,7 @@
 services:
   afrifurn-mongodb:
     container_name: afrifurn-mongodb
-    image: mongo
+    image: mongo:7.0
 
     environment:
       - MONGO_INITDB_ROOT_USERNAME=kchikweshe
@@ -13,8 +13,7 @@ services:
       - 27017:27017
     volumes:
       -  mongodb_data_container:/data
-      - ./init.js:/docker-entrypoint-initdb.d/init.js:ro
-      - ./seed:/data
+     
 
 
 
