@@ -15,7 +15,7 @@ services:
       - ./seed:/data
       - ./init.js:/docker-entrypoint-initdb.d/init.js
 
-      -  mongodb_data_container:/data/db
+      -  mongodb_data_container:/data
      
 
 
