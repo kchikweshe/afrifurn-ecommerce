@@ -5,13 +5,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
+                
             }
         }
         
         stage('Build') {
             steps {
                 script {
-                                        
                     sh ' docker compose build'
                 }
             }

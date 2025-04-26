@@ -73,7 +73,6 @@ services:
     restart: unless-stopped
     
     depends_on:
-      - afrifurn-mongodb
       - eureka-service
       - api-gateway
 
