@@ -3,10 +3,9 @@
 
 const MONGO_HOST = "localhost";
 const MONGO_PORT = "27017";
-const MONGO_USER = "kchikweshe";
-const MONGO_PASSWORD = "mypassword";
 const MONGO_DB = "afrifurn";
-const DATA_DIR = "/data";
+const USER_NAME = "kchikweshe";
+const PASSWORD = "mypassword";
 
 // Helper function to sleep/wait
 async function sleep(seconds) {
@@ -32,70 +31,46 @@ async function waitForMongoReady() {
   }
 }
 
-// Function to wait for authentication to be ready
-async function waitForAuthReady() {
-  print("Waiting for MongoDB authentication to be ready...");
-  
-  while (true) {
-    try {
-      // Try to connect with authentication
-      const conn = new Mongo(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`);
-      const testDb = conn.getDB(MONGO_DB);
-      testDb.runCommand({ ping: 1 });
-      print("MongoDB authentication is ready!");
-      return;
-    } catch (err) {
-      print("MongoDB authentication not ready yet - sleeping 2 seconds");
-      await sleep(2);
-    }
-  }
-}
-
-// Function to check if a collection has data
-function collectionHasData(collection) {
-  const conn = new Mongo(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`);
-  const db = conn.getDB(MONGO_DB);
-  const count = db.getCollection(collection).countDocuments({});
-  return count > 0;
-}
-
-// Function to import data from a JSON file
-function importJsonFile(filePath, collection) {
+// Function to create user if it doesn't exist
+async function createUser() {
   try {
-    // Read the JSON file
-    const fileContent = cat(filePath);
-    const jsonData = JSON.parse(fileContent);
-    
-    // Connect to database
-    const conn = new Mongo(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`);
+    const conn = new Mongo(`mongodb://${MONGO_HOST}:${MONGO_PORT}`);
     const db = conn.getDB(MONGO_DB);
     
-    // Insert the data
-    if (Array.isArray(jsonData)) {
-      db.getCollection(collection).insertMany(jsonData);
+    // Check if user already exists
+    const usersInfo = db.getUsers();
+    const userExists = usersInfo.users && usersInfo.users.some(user => user.user === USER_NAME);
+    
+    if (!userExists) {
+      print(`Creating user '${USER_NAME}' for database '${MONGO_DB}'...`);
+      
+      // Create the user with appropriate roles
+      db.createUser({
+        user: USER_NAME,
+        pwd: PASSWORD,
+        roles: [
+          { role: "readWrite", db: MONGO_DB },
+          { role: "dbAdmin", db: MONGO_DB }
+        ]
+      });
+      
+      print(`User '${USER_NAME}' created successfully!`);
     } else {
-      db.getCollection(collection).insertOne(jsonData);
+      print(`User '${USER_NAME}' already exists.`);
     }
     
-    print(`Data imported into collection '${collection}' successfully.`);
-    return true;
+    // Create a test document to ensure the database exists
+    db.test.insertOne({ 
+      createdAt: new Date(), 
+      message: "Database initialization complete" 
+    });
+    
+    print(`Database '${MONGO_DB}' initialized successfully!`);
+    
   } catch (err) {
-    print(`Error importing data into '${collection}': ${err.message}`);
-    return false;
+    print(`Error creating user: ${err.message}`);
+    throw err;
   }
-}
-
-// Function to get all JSON files in the data directory
-function getJsonFiles() {
-  // This is a simplified approach as JavaScript in MongoDB shell doesn't have direct file system access
-  // In a real environment, you'd need to implement this according to your specific setup
-  const fileList = listFiles(DATA_DIR);
-  return fileList
-    .filter(file => file.name.match(/afrifurn\..+\.json$/))
-    .map(file => ({ 
-      path: file.name,
-      collection: file.name.match(/afrifurn\.(.+)\.json$/)[1]
-    }));
 }
 
 // Main function to run the script
@@ -104,24 +79,10 @@ async function main() {
     // Wait for MongoDB to be ready
     await waitForMongoReady();
     
-    // Wait for authentication to be ready
-    await waitForAuthReady();
+    // Create the user
+    await createUser();
     
-    // Import JSON files if collections are empty
-    print("Checking and importing seed data...");
-    
-    const jsonFiles = getJsonFiles();
-    
-    for (const file of jsonFiles) {
-      if (collectionHasData(file.collection)) {
-        print(`Collection '${file.collection}' already has data, skipping import.`);
-      } else {
-        print(`Importing data into collection '${file.collection}'...`);
-        importJsonFile(file.path, file.collection);
-      }
-    }
-    
-    print("Data import completed successfully!");
+    print("MongoDB initialization completed successfully!");
   } catch (err) {
     print(`Error during initialization: ${err.message}`);
   }

@@ -49,7 +49,7 @@ collection_has_data() {
 echo "Checking and importing seed data..."
 
 # Loop through each JSON file in the data directory
-for file in /data/afrifurn.*.json; do
+for file in /data/seed/afrifurn.*.json; do
   if [ -f "$file" ]; then  # Check if file exists
     # Extract collection name from filename
     collection=$(basename "$file" | sed -E 's/afrifurn\.(.*)\.json/\1/')

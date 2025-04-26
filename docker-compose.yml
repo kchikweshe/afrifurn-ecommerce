@@ -12,9 +12,9 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./seed:/data
+      - ./seed:/data/seed
       - ./init.js:/docker-entrypoint-initdb.d/init.js
-
+      - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
       -  mongodb_data_container:/data
      
 
