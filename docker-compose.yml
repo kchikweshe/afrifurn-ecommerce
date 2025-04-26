@@ -12,8 +12,8 @@ services:
       - 27017:27017
     volumes:
       -  mongodb_data_container:/data/db
-      - ./product-service/database/mongo-init:/docker-entrypoint-initdb.d
-      - ./product-service/database/seed:/data
+      - ./database/mongo-init/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./database/seed:/data
 
     restart: unless-stopped
 
@@ -73,6 +73,7 @@ services:
     restart: unless-stopped
     
     depends_on:
+      - afrifurn-mongodb
       - eureka-service
       - api-gateway
 

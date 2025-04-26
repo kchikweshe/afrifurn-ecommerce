@@ -12,6 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                                       
                     sh ' docker compose build'
                 }
             }
