@@ -2,7 +2,7 @@
 services:
   afrifurn-mongodb:
     container_name: afrifurn-mongodb
-    image: mongo
+    image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=kchikweshe
       - MONGO_INITDB_ROOT_PASSWORD=mypassword
@@ -11,9 +11,9 @@ services:
     ports:
       - 27017:27017
     volumes:
-      -  mongodb_data_container:/data/db
+      -  mongodb_data_container:/data
       - ./init.js:/docker-entrypoint-initdb.d/init.js:ro
-      - ./database/seed:/data
+      - ./seed:/data
 
 
 
