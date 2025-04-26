@@ -2,7 +2,7 @@
 services:
   afrifurn-mongodb:
     container_name: afrifurn-mongodb
-    image: mongo:8.0.6-nanoserver
+    image: mongo
 
     environment:
       - MONGO_INITDB_ROOT_USERNAME=kchikweshe
