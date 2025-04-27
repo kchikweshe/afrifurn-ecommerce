@@ -85,7 +85,7 @@ async def startup_event() -> None:
         app_info = get_app_info()
         logging.info(f"""
         {app_info['banner']}
-        Framework: FastAPI {app_info['fastapi_version']}
+        Framework: FastAPI App{app_info['fastapi_version']}
         Python: {app_info['python_version']}
         Running on: http://{app_info['host']}:{app_info['port']}
         """)
