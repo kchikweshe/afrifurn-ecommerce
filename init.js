@@ -25,7 +25,7 @@ async function waitForMongoReady() {
       print("MongoDB is up and running!");
       return;
     } catch (err) {
-      print("MongoDB is not ready yet - sleeping 2 seconds");
+      print("MongoDB is really not ready yet - sleeping 2 seconds" +err.message);
       await sleep(2);
     }
   }
