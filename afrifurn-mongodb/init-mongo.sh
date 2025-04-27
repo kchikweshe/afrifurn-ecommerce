@@ -11,23 +11,13 @@ MONGO_DB="afrifurn"
 # Wait for MongoDB to be ready - this is needed since the script might run
 # before MongoDB is fully initialized
 echo "Waiting for MongoDB to be ready..."
-until mongosh ; do
+until mongosh -u $MONGO_USER --password $MONGO_PASSWORD  ; do
   echo "MongoDB is really not ready yet - sleeping 2 seconds"
   sleep 2
 done
 
 echo "MongoDB is up and running!"
 
-# Wait for auth to be enabled and user to be created
-echo "Waiting for MongoDB authentication to be ready..."
-until mongosh --host $MONGO_HOST --port $MONGO_PORT --authenticationDatabase $MONGO_DB \
-              --username $MONGO_USER --password $MONGO_PASSWORD \
-              --eval "db.version()" $MONGO_DB &>/dev/null; do
-  echo "MongoDB authentication not ready yet - sleeping 2 seconds"
-  sleep 2
-done
-
-echo "MongoDB authentication is ready!"
 
 # Function to check if a collection has data
 collection_has_data() {
