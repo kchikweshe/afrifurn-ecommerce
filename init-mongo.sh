@@ -11,8 +11,8 @@ MONGO_DB="afrifurn"
 # Wait for MongoDB to be ready - this is needed since the script might run
 # before MongoDB is fully initialized
 echo "Waiting for MongoDB to be ready..."
-until mongosh --host $MONGO_HOST --port $MONGO_PORT --eval "db.version()" &>/dev/null; do
-  echo "MongoDB is not ready yet - sleeping 2 seconds"
+until mongosh ; do
+  echo "MongoDB is really not ready yet - sleeping 2 seconds"
   sleep 2
 done
 

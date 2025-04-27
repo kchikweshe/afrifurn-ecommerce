@@ -1,95 +1,43 @@
-// MongoDB initialization script for Docker container
-// This is the JavaScript equivalent of the original bash script
+// MongoDB init script to create a user and database
 
-const MONGO_HOST = "localhost";
-const MONGO_PORT = "27017";
-const MONGO_DB = "afrifurn";
-const USER_NAME = "kchikweshe";
-const PASSWORD = "mypassword";
+// Define database and user details
+const databaseName = "afrifurn";
+const username = "kchikweshe";
+const password = "mypassword"; // Replace with a strong password
 
-// Helper function to sleep/wait
-async function sleep(seconds) {
-  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
+// MongoDB connection URL (adjust if needed)
+const mongoUrl = "mongodb://localhost:27017/";
 
-// Function to check if MongoDB is ready
-async function waitForMongoReady() {
-  print("Waiting for MongoDB to be ready...");
-  
-  while (true) {
-    try {
-      // Try to connect to MongoDB without authentication
-      const conn = new Mongo(`mongodb://${MONGO_HOST}:${MONGO_PORT}`);
-      const adminDb = conn.getDB("admin");
-      adminDb.runCommand({ ping: 1 });
-      print("MongoDB is up and running!");
-      return;
-    } catch (err) {
-      print("MongoDB is really not ready yet - sleeping 2 seconds" +err.message);
-      await sleep(2);
-    }
-  }
-}
+import { MongoClient } from 'mongodb';
 
-// Function to create user if it doesn't exist
-async function createUser() {
+async function initializeMongo() {
+  const client = new MongoClient(mongoUrl);
+
   try {
-    const conn = new Mongo(`mongodb://${MONGO_HOST}:${MONGO_PORT}`);
-    const db = conn.getDB(MONGO_DB);
-    
-    // Check if user already exists
-    const usersInfo = db.getUsers();
-    const userExists = usersInfo.users && usersInfo.users.some(user => user.user === USER_NAME);
-    
+    await client.connect();
+    const db = client.db(databaseName);
+
+    // Check if the user exists
+    const userExists = await db.system.users.findOne({ user: username });
+
     if (!userExists) {
-      print(`Creating user '${USER_NAME}' for database '${MONGO_DB}'...`);
-      
-      // Create the user with appropriate roles
-      db.createUser({
-        user: USER_NAME,
-        pwd: PASSWORD,
-        roles: [
-          { role: "readWrite", db: MONGO_DB },
-          { role: "dbAdmin", db: MONGO_DB }
-        ]
+      // Create the user
+      await db.createUser({
+        user: username,
+        pwd: password,
+        roles: [ { role: "readWrite", db: databaseName } ]
       });
-      
-      print(`User '${USER_NAME}' created successfully!`);
+      console.log(`User ${username} created successfully for database ${databaseName}`);
     } else {
-      print(`User '${USER_NAME}' already exists.`);
+      console.log(`User ${username} already exists for database ${databaseName}`);
     }
-    
-    // Create a test document to ensure the database exists
-    db.test.insertOne({ 
-      createdAt: new Date(), 
-      message: "Database initialization complete" 
-    });
-    
-    print(`Database '${MONGO_DB}' initialized successfully!`);
-    
-  } catch (err) {
-    print(`Error creating user: ${err.message}`);
-    throw err;
+
+  } catch (error) {
+    console.error("Error initializing MongoDB:", error);
+  } finally {
+    await client.close();
   }
 }
 
-// Main function to run the script
-async function main() {
-  try {
-    // Wait for MongoDB to be ready
-    await waitForMongoReady();
-    
-    // Create the user
-    await createUser();
-    
-    print("MongoDB initialization completed successfully!");
-  } catch (err) {
-    print(`Error during initialization: ${err.message}`);
-  }
-}
-
-// Run the main function
-main().catch(err => {
-  print(`Fatal error: ${err.message}`);
-  quit(1);
-});
+// Execute the initialization function
+initializeMongo().catch(console.error);
