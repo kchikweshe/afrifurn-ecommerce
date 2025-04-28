@@ -34,7 +34,7 @@ pipeline {
             echo 'Pipeline succeeded! All services are deployed.'
         }
         failure {
-            echo 'Pipeline failed! Check the logs for details.'
+            echo 'Pipeline failed! Check the logs for details. '
         }
         always {
             cleanWs()
