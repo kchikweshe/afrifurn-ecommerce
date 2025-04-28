@@ -6,10 +6,9 @@ const username = "kchikweshe";
 const password = "mypassword"; // Replace with a strong password
 
 // MongoDB connection URL (adjust if needed)
-const mongoUrl = "mongodb://localhost:27017/";
+const mongoUrl = "mongodb://localhost:27017";
 
-import { MongoClient } from 'mongodb';
-
+const { MongoClient } = require('mongodb'); // Change import to require
 async function initializeMongo() {
   const client = new MongoClient(mongoUrl);
 
