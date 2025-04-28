@@ -39,7 +39,9 @@ EXPOSE 8000
 
 # Run as non-root user for better security
 RUN adduser --disabled-password --no-create-home appuser
-RUN mkdir -p /app/static &&   chmod 777 -R /app/static  &&   chmod 666  /app/app.log
+RUN mkdir -p /app/static &&   chmod 777 -R /app/static  
+RUN touch /app/app.log && chmod 666 /app/app.log
+
 
 USER appuser
 # Command to run the FastAPI app
