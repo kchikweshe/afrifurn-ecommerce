@@ -7,6 +7,7 @@ MONGO_PORT="27017"
 MONGO_USER="kchikweshe"
 MONGO_PASSWORD="mypassword"
 MONGO_DB="afrifurn"
+ADMIN_DB="admin"
 
 # Wait for MongoDB to be ready - this is needed since the script might run
 # before MongoDB is fully initialized
@@ -24,7 +25,7 @@ collection_has_data() {
   local collection=$1
   
   local count=$(mongosh --host $MONGO_HOST --port $MONGO_PORT \
-                --authenticationDatabase $MONGO_DB \
+                --authenticationDatabase $ADMIN_DB \
                 --username $MONGO_USER --password $MONGO_PASSWORD \
                 --quiet --eval "db.$collection.countDocuments({})" $MONGO_DB)
   
@@ -52,7 +53,7 @@ for file in /data/seed/afrifurn.*.json; do
       
       # Import the JSON file
       mongoimport --host $MONGO_HOST --port $MONGO_PORT \
-                  --authenticationDatabase $MONGO_DB \
+                  --authenticationDatabase $ADMIN_DB \
                   --username $MONGO_USER --password $MONGO_PASSWORD \
                   --db $MONGO_DB --collection "$collection" \
                   --file "$file" --jsonArray
