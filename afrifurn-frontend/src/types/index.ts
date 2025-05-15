@@ -96,7 +96,7 @@ export interface FilterParams {
   depth?: number;
   height?: number;
   materials?: Array<string>;
-  category?: string;
+  category_short_name?: string;
   page?: number;
   page_size?: number;
   sort_by?: string;

@@ -10,7 +10,7 @@ import { productService } from "@/services/product.service";
 export default async function Page(props0: { params: Promise<{ id: string }> }) {
   const params = await props0.params;
   const filterParams: FilterParams = {
-    category: params.id
+    category_short_name: params.id
   }
   console.debug(filterParams)
   console.debug("Product ID: ", params.id)

@@ -195,7 +195,7 @@ async def get_products_by_level_two_category(
         # Use aggregation pipeline for better performance and flexibility
         pipeline = [
             {"$match": {
-                "category.name": short_name,
+                "category.short_name": short_name,
                 "is_archived": False  # Add this if you want to exclude archived products
             }},
             {"$sort": {sort_by: sort_order}},
