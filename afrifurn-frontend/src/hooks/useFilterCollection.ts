@@ -21,7 +21,7 @@ export function useFilterCollection<T>(doFetch:boolean=false) {
       if (params.depth !== undefined) queryParams.append('depth', params.depth.toString());
       if (params.height !== undefined) queryParams.append('height', params.height.toString());
       if (params.materials !== undefined) queryParams.append('materials', JSON.stringify(params.materials));
-      if (params.category_short_name !== undefined) queryParams.append('category', params.category_short_name);
+      if (params.category_short_name !== undefined) queryParams.append('category_short_name', params.category_short_name);
       if (params.page !== undefined) queryParams.append('page', params.page.toString());
       if (params.page_size !== undefined) queryParams.append('page_size', params.page_size.toString());
       if (params.sort_by) queryParams.append('sort_by', params.sort_by);
