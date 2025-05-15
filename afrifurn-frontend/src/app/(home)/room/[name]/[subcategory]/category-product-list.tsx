@@ -31,7 +31,7 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
         end_price: 1000,
         colors: [],
         materials: [],
-        category: short_name,
+        category_short_name: short_name,
         sort_by: 'price',
         sort_order: 1,
     })

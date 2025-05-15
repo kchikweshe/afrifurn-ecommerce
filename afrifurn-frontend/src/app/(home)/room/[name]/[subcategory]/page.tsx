@@ -15,7 +15,7 @@ export default async function Page(props: { params: Promise<{ subcategory: strin
     
     
     // Fetch products filtered by the subcategory's short_name
-    const data = await productService.filterCategoryProducts({ short_name: subcategory });
+    const data = await productService.filterCategoryProducts({ category_short_name: subcategory });
     
     // Render the product grid component with the filtered products
     return <CategoryProductsGrid categoryProducts={data} short_name={subcategory} />;
