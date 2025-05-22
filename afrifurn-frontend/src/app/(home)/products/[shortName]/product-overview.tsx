@@ -31,7 +31,7 @@ import { useCart } from '@/context/cart/use-cart'
 import { ProductGallery } from '@/components/products/product-gallery'
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { FaStar } from "react-icons/fa"
+import { FaStar, FaWhatsapp } from "react-icons/fa"
 import { useDataContext } from '@/data/data.context'
 import { PRODUCT_IMAGE_URLS } from '@/data/urls'
 import Image from 'next/image'
@@ -116,6 +116,15 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
             toast({ title: "Error", description: "Failed to add item to cart", variant: "destructive" })
         }
     }, [product, selectedVariant, discountedPrice, quantity, toast, addToCart])
+
+    // WhatsApp chat handler
+    const handleWhatsAppClick = () => {
+        const colorObj = colors.find(c => c.color_code === selectedVariant.color_id)
+        const colorName = colorObj?.name || selectedVariant.color_id
+        const message = `Hi, I am interested in the ${product.name} (${colorName}).`;
+        const url = `https://wa.me/263778588495?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
 
     if (product.reviews?.length === 0) {
         return <div>No reviews found</div>
@@ -235,14 +244,6 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                     </div>
                     <span className="text-gray-500 text-sm ml-2">5 available</span>
                 </div>
-                {/* Add to Cart */}
-                <Button
-                    size="lg"
-                    className="w-full bg-gray-900 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-800 transition-colors"
-                    onClick={handleAddToCart}
-                >
-                    Add to Cart
-                </Button>
                 {/* Tabs */}
                 <div className="mt-6">
                     <div className="flex gap-2 border-b mb-4">
@@ -339,6 +340,25 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                         </div>
                     )}
                 </div>
+                {/* Add to Cart */}
+                <Button
+                    size="lg"
+                    className="w-full bg-gray-900 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-800 transition-colors mt-6"
+                    onClick={handleAddToCart}
+                >
+                    Add to Cart
+                </Button>
+            </div>
+            {/* Floating WhatsApp Button */}
+            <div className="fixed bottom-8 right-8 z-50">
+                <button
+                    type="button"
+                    onClick={handleWhatsAppClick}
+                    aria-label="Chat on WhatsApp"
+                    className="w-16 h-16 rounded-full bg-green-600 hover:bg-green-700 flex items-center justify-center shadow-xl text-white text-3xl transition-transform duration-200 hover:scale-110 focus:outline-none"
+                >
+                    <FaWhatsapp className="w-8 h-8" />
+                </button>
             </div>
         </div>
     )
