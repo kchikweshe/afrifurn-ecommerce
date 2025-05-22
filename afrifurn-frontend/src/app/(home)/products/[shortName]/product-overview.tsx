@@ -32,6 +32,9 @@ import { ProductGallery } from '@/components/products/product-gallery'
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { FaStar } from "react-icons/fa"
+import { useDataContext } from '@/data/data.context'
+import { PRODUCT_IMAGE_URLS } from '@/data/urls'
+import Image from 'next/image'
 
 interface ProductOverviewProps {
     /** Product object containing all product details */
@@ -48,10 +51,10 @@ const TABS = [
 export default function ProductOverview({ product }: ProductOverviewProps) {
     /** Currently selected product variant */
     const [selectedVariant, setSelectedVariant] = useState(product.product_variants[0])
-    
+
     /** Index of currently displayed main image */
     const [mainImage, setMainImage] = useState(0)
-    
+
     /** Controls visibility of "Added to Cart" indicator */
     const [showAddedBadge, setShowAddedBadge] = useState(false)
 
@@ -63,6 +66,13 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
 
     const { toast } = useToast()
     const { addToCart } = useCart()
+
+    const state = useDataContext()
+
+    if (!state) {
+        return <div>Loading...</div>
+    }
+    const { colors } = state
 
     /**
      * Handles selection of a new product variant
@@ -98,8 +108,8 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 color: selectedVariant.color_id,
                 quantity,
             }
-            addToCart(cartItem)  
-            setShowAddedBadge(true)  
+            addToCart(cartItem)
+            setShowAddedBadge(true)
             toast({ title: "Success", description: "Added to cart successfully!" })
             setTimeout(() => setShowAddedBadge(false), 2000)
         } catch (error) {
@@ -107,7 +117,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
         }
     }, [product, selectedVariant, discountedPrice, quantity, toast, addToCart])
 
-    if(product.reviews?.length === 0){
+    if (product.reviews?.length === 0) {
         return <div>No reviews found</div>
     }
     // Reviews logic (pagination and filter)
@@ -126,7 +136,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 product.reviews.length
             ).toFixed(1)
             : '0.0'
-            
+
 
     const handleQuantityChange = (delta: number) => {
         setQuantity(q => Math.max(1, Math.min(q + delta, 5))) // Assume 5 available for now
@@ -178,22 +188,33 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 {/* Color selection */}
                 <div className="mb-4">
                     <div className="font-semibold mb-1">Color</div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-4 ">
                         {Array.from(
                             new Map(product.product_variants.map(v => [v.color_id, v])).values()
-                        ).map(variant => (
-                            <button
-                                key={variant.color_id}
-                                className={`px-4 py-1 rounded-full border text-sm font-medium transition-colors duration-150 ${
-                                    selectedVariant.color_id === variant.color_id
-                                        ? 'bg-gray-900 text-white border-gray-900'
-                                        : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-100'
-                                }`}
-                                onClick={() => handleVariantSelect(variant)}
-                            >
-                                {variant.color_id}
-                            </button>
-                        ))}
+                        ).map(variant => {
+                            const colorObj = colors.find(c => c.color_code === variant.color_id)
+                            return (
+                                <button
+                                    key={variant.color_id}
+                                    className={`w-16 h-16 rounded-full border-1 flex items-center justify-center shadow-md transition-all duration-200 p-0 focus:outline-none bg-white hover:scale-105 active:scale-95 ${
+                                        selectedVariant.color_id === variant.color_id
+                                            ? ' ring-primary border-primary'
+                                            : 'border-gray-300 hover:border-primary'
+                                    }`}
+                                    onClick={() => handleVariantSelect(variant)}
+                                    aria-label={colorObj?.name || variant.color_id}
+                                >
+                                    {colorObj?.image ? (
+                                        <Image width={64} height={64} src={PRODUCT_IMAGE_URLS + colorObj.image} alt={colorObj.name} className="rounded-full object-cover w-14 h-14" />
+                                    ) : (
+                                        <span
+                                            className="rounded-full w-14 h-14 block"
+                                            style={{ backgroundColor: colorObj?.color_code || '#ccc' }}
+                                        />
+                                    )}
+                                </button>
+                            )
+                        })}
                     </div>
                 </div>
                 {/* Quantity selector */}
@@ -228,11 +249,10 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                         {TABS.map(tab => (
                             <button
                                 key={tab.key}
-                                className={`py-2 px-4 text-base font-semibold border-b-2 transition-colors duration-150 ${
-                                    activeTab === tab.key
+                                className={`py-2 px-4 text-base font-semibold border-b-2 transition-colors duration-150 ${activeTab === tab.key
                                         ? 'border-gray-900 text-gray-900'
                                         : 'border-transparent text-gray-500 hover:text-gray-900'
-                                }`}
+                                    }`}
                                 onClick={() => setActiveTab(tab.key)}
                             >
                                 {tab.label}
@@ -274,7 +294,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                             {/* Star filter */}
                             <div className="flex items-center gap-2 mb-4">
                                 <span className="text-sm text-gray-600">Filter by:</span>
-                                {[5,4,3,2,1].map(star => (
+                                {[5, 4, 3, 2, 1].map(star => (
                                     <button
                                         key={star}
                                         className={`px-2 py-1 rounded-full border text-xs font-medium ${starFilter === star ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-100'}`}
@@ -325,5 +345,4 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
 }
 
 
-          
- 
+
