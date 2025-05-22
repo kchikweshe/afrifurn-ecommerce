@@ -24,26 +24,29 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import { useToast } from '@/hooks/use-toast'
-import { Product, ProductVariant } from '@/types'
+import { Product, ProductVariant, ProductFeature, ProductReview } from '@/types'
 import type { CartItem } from '@/types/cart'
 import { useCart } from '@/context/cart/use-cart'
 import { ProductGallery } from '@/components/products/product-gallery'
-import { ProductDetails } from '@/components/products/product-details'
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { FaWhatsapp } from "react-icons/fa"
+import { FaStar } from "react-icons/fa"
 
 interface ProductOverviewProps {
     /** Product object containing all product details */
     product: Product;
 }
 
+const TABS = [
+    { key: 'features', label: 'Features' },
+    { key: 'specs', label: 'Specifications' },
+    { key: 'shipping', label: 'Shipping' },
+    { key: 'reviews', label: `Reviews` },
+]
+
 export default function ProductOverview({ product }: ProductOverviewProps) {
     /** Currently selected product variant */
-    
-    console.debug("Debug product", product)
     const [selectedVariant, setSelectedVariant] = useState(product.product_variants[0])
     
     /** Index of currently displayed main image */
@@ -51,6 +54,12 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
     
     /** Controls visibility of "Added to Cart" indicator */
     const [showAddedBadge, setShowAddedBadge] = useState(false)
+
+    const [quantity, setQuantity] = useState(1)
+    const [activeTab, setActiveTab] = useState('features')
+    const [starFilter, setStarFilter] = useState<number | null>(null)
+    const [page, setPage] = useState(1)
+    const pageSize = 3
 
     const { toast } = useToast()
     const { addToCart } = useCart()
@@ -60,11 +69,10 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
      * @param variant - The selected product variant
      */
     const handleVariantSelect = useCallback((variant: ProductVariant) => {
-        // Find the variant with matching color_id to ensure we get the right images
         const targetVariant = product.product_variants.find(v => v.color_id === variant.color_id)
         if (targetVariant) {
             setSelectedVariant(targetVariant)
-            setMainImage(targetVariant.images.findIndex(img => img === targetVariant.images[0])) // Reset to first image when changing variant
+            setMainImage(0)
         }
     }, [product.product_variants])
 
@@ -88,61 +96,234 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 image: selectedVariant.images[0],
                 variantId: selectedVariant._id,
                 color: selectedVariant.color_id,
-                quantity: 1
+                quantity,
             }
-
             addToCart(cartItem)  
             setShowAddedBadge(true)  
-
-            toast({
-                title: "Success",
-                description: "Added to cart successfully!"
-            })
-
-            // Hide the badge after 2 seconds
-            setTimeout(() => {
-                setShowAddedBadge(false)
-            }, 2000)
+            toast({ title: "Success", description: "Added to cart successfully!" })
+            setTimeout(() => setShowAddedBadge(false), 2000)
         } catch (error) {
-            toast({
-                title: "Error",
-                description: "Failed to add item to cart",
-                variant: "destructive"
-            })
+            toast({ title: "Error", description: "Failed to add item to cart", variant: "destructive" })
         }
-    }, [product, selectedVariant, discountedPrice, toast, addToCart])
+    }, [product, selectedVariant, discountedPrice, quantity, toast, addToCart])
+
+    if(product.reviews?.length === 0){
+        return <div>No reviews found</div>
+    }
+    // Reviews logic (pagination and filter)
+    const filteredReviews = starFilter
+        ? product?.reviews?.filter(r => r.rating === starFilter)
+        : product?.reviews
+    const totalReviews = filteredReviews?.length
+    const paginatedReviews = filteredReviews?.slice((page - 1) * pageSize, page * pageSize)
+    const maxPage = totalReviews ? Math.max(1, Math.ceil(totalReviews / pageSize)) : 1
+
+    // Star rating average
+    const avgRating =
+        Array.isArray(product?.reviews) && product.reviews.length > 0
+            ? (
+                product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+                product.reviews.length
+            ).toFixed(1)
+            : '0.0'
+            
+
+    const handleQuantityChange = (delta: number) => {
+        setQuantity(q => Math.max(1, Math.min(q + delta, 5))) // Assume 5 available for now
+    }
 
     return (
-        <div className="  py-8">
-            <div className="flex flex-col gap-8">
-                {/* <div className="block lg:hidden">
-                    <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-                    {product.is_new && <Badge>New</Badge>}
+        <div className="py-8 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
+            {/* Gallery */}
+            <div className="lg:w-1/2 w-full flex flex-col h-full justify-center">
+                <ProductGallery
+                    product={product}
+                    selectedVariant={selectedVariant}
+                    mainImage={mainImage}
+                    setMainImage={setMainImage}
+                />
+            </div>
+            {/* Product Details */}
+            <div className="lg:w-1/2 w-full flex flex-col gap-6 h-full justify-center overflow-y-auto">
+                {/* Category badge */}
+                <div className="mb-2">
+                    <Badge className="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full text-xs">
+                        {product.category?.name || 'Category'}
+                    </Badge>
                 </div>
-                 */}
-                <div className="lg:w-full py-6 px-3 shadow-md  flex flex-col lg:flex-row gap-20">
-                  <div className="md:w-1/2">
-                  <ProductGallery
-                        product={product}
-                        selectedVariant={selectedVariant}
-                        mainImage={mainImage}
-                        setMainImage={setMainImage}
-                    />
-                  </div>
-                
-                    <ProductDetails
-                        product={product}
-                        selectedVariant={selectedVariant}
-                        setSelectedVariant={handleVariantSelect}
-                        onAddToCart={handleAddToCart}
-                        showAddedBadge={showAddedBadge}
-                        setMainImage={setMainImage}
-                    />
+                {/* Name, rating, reviews */}
+                <h1 className="text-3xl font-extrabold mb-1 leading-tight">{product.name}</h1>
+                <div className="flex items-center gap-2 mb-2">
+                    <span className="flex items-center text-yellow-500">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                            <FaStar
+                                key={i}
+                                className={
+                                    i < Math.round(Number(avgRating))
+                                        ? 'text-yellow-500'
+                                        : 'text-gray-300'
+                                }
+                            />
+                        ))}
+                    </span>
+                    <span className="font-semibold text-lg text-gray-800 ml-2">{avgRating}</span>
+                    <span className="text-gray-500 text-sm">({product?.reviews?.length} reviews)</span>
+                </div>
+                {/* Price */}
+                <div className="text-2xl font-bold text-gray-900 mb-2">${product.price.toFixed(2)}</div>
+                {/* Description */}
+                <div className="text-gray-700 mb-4 text-base leading-relaxed">
+                    {product.description}
+                </div>
+                {/* Color selection */}
+                <div className="mb-4">
+                    <div className="font-semibold mb-1">Color</div>
+                    <div className="flex gap-2">
+                        {Array.from(
+                            new Map(product.product_variants.map(v => [v.color_id, v])).values()
+                        ).map(variant => (
+                            <button
+                                key={variant.color_id}
+                                className={`px-4 py-1 rounded-full border text-sm font-medium transition-colors duration-150 ${
+                                    selectedVariant.color_id === variant.color_id
+                                        ? 'bg-gray-900 text-white border-gray-900'
+                                        : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-100'
+                                }`}
+                                onClick={() => handleVariantSelect(variant)}
+                            >
+                                {variant.color_id}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+                {/* Quantity selector */}
+                <div className="mb-4 flex items-center gap-4">
+                    <div className="font-semibold">Quantity</div>
+                    <div className="flex items-center border rounded overflow-hidden">
+                        <button
+                            className="px-3 py-1 text-lg font-bold text-gray-700 hover:bg-gray-100"
+                            onClick={() => handleQuantityChange(-1)}
+                            disabled={quantity === 1}
+                        >-</button>
+                        <span className="px-4 py-1 text-lg font-semibold bg-white">{quantity}</span>
+                        <button
+                            className="px-3 py-1 text-lg font-bold text-gray-700 hover:bg-gray-100"
+                            onClick={() => handleQuantityChange(1)}
+                            disabled={quantity === 5}
+                        >+</button>
+                    </div>
+                    <span className="text-gray-500 text-sm ml-2">5 available</span>
+                </div>
+                {/* Add to Cart */}
+                <Button
+                    size="lg"
+                    className="w-full bg-gray-900 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-800 transition-colors"
+                    onClick={handleAddToCart}
+                >
+                    Add to Cart
+                </Button>
+                {/* Tabs */}
+                <div className="mt-6">
+                    <div className="flex gap-2 border-b mb-4">
+                        {TABS.map(tab => (
+                            <button
+                                key={tab.key}
+                                className={`py-2 px-4 text-base font-semibold border-b-2 transition-colors duration-150 ${
+                                    activeTab === tab.key
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-900'
+                                }`}
+                                onClick={() => setActiveTab(tab.key)}
+                            >
+                                {tab.label}
+                                {tab.key === 'reviews' && (
+                                    <span className="ml-1 text-xs text-gray-500">({product?.reviews?.length})</span>
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                    {/* Tab content */}
+                    {activeTab === 'features' && (
+                        <ul className="list-disc pl-6 text-gray-700 space-y-1">
+                            {product.product_features && product.product_features.length > 0 ? (
+                                product.product_features.map((feature: ProductFeature, idx: number) => (
+                                    <li key={idx}>{feature.name && <span className="font-medium">{feature.name}: </span>}{feature.description}</li>
+                                ))
+                            ) : (
+                                <li>No features listed.</li>
+                            )}
+                        </ul>
+                    )}
+                    {activeTab === 'specs' && (
+                        <div className="text-gray-700 text-base">
+                            <div>Length: <span className="font-semibold">{product.dimensions.length}mm</span></div>
+                            <div>Width: <span className="font-semibold">{product.dimensions.width}mm</span></div>
+                            <div>Height: <span className="font-semibold">{product.dimensions.height}mm</span></div>
+                            {product.dimensions.depth && <div>Depth: <span className="font-semibold">{product.dimensions.depth}mm</span></div>}
+                            {product.dimensions.weight && <div>Weight: <span className="font-semibold">{product.dimensions.weight} lbs</span></div>}
+                        </div>
+                    )}
+                    {activeTab === 'shipping' && (
+                        <div className="text-gray-700 text-base">
+                            <div>Free nationwide shipping in Zimbabwe.</div>
+                            <div>14 day returns. See our Shipping & Returns policy for more info.</div>
+                        </div>
+                    )}
+                    {activeTab === 'reviews' && (
+                        <div>
+                            {/* Star filter */}
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="text-sm text-gray-600">Filter by:</span>
+                                {[5,4,3,2,1].map(star => (
+                                    <button
+                                        key={star}
+                                        className={`px-2 py-1 rounded-full border text-xs font-medium ${starFilter === star ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-900 border-gray-300 hover:bg-gray-100'}`}
+                                        onClick={() => setStarFilter(starFilter === star ? null : star)}
+                                    >
+                                        {star}★
+                                    </button>
+                                ))}
+                            </div>
+                            {/* Reviews list */}
+                            {paginatedReviews && paginatedReviews.length > 0 ? (
+                                paginatedReviews.map((review: ProductReview, idx: number) => (
+                                    <div key={idx} className="mb-4 p-4 border rounded bg-white/80 shadow-sm">
+                                        <div className="flex items-center mb-1">
+                                            <span className="font-semibold">{review.title}</span>
+                                            <span className="ml-2 text-yellow-500">
+                                                {Array.from({ length: 5 }).map((_, i) => (
+                                                    <FaStar key={i} className={i < review.rating ? 'text-yellow-500' : 'text-gray-300'} />
+                                                ))}
+                                            </span>
+                                        </div>
+                                        <div className="text-gray-700">{review.description}</div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-gray-500">No reviews found.</div>
+                            )}
+                            {/* Pagination */}
+                            <div className="flex gap-2 mt-4 items-center">
+                                <button
+                                    disabled={page === 1}
+                                    onClick={() => setPage(page - 1)}
+                                    className="px-3 py-1 border rounded disabled:opacity-50"
+                                >Previous</button>
+                                <span className="text-sm">Page {page} of {maxPage}</span>
+                                <button
+                                    disabled={page === maxPage}
+                                    onClick={() => setPage(page + 1)}
+                                    className="px-3 py-1 border rounded disabled:opacity-50"
+                                >Next</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     )
 }
+
 
           
  

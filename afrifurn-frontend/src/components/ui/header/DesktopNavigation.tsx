@@ -1,7 +1,7 @@
 'use client'
 import { Category, Level1Category, Level2Category } from '@/types';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronDown } from 'lucide-react';
 
 interface DesktopNavigationProps {
@@ -19,8 +19,6 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
     hoveredCategory,
     setHoveredCategory 
 }) => {
-    const [hoveredLevelOne, setHoveredLevelOne] = useState<string | null>(null);
-
     // Get level one categories filtered by main category
     const getLevelOneByMainCategory = (mainCategoryId: string) => {
         return level_one_categories?.filter(cat => cat.category?._id === mainCategoryId) || [];
@@ -32,93 +30,92 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
     };
 
     return (
-        <nav className="hidden lg:block py-1">
-            <div className="flex justify-center">
-                <ul className="flex items-center gap-1">
+        <nav className="hidden lg:block py-1 w-full relative">
+            <div className="flex justify-center w-full">
+                <ul className="flex items-center gap-2">
                     {mainCategories?.map((category) => (
                         <li
                             key={category._id}
-                            className="relative px-4"
+                            className="relative px-6"
                             onMouseEnter={() => setHoveredCategory(category._id)}
                             onMouseLeave={() => setHoveredCategory(null)}
                         >
                             <Link 
                                 href={`/category/${category.short_name}`} 
                                 className={`
-                                    flex items-center px-4 py-2.5 text-xl font-medium tracking-wide
+                                    flex items-center px-4 py-3 text-2xl font-bold tracking-wide
                                     transition-colors duration-200 uppercase
                                     ${hoveredCategory === category._id 
                                         ? 'text-primary' 
-                                        : 'text-gray-600 hover:text-primary'}
+                                        : 'text-gray-700 hover:text-primary'}
                                 `}
                             >
                                 {category.name}
                                 <ChevronDown className={`
-                                    ml-1 h-5 w-5 transition-transform duration-200
+                                    ml-2 h-6 w-6 transition-transform duration-200
                                     ${hoveredCategory === category._id ? 'rotate-180' : ''}
                                 `} />
                             </Link>
 
-                            {/* Redesigned Mega menu dropdown with 3-column grid */}
+                            {/* Mega menu dropdown */}
                             <div 
                                 className={`
-                                    absolute left-1/2 -translate-x-1/2 mt-1 w-[1000px] bg-white rounded-xl shadow-2xl
+                                    absolute left-1/2 -translate-x-1/2 mt-2 w-[1100px] max-w-screen-xl
+                                    bg-white rounded-2xl shadow-2xl
                                     transition-all duration-300 ease-in-out transform origin-top z-50
                                     border border-gray-100 overflow-hidden
                                     ${hoveredCategory === category._id 
                                         ? 'opacity-100 visible scale-100' 
                                         : 'opacity-0 invisible scale-95 pointer-events-none'}
                                 `}
+                                style={{ minWidth: 900 }}
                                 onMouseEnter={() => setHoveredCategory(category._id)}
                                 onMouseLeave={() => setHoveredCategory(null)}
                             >
-                                <div className="p-8">
-                                    <h3 className="text-lg font-bold text-gray-700 uppercase mb-6 border-b pb-2">
-                                        {category.name}
-                                    </h3>
-                                    
-                                    {/* 3-column grid layout for level one categories */}
-                                    <div className="grid grid-cols-3 gap-x-8 gap-y-6">
+                                <div className="p-12">
+                                    <div className="grid grid-cols-5 gap-x-12 gap-y-10">
                                         {getLevelOneByMainCategory(category._id).map((levelOne) => (
-                                            <div key={levelOne._id} className="space-y-3">
+                                            <div key={levelOne._id} className="space-y-5">
                                                 {/* Level One Category as header */}
                                                 <Link
                                                     href={`/room/${levelOne.short_name}`}
-                                                    className="block text-base font-semibold text-primary hover:text-primary/80 transition-colors"
+                                                    className="block text-xl font-extrabold text-gray-900 mb-3 hover:text-primary transition-colors"
                                                 >
                                                     {levelOne.name}
                                                 </Link>
-                                                
                                                 {/* Level Two Categories as list */}
-                                                <ul className="space-y-2">
+                                                <ul className="space-y-3 mb-2">
                                                     {getLevelTwoByLevelOne(levelOne._id).map((levelTwo) => (
                                                         <li key={levelTwo._id}>
                                                             <Link
                                                                 href={`/room/${levelOne.short_name}/${levelTwo.short_name}`}
-                                                                className="group flex items-center text-sm text-gray-600 hover:text-primary transition-colors"
+                                                                className="block text-lg text-gray-700 hover:text-primary transition-colors pl-2"
                                                             >
-                                                                <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2 group-hover:bg-primary transition-colors"></span>
-                                                                <span className="group-hover:translate-x-0.5 transition-transform duration-200">
-                                                                    {levelTwo.name}
-                                                                </span>
+                                                                {levelTwo.name}
                                                             </Link>
                                                         </li>
                                                     ))}
                                                 </ul>
+                                                {/* View All link */}
+                                                <Link
+                                                    href={`/room/${levelOne.short_name}`}
+                                                    className="block text-sm text-primary font-semibold mt-4 hover:underline"
+                                                >
+                                                    View All &rarr;
+                                                </Link>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                                
-                                {/* Featured banner with gradient */}
-                                <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-4 border-t border-gray-100">
+                                {/* Promotional banner at the bottom */}
+                                <div className="bg-gray-50 p-6 border-t border-gray-100">
                                     <div className="flex items-center justify-between">
-                                        <p className="text-sm text-gray-600 font-medium">
+                                        <p className="text-lg text-gray-600 font-medium">
                                             Free delivery on orders over R2000
                                         </p>
                                         <Link 
                                             href="/promotions" 
-                                            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                                            className="text-lg font-bold text-primary hover:text-primary/80 transition-colors"
                                         >
                                             View current promotions →
                                         </Link>

@@ -14,16 +14,27 @@ BANNER_FILE = "banner.txt"
 
 settings=get_settings()
 
-
-
 import logging
-from contextlib import asynccontextmanager
+import warnings
 import sys
 import fastapi
-logger = logging.getLogger(__name__)
-# load_dotenv(dotenv_path=ENV)
-# env=os.environ
 
+logging.getLogger("py_eureka_client").setLevel(logging.CRITICAL)
+logging.getLogger("py_eureka_client.eureka_client").setLevel(logging.CRITICAL)
+logging.getLogger("py_eureka_client.http_client").setLevel(logging.CRITICAL)
+logging.getLogger("py_eureka_client.eureka_basic").setLevel(logging.CRITICAL)
+warnings.filterwarnings("ignore")
+
+# Optionally, suppress all uncaught exception tracebacks
+# def suppress_traceback(exctype, value, traceback):
+#     print(f"Suppressed exception: {value}")
+# sys.excepthook = suppress_traceback
+
+# Color codes for terminal output
+class Colors:
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
 
 def read_banner():
     with open('banner.txt', 'r') as f:
@@ -42,7 +53,7 @@ def get_app_info() -> Dict[str, str | int]:
             banner = f.read()
     except FileNotFoundError:
         banner = "Banner file not found"
-        logger.warning(f"{BANNER_FILE} not found")
+        logging.warning(f"{BANNER_FILE} not found")
 
     return {
         'banner': banner,
@@ -51,33 +62,43 @@ def get_app_info() -> Dict[str, str | int]:
         'host':settings.host_ip, # type: ignore
         'port': int(settings.port) # type: ignore
     }
+
+def log_eureka_status(status: str, url: str, reason: str = ""):
+    color = Colors.GREEN if status == "UP" else Colors.RED
+    status_colored = f"{color}{status}{Colors.RESET}"
+    print("\nEureka Info {")
+    print(f"  Status: {status_colored}")
+    print(f"  URL: {url}")
+    if reason:
+        print(f"  Reason: {reason}")
+    print("}\n")
+
 @asynccontextmanager
 async def lifespan(app: fastapi.FastAPI):
     host = settings.host_ip # type: ignore
-    # Startup logic
     banner = read_banner()
     fastapi_version = get_fastapi_version()
     python_version = get_python_version()
-    port = 8000  # Default port, you can change this or make it configurable
-    await eureka_client.init_async(
-            eureka_server=settings.eureka_client_service_url, # type: ignore
+    port = 8000
+    eureka_url = settings.eureka_client_service_url # type: ignore
+
+    try:
+        await eureka_client.init_async(
+            eureka_server=eureka_url, # type: ignore
             app_name="product-service",
             instance_port=int(settings.server_port), # type: ignore
             instance_host=host
-    )
+        )
+        log_eureka_status("UP", eureka_url)
+    except Exception as e:
+        reason = str(e)
+        log_eureka_status("DOWN", eureka_url, reason=reason)
+
     info = f"""
     {banner}
     Framework: FastAPI {fastapi_version}
     Python: {python_version}
     Running on: http://{host}:{port}
     """
-    logger.info(info)
-
-    # Your existing startup logic here (if any)
-    # ...
-
+    logging.info(info)
     yield
-
-    # Shutdown logic
-    # Your existing shutdown logic here (if any)
-    # ...

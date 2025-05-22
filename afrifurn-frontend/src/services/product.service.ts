@@ -1,5 +1,5 @@
 import { productMicroService } from '@/config/api.config';
-import { CategoryProducts, Product, FilterParams } from '@/types';
+import { CategoryProducts, Product, FilterParams, ProductReview } from '@/types';
 
 /**
  * Interface representing parameters for filtering products
@@ -103,6 +103,17 @@ export class ProductService implements IProductService {
       throw error;
     }
   }
+}
+
+async function fetchReviews(product_id: string, page: number, pageSize: number, stars: number): Promise<ProductReview[]> {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    page_size: pageSize.toString(),
+    ...(stars ? { stars: stars.toString() } : {})
+  })
+  const res = await fetch(`/api/products/${product_id}/reviews?${params}`)
+  const data = await res.json()
+  return data
 }
 
 // Export a singleton instance

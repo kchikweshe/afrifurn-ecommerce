@@ -73,7 +73,14 @@ class ProductVariant(CommonModel):
     quantity_in_stock: int
     product_id: str 
     images: List[str] = []
-
+class ProductFeature(CommonModel):
+    name: str = Field(..., min_length=3, max_length=50)
+    description: str = Field(..., min_length=3)
+class ProductReview(CommonModel):
+    user_id: str  # or reference to a User model
+    rating: int = Field(..., ge=1, le=5)
+    title: str = Field(..., min_length=3, max_length=100)
+    description: str = Field(..., min_length=3)
 class Product(CommonModel):
     name: str = Field(..., min_length=3, max_length=50)
     description: str = Field(..., min_length=3)
@@ -84,7 +91,8 @@ class Product(CommonModel):
     currency: str  # Reference to Currency._id
     color_codes: List[str] = []  # References to Color._id
     product_variants: List[ProductVariant] = []  # References to ProductVariant._id
-
+    product_features: List[ProductFeature] = []  # References to ProductFeature._id
+    product_reviews: List[ProductReview] = []  # References to ProductReview._id
     discount: Optional[float] = None
     views: int = 0
     material: str
