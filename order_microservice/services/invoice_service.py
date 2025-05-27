@@ -2,11 +2,11 @@ import os
 from fastapi import Depends, HTTPException
 import httpx
 from sqlmodel import Session
-from db import get_session
-from models.order import Cart, CartItem, Invoice, Order
-from services.email_service import EmailService
-from services.product_service import ProductService
-from services.user_service import UserService
+from order_microservice.config.db import get_session
+from order_microservice.models.order import Cart, CartItem, Invoice, Order
+from order_microservice.services.email_service import EmailService
+from order_microservice.services.product_service import ProductService
+from order_microservice.services.user_service import UserService
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch

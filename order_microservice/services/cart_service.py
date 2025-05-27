@@ -2,7 +2,7 @@ from typing import Protocol
 
 import requests
 
-from models.order import Cart
+from order_microservice.models.order import Cart
 
 
 class CartService(Protocol):

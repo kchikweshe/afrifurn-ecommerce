@@ -63,6 +63,16 @@ export interface Dimensions {
     images: string[];
   }
   
+export interface ProductReview {
+  user_id: string;
+  rating: number;
+  title: string;
+  description: string;
+}
+  export interface ProductFeature {
+    name: string;
+    description: string;
+  }
   export interface Product  extends CommonModel{
   
     description: string;
@@ -76,6 +86,8 @@ export interface Dimensions {
     discount?: number;
     views: number;
     material?: string;
+    reviews?: ProductReview[];
+    product_features: ProductFeature[];
   }
 
   export interface Cart {

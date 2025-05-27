@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Form, HTTPException, Query
+from fastapi import APIRouter, Form, HTTPException, Query, Body
 from typing import List, Optional
 from bson import ObjectId
 import logging
 
-from models.products import CategoryProducts, Dimensions, Product, ProductPipeline
+from models.products import CategoryProducts, Dimensions, Product, ProductFeature, ProductPipeline
 from models.common import ResponseModel
 from utils.query_builder import build_product_query
 from database import db
@@ -122,7 +122,7 @@ async def filter_product(
 
 @router.post("/", response_model=ResponseModel)
 async def create_product(
-    id: Optional[str] = None ,
+    product_features: List[ProductFeature] | None = None,
     name: str = Query(...),
     short_name: str = Query(...),
     category: str = Query(...),
@@ -163,7 +163,8 @@ async def create_product(
             color_codes=colors,
             category=level2_category,
             price=price,
-            dimensions=dimensions
+            dimensions=dimensions,
+            product_features=product_features or []
         )
 
         inserted_product =  db["products"].insert_one(product.model_dump())
@@ -252,3 +253,46 @@ async def get_products_by_category(category_name:str):
     except Exception as e:
         logging.error(f"Error retrieving products by category: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+@router.patch("/products/{product_id}")
+async def update_product(product_id: str, update_data: dict = Body(...)):
+    # Validate product_id
+    if not ObjectId.is_valid(product_id):
+        raise HTTPException(status_code=400, detail="Invalid product ID")
+    # Remove fields you don't want to allow updating, if any
+    # update_data.pop("id", None)
+    # update_data.pop("_id", None)
+    # Update only the provided fields
+    result =  db["products"].update_one(
+        {"_id": ObjectId(product_id)},
+        {"$set": update_data}
+    )
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return {"msg": "Product updated with details:"+str(update_data)}
+
+
+@router.get("/products/{product_id}/reviews")
+async def get_reviews(
+    product_id: str,
+    page: int = 1,
+    page_size: int = 5,
+    stars: int | None = None
+):
+    match = {"_id": ObjectId(product_id)}
+    project = {"reviews": 1}
+    product = db["products"].find_one(match, project)
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    reviews = product.get("reviews", [])
+    if stars:
+        reviews = [r for r in reviews if r.get("rating") == stars]
+    total = len(reviews)
+    start = (page - 1) * page_size
+    end = start + page_size
+    return {
+        "reviews": reviews[start:end],
+        "total": total,
+        "page": page,
+        "page_size": page_size
+    }

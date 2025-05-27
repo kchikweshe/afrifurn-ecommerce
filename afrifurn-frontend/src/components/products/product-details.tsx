@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ShoppingCart, Heart } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
-import {  Product, ProductVariant } from '@/types'
+import {  Product, ProductVariant, ProductFeature } from '@/types'
 import { useCallback, useContext, useState } from 'react'
 import { DataContext } from "@/data/data.context"
 import { PRODUCT_IMAGE_URLS } from "@/data/urls"
@@ -24,7 +24,9 @@ export function ProductDetails({
   selectedVariant,
   setSelectedVariant,
   onAddToCart,
-  showAddedBadge}: ProductDetailsProps) {
+  showAddedBadge,
+  setMainImage
+}: ProductDetailsProps) {
   const state = useContext(DataContext)
   
   // Move all hooks before any conditional returns
@@ -57,7 +59,7 @@ export function ProductDetails({
     window.open(whatsappUrl, '_blank')
   }, [product, selectedVariant, getColorName])
 
-  const [activeTab, setActiveTab] = useState<'features' | 'dimensions' | 'material'>('features');
+  const [activeTab, setActiveTab] = useState<'features' | 'specification' | 'material'>('features');
 
   if(!state){
     return <div>
@@ -68,8 +70,8 @@ export function ProductDetails({
 
   return (
     <div className="lg:w-1/2 space-y-4 container mx-auto px-4">
-      {/* Product Header Section */}
-      <div className="border-b pb-4">
+      {/* Product Description First */}
+      <div className="border-b pb-4 mb-4">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">{product.name}</h1>
         <div className="flex items-center gap-2 mb-3">
           {product.is_new && <Badge className="bg-emerald-500 hover:bg-emerald-600">New</Badge>}
@@ -77,7 +79,6 @@ export function ProductDetails({
             <Badge className="bg-red-500 hover:bg-red-600">{product.discount}% OFF</Badge>
           )}
         </div>
-        
         <p className="text-2xl lg:text-3xl font-bold text-primary flex items-center">
           {getCurrencySymbol(product.currency.toString())}
           {(product.price * (1 - (product.discount || 0) / 100)).toFixed(2)}
@@ -88,9 +89,13 @@ export function ProductDetails({
             </span>
           )}
         </p>
+        <div className="mt-3">
+          <h2 className="text-lg font-semibold mb-1">Description</h2>
+          <p className="text-gray-700 leading-relaxed text-sm">{product.description}</p>
+        </div>
       </div>
 
-      {/* Colors Section with improved layout */}
+      {/* Colors Section */}
       <div className="py-4">
         <h2 className="text-lg font-semibold mb-3">Colors</h2>
         <div className="flex flex-wrap gap-4">
@@ -143,7 +148,7 @@ export function ProductDetails({
       </div>
 
       {/* Tabs Section */}
-      <div className="flex space-x-2 border-b">
+      <div className="flex space-x-2 border-b mt-4">
         <button 
           className={`py-1 px-2 text-sm ${activeTab === 'features' ? 'font-bold border-b-2 border-primary' : ''}`} 
           onClick={() => setActiveTab('features')}
@@ -151,10 +156,10 @@ export function ProductDetails({
           Features
         </button>
         <button 
-          className={`py-1 px-2 text-sm ${activeTab === 'dimensions' ? 'font-bold border-b-2 border-primary' : ''}`} 
-          onClick={() => setActiveTab('dimensions')}
+          className={`py-1 px-2 text-sm ${activeTab === 'specification' ? 'font-bold border-b-2 border-primary' : ''}`} 
+          onClick={() => setActiveTab('specification')}
         >
-          Dimensions
+          Specification
         </button>
         <button 
           className={`py-1 px-2 text-sm ${activeTab === 'material' ? 'font-bold border-b-2 border-primary' : ''}`} 
@@ -167,14 +172,22 @@ export function ProductDetails({
       {/* Tab Content */}
       {activeTab === 'features' && (
         <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 shadow-sm">
-          <h2 className="text-lg font-semibold mb-1">Description</h2>
-          <p className="text-gray-700 leading-relaxed text-sm">{product.description}</p>
+          <h2 className="text-lg font-semibold mb-1">Product Features</h2>
+          {product.product_features && product.product_features.length > 0 ? (
+            <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+              {product.product_features.map((feature: ProductFeature, idx: number) => (
+                <li key={idx}><span className="font-medium">{feature.name}:</span> {feature.description}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 text-sm">No features listed.</p>
+          )}
         </div>
       )}
-      {activeTab === 'dimensions' && (
+      {activeTab === 'specification' && (
         <Card className="bg-gray-50 shadow-sm border-gray-100">
           <CardContent className="p-2">
-            <h2 className="text-lg font-semibold mb-1">Dimensions</h2>
+            <h2 className="text-lg font-semibold mb-1">Product Dimensions</h2>
             <div className="grid grid-cols-2 gap-2 text-sm">
               <p className="flex items-center text-gray-700"><span className="font-medium mr-1">Length:</span> {product.dimensions.length}mm</p>
               <p className="flex items-center text-gray-700"><span className="font-medium mr-1">Width:</span> {product.dimensions.width}mm</p>
@@ -198,8 +211,6 @@ export function ProductDetails({
           </p>
         </div>
       )}
-
-
 
       {/* Action Buttons */}
       <div className="flex flex-col gap-3 pt-4 sticky bottom-0 bg-white pb-4 border-t mt-4">

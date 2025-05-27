@@ -16,6 +16,12 @@ const nextConfig = {
       },
       {
         protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
         hostname: process.env.NEXT_PUBLIC_URL || 'api-gateway',
         port: '3000',
         pathname: '/**',

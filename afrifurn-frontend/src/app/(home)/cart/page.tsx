@@ -6,9 +6,12 @@ import { PRODUCT_IMAGE_URLS } from '@/data/urls'
 import { useToast } from '@/hooks/use-toast'
 import { X } from 'lucide-react'
 import useCart from '@/context/cart/hook'
+import { useRouter } from 'next/navigation'
+
 export default function CartPage() {
   const { cartItems, removeFromCart } = useCart()
   const { toast } = useToast()
+  const router = useRouter()
 
   const handleRemoveItem = (itemId: string, productName: string) => {
     removeFromCart(itemId)
@@ -64,7 +67,7 @@ export default function CartPage() {
               ${cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
             </span>
           </div>
-          <Button className="w-full mt-4" size="lg">
+          <Button className="w-full mt-4" size="lg" onClick={() => router.push('/checkout')}>
             Proceed to Checkout
           </Button>
         </div>
