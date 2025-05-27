@@ -37,17 +37,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <DataProvider>
-    <CartProvider>
-      <Header logoUrl={logoUrl} />
-      <Breadcrumbs />
-
-<main >
-  {children}
-</main>
-<Footer/>
-
-    </CartProvider>
-  </DataProvider>
+    <AuthProvider>
+       <DataProvider>
+      
+      <CartProvider>
+        <Header logoUrl={logoUrl} />
+        <Breadcrumbs />
+  
+  <main >
+    {children}
+  </main>
+  <Footer/>
+  
+      </CartProvider>
+    </DataProvider>
+    </AuthProvider>
+   
   );
 }
