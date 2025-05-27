@@ -51,10 +51,10 @@ const TABS = [
 export default function ProductOverview({ product }: ProductOverviewProps) {
     /** Currently selected product variant */
     const [selectedVariant, setSelectedVariant] = useState(product.product_variants[0])
-
+    
     /** Index of currently displayed main image */
     const [mainImage, setMainImage] = useState(0)
-
+    
     /** Controls visibility of "Added to Cart" indicator */
     const [showAddedBadge, setShowAddedBadge] = useState(false)
 
@@ -108,8 +108,8 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 color: selectedVariant.color_id,
                 quantity,
             }
-            addToCart(cartItem)
-            setShowAddedBadge(true)
+            addToCart(cartItem)  
+            setShowAddedBadge(true)  
             toast({ title: "Success", description: "Added to cart successfully!" })
             setTimeout(() => setShowAddedBadge(false), 2000)
         } catch (error) {
@@ -155,13 +155,13 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
         <div className="py-8 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
             {/* Gallery */}
             <div className="lg:w-1/2 w-full flex flex-col h-full justify-center">
-                <ProductGallery
-                    product={product}
-                    selectedVariant={selectedVariant}
-                    mainImage={mainImage}
-                    setMainImage={setMainImage}
-                />
-            </div>
+                  <ProductGallery
+                        product={product}
+                        selectedVariant={selectedVariant}
+                        mainImage={mainImage}
+                        setMainImage={setMainImage}
+                    />
+                  </div>
             {/* Product Details */}
             <div className="lg:w-1/2 w-full flex flex-col gap-6 h-full justify-center overflow-y-auto">
                 {/* Category badge */}
@@ -365,4 +365,5 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
 }
 
 
-
+          
+ 

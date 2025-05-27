@@ -1,42 +1,54 @@
 'use client'
-
-import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronRight } from 'lucide-react'
 
 export default function Breadcrumbs() {
   const pathname = usePathname()
-  const pathSegments = pathname?.split('/').filter(segment => segment !== '') || []
+  const segments = pathname.split('/').filter(Boolean)
+
+  // Optionally, map segments to display names or links
+  const crumbs = [
+    { name: 'Home', href: '/' },
+    ...segments.map((seg, idx) => ({
+      name: seg.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      href: '/' + segments.slice(0, idx + 1).join('/'),
+    })),
+  ]
 
   return (
-    <nav aria-label="Breadcrumb" className="text-sm mb-4">
-      <ol className="flex items-center space-x-2">
-        <li>
-          <Link href="/" className="text-gray-500 hover:text-primary transition-colors duration-200">
-            Home
-          </Link>
-        </li>
-        {pathSegments.map((segment, index) => {
-          const href = `/${pathSegments.slice(0, index + 1).join('/')}`
-          const isLast = index === pathSegments.length - 1
-          const name = segment.charAt(0).toUpperCase() + segment.slice(1).replace('-', ' ')
-
-          return (
-            <React.Fragment key={href}>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
-              <li>
-                {isLast ? (
-                  <span className="text-gray-400">{name}</span>
-                ) : (
-                  <Link href={href} className="text-gray-500 hover:text-primary transition-colors duration-200">
-                    {name}
-                  </Link>
-                )}
-              </li>
-            </React.Fragment>
-          )
-        })}
+    <nav
+      className="py-4 px-2"
+      aria-label="Breadcrumb"
+    >
+      <ol className="flex items-center space-x-1 bg-white/80 rounded-lg shadow-sm px-4 py-2">
+        {crumbs.map((crumb, idx) => (
+          <li key={crumb.href} className="flex items-center">
+            {idx > 0 && (
+              <svg
+                className="mx-2 h-4 w-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            )}
+            {idx < crumbs.length - 1 ? (
+              <Link
+                href={crumb.href}
+                className="hover:underline hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-colors px-2 py-1 rounded text-gray-700 font-medium"
+              >
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className="font-semibold text-primary-700 px-2 py-1 rounded bg-primary-50 cursor-default">
+                {crumb.name}
+              </span>
+            )}
+          </li>
+        ))}
       </ol>
     </nav>
   )

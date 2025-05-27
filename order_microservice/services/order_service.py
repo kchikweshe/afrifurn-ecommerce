@@ -1,26 +1,22 @@
 import logging
-import asyncio
 
-from kafka import KafkaProducer
-
-from config.settings import Settings
-from services.kafka.kafka_producer import CustomKafkaProducer
+from order_microservice.config.settings import TOPICS, Settings
+from order_microservice.services.kafka.kafka_producer import CustomKafkaProducer
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-from aiokafka import AIOKafkaProducer
 from sqlmodel import Session
-from db import get_session
-from models.order import Cart, Invoice, Order, OrderCreate
+from order_microservice.config.db import get_session
+from order_microservice.models.order import Cart, Order, OrderCreate
 from fastapi import BackgroundTasks, Depends
 
-from services.cart_service import CartService
-from services.email_service import EmailServiceImpl
-from services.invoice_service import InvoiceService
-from services.product_service import ProductServiceImpl
-from services.user_service import UserService
+from order_microservice.services.cart_service import CartService
+from order_microservice.services.email_service import EmailServiceImpl
+from order_microservice.services.invoice_service import InvoiceService
+from order_microservice.services.product_service import ProductServiceImpl
+from order_microservice.services.user_service import UserService
 
 class OrderService:
     def __init__(self,user_service:UserService,cart_service:CartService,bt:BackgroundTasks,session: Session=Depends(get_session)):
@@ -67,7 +63,7 @@ class OrderService:
         self.bt.add_task(self.invoice_service.generate_pdf,invoice,cart)
          
         producer=CustomKafkaProducer()
-        await producer.send_message(topic=Settings.TOPICS["ORDER_CREATED"],message={'message':f"============Order created for=================\n {db_order} "})
+        await producer.send_message(topic=TOPICS["ORDER_CREATED"],message={'message':f"============Order created for=================\n {db_order} "})
         # Log after starting the background task
         logger.info("PDF generation task started for invoice: %s", invoice.id)
 

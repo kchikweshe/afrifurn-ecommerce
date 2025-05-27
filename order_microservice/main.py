@@ -1,76 +1,60 @@
 import asyncio
-from re import I
+import os
 import sys
 from contextlib import asynccontextmanager
-
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from py_eureka_client import eureka_client
-from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 
-from constants.urls import APP_NAME, EURKEKA_SERVER, HOST, KAFKA_INSTANCE, PORT
-from db import create_db_and_tables
-from routers.order_router import router as order_router
-from services.kafka.kafka_consumer import start_kafka_consumers
-# from services.kafka_consumer import start_kafka_consumers
 
-# Global variables to manage Kafka resources
-kafka_producer = None
-kafka_consumer = None
-consume_task = None
+from order_microservice.constants.urls import HOST, PORT, EURKEKA_SERVER, APP_NAME
+from order_microservice.config.db import DATABASE_URL, create_db_and_tables
+from order_microservice.routers.order_router import router as order_router
+from order_microservice.services.kafka.kafka_consumer import start_kafka_consumers
+
+from order_microservice.auth.router import router as auth_router
 
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
-    global kafka_producer, kafka_consumer, consume_task
-    
     try:
+        # await start_kafka_consumers()
         # Eureka initialization
+        await asyncio.to_thread(start_kafka_consumers)
         await eureka_client.init_async(
             eureka_server=EURKEKA_SERVER, 
             app_name=APP_NAME, 
             instance_port=PORT
         )
-        
-        # Initialize Kafka producer
-      
-        # Create database tables
-        create_db_and_tables()
-        
-        await start_kafka_consumers()
-        
-        # # Create a task for consuming messages
-        
-        # # Explicitly yield the app to satisfy the context manager protocol
+ 
         yield
-    
     except Exception as e:
         print(f"Startup error: {e}")
-        raise  # Re-raise to ensure the error is propagated
+        raise e
+
+def create_app() -> FastAPI:
+    app = FastAPI(lifespan=app_lifespan)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=os.getenv("CORS_ORIGINS", "").split(","),
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    app.include_router(auth_router)
+
+    app.include_router(order_router)
+    create_db_and_tables()
+
+    # Add a simple root endpoint for health check
+
+
+    return app
+
+app = create_app()
+
+if __name__ == "__main__":
     
-    # finally:
-    #     # Cleanup resources
-    #     if consume_task:
-    #         consume_task.cancel()
-    #         try:
-    #             await consume_task
-    #         except asyncio.CancelledError:
-    #             pass
-        
-        # Properly close Kafka producer
- 
-
-# Create FastAPI app with the new lifespan manager
-app = FastAPI(lifespan=app_lifespan)
-
-# Include routers
-app.include_router(order_router)
-
-
-if __name__ == "main":
-    import uvicorn
-    
-    # Ensure event loop policy works correctly on Windows
-    if sys.platform.lower() == "win32":
+    if sys.platform.lower().startswith("win"):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
-    # Use reload=True for development to enable auto-reload
-    uvicorn.run("main:app",host=HOST, port=PORT, reload=True)
+    import uvicorn
+    uvicorn.run("order_microservice.main:app", host=HOST, port=PORT, reload=True)

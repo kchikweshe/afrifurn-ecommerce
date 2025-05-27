@@ -7,12 +7,22 @@ interface ICategoryService {
   getLevel1Categories(name: string): Promise<Level1Category[]>;
   getLevel2Categories(name: string): Promise<Level2Category[]>;
   getLevel2CategoriesByLevel1(level1categoryId: string): Promise<Level2Category[]>;
+  getLevel2CategoriesByShortName(shortName: string): Promise<Level2Category[]>;
 }
 
 /**
  * Service responsible for handling category-related API operations
  */
 export class CategoryService implements ICategoryService {
+  async getLevel2CategoriesByShortName(shortName: string): Promise<Level2Category[]> {
+    try {
+      const response = await productMicroService.get(`/categories/level-2/short-name/${shortName}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching Level 2 categories by short name:', error);
+      throw error;
+    }
+  }
   /**
    * Fetches Level 1 categories by name
    * @param name - The name parameter to filter Level 1 categories

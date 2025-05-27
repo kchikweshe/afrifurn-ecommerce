@@ -1,19 +1,14 @@
-from functools import lru_cache
-import json
 import logging
 import os
-import sys
 import time
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 import uvicorn.logging
 from config.eureka import get_app_info, lifespan
-from config.settings import Settings
 from constants.paths import STATIC_DIR
 from routers import api_router
 

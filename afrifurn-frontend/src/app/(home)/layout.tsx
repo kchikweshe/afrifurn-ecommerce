@@ -11,6 +11,7 @@ import { logoUrl } from '@/data/logo';
 import { AuthProvider } from '@/ui/auth-provider';
 import LoadingState from './room/[name]/LoadingState';
 import Footer from '@/components/ui/footer';
+import Breadcrumbs from '@/components/ui/breadcrumbs';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,6 +40,8 @@ export default function RootLayout({
     <DataProvider>
     <CartProvider>
       <Header logoUrl={logoUrl} />
+      <Breadcrumbs />
+
 <main >
   {children}
 </main>

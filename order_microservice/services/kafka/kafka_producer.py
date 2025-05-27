@@ -4,7 +4,7 @@ import logging
 
 from kafka import KafkaProducer
 
-from config.settings import Settings
+from order_microservice.config.settings import KAFKA_BOOTSTRAP_SERVERS, Settings
 
 class CustomKafkaProducer:
     """
@@ -25,7 +25,7 @@ class CustomKafkaProducer:
         if not self._producer:
             try:
                 self._producer = KafkaProducer(
-                    bootstrap_servers=Settings.KAFKA_BOOTSTRAP_SERVERS,
+                    bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
                     value_serializer=lambda v: json.dumps(v).encode('utf-8')
                 )
             except Exception as e:
@@ -56,4 +56,4 @@ class CustomKafkaProducer:
             self._producer = None
 
 # Singleton instance for easier importing
-kafka_producer = KafkaProducer()
+kafka_producer = CustomKafkaProducer()

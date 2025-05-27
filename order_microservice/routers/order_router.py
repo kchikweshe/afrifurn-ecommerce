@@ -1,14 +1,12 @@
-from aiokafka import AIOKafkaProducer
-from fastapi import APIRouter, BackgroundTasks, Depends, Form, HTTPException, logger
-from sqlmodel import Session
-from constants.urls import KAFKA_INSTANCE
-from db import get_session
-from models.order import Order, OrderCreate
-from services.cart_service import CartService, CartServiceImpl
-from services.order_service import OrderService
-from typing import Any, Optional
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, logger
+from order_microservice.auth import JWTBearer
+from order_microservice.config.db import get_session
+from order_microservice.models.order import OrderCreate
+from order_microservice.services.cart_service import CartServiceImpl
+from order_microservice.services.order_service import OrderService
+from typing import Any
 
-from services.user_service import UserService, UserServiceImpl
+from order_microservice.services.user_service import UserServiceImpl
 
 router = APIRouter(prefix="/api/v1", tags=["Orders"])
 
@@ -30,7 +28,7 @@ def get_order_service():
 
 # def get_kafka_producer():
 #     return AIOKafkaProducer(bootstrap_servers=KAFKA_INSTANCE)
-@router.post("/orders/", response_model=Any)
+@router.post("/orders/", response_model=Any,dependencies=[Depends(JWTBearer())])
 async def create_order(
        customer_name: str,
     customer_phone: str,

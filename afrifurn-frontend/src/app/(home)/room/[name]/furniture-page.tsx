@@ -1,170 +1,174 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { FaChevronDown, FaFilter } from 'react-icons/fa'
+import { X } from 'lucide-react'
 
 import { useFilterCollection } from '@/hooks/useFilterCollection'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import ProductSkeleton from '@/ui/product-skeleton'
-import { CategorySection } from '@/components/CategorySection'
-import { CategoryProducts, Level2Category, Product } from '@/types'
+import { CategoryProducts, Level2Category, Product, FilterParams } from '@/types'
 import ErrorState from './ErrorState'
-import { Link } from 'lucide-react'
-import { Carousel, CarouselItem, CarouselContent, CarouselPrevious, CarouselNext } from '@/components/ui/carousel'
 import { Button } from '@/components/ui/button'
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import Image from "next/image";
-import { PRODUCT_IMAGE_URLS, PUBLIC_URL } from '@/data/urls'
+import { useDataContext } from '@/data/data.context'
+import ColorFilter from '@/ui/filters/ColorFilter'
+import PriceFilter from '@/ui/filters/PriceFilter'
+import { ProductList } from '@/components/ProductList'
+import MaterialFilter from '@/ui/filters/MaterialFilter'
 
-// Updated carousel items with Ikea-style messaging
-const carouselItems = [
-    {
-        image: "/living.jpg",
-        title: "Create a home that's you",
-        description: "Affordable solutions for better living",
-        link: "/rooms/living-room"
-    },
-    {
-        image: "/f2.png",
-        title: "Summer sale",
-        description: "Up to 50% off selected items",
-        link: "/offers"
-    },
-    {
-        image: "/wide.png",
-        title: "New lower price",
-        description: "Making sustainable living more affordable",
-        link: "/new-arrivals"
-    }
-]
 interface FurniturePageProps {
     shortName: string
     title: string
     categories: Array<Level2Category>
 }
 
-export default function FurniturePage({ shortName, title, categories }: FurniturePageProps) {
-    const [activeCategory, setActiveCategory] = useState<string>(categories[0]?.name || '')
-    const { data: products, loading, error, filterCollection } = useFilterCollection<Product>()
-    const [isDelayedLoading, setIsDelayedLoading] = useState(true)
+// FilterButton component
+function FilterButton({ label, icon, children }: { label: string, icon?: React.ReactNode, children?: React.ReactNode }) {
+    const [open, setOpen] = useState(false)
 
-    useEffect(() => {
-        if (activeCategory && shortName) {
-            setIsDelayedLoading(true)
-            filterCollection('products/by-level-two-category', {
-                short_name: activeCategory
-            })
-        }
-    }, [activeCategory, shortName, filterCollection])
-
-    useEffect(() => {
-        if (!loading) {
-            const timer = setTimeout(() => {
-                setIsDelayedLoading(false)
-            }, 300)
-            return () => clearTimeout(timer)
-        }
-    }, [loading])
-
-    const handleTabChange = (value: string) => {
-        setActiveCategory(value)
-    }
-
-    if (error) {
-        return <ErrorState message={error.message} />
-    }
-
-    const renderContent = () => {
-        if (loading || isDelayedLoading) {
-            return (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {[...Array(8)].map((_, index) => (
-                        <ProductSkeleton key={index} />
-                    ))}
+    return (
+        <div className="relative">
+            <button
+                className="rounded-full bg-gray-100 px-5 py-2 font-semibold flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onClick={() => setOpen((v) => !v)}
+                type="button"
+            >
+                {label}
+                {icon ? icon : <FaChevronDown className="ml-1 text-xs" />}
+            </button>
+            {open && children && (
+                <div className="absolute left-0 mt-2 z-40 bg-white rounded-xl shadow-lg p-4 min-w-[200px]">
+                    {children}
                 </div>
-            );
-        }
+            )}
+        </div>
+    )
+}
 
-        const categoryProducts: CategoryProducts = {
-            category_name: activeCategory,
-            products: products || []
-        };
+export default function FurniturePage({ shortName, title, categories }: FurniturePageProps) {
+    const { data: products, loading, error, filterCollection } = useFilterCollection<Product>()
+    const state = useDataContext();
+    const colors = state?.colors || [];
+    const materials = state?.materials || [];
 
-        return <CategorySection category={categoryProducts} />;
+    // Filters state (can be expanded as needed)
+    const [filters, setFilters] = useState<Partial<FilterParams>>({});
+    const [viewMode, setViewMode] = useState('grid');
+
+    // Fetch products when filters change
+    useEffect(() => {
+        filterCollection('products', filters as FilterParams);
+    }, [filters, filterCollection]);
+
+    const handleFilterChange = (newFilters: Partial<FilterParams>) => {
+        setFilters((prev) => ({ ...prev, ...newFilters }));
+    };
+    const resetFilters = () => setFilters({});
+
+    // Helper to get label for selected filters
+    const getColorName = (code: string) => colors.find(c => c.color_code === code)?.name || code;
+    const getMaterialName = (id: string) => materials.find(m => m._id === id)?.name || id;
+    const getCategoryName = (shortName: string) => categories.find(c => c.short_name === shortName)?.name || shortName;
+
+    // Remove a filter chip
+    const removeFilter = (type: string, value?: string) => {
+        setFilters(prev => {
+            const updated = { ...prev };
+            if (type === 'colors') updated.colors = [];
+            if (type === 'materials') updated.materials = [];
+            if (type === 'category_short_name') updated.category_short_name = '';
+            if (type === 'sort_by') updated.sort_by = '';
+            return updated;
+        });
     };
 
     return (
-        <div>
-            {/* <header className="mb-8">
-                <h1 className="text-4xl font-bold text-center">{title}</h1>
-            </header> */}
-            <section className="relative ">
-                <Carousel className="w-full h-full">
-                    <CarouselContent className="h-full">
-                        {categories.map((item, index) => (
-                            <CarouselItem key={index} className="h-full">
-                                <div className="relative h-[70vh]">
-                                    <AspectRatio ratio={16 / 9} className="hidden md:block h-[70vh]">
-                                        <Image
-                                            src={`${PRODUCT_IMAGE_URLS}${item.images[0]}`}
-                                            alt={item.name}
-                                            fill
-                                            className="object-cover"
-                                            priority
-                                            sizes="(max-width: 768px) 100vw, 100vw"
-                                            quality={100}
-                                        />
-                                    </AspectRatio>
-                                    {/* Mobile-specific image container */}
-                                    <div className="block md:hidden h-full">
-                                        <AspectRatio className="h-full"></AspectRatio>
-                                        <Image
-                                            src={`${PRODUCT_IMAGE_URLS}${item.images[0]}`}
-                                            alt={item.name}
-                                            fill
-                                            className="object-cover"
-                                            priority
-                                        />
-                                    </div>
-                                    <div className="absolute inset-0 flex items-center justify-start bg-black/10">
-                                        <div className="text-left text-black max-w-xl px-8 md:px-16 py-8 bg-white/80 ml-0 md:ml-16 transform transition-all duration-700">
-                                            <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4">{item.name}</h2>
-                                            <p className="text-base md:text-xl mb-4 md:mb-6">{item.description}</p>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </CarouselItem>
+        <main className="min-h-screen bg-white font-sans">
+            <div className="container mx-auto px-6 py-8">
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold mb-4">{title}</h1>
+                    {/* Filter Chips */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {filters.colors && filters.colors.length > 0 && filters.colors.map((code: string) => (
+                            <span key={code} className="flex items-center bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Color: {getColorName(code)}
+                                <button className="ml-2" onClick={() => removeFilter('colors', code)}><X size={14} /></button>
+                            </span>
                         ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-2 md:left-8 h-8 w-8 md:h-10 md:w-10 bg-white text-black border-none rounded-full" />
-                    <CarouselNext className="right-2 md:right-8 h-8 w-8 md:h-10 md:w-10 bg-white text-black border-none rounded-full" />
-                </Carousel>
-            </section>
-            <section className="mt-8 px-8">
-                <Tabs
-                    defaultValue={activeCategory}
-                    className="w-full"
-                    onValueChange={handleTabChange}
-            >
-                <TabsList className="w-full justify-start  bg-gray-100 rounded-lg overflow-x-auto flex-nowrap">
-                    {categories?.map((category) => (
-                        <TabsTrigger
-                            key={category?._id}
-                            value={category?.name}
-                            className=" w-full text-xl"
-                        >
-                            {category?.name}
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
-
-                <TabsContent
-                    value={activeCategory}
-                    className="mt-4 focus-visible:outline-none focus-visible:ring-0"
-                >
-                    {renderContent()}
-                </TabsContent>
-                </Tabs>
-                </section>
+                        {filters.materials && filters.materials.length > 0 && filters.materials.map((id: string) => (
+                            <span key={id} className="flex items-center bg-green-100 text-green-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Material: {getMaterialName(id)}
+                                <button className="ml-2" onClick={() => removeFilter('materials', id)}><X size={14} /></button>
+                            </span>
+                        ))}
+                        {filters.category_short_name && (
+                            <span className="flex items-center bg-purple-100 text-purple-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Category: {getCategoryName(filters.category_short_name as string)}
+                                <button className="ml-2" onClick={() => removeFilter('category_short_name')}><X size={14} /></button>
+                            </span>
+                        )}
+                        {filters.sort_by && (
+                            <span className="flex items-center bg-yellow-100 text-yellow-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Sort by: {filters.sort_by}
+                                <button className="ml-2" onClick={() => removeFilter('sort_by')}><X size={14} /></button>
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-wrap gap-4 items-center mb-6 sticky top-0 z-30 bg-white shadow-sm py-4">
+                        <FilterButton label="Sort">
+                            <select
+                                className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
+                                onChange={e => handleFilterChange({ sort_by: e.target.value })}
+                                value={filters.sort_by || ''}
+                            >
+                                <option value="">Featured</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
+                            </select>
+                        </FilterButton>
+                        <FilterButton label="Color">
+                            <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
+                        </FilterButton>
+                        <FilterButton label="Material">
+                            <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
+                        </FilterButton>
+                        <FilterButton label="Price">
+                            <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
+                        </FilterButton>
+                        <FilterButton label="Category">
+                            <select
+                                className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
+                                onChange={e => handleFilterChange({ category_short_name: e.target.value })}
+                                value={filters.category_short_name || ''}
+                            >
+                                <option value="">All Categories</option>
+                                {categories.map(cat => (
+                                    <option key={cat.short_name} value={cat.short_name}>{cat.name}</option>
+                                ))}
+                            </select>
+                        </FilterButton>
+                        <FilterButton label="All filters" icon={<FaFilter className="ml-1" />}>
+                            <div className="flex flex-col gap-2">
+                                <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
+                                <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
+                                <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
+                                <select
+                                    className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
+                                    onChange={e => handleFilterChange({ category_short_name: e.target.value })}
+                                    value={filters.category_short_name || ''}
+                                >
+                                    <option value="">All Categories</option>
+                                    {categories.map(cat => (
+                                        <option key={cat.short_name} value={cat.short_name}>{cat.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </FilterButton>
+                        <Button onClick={resetFilters} className="py-2 bg-red-500 text-white rounded-lg font-semibold">Reset</Button>
+                    </div>
+                </div>
+                {/* Product Grid/List */}
+                <div>
+                    <ProductList products={products || []} />
+                </div>
         </div>
-    )
+        </main>
+    );
 }
