@@ -8,13 +8,24 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { Product } from '@/types';
 import { PRODUCT_IMAGE_URLS } from '@/data/urls';
+import Link from 'next/link';
 
 interface SearchBarProps {
     onClose?: () => void;
+    mobileMode?: boolean;
+    searchTerm?: string;
+    setSearchTerm?: (val: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onClose }) => {
-    const [searchTerm, setSearchTerm] = useState('');
+const SearchBar: React.FC<SearchBarProps> = ({
+    onClose,
+    mobileMode = false,
+    searchTerm: externalSearchTerm,
+    setSearchTerm: setExternalSearchTerm
+}) => {
+    const [internalSearchTerm, setInternalSearchTerm] = useState('');
+    const searchTerm = mobileMode && externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
+    const setSearchTerm = mobileMode && setExternalSearchTerm ? setExternalSearchTerm : setInternalSearchTerm;
     const [isOpen, setIsOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const debouncedSearch = useDebounce(searchTerm, 300);
@@ -97,29 +108,34 @@ const SearchBar: React.FC<SearchBarProps> = ({ onClose }) => {
                         ) : products && products.length > 0 ? (
                             <div className="py-2">
                                 {products.map((product) => (
-                                    <div
+                                    <Link
                                         key={product.short_name}
-                                        className="px-4 py-3 hover:bg-gray-50/80 cursor-pointer flex items-center gap-4 transition-colors group"
+                                        href={`/products/${product.short_name}`}
+                                        className="block"
                                         onClick={() => {
                                             setIsOpen(false);
                                             setSearchTerm('');
                                         }}
                                     >
-                                        {product.product_variants[0]?.images[0] && (
-                                            <div className="relative flex-shrink-0 w-14 h-14 overflow-hidden rounded-lg">
-                                                <Image
-                                                    src={PRODUCT_IMAGE_URLS + product?.product_variants[0]?.images[0]}
-                                                    alt={product.name}
-                                                    fill
-                                                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                                />
+                                        <div
+                                            className="px-4 py-3 hover:bg-gray-50/80 cursor-pointer flex items-center gap-4 transition-colors group"
+                                        >
+                                            {product.product_variants[0]?.images[0] && (
+                                                <div className="relative flex-shrink-0 w-14 h-14 overflow-hidden rounded-lg">
+                                                    <Image
+                                                        src={PRODUCT_IMAGE_URLS + product?.product_variants[0]?.images[0]}
+                                                        alt={product.name}
+                                                        fill
+                                                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="text-base font-medium text-gray-900 truncate group-hover:text-primary transition-colors">{product.name}</div>
+                                                <div className="text-sm text-gray-500 mt-0.5">${product.price}</div>
                                             </div>
-                                        )}
-                                        <div className="flex-1 min-w-0">
-                                            <div className="text-base font-medium text-gray-900 truncate group-hover:text-primary transition-colors">{product.name}</div>
-                                            <div className="text-sm text-gray-500 mt-0.5">${product.price}</div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         ) : (
