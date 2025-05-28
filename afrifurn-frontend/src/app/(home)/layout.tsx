@@ -52,11 +52,12 @@ export default function RootLayout({
         <DataProvider>
 
           <CartProvider>
-          <Toaster position="bottom-left" />
+          
 
 
             <Header logoUrl={logoUrl} />
             <Breadcrumbs />
+            <Toaster position="top-center" />
 
             <main >
               {children}

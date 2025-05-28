@@ -35,25 +35,25 @@ const roomSections = [
   {
     title: "Living room",
     image: "/living.jpg",
-    link: "/rooms/living-room",
+    link: "/room/living-room",
     description: "Cozy solutions for your everyday space"
   },
   {
     title: "Bedroom",
     image: "/bedroom.jpg",
-    link: "/rooms/bedroom",
+    link: "/room/bedroom",
     description: "For better sleep and peaceful mornings"
   },
   {
     title: "Kitchen",
     image: "/f2.png",
-    link: "/rooms/kitchen",
+    link: "/room/kitchen",
     description: "The heart of the home"
   },
   {
     title: "Home office",
     image: "/office.jpg",
-    link: "/rooms/office",
+    link: "/room/office",
     description: "Functional workspaces for productivity"
   }
 ]

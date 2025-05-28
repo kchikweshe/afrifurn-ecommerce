@@ -144,23 +144,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                                 ))}
                             </select>
                         </FilterButton>
-                        <FilterButton label="All filters" icon={<FaFilter className="ml-1" />}>
-                            <div className="flex flex-col gap-2">
-                                <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
-                                <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
-                                <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
-                                <select
-                                    className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
-                                    onChange={e => handleFilterChange({ category_short_name: e.target.value })}
-                                    value={filters.category_short_name || ''}
-                                >
-                                    <option value="">All Categories</option>
-                                    {categories.map(cat => (
-                                        <option key={cat.short_name} value={cat.short_name}>{cat.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </FilterButton>
+                  
                         <Button onClick={resetFilters} className="py-2 bg-red-500 text-white rounded-lg font-semibold">Reset</Button>
                     </div>
                 </div>
@@ -168,7 +152,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                 <div>
                     <ProductList products={products || []} />
                 </div>
-        </div>
+            </div>
         </main>
     );
 }
