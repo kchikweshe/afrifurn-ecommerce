@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: [
+      'afri-furn.co.zw', // <-- add your image domain here (no protocol, no path)
+      // add more domains as needed
+    ],
     remotePatterns: [
       {
         protocol: 'http',
