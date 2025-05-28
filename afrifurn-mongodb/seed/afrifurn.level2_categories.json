@@ -13,9 +13,9 @@
   "name": "TV Stands",
   "description": "From basic  to premium , there are plenty to choose from all types.",
   "images": [
-    "static\\images\\categories\\level-three\\tv-stands\\0.webp",
-    "static\\images\\categories\\level-three\\tv-stands\\1.webp",
-    "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    "static/images/categories/level-three/tv-stands/0.webp",
+    "static/images/categories/level-three/tv-stands/1.webp",
+    "static/images/categories/level-three/tv-stands/2.webp"
   ],
   "level_one_category": {
     "_id": "679b8f63da26810c5e3a5f1b",
@@ -40,17 +40,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Living Room",
     "description": "Living room furniture",
     "images": [
-      "static\\images\\categories\\level-two\\living-room\\0.webp",
-      "static\\images\\categories\\level-two\\living-room\\1.webp",
-      "static\\images\\categories\\level-two\\living-room\\2.webp"
+      "static/images/categories/level-two/living-room/0.webp",
+      "static/images/categories/level-two/living-room/1.webp",
+      "static/images/categories/level-two/living-room/2.webp"
     ]
   }
 },
@@ -64,9 +64,9 @@
   "name": "Chest of Drawers",
   "description": "Stunning Chest of drawers of all sizes",
   "images": [
-    "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
-    "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
-    "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+    "static/images/categories/level-three/chest-of-drawers/0.webp",
+    "static/images/categories/level-three/chest-of-drawers/1.webp",
+    "static/images/categories/level-three/chest-of-drawers/2.webp"
   ],
   "level_one_category": {
     "id": "679ce016c4a46633d8d871ae",
@@ -79,17 +79,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
     "images": [
-      "static\\images\\categories\\level-two\\bedroom\\0.webp",
-      "static\\images\\categories\\level-two\\bedroom\\1.webp",
-      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      "static/images/categories/level-two/bedroom/0.webp",
+      "static/images/categories/level-two/bedroom/1.webp",
+      "static/images/categories/level-two/bedroom/2.webp"
     ]
   }
 },
@@ -103,9 +103,9 @@
   "name": "Bedside Pedestals",
   "description": "Beautiful bedside tables",
   "images": [
-    "static\\images\\categories\\level-three\\bedsides\\0.webp",
-    "static\\images\\categories\\level-three\\bedsides\\1.webp",
-    "static\\images\\categories\\level-three\\bedsides\\2.webp"
+    "static/images/categories/level-three/bedsides/0.webp",
+    "static/images/categories/level-three/bedsides/1.webp",
+    "static/images/categories/level-three/bedsides/2.webp"
   ],
   "level_one_category": {
     "id": "679ce016c4a46633d8d871ae",
@@ -118,17 +118,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
     "images": [
-      "static\\images\\categories\\level-two\\bedroom\\0.webp",
-      "static\\images\\categories\\level-two\\bedroom\\1.webp",
-      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      "static/images/categories/level-two/bedroom/0.webp",
+      "static/images/categories/level-two/bedroom/1.webp",
+      "static/images/categories/level-two/bedroom/2.webp"
     ]
   }
 },
@@ -142,9 +142,9 @@
   "name": "Shoe Racks",
   "description": "Beautiful shoe racks with elegant, minimalistic design.",
   "images": [
-    "static\\images\\categories\\level-three\\shoe-racks\\0.webp",
-    "static\\images\\categories\\level-three\\shoe-racks\\1.webp",
-    "static\\images\\categories\\level-three\\shoe-racks\\2.webp"
+    "static/images/categories/level-three/shoe-racks/0.webp",
+    "static/images/categories/level-three/shoe-racks/1.webp",
+    "static/images/categories/level-three/shoe-racks/2.webp"
   ],
   "level_one_category": {
     "id": "679ce016c4a46633d8d871ae",
@@ -157,17 +157,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
     "images": [
-      "static\\images\\categories\\level-two\\bedroom\\0.webp",
-      "static\\images\\categories\\level-two\\bedroom\\1.webp",
-      "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      "static/images/categories/level-two/bedroom/0.webp",
+      "static/images/categories/level-two/bedroom/1.webp",
+      "static/images/categories/level-two/bedroom/2.webp"
     ]
   }
 },
@@ -181,9 +181,9 @@
   "name": "Coffee Tables",
   "description": "Beautiful coffee tables with elegant, minimalistic design.",
   "images": [
-    "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
-    "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
-    "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+    "static/images/categories/level-three/coffee-tables/0.webp",
+    "static/images/categories/level-three/coffee-tables/1.webp",
+    "static/images/categories/level-three/coffee-tables/2.webp"
   ],
   "level_one_category": {
     "id": "679b8f63da26810c5e3a5f1b",
@@ -196,17 +196,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Living Room",
     "description": "Living room furniture",
     "images": [
-      "static\\images\\categories\\level-two\\living-room\\0.webp",
-      "static\\images\\categories\\level-two\\living-room\\1.webp",
-      "static\\images\\categories\\level-two\\living-room\\2.webp"
+      "static/images/categories/level-two/living-room/0.webp",
+      "static/images/categories/level-two/living-room/1.webp",
+      "static/images/categories/level-two/living-room/2.webp"
     ]
   }
 },
@@ -220,9 +220,9 @@
   "name": "Shelving",
   "description": "For all your shelving needs",
   "images": [
-    "static\\images\\categories\\level-three\\shelving\\0.webp",
-    "static\\images\\categories\\level-three\\shelving\\1.webp",
-    "static\\images\\categories\\level-three\\shelving\\2.webp"
+    "static/images/categories/level-three/shelving/0.webp",
+    "static/images/categories/level-three/shelving/1.webp",
+    "static/images/categories/level-three/shelving/2.webp"
   ],
   "level_one_category": {
     "id": "67c99181587c7b81e878ae2e",
@@ -235,15 +235,15 @@
       "name": "office",
       "description": "Office Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\office\\0.webp",
-        "static\\images\\categories\\level-one\\office\\1.webp",
-        "static\\images\\categories\\level-one\\office\\2.webp"
+        "static/images/categories/level-one/office/0.webp",
+        "static/images/categories/level-one/office/1.webp",
+        "static/images/categories/level-one/office/2.webp"
       ]
     },
     "name": "Storage",
     "description": "storage",
     "images": [
-      "static\\images\\categories\\level-one\\storage\\storage\\0.webp"
+      "static/images/categories/level-one/storage/storage/0.webp"
     ]
   }
 },
@@ -273,17 +273,17 @@
       "name": "office",
       "description": "Office Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\office\\0.webp",
-        "static\\images\\categories\\level-one\\office\\1.webp",
-        "static\\images\\categories\\level-one\\office\\2.webp"
+        "static/images/categories/level-one/office/0.webp",
+        "static/images/categories/level-one/office/1.webp",
+        "static/images/categories/level-one/office/2.webp"
       ]
     },
     "name": "Tables",
     "description": "Tables",
     "images": [
-      "static\\images\\categories\\level-one\\tables\\tables\\0.webp",
-      "static\\images\\categories\\level-one\\tables\\tables\\1.webp",
-      "static\\images\\categories\\level-one\\tables\\tables\\2.webp"
+      "static/images/categories/level-one/tables/tables/0.webp",
+      "static/images/categories/level-one/tables/tables/1.webp",
+      "static/images/categories/level-one/tables/tables/2.webp"
     ]
   }
 },
@@ -297,9 +297,9 @@
   "name": "Tv Stands",
   "description": "Beautiful tv stands in melamine and pine wood variants.",
   "images": [
-    "static\\images\\categories\\level-three\\tv-stands\\0.webp",
-    "static\\images\\categories\\level-three\\tv-stands\\1.webp",
-    "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    "static/images/categories/level-three/tv-stands/0.webp",
+    "static/images/categories/level-three/tv-stands/1.webp",
+    "static/images/categories/level-three/tv-stands/2.webp"
   ],
   "level_one_category": {
     "id": "67eebf21c2f0d5fe393d6e38",
@@ -312,17 +312,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Living Room",
     "description": "Living room decor including tv stands, coffee tables and much more.",
     "images": [
-      "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
-      "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
-      "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      "static/images/categories/level-one/living-room/living-room/0.webp",
+      "static/images/categories/level-one/living-room/living-room/1.webp",
+      "static/images/categories/level-one/living-room/living-room/2.webp"
     ]
   }
 },
@@ -336,9 +336,9 @@
   "name": "Coffee Tables",
   "description": "Beautiful coffee tables in melamine and pine wood variants.",
   "images": [
-    "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
-    "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
-    "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+    "static/images/categories/level-three/coffee-tables/0.webp",
+    "static/images/categories/level-three/coffee-tables/1.webp",
+    "static/images/categories/level-three/coffee-tables/2.webp"
   ],
   "level_one_category": {
     "id": "67eebf21c2f0d5fe393d6e38",
@@ -351,17 +351,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Living Room",
     "description": "Living room decor including tv stands, coffee tables and much more.",
     "images": [
-      "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
-      "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
-      "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      "static/images/categories/level-one/living-room/living-room/0.webp",
+      "static/images/categories/level-one/living-room/living-room/1.webp",
+      "static/images/categories/level-one/living-room/living-room/2.webp"
     ]
   }
 },
@@ -375,9 +375,9 @@
   "name": "Bedside Pedestals",
   "description": "For your bedroom, by your side.",
   "images": [
-    "static\\images\\categories\\level-three\\bedsides\\0.webp",
-    "static\\images\\categories\\level-three\\bedsides\\1.webp",
-    "static\\images\\categories\\level-three\\bedsides\\2.webp"
+    "static/images/categories/level-three/bedsides/0.webp",
+    "static/images/categories/level-three/bedsides/1.webp",
+    "static/images/categories/level-three/bedsides/2.webp"
   ],
   "level_one_category": {
     "id": "67eec026c2f0d5fe393d6e39",
@@ -390,17 +390,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
     "images": [
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      "static/images/categories/level-one/bedroom/bedroom/0.webp",
+      "static/images/categories/level-one/bedroom/bedroom/1.webp",
+      "static/images/categories/level-one/bedroom/bedroom/2.webp"
     ]
   }
 },
@@ -414,9 +414,9 @@
   "name": "Chest of Drawers",
   "description": "Beautiful, rich colored chest of drawers.",
   "images": [
-    "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
-    "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
-    "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+    "static/images/categories/level-three/chest-of-drawers/0.webp",
+    "static/images/categories/level-three/chest-of-drawers/1.webp",
+    "static/images/categories/level-three/chest-of-drawers/2.webp"
   ],
   "level_one_category": {
     "id": "67eec026c2f0d5fe393d6e39",
@@ -429,17 +429,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
     "images": [
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      "static/images/categories/level-one/bedroom/bedroom/0.webp",
+      "static/images/categories/level-one/bedroom/bedroom/1.webp",
+      "static/images/categories/level-one/bedroom/bedroom/2.webp"
     ]
   }
 },
@@ -453,9 +453,9 @@
   "name": "Headboards",
   "description": "Fancy but affordable headboard designs.",
   "images": [
-    "static\\images\\categories\\level-three\\headboards\\0.webp",
-    "static\\images\\categories\\level-three\\headboards\\1.webp",
-    "static\\images\\categories\\level-three\\headboards\\2.webp"
+    "static/images/categories/level-three/headboards/0.webp",
+    "static/images/categories/level-three/headboards/1.webp",
+    "static/images/categories/level-three/headboards/2.webp"
   ],
   "level_one_category": {
     "id": "67eec026c2f0d5fe393d6e39",
@@ -468,17 +468,17 @@
       "name": "Home",
       "description": "Home Furniture",
       "images": [
-        "static\\images\\categories\\level-one\\home\\0.webp",
-        "static\\images\\categories\\level-one\\home\\1.webp",
-        "static\\images\\categories\\level-one\\home\\2.webp"
+        "static/images/categories/level-one/home/0.webp",
+        "static/images/categories/level-one/home/1.webp",
+        "static/images/categories/level-one/home/2.webp"
       ]
     },
     "name": "Bedroom",
     "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
     "images": [
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
-      "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      "static/images/categories/level-one/bedroom/bedroom/0.webp",
+      "static/images/categories/level-one/bedroom/bedroom/1.webp",
+      "static/images/categories/level-one/bedroom/bedroom/2.webp"
     ]
   }
 }]
