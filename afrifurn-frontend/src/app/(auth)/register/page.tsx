@@ -3,7 +3,7 @@ import React, { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import { auth } from '@/config/firebase/firebase';
 import { EyeOff, Eye } from 'lucide-react';
 import SocialAuth from '@/ui/social-auth';
@@ -36,13 +36,18 @@ const RegisterPage: React.FC = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // await updateProfile(userCredential.user, { displayName: name });
+      let user=userCredential.user
 
       if (userCredential)
-        setSuccess("Account created successfuly for " + userCredential.user.displayName + ". Redirecting you to the homepage........");
+        setSuccess("Account created successfuly for " + user.displayName + ". Redirecting you to the homepage........");
+        // Set a flag for the toast
+      localStorage.setItem('showRegisterSuccess', 'true');
+      localStorage.setItem('showRegisterSuccessMessage', success);
+      await sendEmailVerification(user);
 
-      startTransition(() => {
-        router.push('/');
-      });
+        startTransition(() => {
+          router.push('/');
+        });
     } catch (error: any) {
       const errorMessage = error.code ? getFirebaseErrorMessage(error.code) : 'Failed to register. Please try again.';
       setError(errorMessage);
