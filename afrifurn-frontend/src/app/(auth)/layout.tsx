@@ -1,6 +1,7 @@
 // File: components/AuthLayout.tsx
 import React from 'react';
 import Image from 'next/image';
+import { Toaster } from '@/components/ui/toaster';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         <div className="bg-slate-500 w-auto h-auto">
           {children}
         </div>
+        <Toaster></Toaster>
       </div>
     </div>
   );

@@ -110,7 +110,9 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
             }
             addToCart(cartItem)  
             setShowAddedBadge(true)  
-            toast({ title: "Success", description: "Added to cart successfully!" })
+            toast({ title: "Success", description: "Item added to cart successfully.", variant: "default" })
+
+            
             setTimeout(() => setShowAddedBadge(false), 2000)
         } catch (error) {
             toast({ title: "Error", description: "Failed to add item to cart", variant: "destructive" })

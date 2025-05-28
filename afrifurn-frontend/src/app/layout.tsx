@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { Inter, Playfair_Display } from "next/font/google"
 
 import '@/app/globals.css'
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: "Afri Furn | Premium Furniture in Zimbabwe",
@@ -31,7 +32,8 @@ export default function RootLayout({
 
 
       <body>
-        {children}
+        <main>   {children}</main>
+     <Toaster />
       </body>
     
 

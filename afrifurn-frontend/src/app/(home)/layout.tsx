@@ -57,14 +57,14 @@ export default function RootLayout({
 
             <Header logoUrl={logoUrl} />
             <Breadcrumbs />
-            <Toaster position="top-center" />
+         
 
-            <main >
+            <main className='bg-slate-200'>
               {children}
             </main>
 
             <Footer />
-
+            <Toaster />
           </CartProvider>
         </DataProvider>
       </AuthProvider>

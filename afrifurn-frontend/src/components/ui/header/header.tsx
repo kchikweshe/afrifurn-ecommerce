@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, ShoppingCart, Search } from 'lucide-react'
@@ -18,34 +18,40 @@ interface HeaderProps {
     logoUrl: string;
 }
 
-const navLinks = [
-    { name: "Products", href: "/", icon: <span className="inline-block mr-1"><svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="12" height="12" rx="2" /></svg></span> },
-    { name: "Rooms", href: "/rooms" },
-    { name: "Deals", href: "/deals" },
-    { name: "Summer shop", href: "/summer" },
-    { name: "Home accessories", href: "/accessories" },
-    { name: "Ideas & inspiration", href: "/ideas" },
-    { name: "Design & planning", href: "/design" },
-    { name: "Business", href: "/business" },
-    { name: "Support", href: "/support" },
-];
 
 const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
-    const state = useDataContext();
     const { cartItems } = useCart();
     const cartItemsCount = cartItems.length;
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { user } = useAuthContext();
+    const state = useDataContext();
     const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const { user } = useAuthContext()
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const cartRef = useRef<HTMLDivElement>(null);
 
-    if (state == null) return <div>Loading...</div>;
-
+    if (!state) return <div>Loading...</div>;
     const { levelOneCategories, levelTwoCategories, mainCategories } = state;
 
+    // Close cart preview when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+                setIsCartOpen(false);
+            }
+        }
+        if (isCartOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isCartOpen]);
+
     const CartPreview = () => (
-        <div className="absolute right-0 mt-2 w-70 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden">
+        <div ref={cartRef} className="absolute right-0 mt-2 w-70 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden">
             <div className="p-3">
                 <div className="flex justify-between items-center mb-3">
                     <h3 className="font-medium text-sm">Cart ({cartItemsCount})</h3>
@@ -204,35 +210,68 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21C12 21 4 13.5 4 8.5C4 5.5 6.5 3 9.5 3C11.04 3 12.5 3.99 13 5.36C13.5 3.99 14.96 3 16.5 3C19.5 3 22 5.5 22 8.5C22 13.5 12 21 12 21Z" /></svg>
                         </Link>
                         {/* Cart */}
-                        <Link href="/cart" className="relative text-gray-700 hover:text-primary transition-colors">
-                            <ShoppingCart className="h-6 w-6" />
-                            {cartItemsCount > 0 && (
-                                <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs text-white bg-primary rounded-full">
-                                    {cartItemsCount}
-                                </span>
-                            )}
-                        </Link>
+                        <div className="relative">
+                            <button
+                                className="relative text-gray-700 hover:text-primary transition-colors"
+                                onClick={() => setIsCartOpen((v) => !v)}
+                                aria-label="Open cart preview"
+                            >
+                                <ShoppingCart className="h-6 w-6" />
+                                {cartItemsCount > 0 && (
+                                    <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs text-white bg-primary rounded-full">
+                                        {cartItemsCount}
+                                    </span>
+                                )}
+                            </button>
+                            {isCartOpen && <CartPreview />}
+                        </div>
+                        {/* Mobile menu button */}
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 md:hidden"
+                            onClick={() => setIsMenuOpen(true)}
+                        >
+                            <Menu className="h-5 w-5 text-gray-700" />
+                        </Button>
                     </div>
                 </div>
-                {/* Navigation Links */}
-                <nav className="bg-white border-t border-gray-100">
-                    <div className="container mx-auto flex items-center px-4">
-                        {navLinks.map((link, idx) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={`flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:text-primary transition-colors ${idx === 0 ? 'font-bold' : ''}`}
-                            >
-                                {link.icon}
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
-                </nav>
+                {/* Desktop Navigation (replaces navLinks) */}
+                <DesktopNavigation
+                    mainCategories={mainCategories}
+                    level_one_categories={levelOneCategories}
+                    level_two_categories={levelTwoCategories}
+                    hoveredCategory={hoveredCategory}
+                    setHoveredCategory={setHoveredCategory}
+                />
             </header>
             {/* Spacer for fixed header if needed */}
             <div className="h-28" />
-
+            <MobileMenu
+                isOpen={isMenuOpen}
+                onClose={() => setIsMenuOpen(false)}
+                mainCategories={mainCategories}
+                levelOneCategories={levelOneCategories}
+                levelTwoCategories={levelTwoCategories}
+                utilityLinks={[
+                    { name: "About", href: "/about" },
+                    { name: "Contact Us", href: "/contact" },
+                    { name: "Sales", href: "/deals" }
+                ]}
+                logo={
+                    <div className="relative h-10 w-28">
+                        <Image
+                            src={logoUrl}
+                            alt="Afrifurn Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                            sizes="112px"
+                            quality={90}
+                        />
+                    </div>
+                }
+            />
             <MobileSearchModal />
         </>
     );
