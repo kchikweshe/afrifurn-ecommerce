@@ -14,9 +14,9 @@ interface UtilityLink {
 interface MobileMenuProps {
     isOpen: boolean;
     onClose: () => void;
-    mainCategories: Category[]|undefined;
-    levelOneCategories: Level1Category[]|undefined;
-    levelTwoCategories: Level2Category[]|undefined;
+    mainCategories: Category[] | undefined;
+    levelOneCategories: Level1Category[] | undefined;
+    levelTwoCategories: Level2Category[] | undefined;
     utilityLinks?: UtilityLink[];
     logo?: React.ReactNode;
     user?: {
@@ -26,19 +26,19 @@ interface MobileMenuProps {
     } | null;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ 
-    isOpen, 
-    onClose,        
+const MobileMenu: React.FC<MobileMenuProps> = ({
+    isOpen,
+    onClose,
     levelOneCategories,
     levelTwoCategories,
     mainCategories,
     utilityLinks = [],
     logo,
-   
+
 }) => {
     const [activeMainCategory, setActiveMainCategory] = useState<Category | null>(null);
     const [activeLevel1Category, setActiveLevel1Category] = useState<Level1Category | null>(null);
-     const {user}=useAuth()
+    const { user } = useAuth()
     const handleMainCategoryClick = (category: Category) => {
         setActiveMainCategory(activeMainCategory?._id === category._id ? null : category);
         setActiveLevel1Category(null); // Reset level 1 when changing main category
@@ -64,8 +64,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
-            <SheetContent 
-                side="left" 
+            <SheetContent
+                side="left"
                 className="w-full sm:w-[380px] p-0 flex flex-col"
             >
                 {/* Header Section */}
@@ -99,8 +99,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     ) : (
                         <div className="flex items-center justify-between">
                             <span className="text-gray-600">Welcome, Guest</span>
-                            <Link 
-                                href="/auth/signin" 
+                            <Link
+                                href="/auth/signin"
                                 className="text-primary hover:text-primary/80 text-sm font-medium"
                                 onClick={onClose}
                             >
@@ -120,7 +120,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                     className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-50 transition-colors"
                                 >
                                     <span className="text-base font-medium">{mainCategory.name}</span>
-                                    <ChevronRight 
+                                    <ChevronRight
                                         className={`h-5 w-5 text-gray-400 transition-transform duration-200
                                             ${activeMainCategory?._id === mainCategory._id ? 'rotate-90' : ''}
                                         `}
@@ -141,7 +141,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                                     className="flex items-center justify-between w-full pl-12 pr-6 py-4 text-base text-gray-600 hover:bg-gray-100 transition-colors"
                                                 >
                                                     <span>{level1Category.name}</span>
-                                                    <ChevronRight 
+                                                    <ChevronRight
                                                         className={`h-5 w-5 text-gray-400 transition-transform duration-300
                                                             ${activeLevel1Category?._id === level1Category._id ? 'rotate-90' : ''}
                                                         `}
@@ -176,9 +176,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 {/* Utility Links Footer */}
                 <div className="border-t mt-auto">
                     {utilityLinks.map((link) => (
-                        <Link 
-                            key={link.name} 
-                            href={link.href} 
+                        <Link
+                            key={link.name}
+                            href={link.href}
                             className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 transition-colors"
                             onClick={onClose}
                         >
