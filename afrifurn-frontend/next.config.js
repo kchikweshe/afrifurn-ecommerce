@@ -4,9 +4,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: process.env.NEXT_PUBLIC_URL || 'api-gateway',
+        hostname: process.env.NEXT_PUBLIC_URL || 'afri-furn.co.zw',
         port: '8000',
-        pathname: 'static/**',
+        pathname: '/static/**',
       },
       {
         protocol: 'http',
