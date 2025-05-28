@@ -1,11 +1,11 @@
 'use client'
 import { DataProvider } from '@/data/data.provider';
 import { Inter, Madimi_One, Playfair_Display } from "next/font/google";
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
+import { toast, Toaster } from 'sonner'; // or 'react-hot-toast'
 
 import '@/app/globals.css';
 import Header from '@/components/ui/header/header';
-import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart/provider';
 import { logoUrl } from '@/data/logo';
 import { AuthProvider } from '@/ui/auth-provider';
@@ -36,22 +36,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('showRegisterSuccess')) {
+        toast.success(localStorage.getItem('showRegisterSuccessMessage'));
+        localStorage.removeItem('showRegisterSuccess');
+        localStorage.removeItem('showRegisterSuccessMessage');
+
+      }
+    }
+  }, []);
+
   return (
-    <AuthProvider>
-       <DataProvider>
-      
-      <CartProvider>
-        <Header logoUrl={logoUrl} />
-        <Breadcrumbs />
-  
-  <main >
-    {children}
-  </main>
-  <Footer/>
-  
-      </CartProvider>
-    </DataProvider>
-    </AuthProvider>
-   
+      <AuthProvider>
+        <DataProvider>
+
+          <CartProvider>
+          <Toaster position="bottom-left" />
+
+
+            <Header logoUrl={logoUrl} />
+            <Breadcrumbs />
+
+            <main >
+              {children}
+            </main>
+
+            <Footer />
+
+          </CartProvider>
+        </DataProvider>
+      </AuthProvider>
+
+
+
   );
 }
