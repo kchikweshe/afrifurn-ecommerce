@@ -14,9 +14,9 @@
     "name": "Chest of Drawers",
     "description": "Stunning Chest of drawers of all sizes",
     "images": [
-      "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
-      "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
-      "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+      "static/images/categories/level-three/chest-of-drawers/0.webp",
+      "static/images/categories/level-three/chest-of-drawers/1.webp",
+      "static/images/categories/level-three/chest-of-drawers/2.webp"
     ],
     "level_one_category": {
       "id": "679ce016c4a46633d8d871ae",
@@ -29,17 +29,17 @@
         "name": "Home",
         "description": "Home Furniture",
         "images": [
-          "static\\images\\categories\\level-one\\home\\0.webp",
-          "static\\images\\categories\\level-one\\home\\1.webp",
-          "static\\images\\categories\\level-one\\home\\2.webp"
+          "static/images/categories/level-one/home/0.webp",
+          "static/images/categories/level-one/home/1.webp",
+          "static/images/categories/level-one/home/2.webp"
         ]
       },
       "name": "Bedroom",
       "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
       "images": [
-        "static\\images\\categories\\level-two\\bedroom\\0.webp",
-        "static\\images\\categories\\level-two\\bedroom\\1.webp",
-        "static\\images\\categories\\level-two\\bedroom\\2.webp"
+        "static/images/categories/level-two/bedroom/0.webp",
+        "static/images/categories/level-two/bedroom/1.webp",
+        "static/images/categories/level-two/bedroom/2.webp"
       ]
     }
   },
@@ -69,11 +69,11 @@
       "quantity_in_stock": 5,
       "product_id": "67eed7b3c2f0d5fe393d6e3f",
       "images": [
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\0.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\1.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\2.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\3.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\4.webp"
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
       ]
     },
     {
@@ -84,11 +84,11 @@
       "quantity_in_stock": 5,
       "product_id": "67eed7b3c2f0d5fe393d6e3f",
       "images": [
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\0.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\1.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\2.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\3.webp",
-        "static\\images\\products\\624f48\\67eed7b3c2f0d5fe393d6e3f\\4.webp"
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
+        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
       ]
     }
   ],
@@ -112,9 +112,9 @@
     "name": "TV Stands",
     "description": "From basic  to premium , there are plenty to choose from all types.",
     "images": [
-      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
-      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
-      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+      "static/images/categories/level-three/tv-stands/0.webp",
+      "static/images/categories/level-three/tv-stands/1.webp",
+      "static/images/categories/level-three/tv-stands/2.webp"
     ],
     "level_one_category": {
       "id": "679b8f63da26810c5e3a5f1b",
@@ -127,17 +127,17 @@
         "name": "Home",
         "description": "Home Furniture",
         "images": [
-          "static\\images\\categories\\level-one\\home\\0.webp",
-          "static\\images\\categories\\level-one\\home\\1.webp",
-          "static\\images\\categories\\level-one\\home\\2.webp"
+          "static/images/categories/level-one/home/0.webp",
+          "static/images/categories/level-one/home/1.webp",
+          "static/images/categories/level-one/home/2.webp"
         ]
       },
       "name": "Living Room",
       "description": "Living room furniture",
       "images": [
-        "static\\images\\categories\\level-two\\living-room\\0.webp",
-        "static\\images\\categories\\level-two\\living-room\\1.webp",
-        "static\\images\\categories\\level-two\\living-room\\2.webp"
+        "static/images/categories/level-two/living-room/0.webp",
+        "static/images/categories/level-two/living-room/1.webp",
+        "static/images/categories/level-two/living-room/2.webp"
       ]
     }
   },
@@ -169,11 +169,11 @@
       "quantity_in_stock": 10,
       "product_id": "67eee82ec2f0d5fe393d6e41",
       "images": [
-        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\0.webp",
-        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\1.webp",
-        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\2.webp",
-        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\3.webp",
-        "static\\images\\products\\ffffff\\67eee82ec2f0d5fe393d6e41\\4.webp"
+        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/0.webp",
+        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/1.webp",
+        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/2.webp",
+        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/3.webp",
+        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/4.webp"
       ]
     },
     {
@@ -184,11 +184,11 @@
       "quantity_in_stock": 5,
       "product_id": "67eee82ec2f0d5fe393d6e41",
       "images": [
-        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\0.webp",
-        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\1.webp",
-        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\2.webp",
-        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\3.webp",
-        "static\\images\\products\\0d0d0d\\67eee82ec2f0d5fe393d6e41\\4.webp"
+        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/0.webp",
+        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/1.webp",
+        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/2.webp",
+        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/3.webp",
+        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/4.webp"
       ]
     }
   ],
@@ -212,9 +212,9 @@
     "name": "TV Stands",
     "description": "From basic  to premium , there are plenty to choose from all types.",
     "images": [
-      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
-      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
-      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+      "static/images/categories/level-three/tv-stands/0.webp",
+      "static/images/categories/level-three/tv-stands/1.webp",
+      "static/images/categories/level-three/tv-stands/2.webp"
     ],
     "level_one_category": {
       "id": "679b8f63da26810c5e3a5f1b",
@@ -227,17 +227,17 @@
         "name": "Home",
         "description": "Home Furniture",
         "images": [
-          "static\\images\\categories\\level-one\\home\\0.webp",
-          "static\\images\\categories\\level-one\\home\\1.webp",
-          "static\\images\\categories\\level-one\\home\\2.webp"
+          "static/images/categories/level-one/home/0.webp",
+          "static/images/categories/level-one/home/1.webp",
+          "static/images/categories/level-one/home/2.webp"
         ]
       },
       "name": "Living Room",
       "description": "Living room furniture",
       "images": [
-        "static\\images\\categories\\level-two\\living-room\\0.webp",
-        "static\\images\\categories\\level-two\\living-room\\1.webp",
-        "static\\images\\categories\\level-two\\living-room\\2.webp"
+        "static/images/categories/level-two/living-room/0.webp",
+        "static/images/categories/level-two/living-room/1.webp",
+        "static/images/categories/level-two/living-room/2.webp"
       ]
     }
   },
