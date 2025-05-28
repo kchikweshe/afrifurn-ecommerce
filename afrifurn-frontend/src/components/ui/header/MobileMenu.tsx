@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import Link from 'next/link';
 import { ChevronRight, Home, Info, Phone, Tag } from 'lucide-react';
 import { Category, Level1Category, Level2Category } from '@/types';
+import { useAuth } from '@/data/hooks/useAuth';
 
 interface UtilityLink {
     name: string;
@@ -33,11 +34,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     mainCategories,
     utilityLinks = [],
     logo,
-    user
+   
 }) => {
     const [activeMainCategory, setActiveMainCategory] = useState<Category | null>(null);
     const [activeLevel1Category, setActiveLevel1Category] = useState<Level1Category | null>(null);
-
+     const {user}=useAuth()
     const handleMainCategoryClick = (category: Category) => {
         setActiveMainCategory(activeMainCategory?._id === category._id ? null : category);
         setActiveLevel1Category(null); // Reset level 1 when changing main category
