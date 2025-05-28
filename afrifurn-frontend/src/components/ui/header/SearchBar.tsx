@@ -110,7 +110,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                                 {products.map((product) => (
                                     <Link
                                         key={product.short_name}
-                                        href={`/products/${product.short_name}`}
+                                        href={`/room/${product.category.level_one_category.short_name}/${product.category.short_name}/${product.short_name}`}
                                         className="block"
                                         onClick={() => {
                                             setIsOpen(false);
