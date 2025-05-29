@@ -157,11 +157,11 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
     const MobileSearchModal = () => (
         <div className={`fixed inset-0 z-50 transition-all duration-300 ${isSearchOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
             {/* Backdrop */}
-            <div 
+            <div
                 className="absolute inset-0 bg-black/50"
                 onClick={() => setIsSearchOpen(false)}
             />
-            
+
             {/* Search Container */}
             <div className={`absolute top-0 left-0 right-0 bg-white p-4 transition-transform duration-300 ${isSearchOpen ? 'translate-y-0' : '-translate-y-full'}`}>
                 <div className="relative">
