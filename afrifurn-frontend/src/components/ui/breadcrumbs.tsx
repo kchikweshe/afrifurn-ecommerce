@@ -17,15 +17,15 @@ export default function Breadcrumbs() {
 
   return (
     <nav
-      className="py-4 px-2"
+      className="py-2 px-2"
       aria-label="Breadcrumb"
     >
-      <ol className="flex items-center space-x-1 bg-white/80 rounded-lg shadow-sm px-4 py-2">
+      <ol className="flex items-center space-x-1 bg-white/80 rounded-lg shadow-sm px-2 py-1 text-xs leading-tight">
         {crumbs.map((crumb, idx) => (
           <li key={crumb.href} className="flex items-center">
             {idx > 0 && (
               <svg
-                className="mx-2 h-4 w-4 text-gray-400"
+                className="mx-2 h-3 w-3 text-gray-400"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -38,12 +38,12 @@ export default function Breadcrumbs() {
             {idx < crumbs.length - 1 ? (
               <Link
                 href={crumb.href}
-                className="hover:underline hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-colors px-2 py-1 rounded text-gray-700 font-medium"
+                className="hover:underline hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-colors px-1 py-0.5 rounded text-gray-700 font-medium"
               >
                 {crumb.name}
               </Link>
             ) : (
-              <span className="font-semibold text-primary-700 px-2 py-1 rounded bg-primary-50 cursor-default">
+              <span className="font-semibold text-primary-700 px-1 py-0.5 rounded bg-primary-50 cursor-default">
                 {crumb.name}
               </span>
             )}

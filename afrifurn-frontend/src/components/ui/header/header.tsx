@@ -174,39 +174,23 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
     return (
         <>
             <header className="bg-white shadow-sm w-full z-50">
-                <div className="container mx-auto flex items-center justify-between py-4 px-4">
+                <div className="container mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-4 gap-2">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center flex-shrink-0">
-                        <div className="relative h-12 w-32">
-                            <Image
-                                src={logoUrl}
-                                alt="Afrifurn Logo"
-                                fill
-                                className="object-contain"
-                                priority
-                                sizes="128px"
-                                quality={90}
+                    <div className="flex-shrink-0">
+                        <Logo />
+                    </div>
+                    {/* Icons (user, wishlist, cart, menu) */}
+                    <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
+                        {/* User */}
+                        <div className="hidden sm:block">
+                            <UserMenu
+                                isAuthenticated={user != null}
+                                userImage={user?.photoURL}
+                                userName={user?.displayName}
                             />
                         </div>
-                    </Link>
-
-                    {/* Search Bar */}
-                    <div className="flex-1 flex justify-center px-8">
-                        <div className="w-full max-w-2xl">
-                            <SearchBar />
-                        </div>
-                    </div>
-
-                    {/* Icons */}
-                    <div className="flex items-center gap-6">
-                        {/* User */}
-                        <UserMenu
-                            isAuthenticated={user != null}
-                            userImage={user?.photoURL}
-                            userName={user?.displayName}
-                        />
                         {/* Wishlist */}
-                        <Link href="/wishlist" className="text-gray-700 hover:text-primary transition-colors">
+                        <Link href="/wishlist" className="hidden sm:inline text-gray-700 hover:text-primary transition-colors">
                             <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21C12 21 4 13.5 4 8.5C4 5.5 6.5 3 9.5 3C11.04 3 12.5 3.99 13 5.36C13.5 3.99 14.96 3 16.5 3C19.5 3 22 5.5 22 8.5C22 13.5 12 21 12 21Z" /></svg>
                         </Link>
                         {/* Cart */}
@@ -237,22 +221,26 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     </div>
                 </div>
                 {/* Desktop Navigation (replaces navLinks) */}
-                <DesktopNavigation
-                    mainCategories={mainCategories}
-                    level_one_categories={levelOneCategories}
-                    level_two_categories={levelTwoCategories}
-                    hoveredCategory={hoveredCategory}
-                    setHoveredCategory={setHoveredCategory}
-                />
+                <div className="hidden lg:block">
+                    <DesktopNavigation
+                        mainCategories={mainCategories}
+                        level_one_categories={levelOneCategories}
+                        level_two_categories={levelTwoCategories}
+                        hoveredCategory={hoveredCategory}
+                        setHoveredCategory={setHoveredCategory}
+                    />
+                </div>
             </header>
+            {/* Mobile: Search bar below header */}
+            <div className="block md:hidden bg-white px-2 pt-2 pb-1">
+                <SearchBar />
+            </div>
             {/* Spacer for fixed header if needed */}
-            <div className="h-28" />
+            <div className="h-20 md:h-28" />
             <MobileMenu
                 isOpen={isMenuOpen}
                 onClose={() => setIsMenuOpen(false)}
                 mainCategories={mainCategories}
-                levelOneCategories={levelOneCategories}
-                levelTwoCategories={levelTwoCategories}
                 utilityLinks={[
                     { name: "About", href: "/about" },
                     { name: "Contact Us", href: "/contact" },
