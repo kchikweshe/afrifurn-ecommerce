@@ -176,13 +176,13 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
             <header className="bg-white shadow-sm w-full z-50">
                 <div className="container mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-4 gap-2">
                     {/* Logo */}
-                    <div className="flex-shrink-0">
+                    <div className="relative h-10 w-28">
                         <Logo />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
                     <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
                         {/* User */}
-                        <div className="hidden sm:block">
+                        <div className=" sm:block">
                             <UserMenu
                                 isAuthenticated={user != null}
                                 userImage={user?.photoURL}
@@ -241,6 +241,8 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 isOpen={isMenuOpen}
                 onClose={() => setIsMenuOpen(false)}
                 mainCategories={mainCategories}
+                levelOneCategories={levelOneCategories}
+                levelTwoCategories={levelTwoCategories}
                 utilityLinks={[
                     { name: "About", href: "/about" },
                     { name: "Contact Us", href: "/contact" },
