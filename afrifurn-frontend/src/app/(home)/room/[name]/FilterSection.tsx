@@ -15,7 +15,7 @@ interface FilterSectionProps {
     filters: FilterParams
     colors: any[]
     materials: any[],
-    categories:Level2Category[]
+    categories:Level2Category[],
 
     onFilterChange: (newFilters: Partial<FilterParams>) => void
     onClearFilters: () => void

@@ -176,7 +176,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
             <header className="bg-white shadow-sm w-full z-50">
                 <div className="container mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-4 gap-2">
                     {/* Logo */}
-                    <div className="relative h-10 w-28">
+                    <div className="relative h-10 w-28 flex-shrink-0 flex items-center justify-center md:justify-start">
                         <Logo />
                     </div>
                     <div className="md:hidden flex bg-white px-2 pt-2 pb-1">
