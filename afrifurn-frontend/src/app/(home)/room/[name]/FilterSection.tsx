@@ -139,23 +139,33 @@ const MaterialFilter = ({ materials, selectedMaterials, onMaterialToggle }: { ma
     </Popover>
 )
 
-const Level2CategoriesFilter = ({ arr, onFilterChange }: { arr: Level2Category[], onFilterChange: ({}) => void }) => (
-    <Select onValueChange={(value) => onFilterChange({category_short_name:value})}>
+const Level2CategoriesFilter = ({
+  arr,
+  onFilterChange,
+}: {
+  arr: Level2Category[];
+  onFilterChange: (filters: Partial<FilterParams>) => void;
+}) => (
+  <Select
+    onValueChange={(value) =>
+      onFilterChange({
+        category_short_name: value === "" ? undefined : value,
+      })
+    }
+  >
     <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Category" />
+      <SelectValue placeholder="All Categories" />
     </SelectTrigger>
     <SelectContent>
-        <SelectItem value="1">Price: Low to High</SelectItem>
-        {arr.map(cat => (
-                                    <SelectItem key={cat.short_name} value={cat.short_name}>{cat.name}</SelectItem>
-                               
-                               
-                               
-                               ))}
+      <SelectItem value="">All Categories</SelectItem>
+      {arr.map((cat) => (
+        <SelectItem key={cat.short_name} value={cat.short_name}>
+          {cat.name}
+        </SelectItem>
+      ))}
     </SelectContent>
-</Select>
-)
-
+  </Select>
+);
 
 const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: number, endPrice: number, onPriceChange: (start: number, end: number) => void }) => (
     <div className="flex items-center  space-x-2">

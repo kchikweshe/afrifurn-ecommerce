@@ -96,6 +96,7 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
                 </Button>
 
                 <FilterSection
+                categories={[]}
                     ref={filterRef}
                     isVisible={isFilterVisible}
                     isSticky={isFilterSticky}
