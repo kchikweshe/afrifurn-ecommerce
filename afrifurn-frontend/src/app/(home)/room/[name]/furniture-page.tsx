@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { FaChevronDown, FaFilter } from 'react-icons/fa'
-import { X } from 'lucide-react'
+import { Filter, X } from 'lucide-react'
 
 import { useFilterCollection } from '@/hooks/useFilterCollection'
 import { Level2Category, Product, FilterParams } from '@/types'
@@ -51,6 +51,9 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     // Filters state (can be expanded as needed)
     const [filters, setFilters] = useState<Partial<FilterParams>>({});
     const [viewMode, setViewMode] = useState('grid');
+    const [isFilterVisible, setIsFilterVisible] = useState(false)
+
+    const toggleFilters = () => setIsFilterVisible(!isFilterVisible)
 
     // Fetch products when filters change
     useEffect(() => {
@@ -84,12 +87,90 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
             <div className="container mx-auto px-6 py-8">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold mb-4">{title}</h1>
+                    
+                    
+                     {/* Filter Chips */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {filters.colors && filters.colors.length > 0 && filters.colors.map((code: string) => (
+                            <span key={code} className="flex items-center bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Color: {getColorName(code)}
+                                <button className="ml-2" onClick={() => removeFilter('colors', code)}><X size={14} /></button>
+                            </span>
+                        ))}
+                        {filters.materials && filters.materials.length > 0 && filters.materials.map((id: string) => (
+                            <span key={id} className="flex items-center bg-green-100 text-green-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Material: {getMaterialName(id)}
+                                <button className="ml-2" onClick={() => removeFilter('materials', id)}><X size={14} /></button>
+                            </span>
+                        ))}
+                        {filters.category_short_name && (
+                            <span className="flex items-center bg-purple-100 text-purple-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Category: {getCategoryName(filters.category_short_name as string)}
+                                <button className="ml-2" onClick={() => removeFilter('category_short_name')}><X size={14} /></button>
+                            </span>
+                        )}
+                        {filters.sort_by && (
+                            <span className="flex items-center bg-yellow-100 text-yellow-800 rounded-full px-3 py-1 text-sm font-semibold">
+                                Sort by: {filters.sort_by}
+                                <button className="ml-2" onClick={() => removeFilter('sort_by')}><X size={14} /></button>
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-wrap gap-4 items-center mb-6 sticky top-0 z-30 bg-white shadow-sm py-4">
+                        <FilterButton label="Sort">
+                            <select
+                                className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
+                                onChange={e => handleFilterChange({ sort_by: e.target.value })}
+                                value={filters.sort_by || ''}
+                            >
+                                <option value="">Featured</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
+                            </select>
+                        </FilterButton>
+                        <FilterButton label="Color">
+                            <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
+                        </FilterButton>
+                        <FilterButton label="Material">
+                            <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
+                        </FilterButton>
+                        <FilterButton label="Price">
+                            <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
+                        </FilterButton>
+              
+                        <FilterButton label="All filters" icon={<FaFilter className="ml-1" />}>
+                            <div className="flex flex-col gap-2">
+                                <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
+                                <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
+                                <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
+                                <select
+                                    className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
+                                    onChange={e => handleFilterChange({ category_short_name: e.target.value })}
+                                    value={filters.category_short_name || ''}
+                                >
+                                    <option value="">All Categories</option>
+                                    {categories.map(cat => (
+                                        <option key={cat.short_name} value={cat.short_name}>{cat.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </FilterButton>
+                        <Button onClick={resetFilters} className="py-2 bg-red-500 text-white rounded-lg font-semibold">Reset</Button>
+                    </div>
+                    <Button
+                    variant="outline"
+                    onClick={toggleFilters}
+                    className="fixed left-2 top-1/2 z-10 transition-all duration-300 ease-in-out -translate-y-1/2"
+                >
+                    <Filter className="h-4 w-4" />
+                </Button>
                     {/* Filter Section */}
                     <FilterSection
                         isVisible={true}
                         isSticky={false}
                         filters={filters as any}
                         colors={colors}
+                        categories={categories}
                         materials={materials}
                         onFilterChange={handleFilterChange}
                         onClearFilters={resetFilters}

@@ -6,7 +6,7 @@ import { Slider } from "@/components/ui/slider"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { FilterParams } from '@/types'
+import { FilterParams, Level2Category } from '@/types'
 import { Material } from '@/types'
 
 interface FilterSectionProps {
@@ -14,14 +14,16 @@ interface FilterSectionProps {
     isSticky: boolean
     filters: FilterParams
     colors: any[]
-    materials: any[]
+    materials: any[],
+    categories:Level2Category[]
+
     onFilterChange: (newFilters: Partial<FilterParams>) => void
     onClearFilters: () => void
 }
 
 // eslint-disable-next-line react/display-name
 export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps>(
-    ({ isVisible, isSticky, filters, colors, materials, onFilterChange, onClearFilters }, ref) => (
+    ({ isVisible, isSticky, filters, colors, materials, categories,onFilterChange, onClearFilters }, ref) => (
         <div
             ref={ref}
             className={`transition-all duration-300 ease-in-out ${
@@ -29,6 +31,8 @@ export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps
             } ${isSticky ? 'sticky top-0 bg-white z-20 py-4 shadow-md' : ''}`}
         >
             <div className="flex flex-wrap gap-4 items-center justify-between">
+                
+                <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories}/>
                 <div className="flex flex-wrap gap-4 items-center">
                     <Select onValueChange={(value) => onFilterChange({ sort_order: Number(value) })}>
                         <SelectTrigger className="w-[180px]">
@@ -134,6 +138,24 @@ const MaterialFilter = ({ materials, selectedMaterials, onMaterialToggle }: { ma
         </PopoverContent>
     </Popover>
 )
+
+const Level2CategoriesFilter = ({ arr, onFilterChange }: { arr: Level2Category[], onFilterChange: ({}) => void }) => (
+    <Select onValueChange={(value) => onFilterChange({category_short_name:value})}>
+    <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Category" />
+    </SelectTrigger>
+    <SelectContent>
+        <SelectItem value="1">Price: Low to High</SelectItem>
+        {arr.map(cat => (
+                                    <SelectItem key={cat.short_name} value={cat.short_name}>{cat.name}</SelectItem>
+                               
+                               
+                               
+                               ))}
+    </SelectContent>
+</Select>
+)
+
 
 const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: number, endPrice: number, onPriceChange: (start: number, end: number) => void }) => (
     <div className="flex items-center  space-x-2">

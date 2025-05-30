@@ -179,6 +179,9 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     <div className="relative h-10 w-28">
                         <Logo />
                     </div>
+                    <div className="md:hidden flex bg-white px-2 pt-2 pb-1">
+                        <SearchBar />
+                    </div>
                     {/* Icons (user, wishlist, cart, menu) */}
                     <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
                         {/* User */}
@@ -189,10 +192,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                                 userName={user?.displayName}
                             />
                         </div>
-                        {/* Wishlist */}
-                        <Link href="/wishlist" className="hidden sm:inline text-gray-700 hover:text-primary transition-colors">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21C12 21 4 13.5 4 8.5C4 5.5 6.5 3 9.5 3C11.04 3 12.5 3.99 13 5.36C13.5 3.99 14.96 3 16.5 3C19.5 3 22 5.5 22 8.5C22 13.5 12 21 12 21Z" /></svg>
-                        </Link>
+
                         {/* Cart */}
                         <div className="relative">
                             <button
@@ -232,7 +232,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 </div>
             </header>
             {/* Mobile: Search bar below header */}
-            <div className="block  bg-white px-2 pt-2 pb-1">
+            <div className="md:hidden block  bg-white px-2 pt-2 pb-1">
                 <SearchBar />
             </div>
             {/* Spacer for fixed header if needed */}
