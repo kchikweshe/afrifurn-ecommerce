@@ -232,7 +232,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 </div>
             </header>
             {/* Mobile: Search bar below header */}
-            <div className="block md:hidden bg-white px-2 pt-2 pb-1">
+            <div className="block  bg-white px-2 pt-2 pb-1">
                 <SearchBar />
             </div>
             {/* Spacer for fixed header if needed */}
