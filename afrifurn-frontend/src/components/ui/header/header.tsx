@@ -186,10 +186,18 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             <Menu className="h-5 w-5 text-gray-700" />
                         </Button>
                     {/* Logo */}
-                    <div className="relative h-10 w-28 shrink-0 flex items-center justify-center md:justify-start">
-                        <Logo isMobile={true}/>
+                    <div className="relative h-10 w-28">
+                        <Image
+                            src={logoUrl}
+                            alt="Afrifurn Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                            sizes="112px"
+                            quality={90}
+                        />
                     </div>
-                    <div className="hidden md:flex bg-white px-2 pt-2 pb-1">
+                    <div className="hidden md:flex md:w-3/5 bg-white px-2 pt-2 pb-1">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
