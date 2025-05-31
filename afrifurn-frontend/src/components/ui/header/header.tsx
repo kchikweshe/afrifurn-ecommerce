@@ -179,7 +179,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     <div className="relative h-10 w-28 flex-shrink-0 flex items-center justify-center md:justify-start">
                         <Logo />
                     </div>
-                    <div className="md:hidden flex bg-white px-2 pt-2 pb-1">
+                    <div className="sm:hidden flex bg-white px-2 pt-2 pb-1">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
