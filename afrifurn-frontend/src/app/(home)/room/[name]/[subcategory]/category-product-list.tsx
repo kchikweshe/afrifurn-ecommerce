@@ -85,7 +85,7 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow container mx-auto px-4 py-8 relative">
-                <h1 className="text-4xl font-normal tracking-wide mb-8">{categoryProducts?.category_name}</h1>
+                <h1 className="text-4xl font-normal tracking-wide mb-8">{categoryProducts.category_name}</h1>
 
                 <Button
                     variant="outline"

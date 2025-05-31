@@ -59,7 +59,7 @@ export default function RootLayout({
           <Breadcrumbs />
 
 
-          <main className='bg-slate-50'>
+          <main className='bg-white'>
             {children}
           </main>
 

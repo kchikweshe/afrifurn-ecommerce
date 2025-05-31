@@ -174,7 +174,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
 
     return (
         <>
-            <header className="bg-white shadow-sm w-full z-50">
+            <header className="bg-white py-3 shadow-sm w-full z-50">
                 <div className="container mx-auto flex items-center justify-between px-2 md:px-4 gap-2">
                     {/* Mobile menu button */}
                     <Button
@@ -242,7 +242,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 </div>
             </header>
             {/* Mobile: Search bar below header */}
-            <div className="md:hidden block  bg-white px-2 pt-2 pb-1">
+            <div className="md:hidden block  md:w-full bg-white px-2 pt-2 pb-1">
                 <SearchBar />
             </div>
 
