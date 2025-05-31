@@ -178,13 +178,13 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 <div className="container mx-auto flex items-center justify-between px-2 md:px-4 gap-2">
                     {/* Mobile menu button */}
                     <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 md:hidden"
-                            onClick={() => setIsMenuOpen(true)}
-                        >
-                            <Menu className="h-5 w-5 text-gray-700" />
-                        </Button>
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 md:hidden"
+                        onClick={() => setIsMenuOpen(true)}
+                    >
+                        <Menu className="h-5 w-5 text-gray-700" />
+                    </Button>
                     {/* Logo */}
                     <div className="relative h-10 w-28">
                         <Image
@@ -227,7 +227,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             </button>
                             {isCartOpen && <CartPreview />}
                         </div>
-                       
+
                     </div>
                 </div>
                 {/* Desktop Navigation (replaces navLinks) */}
