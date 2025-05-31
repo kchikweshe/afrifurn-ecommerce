@@ -175,11 +175,20 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
         <>
             <header className="bg-white shadow-sm w-full z-50">
                 <div className="container mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-4 gap-2">
+                    {/* Mobile menu button */}
+                    <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 md:hidden"
+                            onClick={() => setIsMenuOpen(true)}
+                        >
+                            <Menu className="h-5 w-5 text-gray-700" />
+                        </Button>
                     {/* Logo */}
                     <div className="relative h-10 w-28 flex-shrink-0 flex items-center justify-center md:justify-start">
                         <Logo />
                     </div>
-                    <div className="sm:hidden flex bg-white px-2 pt-2 pb-1">
+                    <div className="hidden md:flex bg-white px-2 pt-2 pb-1">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
@@ -209,15 +218,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             </button>
                             {isCartOpen && <CartPreview />}
                         </div>
-                        {/* Mobile menu button */}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 md:hidden"
-                            onClick={() => setIsMenuOpen(true)}
-                        >
-                            <Menu className="h-5 w-5 text-gray-700" />
-                        </Button>
+                       
                     </div>
                 </div>
                 {/* Desktop Navigation (replaces navLinks) */}
