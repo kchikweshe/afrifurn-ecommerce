@@ -197,7 +197,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             quality={90}
                         />
                     </div>
-                    <div className="hidden md:flex  bg-white px-2 pt-2 pb-1 mx-5">
+                    <div className="hidden md:flex md:w-full bg-white px-2 pt-2 pb-1 mx-5">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
@@ -242,7 +242,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 </div>
             </header>
             {/* Mobile: Search bar below header */}
-            <div className="md:hidden block  md:w-full bg-white px-2 pt-2 pb-1">
+            <div className="md:hidden block   bg-white px-2 pt-2 pb-1">
                 <SearchBar />
             </div>
 
