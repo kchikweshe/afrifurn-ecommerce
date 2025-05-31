@@ -10,7 +10,7 @@ import { useFilters } from '@/app/(home)/shop/[id]/shop'
 import { useFilterCollection } from '@/hooks/useFilterCollection'
 import { CategoryProducts, Product } from '@/types'
 
-import { FilterSection } from '../FilterSection'
+import { FilterSection } from '@/components/ui/FilterSection'
 import { Pagination } from '@/components/ui/Pagination'
 import { ProductCard } from '@/components/ui/ProductCard'
 import Link from 'next/link'

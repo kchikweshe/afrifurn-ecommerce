@@ -9,7 +9,7 @@ import Header from '@/components/ui/header/header';
 import { CartProvider } from '@/context/cart/provider';
 import { logoUrl } from '@/data/logo';
 import { AuthProvider } from '@/ui/auth-provider';
-import LoadingState from './room/[name]/LoadingState';
+import LoadingState from '../../components/ui/LoadingState';
 import Footer from '@/components/ui/footer';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
 

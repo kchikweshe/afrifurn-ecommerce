@@ -4,7 +4,7 @@ import { DataContext } from "./data.context";
 import { dataReducer, State } from "./reducer/reducer";
 import {  fetchAll } from "./data.fetcher";
 import { Level2Category, Level1Category, Color, Material, Currency, Category } from "../types";
-import LoadingState from "@/app/(home)/room/[name]/LoadingState";
+import LoadingState from "@/components/ui/LoadingState";
 const initialState: State = {
 
   mainCategories: [],

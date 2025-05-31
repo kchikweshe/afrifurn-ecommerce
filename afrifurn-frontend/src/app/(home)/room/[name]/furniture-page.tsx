@@ -1,17 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { FaChevronDown, FaFilter } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa'
 import { Filter, X } from 'lucide-react'
 
 import { useFilterCollection } from '@/hooks/useFilterCollection'
 import { Level2Category, Product, FilterParams } from '@/types'
 import { Button } from '@/components/ui/button'
 import { useDataContext } from '@/data/data.context'
-import ColorFilter from '@/ui/filters/ColorFilter'
-import PriceFilter from '@/ui/filters/PriceFilter'
 import { ProductList } from '@/components/ProductList'
-import MaterialFilter from '@/ui/filters/MaterialFilter'
-import { FilterSection } from '@/app/(home)/room/[name]/FilterSection'
+import { FilterSection } from '@/components/ui/FilterSection'
 
 interface FurniturePageProps {
     shortName: string
@@ -47,14 +44,16 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     const state = useDataContext();
     const colors = state?.colors || [];
     const materials = state?.materials || [];
-
+    
     // Filters state (can be expanded as needed)
     const [filters, setFilters] = useState<Partial<FilterParams>>({});
     const [viewMode, setViewMode] = useState('grid');
     const [isFilterVisible, setIsFilterVisible] = useState(false)
 
     const toggleFilters = () => setIsFilterVisible(!isFilterVisible)
-   
+   if(!(categories.length>0)){
+    return categories.length
+   }
     // Fetch products when filters change
     useEffect(() => {
         filterCollection('products', filters as FilterParams);
@@ -125,6 +124,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                     <Filter className="h-4 w-4" />
                 </Button>
                     {/* Filter Section */}
+                  
                     <FilterSection
                         isVisible={isFilterVisible}
                         isSticky={false}
