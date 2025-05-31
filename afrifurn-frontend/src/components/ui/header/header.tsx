@@ -185,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             <Menu className="h-5 w-5 text-gray-700" />
                         </Button>
                     {/* Logo */}
-                    <div className="relative h-10 w-28 flex-shrink-0 flex items-center justify-center md:justify-start">
+                    <div className="relative h-10 w-28 shrink-0 flex items-center justify-center md:justify-start">
                         <Logo />
                     </div>
                     <div className="hidden md:flex bg-white px-2 pt-2 pb-1">

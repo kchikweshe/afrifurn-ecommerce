@@ -157,7 +157,6 @@ const Level2CategoriesFilter = ({
       <SelectValue placeholder="All Categories" />
     </SelectTrigger>
     <SelectContent>
-      <SelectItem value="">All Categories</SelectItem>
       {arr.map((cat) => (
         <SelectItem key={cat.short_name} value={cat.short_name}>
           {cat.name}
