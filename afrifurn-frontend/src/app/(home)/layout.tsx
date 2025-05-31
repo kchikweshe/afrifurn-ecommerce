@@ -48,26 +48,26 @@ export default function RootLayout({
   }, []);
 
   return (
-      <AuthProvider>
-        <DataProvider>
+    <AuthProvider>
+      <DataProvider>
 
-          <CartProvider>
-          
+        <CartProvider>
 
 
-            <Header logoUrl={logoUrl} />
-            <Breadcrumbs />
-         
 
-            <main className='bg-slate-200'>
-              {children}
-            </main>
+          <Header logoUrl={logoUrl} />
+          <Breadcrumbs />
 
-            <Footer />
-            <Toaster />
-          </CartProvider>
-        </DataProvider>
-      </AuthProvider>
+
+          <main className='bg-slate-200'>
+            {children}
+          </main>
+
+          <Footer />
+          <Toaster />
+        </CartProvider>
+      </DataProvider>
+    </AuthProvider>
 
 
 

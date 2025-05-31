@@ -126,7 +126,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                 </Button>
                     {/* Filter Section */}
                     <FilterSection
-                        isVisible={true}
+                        isVisible={isFilterVisible}
                         isSticky={false}
                         filters={filters as any}
                         colors={colors}

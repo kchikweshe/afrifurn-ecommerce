@@ -1,12 +1,9 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import { PUBLIC_URL } from "@/data/urls";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
 import Link from "next/link";
-import LoadingState from "./room/[name]/LoadingState";
-import { Suspense } from "react";
 
 // Updated carousel items with Ikea-style messaging
 const carouselItems = [
@@ -112,11 +109,11 @@ export default function HomePage() {
       </section>
 
       {/* Popular categories */}
-      <section className="py-12 px-4 md:px-8">
+      {/* <section className="py-12 px-4 md:px-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Popular categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          {['Sofas', 'Beds', 'Tables', 'Storage', 'Lighting', 'Textiles', 'Decoration', 'Kitchenware'].map((category, index) => (
-            <Link href={`/category/${category.toLowerCase()}`} key={index}>
+          {['Tv Stands', 'Bedsides', 'Tables', 'Storage', 'Lighting', 'Textiles', 'Decoration', 'Kitchenware'].map((category, index) => (
+            <Link href={`/room/${category.toLowerCase()}`} key={index}>
               <div className="bg-white p-4 text-center hover:shadow-md transition-shadow duration-300">
                 <div className="w-16 h-16 md:w-24 md:h-24 bg-[#f5f5f5] rounded-full mx-auto mb-4 flex items-center justify-center">
                   <span className="text-2xl">🪑</span>
@@ -126,7 +123,7 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Room inspiration */}
       <section className="py-8 px-4 md:px-8">

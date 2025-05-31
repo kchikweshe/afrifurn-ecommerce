@@ -175,7 +175,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
     return (
         <>
             <header className="bg-white shadow-sm w-full z-50">
-                <div className="container mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-4 gap-2">
+                <div className="container mx-auto flex items-center justify-between px-2 md:px-4 gap-2">
                     {/* Mobile menu button */}
                     <Button
                             variant="ghost"
@@ -193,11 +193,11 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             fill
                             className="object-contain"
                             priority
-                            sizes="112px"
+                            sizes="192px"
                             quality={90}
                         />
                     </div>
-                    <div className="hidden md:flex md:w-3/5 bg-white px-2 pt-2 pb-1">
+                    <div className="hidden md:flex md:flex-1 bg-white px-2 pt-2 pb-1">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
