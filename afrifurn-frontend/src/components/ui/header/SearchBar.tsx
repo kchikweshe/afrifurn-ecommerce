@@ -62,8 +62,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
     };
 
     return (
-        <div className="relative">
-            <div className="relative w-full" ref={containerRef}>
+        <div className="md:w-full relative">
+            <div className="relative " ref={containerRef}>
                 <div 
                     className={`
                         flex items-center bg-white/90 backdrop-blur-md rounded-full border transition-all duration-300

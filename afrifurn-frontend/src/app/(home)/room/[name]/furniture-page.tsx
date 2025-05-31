@@ -54,7 +54,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     const [isFilterVisible, setIsFilterVisible] = useState(false)
 
     const toggleFilters = () => setIsFilterVisible(!isFilterVisible)
-
+   
     // Fetch products when filters change
     useEffect(() => {
         filterCollection('products', filters as FilterParams);

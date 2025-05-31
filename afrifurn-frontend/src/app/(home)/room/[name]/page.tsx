@@ -10,5 +10,5 @@ export default async function Page(props: { params: Promise<{ name: string }> })
     // fetch category
     let level2Categories = await categoryService.getLevel2CategoriesByShortName(params.name)
 
-    return <FurniturePage shortName={params.name} title={params.name.toUpperCase().replace('-', ' ')} categories={level2Categories || []} />
+    return <FurniturePage shortName={params.name} title={params.name.toUpperCase().replace('-', ' ')} categories={level2Categories} />
 }

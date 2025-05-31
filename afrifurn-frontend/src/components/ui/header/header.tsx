@@ -180,13 +180,13 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 md:hidden"
+                        className="h-8 w-8 lg:hidden"
                         onClick={() => setIsMenuOpen(true)}
                     >
                         <Menu className="h-5 w-5 text-gray-700" />
                     </Button>
                     {/* Logo */}
-                    <div className="relative h-10 w-28">
+                    <div className="relative h-20 w-48 flex">
                         <Image
                             src={logoUrl}
                             alt="Afrifurn Logo"
@@ -197,7 +197,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             quality={90}
                         />
                     </div>
-                    <div className="hidden md:flex md:flex-1 bg-white px-2 pt-2 pb-1">
+                    <div className="hidden md:flex  bg-white px-2 pt-2 pb-1 mx-5">
                         <SearchBar />
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
@@ -245,8 +245,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
             <div className="md:hidden block  bg-white px-2 pt-2 pb-1">
                 <SearchBar />
             </div>
-            {/* Spacer for fixed header if needed */}
-            <div className="h-20 md:h-28" />
+
             <MobileMenu
                 isOpen={isMenuOpen}
                 onClose={() => setIsMenuOpen(false)}
