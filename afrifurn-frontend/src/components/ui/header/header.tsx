@@ -13,6 +13,7 @@ import MobileMenu from './MobileMenu'
 import UserMenu from './UserMenu'
 import { useAuthContext } from '@/ui/auth-provider'
 import { PRODUCT_IMAGE_URLS } from '@/data/urls'
+import { tree } from 'next/dist/build/templates/app-page'
 
 interface HeaderProps {
     logoUrl: string;
@@ -186,7 +187,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                         </Button>
                     {/* Logo */}
                     <div className="relative h-10 w-28 shrink-0 flex items-center justify-center md:justify-start">
-                        <Logo />
+                        <Logo isMobile={true}/>
                     </div>
                     <div className="hidden md:flex bg-white px-2 pt-2 pb-1">
                         <SearchBar />

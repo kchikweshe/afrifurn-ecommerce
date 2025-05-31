@@ -116,47 +116,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                             </span>
                         )}
                     </div>
-                    <div className="flex flex-wrap gap-4 items-center mb-6 sticky top-0 z-30 bg-white shadow-sm py-4">
-                        <FilterButton label="Sort">
-                            <select
-                                className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
-                                onChange={e => handleFilterChange({ sort_by: e.target.value })}
-                                value={filters.sort_by || ''}
-                            >
-                                <option value="">Featured</option>
-                                <option value="price_asc">Price: Low to High</option>
-                                <option value="price_desc">Price: High to Low</option>
-                            </select>
-                        </FilterButton>
-                        <FilterButton label="Color">
-                            <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
-                        </FilterButton>
-                        <FilterButton label="Material">
-                            <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
-                        </FilterButton>
-                        <FilterButton label="Price">
-                            <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
-                        </FilterButton>
-              
-                        <FilterButton label="All filters" icon={<FaFilter className="ml-1" />}>
-                            <div className="flex flex-col gap-2">
-                                <PriceFilter onFilterChange={(start_price: number, end_price: number) => handleFilterChange({ start_price, end_price })} />
-                                <ColorFilter colors={colors} onFilterChange={(color: string | null) => handleFilterChange({ colors: color ? [color] : [] })} />
-                                <MaterialFilter materials={materials} onFilterChange={(materials: string[]) => handleFilterChange({ materials })} />
-                                <select
-                                    className="w-full border rounded-lg px-3 py-2 text-base font-semibold"
-                                    onChange={e => handleFilterChange({ category_short_name: e.target.value })}
-                                    value={filters.category_short_name || ''}
-                                >
-                                    <option value="">All Categories</option>
-                                    {categories.map(cat => (
-                                        <option key={cat.short_name} value={cat.short_name}>{cat.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </FilterButton>
-                        <Button onClick={resetFilters} className="py-2 bg-red-500 text-white rounded-lg font-semibold">Reset</Button>
-                    </div>
+                
                     <Button
                     variant="outline"
                     onClick={toggleFilters}

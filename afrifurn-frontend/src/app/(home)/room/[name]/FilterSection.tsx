@@ -66,7 +66,7 @@ export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps
                     />
                 </div>
 
-                <Button variant="outline" onClick={onClearFilters} className="whitespace-nowrap">
+                <Button variant="outline" onClick={onClearFilters} className="bg-red-600 whitespace-nowrap text-base font-semibold text-white">
                     Clear Filters
                     <X className="ml-2 h-4 w-4" />
                 </Button>
@@ -94,7 +94,7 @@ const ColorFilter = ({ colors, selectedColors, onColorToggle }: { colors: any[],
                         />
                         <label
                             htmlFor={`color-${color.color_code}`}
-                            className="flex items-center cursor-pointer"
+                            className="text-base font-semibold flex items-center cursor-pointer"
                         >
                             <div
                                 className="w-4 h-4 rounded-full mr-2"
@@ -123,6 +123,7 @@ const MaterialFilter = ({ materials, selectedMaterials, onMaterialToggle }: { ma
                     <div key={material._id} className="flex items-center space-x-2 mb-2">
                         <Checkbox
                             id={`material-${material._id}`}
+                            className='text-base font-semibold'
                             checked={selectedMaterials.includes(material._id)}
                             onCheckedChange={() => onMaterialToggle(material._id)}
                         />
@@ -153,13 +154,13 @@ const Level2CategoriesFilter = ({
       })
     }
   >
-    <SelectTrigger className="w-[180px]">
-      <SelectValue placeholder="All Categories" />
-    </SelectTrigger>
+   
     <SelectContent>
       {arr.map((cat) => (
         <SelectItem key={cat.short_name} value={cat.short_name}>
+          <span className='text-base font-semibold'>
           {cat.name}
+          </span>
         </SelectItem>
       ))}
     </SelectContent>
@@ -168,7 +169,7 @@ const Level2CategoriesFilter = ({
 
 const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: number, endPrice: number, onPriceChange: (start: number, end: number) => void }) => (
     <div className="flex items-center  space-x-2">
-        <span className="text-sm">Price:</span>
+        <span className="text-base font-semibold">Price:</span>
         <Slider
             min={0}
             max={1000}
@@ -177,6 +178,6 @@ const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: numb
             onValueChange={(value) => onPriceChange(value[0], value[1])}
             className="w-[200px]"
         />
-        <span className="text-sm">${startPrice} - ${endPrice}</span>
+        <span className="text-base font-semibold">${startPrice} - ${endPrice}</span>
     </div>
 )
