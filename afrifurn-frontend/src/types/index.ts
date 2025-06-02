@@ -113,6 +113,7 @@ export interface FilterParams {
   page_size?: number;
   sort_by?: string;
   name?: string; short_name?: string;
+  level1_category_name?: string;
 
 
   sort_order?: number;

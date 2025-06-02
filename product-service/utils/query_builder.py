@@ -45,5 +45,5 @@ def build_product_query(
     if category_short_name:
         query_criteria["category.short_name"] = category_short_name
     if level1_category_name:
-        query_criteria["category.level_one_category.name"] = level1_category_name
+        query_criteria["category.level_one_category.name"] ={"$regex": level1_category_name, "$options": "i"}
     return query_criteria 

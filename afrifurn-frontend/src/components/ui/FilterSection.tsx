@@ -31,15 +31,23 @@ export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps
             <div className="flex flex-wrap gap-4 items-center justify-between">
 
                 <div className="flex flex-wrap gap-4 items-center">
-                <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories}/>
-                    <Select onValueChange={(value) => onFilterChange({ sort_order: Number(value) })}>
+               {categories.length > 0 && <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories}/> }
+                {/* <Select onValueChange={(value) => onFilterChange({ sort_by: value })}>
                         <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Sort by" />
+                            <SelectValue placeholder="Sort by Name" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="name">Name</SelectItem>
-                            <SelectItem value="1">Price: Low to High</SelectItem>
-                            <SelectItem value="-1">Price: High to Low</SelectItem>
+
+                        </SelectContent>
+                    </Select> */}
+                    <Select onValueChange={(value) => onFilterChange({ sort_order: Number(value) })}>
+                        <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Sort by Price" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="1">Low to High</SelectItem>
+                            <SelectItem value="-1">High to Low</SelectItem>
                         </SelectContent>
                     </Select>
 

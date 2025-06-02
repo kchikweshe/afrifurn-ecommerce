@@ -29,7 +29,7 @@ export function useFilterCollection<T>(doFetch:boolean=false) {
       if (params.short_name) queryParams.append('short_name', params.short_name);
     
       if (params.sort_order !== undefined) queryParams.append('sort_order', params.sort_order.toString());
-    
+      if (params.level1_category_name !== undefined) queryParams.append('level1_category_name', params.level1_category_name);
       const url = `${collection}/filter?${queryParams.toString()}`;
   
       try {
