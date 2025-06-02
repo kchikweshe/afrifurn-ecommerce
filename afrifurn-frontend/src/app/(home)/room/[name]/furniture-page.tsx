@@ -40,18 +40,20 @@ function FilterButton({ label, icon, children }: { label: string, icon?: React.R
 }
 
 export default function FurniturePage({ shortName, title, categories }: FurniturePageProps) {
-    const { data: products, loading, error, filterCollection } = useFilterCollection<Product>()
     const state = useDataContext();
     const colors = state?.colors || [];
     const materials = state?.materials || [];
-    
+    const [productData, setProductData] = useState<Product[]>([]);
     // Filters state (can be expanded as needed)
     const [filters, setFilters] = useState<Partial<FilterParams>>({});
     const [isFilterVisible, setIsFilterVisible] = useState(true)
+  const { data: products, loading, error, filterCollection } = useFilterCollection<Product>()
 
     const toggleFilters = () => setIsFilterVisible(!isFilterVisible)
-    console.log("categories: ",categories)
     // Fetch products when filters change
+
+
+  
     useEffect(() => {
         filterCollection('products', filters as FilterParams);
     }, [filters, filterCollection]);
@@ -83,9 +85,9 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
             <div className="container mx-auto px-6 py-8">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold mb-4">{title}</h1>
-                    
-                    
-                     {/* Filter Chips */}
+
+
+                    {/* Filter Chips */}
                     <div className="flex flex-wrap gap-2 mb-4">
                         {filters.colors && filters.colors.length > 0 && filters.colors.map((code: string) => (
                             <span key={code} className="flex items-center bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-semibold">
@@ -112,16 +114,16 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                             </span>
                         )}
                     </div>
-                
+
                     <Button
-                    variant="outline"
-                    onClick={toggleFilters}
-                    className="fixed left-2 top-1/2 z-10 transition-all duration-300 ease-in-out -translate-y-1/2"
-                >
-                    <Filter className="h-4 w-4" />
-                </Button>
+                        variant="outline"
+                        onClick={toggleFilters}
+                        className="fixed left-2 top-1/2 z-10 transition-all duration-300 ease-in-out -translate-y-1/2"
+                    >
+                        <Filter className="h-4 w-4" />
+                    </Button>
                     {/* Filter Section */}
-                  
+
                     <FilterSection
                         isVisible={isFilterVisible}
                         isSticky={false}
