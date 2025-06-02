@@ -47,13 +47,10 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     
     // Filters state (can be expanded as needed)
     const [filters, setFilters] = useState<Partial<FilterParams>>({});
-    const [viewMode, setViewMode] = useState('grid');
-    const [isFilterVisible, setIsFilterVisible] = useState(false)
+    const [isFilterVisible, setIsFilterVisible] = useState(true)
 
     const toggleFilters = () => setIsFilterVisible(!isFilterVisible)
-   if(!(categories.length>0)){
-    return categories.length
-   }
+    console.log("categories: ",categories)
     // Fetch products when filters change
     useEffect(() => {
         filterCollection('products', filters as FilterParams);
