@@ -9,7 +9,8 @@ def build_product_query(
     colors: str,
     materials: str,
     dimensions: Dict[str, float|None],
-    category_short_name: Optional[str]
+    category_short_name: Optional[str],
+    level1_category_name: Optional[str]
 ) -> Dict[str, Any]:
     """Build MongoDB query criteria for product filtering"""
     query_criteria = {}
@@ -43,5 +44,6 @@ def build_product_query(
     # Category
     if category_short_name:
         query_criteria["category.short_name"] = category_short_name
-        
+    if level1_category_name:
+        query_criteria["category.level_one_category.name"] = level1_category_name
     return query_criteria 
