@@ -116,7 +116,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     return (
         <div className="fixed inset-0 z-50 bg-white flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b">
+            <div className="flex items-center justify-between px-4 py-2 border-b">
                 <div className="flex items-center">
                     {logo ? (
                         <div className="h-10 w-28 flex items-center">{logo}</div>
@@ -135,7 +135,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             </div>
 
             {/* Navigation (main, level one, level two) */}
-            <nav className="flex-1 overflow-y-auto">
+            <nav className="flex overflow-y-auto">
                 {content}
             </nav>
 
@@ -156,8 +156,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
             {/* Delivery Info */}
             <div className="bg-gray-50 border-t flex items-center px-6 py-3 text-sm text-gray-700">
-                <Truck className="h-5 w-5 mr-2 text-gray-500" />
-                Standard delivery starting at $19
+                <Truck className="h-5 w-5 mr-2 text-gray-600" />
+                Standard delivery starting at $25
             </div>
         </div>
     );

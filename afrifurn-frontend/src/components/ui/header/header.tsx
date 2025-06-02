@@ -186,7 +186,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                         <Menu className="h-5 w-5 text-gray-700" />
                     </Button>
                     {/* Logo */}
-                    <div className="relative h-20 w-48 flex">
+                    <div className="relative h-16 w-48 flex">
                         <Image
                             src={logoUrl}
                             alt="Afrifurn Logo"
@@ -197,8 +197,14 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             quality={90}
                         />
                     </div>
-                    <div className="hidden md:flex md:w-full bg-white px-2 pt-2 pb-1 mx-5">
+                    <div className="hidden md:flex md:w-[60%] bg-white px-2 pt-2 pb-1 mx-5">
                         <SearchBar />
+                    </div>
+                    {/* Utility Links - visible on md+ screens */}
+                    <div className="hidden md:flex items-center gap-4 lg:ml-4 lg:text-md">
+                        <Link href="/about" className="text-gray-700 hover:text-primary font-medium transition-colors ">About</Link>
+                        <Link href="/contact" className="text-gray-700 hover:text-primary font-medium transition-colors ">Contact </Link>
+                        <Link href="/deals" className="text-gray-700 hover:text-primary font-medium transition-colors">Sales</Link>
                     </div>
                     {/* Icons (user, wishlist, cart, menu) */}
                     <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
@@ -258,14 +264,14 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     { name: "Sales", href: "/deals" }
                 ]}
                 logo={
-                    <div className="relative h-10 w-28">
+                    <div className="relative h-16 w-28">
                         <Image
                             src={logoUrl}
                             alt="Afrifurn Logo"
                             fill
                             className="object-contain"
                             priority
-                            sizes="112px"
+                            sizes="182px"
                             quality={90}
                         />
                     </div>

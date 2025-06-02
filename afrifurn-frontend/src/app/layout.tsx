@@ -7,6 +7,9 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: "Afri Furn | Premium Furniture in Zimbabwe",
+  icons: [{
+    url: './favicon.ico',
+  }],
   description:
     "Handcrafted furniture for living room, bedroom, office and home office. Quality craftsmanship from Zimbabwe.",
 }

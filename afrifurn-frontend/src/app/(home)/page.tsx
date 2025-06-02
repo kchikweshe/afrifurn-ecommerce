@@ -49,7 +49,7 @@ const roomSections = [
   },
   {
     title: "Home office",
-    image: "/office.jpg",
+    image: "/office_1.png",
     link: "/room/office",
     description: "Functional workspaces for productivity"
   }
