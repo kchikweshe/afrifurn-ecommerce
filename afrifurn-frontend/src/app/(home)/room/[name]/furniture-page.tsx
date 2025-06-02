@@ -43,9 +43,8 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     const state = useDataContext();
     const colors = state?.colors || [];
     const materials = state?.materials || [];
-    const [productData, setProductData] = useState<Product[]>([]);
     // Filters state (can be expanded as needed)
-    const [filters, setFilters] = useState<Partial<FilterParams>>({});
+    const [filters, setFilters] = useState<Partial<FilterParams>>({level1_category_name: title});
     const [isFilterVisible, setIsFilterVisible] = useState(true)
   const { data: products, loading, error, filterCollection } = useFilterCollection<Product>()
 
