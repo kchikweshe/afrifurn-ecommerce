@@ -24,6 +24,7 @@ async def filter_products_route(
     height: Optional[float] = Query(None, description="Product height"),
     weight: Optional[float] = Query(None, description="Product weight"),
     category_short_name: Optional[str] = Query(None, description="Category short name"),
+    level1_category_name: Optional[str] = Query(None, description="Level 1 category name"),
     page: int = Query(1, description="Page number"),
     page_size: int = Query(10, description="Number of items per page"),
     sort_by: str = Query("_id", description="Field to sort by"),
@@ -49,6 +50,7 @@ async def filter_products_route(
 
             },
             category_short_name=category_short_name,
+            level1_category_name=level1_category_name
         )
         
         # Add default criteria
