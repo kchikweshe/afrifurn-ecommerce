@@ -21,7 +21,7 @@ const PRODUCTS_PER_PAGE = 10
 export function CategoryProductsGrid({ categoryProducts,short_name }: { categoryProducts: CategoryProducts,short_name:string }) {
     
     const [currentPage, setCurrentPage] = useState(1)
-    const [isFilterVisible, setIsFilterVisible] = useState(false)
+    const [isFilterVisible, setIsFilterVisible] = useState(true)
     const [isFilterSticky, setIsFilterSticky] = useState(false)
     const filterRef = useRef<HTMLDivElement>(null)
 
@@ -79,13 +79,12 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
     const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE
     const currentProducts = filteredProducts.length>0 ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct) : []
     const totalPages = filteredProducts.length>0 ? Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE) : 0
-    console.log("Current Products:  \n",currentProducts)
     
     // if (!categoryProducts) { }
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow container mx-auto px-4 py-8 relative">
-                <h1 className="text-4xl font-normal tracking-wide mb-8">{categoryProducts.category_name}</h1>
+                <h1 className="text-4xl font-normal tracking-wide mb-8">{short_name.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h1>
 
                 <Button
                     variant="outline"

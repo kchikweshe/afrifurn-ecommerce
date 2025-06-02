@@ -51,10 +51,10 @@ const TABS = [
 export default function ProductOverview({ product }: ProductOverviewProps) {
     /** Currently selected product variant */
     const [selectedVariant, setSelectedVariant] = useState(product.product_variants[0])
-    
+
     /** Index of currently displayed main image */
     const [mainImage, setMainImage] = useState(0)
-    
+
     /** Controls visibility of "Added to Cart" indicator */
     const [showAddedBadge, setShowAddedBadge] = useState(false)
 
@@ -108,11 +108,11 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 color: selectedVariant.color_id,
                 quantity,
             }
-            addToCart(cartItem)  
-            setShowAddedBadge(true)  
+            addToCart(cartItem)
+            setShowAddedBadge(true)
             toast({ title: "Success", description: "Item added to cart successfully.", variant: "default" })
 
-            
+
             setTimeout(() => setShowAddedBadge(false), 2000)
         } catch (error) {
             toast({ title: "Error", description: "Failed to add item to cart", variant: "destructive" })
@@ -121,11 +121,18 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
 
     // WhatsApp chat handler
     const handleWhatsAppClick = () => {
-        const colorObj = colors.find(c => c.color_code === selectedVariant.color_id)
-        const colorName = colorObj?.name || selectedVariant.color_id
-        const message = `Hi, I am interested in the ${product.name} (${colorName}).`;
-        const url = `https://wa.me/263778588495?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        const productUrl = typeof window !== 'undefined'
+            ? window.location.href
+            : `https://afri-furn.co.zw/room/${product.category.level_one_category.short_name}/${product.category.short_name}/${product.short_name}`;
+
+        const imageUrl = PRODUCT_IMAGE_URLS + selectedVariant.images[0];
+        const colorObj = colors.find(c => c.color_code === selectedVariant.color_id);
+        const colorName = colorObj?.name || selectedVariant.color_id;
+
+        const message = `Hi, I'm interested in this product:\n\n${product.name} (${colorName})\n${productUrl}`;
+        const whatsappUrl = `https://wa.me/263778588495?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, '_blank');
     }
 
     if (product.reviews?.length === 0) {
@@ -154,21 +161,22 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
     }
 
     return (
-        <div className="py-8 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
+        <div className=" px-2 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
             {/* Gallery */}
-            <div className="lg:w-1/2 w-full flex flex-col h-full justify-center">
-                  <ProductGallery
-                        product={product}
-                        selectedVariant={selectedVariant}
-                        mainImage={mainImage}
-                        setMainImage={setMainImage}
-                    />
-                  </div>
+            <div className="w-full flex flex-col justify-center
+                lg:w-3/5 lg:min-h-[500px] xl:w-2/3 xl:min-h-[700px]">
+                <ProductGallery
+                    product={product}
+                    selectedVariant={selectedVariant}
+                    mainImage={mainImage}
+                    setMainImage={setMainImage}
+                />
+            </div>
             {/* Product Details */}
             <div className="lg:w-1/2 w-full flex flex-col gap-6 h-full justify-center overflow-y-auto">
                 {/* Category badge */}
                 <div className="mb-2">
-                    <Badge className="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full text-xs">
+                    <Badge className="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full text-md">
                         {product.category?.name || 'Category'}
                     </Badge>
                 </div>
@@ -191,14 +199,14 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                     <span className="text-gray-500 text-sm">({product?.reviews?.length} reviews)</span>
                 </div>
                 {/* Price */}
-                <div className="text-2xl font-bold text-gray-900 mb-2">${product.price.toFixed(2)}</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">${product.price.toFixed(2)}</div>
                 {/* Description */}
                 <div className="text-gray-700 mb-4 text-base leading-relaxed">
                     {product.description}
                 </div>
                 {/* Color selection */}
                 <div className="mb-4">
-                    <div className="font-semibold mb-1">Color</div>
+                    <div className="font-semibold mb-1">Color(s)</div>
                     <div className="flex gap-4 ">
                         {Array.from(
                             new Map(product.product_variants.map(v => [v.color_id, v])).values()
@@ -207,11 +215,10 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                             return (
                                 <button
                                     key={variant.color_id}
-                                    className={`w-16 h-16 rounded-full border-1 flex items-center justify-center shadow-md transition-all duration-200 p-0 focus:outline-none bg-white hover:scale-105 active:scale-95 ${
-                                        selectedVariant.color_id === variant.color_id
-                                            ? ' ring-primary border-primary'
-                                            : 'border-gray-300 hover:border-primary'
-                                    }`}
+                                    className={`w-16 h-16 rounded-full border-1 flex items-center justify-center shadow-md transition-all duration-200 p-0 focus:outline-none bg-white hover:scale-105 active:scale-95 ${selectedVariant.color_id === variant.color_id
+                                        ? ' ring-primary border-primary'
+                                        : 'border-gray-300 hover:border-primary'
+                                        }`}
                                     onClick={() => handleVariantSelect(variant)}
                                     aria-label={colorObj?.name || variant.color_id}
                                 >
@@ -253,8 +260,8 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                             <button
                                 key={tab.key}
                                 className={`py-2 px-4 text-base font-semibold border-b-2 transition-colors duration-150 ${activeTab === tab.key
-                                        ? 'border-gray-900 text-gray-900'
-                                        : 'border-transparent text-gray-500 hover:text-gray-900'
+                                    ? 'border-gray-900 text-gray-900'
+                                    : 'border-transparent text-gray-500 hover:text-gray-900'
                                     }`}
                                 onClick={() => setActiveTab(tab.key)}
                             >
@@ -278,12 +285,31 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                         </ul>
                     )}
                     {activeTab === 'specs' && (
-                        <div className="text-gray-700 text-base">
-                            <div>Length: <span className="font-semibold">{product.dimensions.length}mm</span></div>
-                            <div>Width: <span className="font-semibold">{product.dimensions.width}mm</span></div>
-                            <div>Height: <span className="font-semibold">{product.dimensions.height}mm</span></div>
-                            {product.dimensions.depth && <div>Depth: <span className="font-semibold">{product.dimensions.depth}mm</span></div>}
-                            {product.dimensions.weight && <div>Weight: <span className="font-semibold">{product.dimensions.weight} lbs</span></div>}
+                        <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-base text-gray-500">
+                            <div className="flex flex-col">
+                                <span className="font-semibold text-lg">Length</span>
+                                <span className="text-gray-900 text-xl">{product.dimensions.length} mm</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="font-semibold text-lg">Width</span>
+                                <span className="text-gray-900 text-xl">{product.dimensions.width} mm</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="font-semibold text-lg">Height</span>
+                                <span className="text-gray-900 text-xl">{product.dimensions.height} mm</span>
+                            </div>
+                            {product.dimensions.depth && (
+                                <div className="flex flex-col">
+                                    <span className="font-semibold text-lg">Depth</span>
+                                    <span className="text-gray-900 text-xl">{product.dimensions.depth} mm</span>
+                                </div>
+                            )}
+                            {product.dimensions.weight && (
+                                <div className="flex flex-col">
+                                    <span className="font-semibold text-lg">Weight</span>
+                                    <span className="text-gray-900 text-xl">{product.dimensions.weight} lbs</span>
+                                </div>
+                            )}
                         </div>
                     )}
                     {activeTab === 'shipping' && (
@@ -354,10 +380,9 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
             {/* Floating WhatsApp Button */}
             <div className="fixed bottom-8 right-8 z-50">
                 <button
-                    type="button"
                     onClick={handleWhatsAppClick}
-                    aria-label="Chat on WhatsApp"
                     className="w-16 h-16 rounded-full bg-green-600 hover:bg-green-700 flex items-center justify-center shadow-xl text-white text-3xl transition-transform duration-200 hover:scale-110 focus:outline-none"
+                    aria-label="Chat on WhatsApp"
                 >
                     <FaWhatsapp className="w-8 h-8" />
                 </button>
@@ -367,5 +392,4 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
 }
 
 
-          
- 
+

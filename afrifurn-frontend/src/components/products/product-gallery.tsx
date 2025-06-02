@@ -21,8 +21,8 @@ export function ProductGallery({
   const hasMultipleImages = selectedVariant.images.length > 1;
   return (
     <div className="flex flex-col gap-4">
-      {/* Main Image - Full width on mobile and desktop */}
-      <div className="relative md:w-full h-[480px] lg:aspect-square rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200">
+      {/* Main Image - Full width on mobile and desktop, taller on large screens */}
+      <div className="relative w-full h-[380px] md:h-[480px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px] aspect-square rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200 flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10 rounded-2xl" />
         <Image
           src={PRODUCT_IMAGE_URLS + selectedVariant!.images[mainImage]}
@@ -55,25 +55,26 @@ export function ProductGallery({
         )}
       </div>
 
-      {/* Thumbnails - Always below the main image */}
-      <div className="flex gap-2 overflow-x-auto pb-2 justify-center">
+      {/* Thumbnails - Always below the main image, fill up horizontally */}
+      <div className="flex gap-3 overflow-x-auto pb-2 justify-center w-full">
         {selectedVariant.images.map((img, index) => (
           <button
             key={index}
-            className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border transition-all duration-200 shadow-sm bg-white/80 hover:scale-105 hover:shadow-md ${
+            className={`flex-shrink-0 w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-lg overflow-hidden border transition-all duration-200 shadow-sm bg-white/80 hover:scale-105 hover:shadow-md ${
               index === mainImage ? 'ring-2 ring-primary border-primary scale-105' : 'border-gray-200'
             }`}
             onClick={() => setMainImage(index)}
             style={{ position: 'relative' }}
             aria-label={`Show image ${index + 1}`}
           >
-            <Image
-              src={PRODUCT_IMAGE_URLS + img}
-              alt={`${product.name} - ${selectedVariant.color_id} - Thumbnail ${index + 1}`}
-              width={80}
-              height={80}
-              className="object-cover rounded-lg"
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={PRODUCT_IMAGE_URLS + img}
+                alt={`${product.name} - ${selectedVariant.color_id} - Thumbnail ${index + 1}`}
+                fill
+                className="object-cover rounded-lg"
+              />
+            </div>
             {index === mainImage && (
               <span className="absolute inset-0 border-2 border-primary rounded-lg pointer-events-none" />
             )}
