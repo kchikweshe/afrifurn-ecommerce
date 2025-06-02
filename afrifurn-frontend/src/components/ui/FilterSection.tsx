@@ -15,25 +15,23 @@ interface FilterSectionProps {
     filters: FilterParams
     colors: any[]
     materials: any[]
-    categories:Level2Category[]
+    categories: any[]
     onFilterChange: (newFilters: Partial<FilterParams>) => void
     onClearFilters: () => void
 }
 
 // eslint-disable-next-line react/display-name
 export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps>(
-    ({ isVisible, isSticky, filters, colors, materials, categories,onFilterChange, onClearFilters }, ref) => (
+    ({ isVisible, isSticky, filters, colors, materials, categories, onFilterChange, onClearFilters }, ref) => (
         <div
             ref={ref}
-            className={`transition-all duration-300 ease-in-out ${
-                isVisible ? 'opacity-100 max-h-[1000px]' : 'opacity-0 max-h-0 overflow-hidden'
-            } ${isSticky ? 'sticky top-0 bg-white z-20 py-4 shadow-md' : ''}`}
+            className={`transition-all duration-300 ease-in-out ${isVisible ? 'opacity-100 max-h-[1000px]' : 'opacity-0 max-h-0 overflow-hidden'
+                } ${isSticky ? 'sticky top-0 bg-white z-20 py-4 shadow-md' : ''}`}
         >
             <div className="flex flex-wrap gap-4 items-center justify-between">
-                
+
                 <div className="flex flex-wrap gap-4 items-center">
                 <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories}/>
-
                     <Select onValueChange={(value) => onFilterChange({ sort_order: Number(value) })}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Sort by" />
@@ -52,8 +50,8 @@ export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps
                         onFilterChange({ colors: newColors })
                     }} />
 
-                    <MaterialFilter materials={materials} selectedMaterials={filters.materials || []    } onMaterialToggle={(material: string) => {
-                            const newMaterials = filters.materials?.includes(material)
+                    <MaterialFilter materials={materials} selectedMaterials={filters.materials || []} onMaterialToggle={(material: string) => {
+                        const newMaterials = filters.materials?.includes(material)
                             ? filters.materials?.filter(m => m !== material)
                             : [...(filters.materials || []), material]
                         onFilterChange({ materials: newMaterials })
@@ -82,8 +80,8 @@ const ColorFilter = ({ colors, selectedColors, onColorToggle }: { colors: any[],
                 {selectedColors.length > 0 ? `${selectedColors.length} colors` : "Select colors"}
                 <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0">
             <ScrollArea className="h-[300px] p-4">
                 {colors.map((color) => (
                     <div key={color.color_code} className="flex items-center space-x-2 mb-2">
@@ -141,30 +139,32 @@ const MaterialFilter = ({ materials, selectedMaterials, onMaterialToggle }: { ma
 )
 
 const Level2CategoriesFilter = ({
-  arr,
-  onFilterChange,
+    arr,
+    onFilterChange,
 }: {
-  arr: Level2Category[];
-  onFilterChange: (filters: Partial<FilterParams>) => void;
+    arr: Level2Category[];
+    onFilterChange: (filters: Partial<FilterParams>) => void;
 }) => (
-  <Select
+    <Select
     onValueChange={(value) =>
-      onFilterChange({
-        category_short_name: value === "" ? undefined : value,
-      })
+        onFilterChange({
+            category_short_name: value === "" ? undefined : value,
+        })
     }
-  >
-   
+>
+    <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select Category" />
+    </SelectTrigger>
     <SelectContent>
-      {arr.map((cat) => (
-        <SelectItem key={cat.short_name} value={cat.short_name}>
-          <span className='text-base font-semibold'>
-          {cat.name}
-          </span>
-        </SelectItem>
-      ))}
+        {arr.map((cat: Level2Category) => (
+            <SelectItem key={cat.short_name} value={cat.short_name}>
+                <span className='text-base font-semibold'>
+                    {cat.name}
+                </span>
+            </SelectItem>
+        ))}
     </SelectContent>
-  </Select>
+</Select>
 );
 
 const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: number, endPrice: number, onPriceChange: (start: number, end: number) => void }) => (
