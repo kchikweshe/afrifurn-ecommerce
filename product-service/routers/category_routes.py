@@ -1,3 +1,4 @@
+import json
 import logging
 from bson import ObjectId
 from fastapi import APIRouter, HTTPException, File, UploadFile
@@ -7,22 +8,38 @@ from constants.paths import LEVEL_ONE_IMAGES_DIR
 from models.products import Category
 from services.repository.category_repository import CategoryRepository
 from services.image_processor import WebPImageProcessor
-
+from decorators.redis_provider import RedisCacheProvider
 router = APIRouter()
 
 # Initialize repositories and processors
 category_repository = CategoryRepository()
 image_processor = WebPImageProcessor()
-
-@router.get("/", response_model=List[Category])
+redis_app=RedisCacheProvider()
+key="categories"
+@router.get("/", )
 async def get_categories():
     """Get all categories"""
+    categories:List[Category]
+    data=[]
     try:
-        categories = await category_repository.fetch_all()
+        categories_from_cache= await redis_app.get(key)
+        if categories_from_cache:
+            print("Fetching from client")
+            raw_list = json.loads(categories_from_cache)
+            categories = [Category.model_validate(item) for item in raw_list]   
+            return categories
+        else:
+            categories = await category_repository.fetch_all()
+            for category in categories:
+                safe_dict =category.model_dump(by_alias=True) 
+                safe_dict["_id"] = str(safe_dict["_id"]) if safe_dict["_id"] else None
+                data.append(safe_dict)
+          
+        await redis_app.set(key=key,value=json.dumps(data))
         return categories
     except Exception as e:
         logging.error(f"Failed to get categories: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get categories")
+        raise HTTPException(status_code=500, detail=f"Failed to get categories {e}")
 
 @router.get("/categories/{category_id}", response_model=Category)
 async def get_category(category_id: str):

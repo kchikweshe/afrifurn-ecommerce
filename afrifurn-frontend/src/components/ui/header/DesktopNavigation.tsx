@@ -50,7 +50,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
                 <ul className="flex items-center gap-4">
                     {mainCategories?.map((category) => (
                         <li
-                            key={category._id}
+                            key={category.name}
                             className="relative"
                             onMouseEnter={() => handleMouseEnter(category._id)}
                             onMouseLeave={handleMouseLeave}

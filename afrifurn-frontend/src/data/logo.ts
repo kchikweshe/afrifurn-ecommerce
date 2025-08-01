@@ -1,1 +1,1 @@
-export const logoUrl:string='/logo.svg'
+export const logoUrl:string='/logo.png'

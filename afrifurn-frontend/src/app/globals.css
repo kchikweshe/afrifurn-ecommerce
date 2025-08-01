@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -78,6 +78,10 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-madimi);
+    font-weight: 400;
 
   }
-}
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

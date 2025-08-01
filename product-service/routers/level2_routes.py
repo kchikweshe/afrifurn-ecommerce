@@ -10,6 +10,7 @@ from services.repository.level2_category_repository import Level2CategoryReposit
 from services.repository.level_1_category_repository import Level1CategoryRepository
 from services.image_processor import WebPImageProcessor
 from database import db
+from decorators.decorator import cache_response
 router = APIRouter()
 
 # Initialize repositories and processors
@@ -82,6 +83,7 @@ async def create_level2_category(
         raise HTTPException(status_code=500, detail="Failed to create level 2 category")
 
 @router.get("/", response_model=List[Level2Category])
+@cache_response(key="level2_categories", response_model=Level2Category)
 async def get_level2_categories():
     """Get all level 2 categories"""
     try:
@@ -92,6 +94,8 @@ async def get_level2_categories():
         raise HTTPException(status_code=500, detail="Failed to get level 2 categories")
 
 @router.get("/{category_id}", response_model=List[Level2Category])
+@cache_response(key="level2-categories-by-level1:{category_id}", response_model=Level2Category)
+
 async def get_level2_categories_by_level_one_category(category_id: str):
     """Get level 2 categories by level 1 category ID"""
     try:
@@ -114,6 +118,7 @@ async def get_level2_categories_by_level_one_category(category_id: str):
         raise HTTPException(status_code=500, detail="Failed to get level 2 categories by level 1 category")
 
 @router.get("/short-name/{category_name}", response_model=List[Level2Category])
+@cache_response(key="level2-categories-by-level1:{category_name}", response_model=Level2Category)
 async def get_level2_categories_by_level_one_category_name(category_name: str):
     """Get level 2 categories by level 1 category name"""
     try:

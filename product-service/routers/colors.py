@@ -4,7 +4,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile, Depends
 from models.products import Color
 from models.common import ResponseModel
 from services.repository.color_repository import ColorRepository
-
+from decorators.decorator import cache_response 
 router = APIRouter(
     prefix="/colors", 
     tags=["Product Color"]
@@ -41,6 +41,8 @@ async def create_color(name: str  = Form(...),
         raise HTTPException(status_code=500, detail="Failed to save color")
 
 @router.get("/{code}", response_model=Color)
+@cache_response(key="color", response_model=Color)
+
 async def get_color(code: str):
     """Get a color by code"""
     try:
@@ -55,6 +57,7 @@ async def get_color(code: str):
         raise HTTPException(status_code=500, detail="Failed to get color")
 
 @router.get("/", response_model=List[Color])
+@cache_response(key="colors", response_model=Color)
 async def get_colors():
     """Get all colors"""
     try:

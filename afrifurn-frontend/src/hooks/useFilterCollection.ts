@@ -33,9 +33,9 @@ export function useFilterCollection<T>(doFetch:boolean=false) {
       const url = `${collection}/filter?${queryParams.toString()}`;
   
       try {
-        const response: AxiosResponse<{data: T[]}> = await productMicroService.get(url);
+        const response = await productMicroService.get(url);
         console.log("Input: \n",url,queryParams.entries,"Output:\n",response)
-        const data = response.data.data || [];
+        const data = response.data || [];
         setData(data);
       } catch (error) {
         console.error('Error fetching filtered data', error);

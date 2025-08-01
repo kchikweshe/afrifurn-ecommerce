@@ -3,6 +3,7 @@ import { DataProvider } from '@/data/data.provider';
 import { Inter, Madimi_One, Playfair_Display } from "next/font/google";
 import React, { Suspense, useEffect } from 'react';
 import { toast, Toaster } from 'sonner'; // or 'react-hot-toast'
+import { usePathname } from 'next/navigation';
 
 import '@/app/globals.css';
 import Header from '@/components/ui/header/header';
@@ -13,23 +14,7 @@ import LoadingState from '../../components/ui/LoadingState';
 import Footer from '@/components/ui/footer';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sans',
-})
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
-})
-
-const madimi = Madimi_One({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-madimi',
-})
 
 export default function RootLayout({
   children,
@@ -56,10 +41,12 @@ export default function RootLayout({
 
 
           <Header logoUrl={logoUrl} />
-          <Breadcrumbs />
+          <div className='bg-gray-50 px-6 text-sm md:text-base'>
+            {usePathname() !== '/' && <Breadcrumbs />}
+          </div>
 
 
-          <main className='bg-white'>
+          <main className={"mx-6"}>
             {children}
           </main>
 

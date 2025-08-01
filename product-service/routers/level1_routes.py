@@ -10,7 +10,7 @@ from models.products import Level1Category
 from services.repository.level_1_category_repository import Level1CategoryRepository
 from services.repository.category_repository import CategoryRepository
 from services.image_processor import WebPImageProcessor
-
+from decorators.decorator import cache_response
 router = APIRouter()
 
 # Initialize repositories and processors
@@ -98,6 +98,8 @@ async def create_level1_category(
         raise HTTPException(status_code=500, detail="Failed to create level 1 category")
 
 @router.get("/", response_model=List[Level1Category])
+@cache_response(key="level1_categories", response_model=Level1Category)
+
 async def get_level1_categories():
     """Get all level 1 categories"""
     try:
@@ -108,6 +110,8 @@ async def get_level1_categories():
         raise HTTPException(status_code=500, detail="Failed to get level 1 categories")
 
 @router.get("/{category_id}", response_model=List[Level1Category])
+@cache_response(key="level1-categories-by-category:{category_id}", response_model=Level1Category)
+
 async def get_level1_categories_by_category(category_id: str):
     """Get level 1 categories by parent category ID"""
     try:

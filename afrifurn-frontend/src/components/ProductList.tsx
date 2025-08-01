@@ -26,7 +26,7 @@ export function ProductList({ products, productsPerPage = 12 }: ProductListProps
 
     return (
         <div>
-            <div className="h-[600px] overflow-y-auto">
+            <div >
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {currentProducts.map((product) => (
                         <Link href={`/room/${product.category.level_one_category.short_name}/${product.category.short_name}/${product.short_name}`} key={product._id}>

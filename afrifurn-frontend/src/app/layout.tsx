@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Madimi_One, Playfair_Display } from "next/font/google"
 
 import '@/app/globals.css'
 import { Toaster } from '@/components/ui/toaster';
@@ -15,30 +15,33 @@ export const metadata: Metadata = {
 }
 const inter = Inter({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sans',
+
 })
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
-})
+  weight:"400",
 
+})
+const madimi = Madimi_One({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-madimi',
+})
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" >
 
 
-      <body>
-        <main>   {children}</main>
-     <Toaster />
+      <body className={`${inter.className}   text-gray-800 bg-gray-50 text-base`}>
+        {children}
+        <Toaster />
       </body>
-    
+
 
 
     </html>

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Form, HTTPException
 from models.product_attributes import Material
 from models.common import ResponseModel
 from services.repository.material_repository import MaterialRepository
+from decorators.decorator import cache_response 
 
 router = APIRouter(
     prefix="/materials", 
@@ -40,6 +41,8 @@ async def create_material(
         raise HTTPException(status_code=500, detail="Failed to save material")
 
 @router.get("/{name}", response_model=Material)
+@cache_response(key="material", response_model=Material)
+
 async def get_material(name: str):
     """Get a material by name"""
     try:
@@ -54,6 +57,7 @@ async def get_material(name: str):
         raise HTTPException(status_code=500, detail="Failed to get material")
 
 @router.get("/", response_model=List[Material])
+@cache_response(key="materials", response_model=Material)
 async def get_all_materials():
     """Get all materials"""
     try:

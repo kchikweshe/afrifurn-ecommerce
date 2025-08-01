@@ -13,12 +13,12 @@ export const ProductCard = ({ product }: { product: Product }) => {
         return material ? material.name : materialId
     }, [state])
 
-    if(!state){
+    if (!state) {
         return <div>
             State is null
         </div>
     }
-    
+
 
     // Helper to split price into whole and cents
     const formatPrice = (price: number) => {
@@ -30,7 +30,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
     const { whole, cents } = formatPrice(price);
 
     return <div className="group">
-        <div className="relative aspect-square overflow-hidden mb-4 rounded-lg">
+        <div className="relative aspect-square overflow-hidden mb-4 rounded-lg shadow-md">
             <Image
                 src={PRODUCT_IMAGE_URLS + product?.product_variants[0]?.images[0]}
                 alt={product.name}
@@ -49,27 +49,26 @@ export const ProductCard = ({ product }: { product: Product }) => {
                 </div>
             )}
         </div>
-        <h3 className="text-lg font-normal mb-1 transition-colors duration-200 ease-in-out group-hover:text-primary">{product.name}</h3>
-        
+        <h3 className="text-sm font-normal mb-1 transition-colors duration-200 ease-in-out group-hover:text-primary">{product.name}</h3>
+
         {/* Elegant Price */}
-        <p className="text-2xl font-semibold text-gray-800 mb-2">
+        <p className="text-xl font-semibold text-gray-800 mb-2">
             ${whole}
             <sup className="align-super text-xs font-medium ml-0.5">{cents}</sup>
         </p>
-        
+
         {/* Bigger Color Dots */}
-        <div className="flex items-center space-x-3">
-            <div className="flex space-x-2">
+        {/* <div className="flex items-center space-x-3">
+            <div className="flex space-x-2 ">
                 {product.product_variants?.map((variant, i) => (
                     <div
                         key={i}
                         className="w-6 h-6 rounded-full border-2 border-gray-300"
                         style={{ backgroundColor: variant.color_id }}
-                        // title={variant.color}
+                    // title={variant.color}
                     />
                 ))}
             </div>
-            <span className="text-base text-gray-500 font-medium">{getMaterialName(product.material ?? null)}</span>
-        </div>
+        </div> */}
     </div>
 }

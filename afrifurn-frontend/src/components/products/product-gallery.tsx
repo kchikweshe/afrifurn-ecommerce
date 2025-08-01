@@ -22,15 +22,14 @@ export function ProductGallery({
   return (
     <div className="flex flex-col gap-4">
       {/* Main Image - Full width on mobile and desktop, taller on large screens */}
-      <div className="relative w-full h-[380px] md:h-[480px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px] aspect-square rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200 flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10 rounded-2xl" />
+      <div className="relative  rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200 flex ">
+        <div className="aspect-square overflow-hidden rounded border" />
         <Image
           src={PRODUCT_IMAGE_URLS + selectedVariant!.images[mainImage]}
           alt={`${product.name} - ${selectedVariant.color_id} - View ${mainImage + 1}`}
-          fill
-          className="object-cover rounded-2xl z-20"
-          priority
-        />
+          width={800}
+          height={800}
+          className="w-[600px] h-[400px] object-cover"        />
         {/* Left Arrow */}
         {hasMultipleImages && (
           <button

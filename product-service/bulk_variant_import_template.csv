@@ -1,0 +1,3 @@
+product_id,color_code,quantity_in_stock,image_urls
+507f1f77bcf86cd799439011,#ffffff,100,https://example.com/image1.jpg;https://example.com/image2.jpg
+507f1f77bcf86cd799439012,#000000,50,https://example.com/image3.jpg;https://example.com/image4.jpg

@@ -18,8 +18,8 @@ import Link from 'next/link'
 
 const PRODUCTS_PER_PAGE = 10
 
-export function CategoryProductsGrid({ categoryProducts,short_name }: { categoryProducts: CategoryProducts,short_name:string }) {
-    
+export function CategoryProductsGrid({ categoryProducts, short_name }: { categoryProducts: CategoryProducts, short_name: string }) {
+
     const [currentPage, setCurrentPage] = useState(1)
     const [isFilterVisible, setIsFilterVisible] = useState(true)
     const [isFilterSticky, setIsFilterSticky] = useState(false)
@@ -77,9 +77,9 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
 
     const indexOfLastProduct = currentPage * PRODUCTS_PER_PAGE
     const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE
-    const currentProducts = filteredProducts.length>0 ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct) : []
-    const totalPages = filteredProducts.length>0 ? Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE) : 0
-    
+    const currentProducts = filteredProducts.length > 0 ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct) : []
+    const totalPages = filteredProducts.length > 0 ? Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE) : 0
+
     // if (!categoryProducts) { }
     return (
         <div className="min-h-screen flex flex-col">
@@ -95,7 +95,7 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
                 </Button>
 
                 <FilterSection
-                categories={[]}
+                    categories={[]}
                     ref={filterRef}
                     isVisible={isFilterVisible}
                     isSticky={isFilterSticky}
@@ -115,10 +115,10 @@ export function CategoryProductsGrid({ categoryProducts,short_name }: { category
                         <>
                             <p className="text-sm mb-4">{filteredProducts?.length || 0} products</p>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-3">
                                 {currentProducts?.map((product) => (
-                                    <Link href={'/room/' + product.short_name} key={product._id}>
-                                        <ProductCard key={product._id }product={product} />
+                                    <Link href={'/room/' +product.category.level_one_category.short_name+'/'+product.category.short_name+'/'+ product.short_name} key={product._id}>
+                                        <ProductCard key={product._id} product={product} />
                                     </Link>
                                 ))}
                             </div>

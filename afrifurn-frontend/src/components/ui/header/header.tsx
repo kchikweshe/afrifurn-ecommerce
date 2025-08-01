@@ -13,12 +13,10 @@ import MobileMenu from './MobileMenu'
 import UserMenu from './UserMenu'
 import { useAuthContext } from '@/ui/auth-provider'
 import { PRODUCT_IMAGE_URLS } from '@/data/urls'
-import { tree } from 'next/dist/build/templates/app-page'
 
 interface HeaderProps {
     logoUrl: string;
 }
-
 
 const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
     const { cartItems } = useCart();
@@ -52,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
     }, [isCartOpen]);
 
     const CartPreview = () => (
-        <div ref={cartRef} className="absolute right-0 mt-2 w-70 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden">
+        <div ref={cartRef} className="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden">
             <div className="p-3">
                 <div className="flex justify-between items-center mb-3">
                     <h3 className="font-medium text-sm">Cart ({cartItemsCount})</h3>
@@ -70,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                         <div className="max-h-56 overflow-y-auto divide-y divide-gray-100">
                             {cartItems.map((item) => (
                                 <div key={item.name} className="flex items-center py-2 group">
-                                    <div className="h-14 w-14 relative flex-shrink-0 rounded overflow-hidden">
+                                    <div className="h-12 w-12 relative flex-shrink-0 rounded overflow-hidden">
                                         <Image
                                             src={PRODUCT_IMAGE_URLS + item.image || '/placeholder.png'}
                                             alt={item.name}
@@ -120,10 +118,10 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     </>
                 ) : (
                     <div className="py-5 text-center">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-3">
+                        <div className="mx-auto w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-3">
                             <ShoppingCart className="h-5 w-5 text-gray-400" />
                         </div>
-                        <p className="text-gray-500 text-sm mb-3">Your cart is empty</p>
+                        <p className="text-gray-500 text-xs mb-3">Your cart is empty</p>
                         <Link href="/products">
                             <Button
                                 variant="outline"
@@ -137,22 +135,6 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 )}
             </div>
         </div>
-    );
-
-    const Logo = ({ isMobile = false }) => (
-        <Link href="/" className={`${isMobile ? "md:hidden" : "hidden md:block"} flex items-center`}>
-            <div className={`relative ${isMobile ? "h-14 w-40" : "h-16 w-48"}`}>
-                <Image
-                    src={logoUrl}
-                    alt="AfrifurnShop Logo"
-                    fill
-                    className="object-contain"
-                    priority
-                    sizes={isMobile ? "128px" : "192px"}
-                    quality={90}
-                />
-            </div>
-        </Link>
     );
 
     const MobileSearchModal = () => (
@@ -174,70 +156,70 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
 
     return (
         <>
-            <header className="bg-white py-3 shadow-sm w-full z-50">
-                <div className="container mx-auto flex items-center justify-between px- md:px-2 gap-2">
-                    {/* Mobile menu button */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 lg:hidden"
-                        onClick={() => setIsMenuOpen(true)}
-                    >
-                        <Menu className="h-5 w-5 text-gray-700" />
-                    </Button>
-                    {/* Logo */}
-                    <div className="relative h-16 w-48 flex">
-                        <Image
-                            src={logoUrl}
-                            alt="Afrifurn Logo"
-                            fill
-                            className="object-contain"
-                            priority
-                            sizes="192px"
-                            quality={90}
-                        />
+            <header className="bg-white shadow-sm w-full z-50 text-base">
+                <div className="mx-auto flex items-center justify-between h-24 px-2 md:px-6 relative">
+                    {/* Left: Menu (mobile) */}
+                    <div className="flex items-center gap-2 min-w-0 md:static absolute left-0 top-0 h-full z-10">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-9 w-9 p-0 mr-1 lg:hidden"
+                            onClick={() => setIsMenuOpen(true)}
+                        >
+                            <Menu className="h-5 w-5 text-gray-700" />
+                        </Button>
                     </div>
-                    <div className="hidden md:flex md:w-[60%] bg-white px-2 pt-2 pb-1 mx-5">
-                        <SearchBar />
-                    </div>
-                    {/* Utility Links - visible on md+ screens */}
-                    <div className="hidden md:flex items-center gap-4 lg:ml-4 lg:text-md">
-                        <Link href="/about" className="text-gray-700 hover:text-primary font-medium transition-colors ">About</Link>
-                        <Link href="/contact" className="text-gray-700 hover:text-primary font-medium transition-colors ">Contact </Link>
-                        <Link href="/deals" className="text-gray-700 hover:text-primary font-medium transition-colors">Sales</Link>
-                    </div>
-                    {/* Icons (user, wishlist, cart, menu) */}
-                    <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
-                        {/* User */}
-                        <div className=" sm:block">
-                            <UserMenu
-                                isAuthenticated={user != null}
-                                userImage={user?.photoURL}
-                                userName={user?.displayName}
-                            />
+                    {/* Center: Logo (always centered on mobile, left on desktop) */}
+                    <div className="flex flex-shrink-0 justify-center  absolute md:static left-0 right-0 top-0 h-full pointer-events-none md:pointer-events-auto">
+                        <div className="pointer-events-auto flex items-center">
+                            <Link href="/" className="flex items-center min-w-0 ">
+                                <Image
+                                    src={logoUrl}
+                                    alt="Afrifurn Logo"
+                                    width={128}
+                                    height={128}
+                                    className="h-28 w-full md:h-[128px] md:w-auto object-contain"
+                                />
+                            </Link>
                         </div>
-
-                        {/* Cart */}
+                    </div>
+                    {/* Center: SearchBar (desktop only) */}
+                    <div className="hidden md:flex flex-1 justify-center px-4">
+                        <div className="w-full">
+                            <SearchBar />
+                        </div>
+                    </div>
+                    {/* Right: Utility icons and nav (desktop) */}
+                    <div className="flex items-center gap-2 min-w-0 md:static absolute right-0 top-0 h-full z-10">
+                        <nav className="hidden md:flex items-center gap-4 text-sm font-medium">
+                            <Link href="/about" className="text-gray-700 hover:text-primary transition-colors">About</Link>
+                            <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
+                            <Link href="/deals" className="text-gray-700 hover:text-primary transition-colors">Sales</Link>
+                        </nav>
+                        <UserMenu
+                            isAuthenticated={user != null}
+                            userImage={user?.photoURL}
+                            userName={user?.displayName}
+                        />
                         <div className="relative">
                             <button
                                 className="relative text-gray-700 hover:text-primary transition-colors"
                                 onClick={() => setIsCartOpen((v) => !v)}
                                 aria-label="Open cart preview"
                             >
-                                <ShoppingCart className="h-6 w-6" />
+                                <ShoppingCart className="h-5 w-5" />
                                 {cartItemsCount > 0 && (
-                                    <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs text-white bg-primary rounded-full">
+                                    <span className="absolute -top-2 -right-2 flex items-center justify-center w-4 h-4 text-[10px] text-white bg-primary rounded-full">
                                         {cartItemsCount}
                                     </span>
                                 )}
                             </button>
                             {isCartOpen && <CartPreview />}
                         </div>
-
                     </div>
                 </div>
                 {/* Desktop Navigation (replaces navLinks) */}
-                <div className="hidden lg:block">
+                <div className="hidden lg:block border-t border-gray-100">
                     <DesktopNavigation
                         mainCategories={mainCategories}
                         level_one_categories={levelOneCategories}
@@ -248,10 +230,9 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                 </div>
             </header>
             {/* Mobile: Search bar below header */}
-            <div className="md:hidden block   bg-white px-2 pt-2 pb-1">
+            <div className="hidden   bg-white px-4 pt-2 pb-1 border-b border-gray-100">
                 <SearchBar />
             </div>
-
             <MobileMenu
                 isOpen={isMenuOpen}
                 onClose={() => setIsMenuOpen(false)}
@@ -264,14 +245,14 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     { name: "Sales", href: "/deals" }
                 ]}
                 logo={
-                    <div className="relative h-16 w-28">
+                    <div className="relative h-12 w-24">
                         <Image
                             src={logoUrl}
                             alt="Afrifurn Logo"
                             fill
                             className="object-contain"
                             priority
-                            sizes="182px"
+                            sizes="96px"
                             quality={90}
                         />
                     </div>

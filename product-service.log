@@ -1,0 +1,414 @@
+INFO     Using path main.py                                                    
+INFO     Resolved absolute path                                                
+         C:\Users\kombo\Documents\GitHub\afrifurn\afrifurn-ecommerce\product-se
+         rvice\main.py                                                         
+INFO     Searching for package file structure from directories with __init__.py
+         files                                                                 
+INFO     Importing from                                                        
+         C:\Users\kombo\Documents\GitHub\afrifurn\afrifurn-ecommerce\product-se
+         rvice                                                                 
+                                                                               
+ +- Python module file -+                                                      
+ |                      |                                                      
+ |  +--------------------- Traceback (most recent call last) ---------------------+
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\fa |
+| stapi_cli\cli.py:174 in dev                                                 |
+|                                                                             |
+|   171                                                                       |
+|   172     Otherwise, it uses the first [bold]FastAPI[/bold] app found in th |
+|   173     """                                                               |
+| > 174     _run(                                                             |
+|   175         path=path,                                                    |
+|   176         host=host,                                                    |
+|   177         port=port,                                                    |
+|                                                                             |
+| +---------------- locals ----------------+                                  |
+| |           app = None                   |                                  |
+| |          host = '127.0.0.1'            |                                  |
+| |          path = WindowsPath('main.py') |                                  |
+| |          port = 8000                   |                                  |
+| | proxy_headers = True                   |                                  |
+| |        reload = True                   |                                  |
+| |     root_path = ''                     |                                  |
+| +----------------------------------------+                                  |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\fa |
+| stapi_cli\cli.py:65 in _run                                                 |
+|                                                                             |
+|    62     proxy_headers: bool = False,                                      |
+|    63 ) -> None:                                                            |
+|    64     try:                                                              |
+| >  65         use_uvicorn_app = get_import_string(path=path, app_name=app)  |
+|    66     except FastAPICLIException as e:                                  |
+|    67         logger.error(str(e))                                          |
+|    68         raise typer.Exit(code=1) from None                            |
+|                                                                             |
+| +---------------- locals ----------------+                                  |
+| |           app = None                   |                                  |
+| |       command = 'dev'                  |                                  |
+| |          host = '127.0.0.1'            |                                  |
+| |          path = WindowsPath('main.py') |                                  |
+| |          port = 8000                   |                                  |
+| | proxy_headers = True                   |                                  |
+| |        reload = True                   |                                  |
+| |     root_path = ''                     |                                  |
+| |       workers = None                   |                                  |
+| +----------------------------------------+                                  |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\fa |
+| stapi_cli\discover.py:148 in get_import_string                              |
+|                                                                             |
+|   145     logger.info(f"Resolved absolute path {path.resolve()}")           |
+|   146     if not path.exists():                                             |
+|   147         raise FastAPICLIException(f"Path does not exist {path}")      |
+| > 148     mod_data = get_module_data_from_path(path)                        |
+|   149     sys.path.insert(0, str(mod_data.extra_sys_path))                  |
+|   150     use_app_name = get_app_name(mod_data=mod_data, app_name=app_name) |
+|   151     import_example = Syntax(                                          |
+|                                                                             |
+| +------------- locals --------------+                                       |
+| | app_name = None                   |                                       |
+| |     path = WindowsPath('main.py') |                                       |
+| +-----------------------------------+                                       |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\fa |
+| stapi_cli\discover.py:93 in get_module_data_from_path                       |
+|                                                                             |
+|    90         ),                                                            |
+|    91         1,                                                            |
+|    92     )                                                                 |
+| >  93     print(panel)                                                      |
+|    94     module_str = ".".join(p.stem for p in module_paths)               |
+|    95     logger.info(f"Importing module [green]{module_str}[/green]")      |
+|    96     return ModuleData(                                                |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| | extra_sys_path = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| |      init_path = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| |    module_path = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| |   module_paths = [                                                      | |
+| |                      WindowsPath('C:/Users/kombo/Documents/GitHub/afri… | |
+| |                  ]                                                      | |
+| |           name = '\U0001f40d main.py'                                           | |
+| |          panel = Padding(<rich.panel.Panel object at                    | |
+| |                  0x000001FA994EE270>, (1,1,1,1))                        | |
+| |         parent = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| |           path = WindowsPath('main.py')                                 | |
+| |           root = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| |      root_tree = <rich.tree.Tree object at 0x000001FA980C7C80>          | |
+| |          title = '[b green]Python module file[/b green]'                | |
+| |           tree = <rich.tree.Tree object at 0x000001FA980C7C80>          | |
+| |       use_path = WindowsPath('C:/Users/kombo/Documents/GitHub/afrifurn… | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\__init__.py:74 in print                                                  |
+|                                                                             |
+|    71     from .console import Console                                      |
+|    72                                                                       |
+|    73     write_console = get_console() if file is None else Console(file=f |
+| >  74     return write_console.print(*objects, sep=sep, end=end)            |
+|    75                                                                       |
+|    76                                                                       |
+|    77 def print_json(                                                       |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |       Console = <class 'rich.console.Console'>                          | |
+| |           end = '\n'                                                    | |
+| |          file = None                                                    | |
+| |         flush = False                                                   | |
+| |       objects = (                                                       | |
+| |                     Padding(<rich.panel.Panel object at                 | |
+| |                 0x000001FA994EE270>, (1,1,1,1)),                        | |
+| |                 )                                                       | |
+| |           sep = ' '                                                     | |
+| | write_console = <console width=79 None>                                 | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\console.py:1683 in print                                                 |
+|                                                                             |
+|   1680                 overflow = "ignore"                                  |
+|   1681             crop = False                                             |
+|   1682         render_hooks = self._render_hooks[:]                         |
+| > 1683         with self:                                                   |
+|   1684             renderables = self._collect_renderables(                 |
+|   1685                 objects,                                             |
+|   1686                 sep,                                                 |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |  buffer_extend = <built-in method extend of list object at              | |
+| |                  0x000001FA94EEC2C0>                                    | |
+| |           crop = True                                                   | |
+| |          emoji = None                                                   | |
+| |            end = '\n'                                                   | |
+| |         extend = <built-in method extend of list object at              | |
+| |                  0x000001FA99559BC0>                                    | |
+| |         height = None                                                   | |
+| |      highlight = None                                                   | |
+| |        justify = None                                                   | |
+| |           line = [                                                      | |
+| |                      Segment(                                           | |
+| |                          '                                              | |
+| |                  ',                                                     | |
+| |                          Style()                                        | |
+| |                      ),                                                 | |
+| |                      Segment('\n')                                      | |
+| |                  ]                                                      | |
+| |         markup = None                                                   | |
+| | new_line_start = False                                                  | |
+| |   new_segments = [                                                      | |
+| |                      Segment(                                           | |
+| |                          '                                              | |
+| |                  \n',                                                   | |
+| |                          Style()                                        | |
+| |                      ),                                                 | |
+| |                      Segment(' ', Style()),                             | |
+| |                      Segment('+-', Style()),                            | |
+| |                      Segment(' ', Style()),                             | |
+| |                      Segment(                                           | |
+| |                          'Python module file',                          | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True                                  | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(' ', Style()),                             | |
+| |                      Segment('-+', Style()),                            | |
+| |                      Segment(                                           | |
+| |                          '                                              | |
+| |                  ',                                                     | |
+| |                          Style()                                        | |
+| |                      ),                                                 | |
+| |                      Segment(' ', Style()),                             | |
+| |                      Segment('\n'),                                     | |
+| |                      ... +30                                            | |
+| |                  ]                                                      | |
+| |        no_wrap = None                                                   | |
+| |        objects = (                                                      | |
+| |                      Padding(<rich.panel.Panel object at                | |
+| |                  0x000001FA994EE270>, (1,1,1,1)),                       | |
+| |                  )                                                      | |
+| |       overflow = None                                                   | |
+| |         render = <bound method Console.render of <console width=79      | |
+| |                  None>>                                                 | |
+| |   render_hooks = []                                                     | |
+| | render_options = ConsoleOptions(                                        | |
+| |                      size=ConsoleDimensions(width=79, height=25),       | |
+| |                      legacy_windows=True,                               | |
+| |                      min_width=1,                                       | |
+| |                      max_width=79,                                      | |
+| |                      is_terminal=False,                                 | |
+| |                      encoding='cp1252',                                 | |
+| |                      max_height=25,                                     | |
+| |                      justify=None,                                      | |
+| |                      overflow=None,                                     | |
+| |                      no_wrap=None,                                      | |
+| |                      highlight=None,                                    | |
+| |                      markup=None,                                       | |
+| |                      height=None                                        | |
+| |                  )                                                      | |
+| |     renderable = Padding(<rich.panel.Panel object at                    | |
+| |                  0x000001FA994EE270>, (1,1,1,1))                        | |
+| |    renderables = [                                                      | |
+| |                      Padding(<rich.panel.Panel object at                | |
+| |                  0x000001FA994EE270>, (1,1,1,1))                        | |
+| |                  ]                                                      | |
+| |           self = <console width=79 None>                                | |
+| |            sep = ' '                                                    | |
+| |      soft_wrap = False                                                  | |
+| |          style = None                                                   | |
+| |          width = None                                                   | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\console.py:864 in __exit__                                               |
+|                                                                             |
+|    861                                                                      |
+|    862     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any |
+|    863         """Exit buffer context."""                                   |
+| >  864         self._exit_buffer()                                          |
+|    865                                                                      |
+|    866     def begin_capture(self) -> None:                                 |
+|    867         """Begin capturing console output. Call :meth:`end_capture`  |
+|                                                                             |
+| +-------------- locals ---------------+                                     |
+| |  exc_type = None                    |                                     |
+| | exc_value = None                    |                                     |
+| |      self = <console width=79 None> |                                     |
+| | traceback = None                    |                                     |
+| +-------------------------------------+                                     |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\console.py:822 in _exit_buffer                                           |
+|                                                                             |
+|    819     def _exit_buffer(self) -> None:                                  |
+|    820         """Leave buffer context, and render content if required."""  |
+|    821         self._buffer_index -= 1                                      |
+| >  822         self._check_buffer()                                         |
+|    823                                                                      |
+|    824     def set_live(self, live: "Live") -> None:                        |
+|    825         """Set Live instance. Used by Live context manager.          |
+|                                                                             |
+| +------------ locals ------------+                                          |
+| | self = <console width=79 None> |                                          |
+| +--------------------------------+                                          |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\console.py:2024 in _check_buffer                                         |
+|                                                                             |
+|   2021             return                                                   |
+|   2022                                                                      |
+|   2023         try:                                                         |
+| > 2024             self._write_buffer()                                     |
+|   2025         except BrokenPipeError:                                      |
+|   2026             self.on_broken_pipe()                                    |
+|   2027                                                                      |
+|                                                                             |
+| +------------ locals ------------+                                          |
+| | self = <console width=79 None> |                                          |
+| +--------------------------------+                                          |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\console.py:2060 in _write_buffer                                         |
+|                                                                             |
+|   2057                             if self.no_color and self._color_system: |
+|   2058                                 buffer = list(Segment.remove_color(b |
+|   2059                                                                      |
+| > 2060                             legacy_windows_render(buffer, LegacyWind |
+|   2061                         else:                                        |
+|   2062                             # Either a non-std stream on legacy Wind |
+|   2063                             text = self._render_buffer(self._buffer[ |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |                    buffer = [                                           | |
+| |                                 Segment(                                | |
+| |                                     '                                   | |
+| |                             ',                                          | |
+| |                                     Style()                             | |
+| |                                 ),                                      | |
+| |                                 Segment('\n'),                          | |
+| |                                 Segment(' ', Style()),                  | |
+| |                                 Segment('+-', Style()),                 | |
+| |                                 Segment(' ', Style()),                  | |
+| |                                 Segment(                                | |
+| |                                     'Python module file',               | |
+| |                                     Style(                              | |
+| |                                         color=Color(                    | |
+| |                                             'green',                    | |
+| |                                             ColorType.STANDARD,         | |
+| |                                             number=2                    | |
+| |                                         ),                              | |
+| |                                         bold=True                       | |
+| |                                     )                                   | |
+| |                                 ),                                      | |
+| |                                 Segment(' ', Style()),                  | |
+| |                                 Segment('-+', Style()),                 | |
+| |                                 Segment(                                | |
+| |                                     '                                   | |
+| |                             ',                                          | |
+| |                                     Style()                             | |
+| |                                 ),                                      | |
+| |                                 Segment(' ', Style()),                  | |
+| |                                 ... +32                                 | |
+| |                             ]                                           | |
+| |                    fileno = 1                                           | |
+| |     legacy_windows_render = <function legacy_windows_render at          | |
+| |                             0x000001FA9950DF80>                         | |
+| |         LegacyWindowsTerm = <class                                      | |
+| |                             'rich._win32_console.LegacyWindowsTerm'>    | |
+| |                      self = <console width=79 None>                     | |
+| | use_legacy_windows_render = True                                        | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\_windows_renderer.py:19 in legacy_windows_render                         |
+|                                                                             |
+|   16             if style:                                                  |
+|   17                 term.write_styled(text, style)                         |
+|   18             else:                                                      |
+| > 19                 term.write_text(text)                                  |
+|   20         else:                                                          |
+|   21             control_codes: Sequence[ControlCode] = control             |
+|   22             for control_code in control_codes:                         |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |  buffer = [                                                             | |
+| |               Segment(                                                  | |
+| |                   '                                                     | |
+| |           ',                                                            | |
+| |                   Style()                                               | |
+| |               ),                                                        | |
+| |               Segment('\n'),                                            | |
+| |               Segment(' ', Style()),                                    | |
+| |               Segment('+-', Style()),                                   | |
+| |               Segment(' ', Style()),                                    | |
+| |               Segment(                                                  | |
+| |                   'Python module file',                                 | |
+| |                   Style(                                                | |
+| |                       color=Color(                                      | |
+| |                           'green',                                      | |
+| |                           ColorType.STANDARD,                           | |
+| |                           number=2                                      | |
+| |                       ),                                                | |
+| |                       bold=True                                         | |
+| |                   )                                                     | |
+| |               ),                                                        | |
+| |               Segment(' ', Style()),                                    | |
+| |               Segment('-+', Style()),                                   | |
+| |               Segment(                                                  | |
+| |                   '                                                     | |
+| |           ',                                                            | |
+| |                   Style()                                               | |
+| |               ),                                                        | |
+| |               Segment(' ', Style()),                                    | |
+| |               ... +32                                                   | |
+| |           ]                                                             | |
+| | control = None                                                          | |
+| |   style = None                                                          | |
+| |    term = <rich._win32_console.LegacyWindowsTerm object at              | |
+| |           0x000001FA99533C50>                                           | |
+| |    text = '\U0001f40d main.py'                                                  | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\site-packages\ri |
+| ch\_win32_console.py:403 in write_text                                      |
+|                                                                             |
+|   400         Args:                                                         |
+|   401             text (str): The text to write to the console              |
+|   402         """                                                           |
+| > 403         self.write(text)                                              |
+|   404         self.flush()                                                  |
+|   405                                                                       |
+|   406     def write_styled(self, text: str, style: Style) -> None:          |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| | self = <rich._win32_console.LegacyWindowsTerm object at                 | |
+| |        0x000001FA99533C50>                                              | |
+| | text = '\U0001f40d main.py'                                                     | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| C:\Users\kombo\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252 |
+| .py:19 in encode                                                            |
+|                                                                             |
+|    16                                                                       |
+|    17 class IncrementalEncoder(codecs.IncrementalEncoder):                  |
+|    18     def encode(self, input, final=False):                             |
+| >  19         return codecs.charmap_encode(input,self.errors,encoding_table |
+|    20                                                                       |
+|    21 class IncrementalDecoder(codecs.IncrementalDecoder):                  |
+|    22     def decode(self, input, final=False):                             |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| | final = False                                                           | |
+| | input = '\U0001f40d main.py'                                                    | |
+| |  self = <encodings.cp1252.IncrementalEncoder object at                  | |
+| |         0x000001FA94AD4080>                                             | |
+| +-------------------------------------------------------------------------+ |
++-----------------------------------------------------------------------------+
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f40d' in 
+position 0: character maps to <undefined>

@@ -3,6 +3,20 @@ import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from config.settings import get_settings
+
+
+def setup_indexes_for_collection(db_dict:dict):
+    collection=db_dict["collection"]
+    indices=db_dict["indices"]  # Changed from "index" to "indices"
+    try:
+        for index in indices:
+            db[collection].create_index(index, unique=True)
+            print(f"Created index: {index} for collection: {collection}")
+
+    except Exception as e:
+        print("Exception:   ",e)
+
+
 # Connect to MongoDB using settings from get_settings function
 try:
     settings = get_settings()
@@ -28,6 +42,32 @@ try:
 
     client = MongoClient(MONGO_URI)
     db = client.get_database(mongo_db_name)
+
+    if db is not None:
+        setup_indexes_for_collection(
+            {"collection":"products",
+             "indices":["name","short_name"]
+             })
+        setup_indexes_for_collection(
+            {"collection":"colors",
+             "indices":["name","color_code"]
+             })
+        setup_indexes_for_collection(
+            {"collection":"categories",
+             "indices":["name","short_name"]
+             })
+        setup_indexes_for_collection(
+            {"collection":"level1_categories",
+             "indices":["name","short_name"]
+             })
+        setup_indexes_for_collection(
+            {"collection":"level2_categories",
+             "indices":["name","short_name"]
+             })
+        setup_indexes_for_collection(
+            {"collection":"materials",
+             "indices":["name",]
+             })
     # Test the connection
     client.server_info()
     logging.info("\033[92m====================== Successfully connected to MongoDB ======================\033[0m")

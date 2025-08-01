@@ -48,6 +48,7 @@ msgpack==1.0.8
 Naked==0.1.32
 odmantic==1.0.1
 packaging==24.0
+pandas==2.1.4
 passlib==1.7.4
 pillow==10.3.0
 pluggy==1.4.0

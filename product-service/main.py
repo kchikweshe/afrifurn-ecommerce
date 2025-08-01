@@ -2,7 +2,7 @@ import logging
 import os
 import time
 from starlette.middleware.base import BaseHTTPMiddleware
-
+from decorators.redis_provider import RedisCacheProvider
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -11,6 +11,15 @@ import uvicorn.logging
 from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from routers import api_router
+
+from fastapi import Header, HTTPException, Depends
+
+API_KEY = "your-super-secret-api-key"
+
+def verify_api_key(x_api_key: str = Header(...)):
+    if x_api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid or missing API Key")
+
 
 
 def create_app() -> FastAPI:
@@ -72,6 +81,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             raise
 app.add_middleware(LoggingMiddleware)
 
+
 @app.on_event("startup")
 async def startup_event() -> None:
     """Log application startup information and environment variables"""
@@ -87,13 +97,14 @@ async def startup_event() -> None:
         
         # Log environment variables
         logging.info("++++++++++++++++++Environment Variables in use:==\n")
+      
         for key, value in os.environ.items():
             # Mask sensitive information
             if any(sensitive in key.lower() for sensitive in ['password', 'secret', 'key', 'token']):
                 logging.info(f"{key}: ********")
             else:
                 logging.info(f"{key}: {value}")
-                
+        
     except Exception as e:
         logging.error(f"Error during startup: {str(e)}")
         raise

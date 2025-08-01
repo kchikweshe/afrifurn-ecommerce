@@ -57,7 +57,8 @@ export class ProductService implements IProductService {
   async filterProducts(params: FilterProductsParams): Promise<Product[]> {
     try {
       const response = await productMicroService.get('/filter', { params });
-      return response.data["data"] as Product[];
+      
+      return response.data as Product[];
     } catch (error) {
       console.error('Error filtering products:', error);
       throw error;
@@ -79,7 +80,7 @@ export class ProductService implements IProductService {
     });
 
     try {
-      console.info('Filtering products by Category:', params.short_name);
+      console.info('Filtering products by Category:', params.category_short_name);
       const response = await productMicroService.get(`/products/by-level-two-category/filter?short_name=${params.name}`);
       return response.data["data"] as CategoryProducts;
     } catch (error) {
@@ -97,7 +98,8 @@ export class ProductService implements IProductService {
   async getProductByShortName(shortName: string): Promise<Product> {
     try {
       const response = await productMicroService.get('/products/filter-one', { params: { short_name: shortName } });
-      return response.data["data"] as Product;
+      
+      return response.data as Product;
     } catch (error) {
       console.error('Error getting product:', error);
       throw error;

@@ -1,0 +1,4 @@
+name,short_name,category,price,description,currency_code,width,length,height,depth,weight,colors,material_id
+"Oak Dining Table","Oak Table","507f1f77bcf86cd799439011",299.99,"Beautiful oak dining table for 6 people","USD",1200,800,750,50,25000,"oak_brown,walnut_brown","507f1f77bcf86cd799439012"
+"Leather Sofa","Leather Sofa","507f1f77bcf86cd799439013",599.99,"Comfortable leather sofa with premium finish","USD",2000,800,850,90,45000,"brown,black","507f1f77bcf86cd799439014"
+"Glass Coffee Table","Glass Table","507f1f77bcf86cd799439015",199.99,"Modern glass coffee table with metal frame","USD",1200,600,450,40,15000,"clear,chrome","507f1f77bcf86cd799439016" 

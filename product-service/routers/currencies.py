@@ -6,7 +6,7 @@ from database import db
 from models.products import Currency
 from models.common import ResponseModel
 from services.repository.currency_repository import CurrencyRepository
-
+from decorators.decorator import cache_response
 router = APIRouter(
     prefix="/currencies",
     tags=["Currencies"]
@@ -64,6 +64,8 @@ async def get_currency(currency_id: str):
         raise HTTPException(status_code=500, detail="Failed to get currency")
 
 @router.get("/", response_model=List[Currency])
+@cache_response(key="currencies", response_model=Currency)
+
 async def get_currencies():
     """Get all currencies"""
     try:

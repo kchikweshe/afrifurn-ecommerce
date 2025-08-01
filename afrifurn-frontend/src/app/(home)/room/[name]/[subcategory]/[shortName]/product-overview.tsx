@@ -44,7 +44,6 @@ interface ProductOverviewProps {
 const TABS = [
     { key: 'features', label: 'Features' },
     { key: 'specs', label: 'Specifications' },
-    { key: 'shipping', label: 'Shipping' },
     { key: 'reviews', label: `Reviews` },
 ]
 
@@ -161,10 +160,9 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
     }
 
     return (
-        <div className=" px-2 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
+        <div className=" px-2 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-9 items-stretch">
             {/* Gallery */}
-            <div className="w-full flex flex-col justify-center
-                lg:w-3/5 lg:min-h-[500px] xl:w-2/3 xl:min-h-[700px]">
+            <div className="relative">
                 <ProductGallery
                     product={product}
                     selectedVariant={selectedVariant}
@@ -173,13 +171,8 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 />
             </div>
             {/* Product Details */}
-            <div className="lg:w-1/2 w-full flex flex-col gap-6 h-full justify-center overflow-y-auto">
-                {/* Category badge */}
-                <div className="mb-2">
-                    <Badge className="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded-full text-md">
-                        {product.category?.name || 'Category'}
-                    </Badge>
-                </div>
+            <div className="bg-white lg:w-1/2 shadow-md p-8 w-full flex flex-col gap-6 h-full justify-center overflow-y-auto">
+
                 {/* Name, rating, reviews */}
                 <h1 className="text-3xl font-extrabold mb-1 leading-tight">{product.name}</h1>
                 <div className="flex items-center gap-2 mb-2">
@@ -207,7 +200,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
                 {/* Color selection */}
                 <div className="mb-4">
                     <div className="font-semibold mb-1">Color(s)</div>
-                    <div className="flex gap-4 ">
+                    <div className="flex gap-4  ">
                         {Array.from(
                             new Map(product.product_variants.map(v => [v.color_id, v])).values()
                         ).map(variant => {
