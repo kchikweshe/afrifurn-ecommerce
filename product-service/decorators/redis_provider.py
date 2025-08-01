@@ -5,6 +5,8 @@ from typing import Any, Optional
 
 import redis.asyncio as redis
 from .interface import ICacheProvider
+from config.settings import get_settings
+
 # Configure logging
 logger.basicConfig(level=logger.INFO)
 
@@ -12,9 +14,10 @@ logger.basicConfig(level=logger.INFO)
 class RedisCacheProvider(ICacheProvider):
     """Redis implementation of cache provider"""
     
-    def __init__(self, redis_url: str = "redis://localhost:6379", key_prefix: str = "app"):
-        self.redis_url = redis_url
-        self.key_prefix = key_prefix
+    def __init__(self, redis_url: Optional[str] = None, key_prefix: Optional[str] = None):
+        settings = get_settings()
+        self.redis_url = redis_url or settings.redis_url
+        self.key_prefix = key_prefix or settings.redis_key_prefix
         self._redis: Optional[redis.Redis] = None
     
     async def _get_redis(self) -> redis.Redis:
@@ -36,11 +39,13 @@ class RedisCacheProvider(ICacheProvider):
             logger.error(f"Cache get error for key {key}: {e}")
             return None
     
-    async def set(self, key: str, value: Any, ttl_seconds: int = 300) -> None:
+    async def set(self, key: str, value: Any, ttl_seconds: Optional[int] = None) -> None:
         try:
+            settings = get_settings()
+            ttl = ttl_seconds or settings.redis_ttl_seconds
             redis_client = await self._get_redis()
             serialized_value = json.dumps(value, default=str)
-            await redis_client.setex(self._make_key(key), ttl_seconds, serialized_value)
+            await redis_client.setex(self._make_key(key), ttl, serialized_value)
         except Exception as e:
             logger.error(f"Cache set error for key {key}: {e}")
     

@@ -17,7 +17,19 @@ services:
      
       -  mongodb_data_container:/data
 
-
+  afrifurn-redis:
+    container_name: afrifurn-redis
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --requirepass afrifurn_redis_password
+    environment:
+      - REDIS_PASSWORD=afrifurn_redis_password
+    networks:
+      - afrifurn-network
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data_container:/data
+    restart: unless-stopped
 
   afrifurn-mongo-express:
     container_name: afrifurn-mongo-express
@@ -67,6 +79,13 @@ services:
       dockerfile: Dockerfile
     env_file:
       - ./product-service/.env.production
+    environment:
+      - REDIS_HOST=afrifurn-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=afrifurn_redis_password
+      - REDIS_URL=redis://:afrifurn_redis_password@afrifurn-redis:6379/0
+      - REDIS_KEY_PREFIX=afrifurn
+      - REDIS_TTL_SECONDS=300
     ports:
       - 8000:8000
     networks:
@@ -75,6 +94,7 @@ services:
     
     depends_on:
       - afrifurn-mongodb
+      - afrifurn-redis
       - eureka-service
       - api-gateway
 
@@ -117,6 +137,8 @@ volumes:
   fastapi:
     driver: local
   mongodb_data_container:
+    driver: local
+  redis_data_container:
     driver: local
 
     
