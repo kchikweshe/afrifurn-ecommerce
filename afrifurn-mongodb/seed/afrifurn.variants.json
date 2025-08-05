@@ -1,322 +1,636 @@
 [{
   "_id": {
-    "$oid": "679b94fa64a046a2d79afecf"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "created_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "updated_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "color_id": "#d6c5a3",
-  "quantity_in_stock": 5,
-  "product_id": "679b932753439d43a5c08dbe",
-  "images": [
-    "static/images/products/679b932753439d43a5c08dbe/d6c5a3/0.webp",
-    "static/images/products/679b932753439d43a5c08dbe/d6c5a3/1.webp",
-    "static/images/products/679b932753439d43a5c08dbe/d6c5a3/2.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679b959d64a046a2d79afed0"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "created_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "updated_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "color_id": "#624f48",
-  "quantity_in_stock": 5,
-  "product_id": "679b932753439d43a5c08dbe",
-  "images": [
-    "static/images/products/679b932753439d43a5c08dbe/624f48/0.webp",
-    "static/images/products/679b932753439d43a5c08dbe/624f48/1.webp",
-    "static/images/products/679b932753439d43a5c08dbe/624f48/2.webp",
-    "static/images/products/679b932753439d43a5c08dbe/624f48/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679b966464a046a2d79afed1"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "created_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "updated_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "color_id": "#ffffff",
-  "quantity_in_stock": 5,
-  "product_id": "679b932753439d43a5c08dbe",
-  "images": [
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/0.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/1.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/2.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679b96ca64a046a2d79afed2"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "created_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "updated_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "color_id": "#0d0d0d",
-  "quantity_in_stock": 5,
-  "product_id": "679b932753439d43a5c08dbe",
-  "images": [
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/0.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/1.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/2.webp",
-    "static/images/products/679b932753439d43a5c08dbe/ffffff/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679b981064a046a2d79afed3"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "created_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "updated_at": {
-    "$date": "2025-01-30T17:02:59.683Z"
-  },
-  "color_id": "#c9b195",
-  "quantity_in_stock": 5,
-  "product_id": "679b932753439d43a5c08dbe",
-  "images": [
-    "static/images/products/679b932753439d43a5c08dbe/c9b195/0.webp",
-    "static/images/products/679b932753439d43a5c08dbe/c9b195/1.webp",
-    "static/images/products/679b932753439d43a5c08dbe/c9b195/2.webp",
-    "static/images/products/679b932753439d43a5c08dbe/c9b195/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679cefe8e8a58505757cb2d3"
+    "$oid": "6886c302919bcbac2bcfb5f7"
   },
   "id": null,
   "is_archived": false,
   "short_name": null,
   "color_id": "#ffffff",
   "quantity_in_stock": 5,
-  "product_id": "679ce63decf2365084c6cd68",
+  "product_id": "68856462f67a824d7e134696",
   "images": [
-    "static/images/products/679ce63decf2365084c6cd68/0.webp",
-    "static/images/products/679ce63decf2365084c6cd68/1.webp",
-    "static/images/products/679ce63decf2365084c6cd68/2.webp",
-    "static/images/products/679ce63decf2365084c6cd68/3.webp"
+    "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\2.webp"
   ]
 },
 {
   "_id": {
-    "$oid": "679cf8c689d96cc9bcb3d87b"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#d6c5a3",
-  "quantity_in_stock": 5,
-  "product_id": "679ce63decf2365084c6cd68",
-  "images": [
-    "static/images/products/679ce63decf2365084c6cd68/0.webp",
-    "static/images/products/679ce63decf2365084c6cd68/1.webp",
-    "static/images/products/679ce63decf2365084c6cd68/2.webp",
-    "static/images/products/679ce63decf2365084c6cd68/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679cfb2f89d96cc9bcb3d87c"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#d6c5a3",
-  "quantity_in_stock": 5,
-  "product_id": "679ceae5ecf2365084c6cd6b",
-  "images": [
-    "static/images/products/679ceae5ecf2365084c6cd6b/0.webp",
-    "static/images/products/679ceae5ecf2365084c6cd6b/1.webp",
-    "static/images/products/679ceae5ecf2365084c6cd6b/2.webp",
-    "static/images/products/679ceae5ecf2365084c6cd6b/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679cfc0f89d96cc9bcb3d87d"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#624f48",
-  "quantity_in_stock": 5,
-  "product_id": "679ced22ecf2365084c6cd6d",
-  "images": [
-    "static/images/products/679ced22ecf2365084c6cd6d/0.webp",
-    "static/images/products/679ced22ecf2365084c6cd6d/1.webp",
-    "static/images/products/679ced22ecf2365084c6cd6d/2.webp",
-    "static/images/products/679ced22ecf2365084c6cd6d/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679d3c33693a2e82aeb4c565"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#624f48",
-  "quantity_in_stock": 5,
-  "product_id": "679d3b93693a2e82aeb4c564",
-  "images": [
-    "static/images/products/679d3b93693a2e82aeb4c564/624f48/0.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/624f48/1.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/624f48/2.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/624f48/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "679d3cf7693a2e82aeb4c566"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#ffffff",
-  "quantity_in_stock": 5,
-  "product_id": "679d3b93693a2e82aeb4c564",
-  "images": [
-    "static/images/products/679d3b93693a2e82aeb4c564/ffffff/0.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/ffffff/1.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/ffffff/2.webp",
-    "static/images/products/679d3b93693a2e82aeb4c564/ffffff/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "67c9d2cb97718e3292604689"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#c9b195",
-  "quantity_in_stock": 10,
-  "product_id": "67c9d23d97718e3292604688",
-  "images": [
-    "static/images/products/c9b195/67c9d23d97718e3292604688/0.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/1.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/2.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "67c9d68ac8b3c280c2933e97"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#c9b195",
-  "quantity_in_stock": 10,
-  "product_id": "67c9d23d97718e3292604688",
-  "images": [
-    "static/images/products/c9b195/67c9d23d97718e3292604688/0.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/1.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/2.webp",
-    "static/images/products/c9b195/67c9d23d97718e3292604688/3.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "67eed8afc2f0d5fe393d6e40"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#624f48",
-  "quantity_in_stock": 5,
-  "product_id": "67eed7b3c2f0d5fe393d6e3f",
-  "images": [
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "67eeea17c2f0d5fe393d6e43"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": null,
-  "color_id": "#ffffff",
-  "quantity_in_stock": 10,
-  "product_id": "67eee82ec2f0d5fe393d6e41",
-  "images": [
-    "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/0.webp",
-    "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/1.webp",
-    "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/2.webp",
-    "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/3.webp",
-    "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/4.webp"
-  ]
-},
-{
-  "_id": {
-    "$oid": "67eeead3c2f0d5fe393d6e44"
+    "$oid": "6886c349919bcbac2bcfb5f8"
   },
   "id": null,
   "is_archived": false,
   "short_name": null,
   "color_id": "#0d0d0d",
   "quantity_in_stock": 5,
-  "product_id": "67eee82ec2f0d5fe393d6e41",
+  "product_id": "68856462f67a824d7e134696",
   "images": [
-    "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/0.webp",
-    "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/1.webp",
-    "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/2.webp",
-    "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/3.webp",
-    "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/4.webp"
+    "static\\images\\products\\0d0d0d\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\0d0d0d\\68856462f67a824d7e134696\\1.webp"
   ]
 },
 {
   "_id": {
-    "$oid": "67eeee79c2f0d5fe393d6e45"
+    "$oid": "6886c39c919bcbac2bcfb5f9"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#d6c5a3",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c429919bcbac2bcfb5fa"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#3A2E2A",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c45d919bcbac2bcfb5fb"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#8d6750",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\8d6750\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\8d6750\\68856462f67a824d7e134696\\1.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c496919bcbac2bcfb5fc"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#A89F91",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c4e3919bcbac2bcfb5fd"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#f3eac3",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c535919bcbac2bcfb5fe"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134696",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\1.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\2.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886c83bca92fd96bbff9b8f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#fec76j",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469f",
+  "images": [
+    "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\0.webp",
+    "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\1.webp",
+    "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\2.webp",
+    "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886cacfca92fd96bbff9b90"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134698",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\1.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6886cbe0ca92fd96bbff9b91"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876defca92fd96bbff9b92"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876e0cca92fd96bbff9b93"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#ffffff",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\ffffff\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876e40ca92fd96bbff9b94"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#0d0d0d",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\0d0d0d\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876e76ca92fd96bbff9b95"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#8d6750",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\8d6750\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876e95ca92fd96bbff9b96"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#A89F91",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\A89F91\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876ee6ca92fd96bbff9b97"
   },
   "id": null,
   "is_archived": false,
   "short_name": null,
   "color_id": "#624f48",
   "quantity_in_stock": 5,
-  "product_id": "67eed7b3c2f0d5fe393d6e3f",
+  "product_id": "68856462f67a824d7e134699",
   "images": [
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
-    "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
+    "static\\images\\products\\624f48\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68876f40ca92fd96bbff9b98"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#cfd0ce",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134699",
+  "images": [
+    "static\\images\\products\\cfd0ce\\68856462f67a824d7e134699\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688770ccca92fd96bbff9b99"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#d6c5a3",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a2",
+  "images": [
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\0.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\1.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\2.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688771e2ca92fd96bbff9b9a"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#d6c5a3",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a3",
+  "images": [
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\0.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\1.webp",
+    "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6887937cca92fd96bbff9b9c"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469b",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\1.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\2.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688794a5ca92fd96bbff9b9d"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#624f48",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469b",
+  "images": [
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469b\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688794cfca92fd96bbff9b9e"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#3A2E2A",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469b",
+  "images": [
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469b\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688794f6ca92fd96bbff9b9f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#A89F91",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469b",
+  "images": [
+    "static\\images\\products\\A89F91\\68856462f67a824d7e13469b\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879537ca92fd96bbff9ba0"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#B2B1AD",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469b",
+  "images": [
+    "static\\images\\products\\B2B1AD\\68856462f67a824d7e13469b\\0.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "688796bbca92fd96bbff9ba1"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469e",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\1.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6887978aca92fd96bbff9ba2"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e13469a",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469a\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469a\\1.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879b8dca92fd96bbff9ba5"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#8d6750",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a1",
+  "images": [
+    "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\0.webp",
+    "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\1.webp",
+    "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879be6ca92fd96bbff9ba6"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#D8D1C5",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a1",
+  "images": [
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\0.webp",
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\1.webp",
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\2.webp",
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879c50ca92fd96bbff9ba7"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#ffffff",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a1",
+  "images": [
+    "static\\images\\products\\ffffff\\68856462f67a824d7e1346a1\\0.webp",
+    "static\\images\\products\\ffffff\\68856462f67a824d7e1346a1\\1.webp",
+    "static\\images\\products\\ffffff\\68856462f67a824d7e1346a1\\2.webp",
+    "static\\images\\products\\ffffff\\68856462f67a824d7e1346a1\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879cf4ca92fd96bbff9ba8"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#A89F91",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a1",
+  "images": [
+    "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\0.webp",
+    "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\1.webp",
+    "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68879ebaca92fd96bbff9ba9"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#f3eac3",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e134698",
+  "images": [
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\0.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\1.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\2.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\3.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\4.webp",
+    "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\5.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6887a5b5ca92fd96bbff9baa"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": " #FF5733",
+  "quantity_in_stock": 5,
+  "product_id": "68856462f67a824d7e1346a0",
+  "images": [
+    "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\0.webp",
+    "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\1.webp",
+    "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\2.webp",
+    "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\3.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "689233271b9ea08664c05a35"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469d",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469d\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469d\\1.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "689237231b9ea08664c05a36"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#c9b195",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469c",
+  "images": [
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\0.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\1.webp",
+    "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6892378a1b9ea08664c05a37"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#D8D1C5",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469c",
+  "images": [
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\0.webp",
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\1.webp",
+    "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "689237cf1b9ea08664c05a38"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#3A2E2A",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469c",
+  "images": [
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\0.webp",
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\1.webp",
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "689239d71b9ea08664c05a39"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#8d6750",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469c",
+  "images": [
+    "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\0.webp",
+    "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\1.webp",
+    "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68923ac41b9ea08664c05a3a"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#624f48",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469c",
+  "images": [
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\0.webp",
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\1.webp",
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\2.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68923b661b9ea08664c05a3b"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#624f48",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469d",
+  "images": [
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469d\\0.webp",
+    "static\\images\\products\\624f48\\68856462f67a824d7e13469d\\1.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "689241fa1b9ea08664c05a3c"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "color_id": "#3A2E2A",
+  "quantity_in_stock": 1,
+  "product_id": "68856462f67a824d7e13469d",
+  "images": [
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469d\\0.webp",
+    "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469d\\1.webp"
   ]
 }]

@@ -56,7 +56,7 @@
   },
   "name": "Walnut",
   "color_code": "#624f48",
-  "image": "static/product/walnut.jpg"
+  "image": "static/images/colors\n/walnut.jpg"
 },
 {
   "_id": {
@@ -118,7 +118,7 @@
   },
   "name": "Kirkwall",
   "color_code": "#c9b195",
-  "image": "static/colors/kirkwall.jpg"
+  "image": "static/images/colors/kirkwall.jpg"
 },
 {
   "_id": {
@@ -135,5 +135,115 @@
   },
   "name": "Havard Cherry",
   "color_code": "#A51C30",
-  "image": "static/images/colors/havard-cherry.jpg"
+  "image": "C:\\Users\\kombo\\Documents\\GitHub\\afrifurn-ecommerce\\static\\images\\colors\\havard-cherry.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d1ada2845dd42e380012"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Farasan",
+  "color_code": "#8d6750",
+  "image": "static\\images\\colors\\farasan.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d248a2845dd42e380013"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Luca Urban",
+  "color_code": "#B2B1AD",
+  "image": "static\\images\\colors\\luca-urban.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d28ca2845dd42e380014"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Congo",
+  "color_code": "#A89F91",
+  "image": "static\\images\\colors\\congo.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d2fba2845dd42e380015"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Nosara",
+  "color_code": "#D6C7B3",
+  "image": "static\\images\\colors\\nosara.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d347a2845dd42e380016"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Light Oak",
+  "color_code": "#D8D1C5",
+  "image": "static\\images\\colors\\light-oak.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d3bba2845dd42e380017"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Brown Oakasa",
+  "color_code": "#5C4033",
+  "image": "static\\images\\colors\\brown-oakasa.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d416a2845dd42e380018"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Wenge",
+  "color_code": "#3A2E2A",
+  "image": "static\\images\\colors\\wenge.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d439a2845dd42e380019"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Bellavista",
+  "color_code": "#D3CBC4",
+  "image": "static\\images\\colors\\bellavista.jpg"
+},
+{
+  "_id": {
+    "$oid": "6883d47aa2845dd42e38001a"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "Nata",
+  "color_code": "#F4EFE5",
+  "image": "static\\images\\colors\\nata.jpg"
+},
+{
+  "_id": {
+    "$oid": "6887748aca92fd96bbff9b9b"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": null,
+  "name": "zebra",
+  "color_code": " #FF5733",
+  "image": "static\\images\\colors\\zebra.jpg"
 }]

@@ -1,22 +1,390 @@
 [{
   "_id": {
-    "$oid": "67eed7b3c2f0d5fe393d6e3f"
+    "$oid": "68856462f67a824d7e134696"
   },
   "id": null,
   "is_archived": false,
-  "short_name": "4d-savannah-chest",
-  "name": "4D Savannah Chest",
-  "description": "Multicolored 4 drawer chest.",
+  "short_name": "maita-2-door-sm",
+  "name": "Maita 2 Door small",
+  "description": "Upgrade your entertainment area with this sleek and functional Modern TV Stand in a rich walnut finish. Designed to blend effortlessly with a variety of interior styles, it features a clean, minimalist profile with two open shelves for media devices and two side cabinets for additional storage. The unit stands on elegant gold-tone metal legs, offering both style and stability. A rear cable management hole ensures your space stays neat and clutter-free.",
   "category": {
-    "id": "679ce2fbb50d498d99a59191",
+    "id": "67eed26fc2f0d5fe393d6e3a",
     "is_archived": false,
-    "short_name": "chest-of-drawers",
-    "name": "Chest of Drawers",
-    "description": "Stunning Chest of drawers of all sizes",
+    "short_name": "tv-stands",
+    "name": "Tv Stands",
+    "description": "Beautiful tv stands in melamine and pine wood variants.",
     "images": [
-      "static/images/categories/level-three/chest-of-drawers/0.webp",
-      "static/images/categories/level-three/chest-of-drawers/1.webp",
-      "static/images/categories/level-three/chest-of-drawers/2.webp"
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 400,
+    "height": 313,
+    "depth": 400,
+    "length": 1600,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 150,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#ffffff",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\ffffff\\68856462f67a824d7e134696\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#0d0d0d",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\0d0d0d\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\0d0d0d\\68856462f67a824d7e134696\\1.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#d6c5a3",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e134696\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#3A2E2A",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e134696\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#8d6750",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\8d6750\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\8d6750\\68856462f67a824d7e134696\\1.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#A89F91",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\A89F91\\68856462f67a824d7e134696\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#f3eac3",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134696\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134696",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\1.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\2.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134696\\3.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 8,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e134697"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "maita-2-door",
+  "name": "Maita 2 Door Standard",
+  "description": "Upgrade your entertainment area with this sleek and functional Modern TV Stand in a rich walnut finish. Designed to blend effortlessly with a variety of interior styles, it features a clean, minimalist profile with two open shelves for media devices and two side cabinets for additional storage. The unit stands on elegant gold-tone metal legs, offering both style and stability. A rear cable management hole ensures your space stays neat and clutter-free.",
+  "category": {
+    "id": "67eed26fc2f0d5fe393d6e3a",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "Tv Stands",
+    "description": "Beautiful tv stands in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 400,
+    "height": 413,
+    "depth": 400,
+    "length": 1600,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 180,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 1,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e134698"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "3d-multi-tvs",
+  "name": "3 Drawer Multi Color",
+  "description": "Another CSV product",
+  "category": {
+    "id": "67eed26fc2f0d5fe393d6e3a",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "Tv Stands",
+    "description": "Beautiful tv stands in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 400,
+    "height": 410,
+    "depth": 400,
+    "length": 1800,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 340,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134698",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\1.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134698\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#f3eac3",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134698",
+      "images": [
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\0.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\1.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\2.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\3.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\4.webp",
+        "static\\images\\products\\f3eac3\\68856462f67a824d7e134698\\5.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 64,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e134699"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "1d-bedside",
+  "name": "Modern 1D Bedside",
+  "description": "Keep your essentials within reach with this sleek Modern Bedside Cabinet in a sophisticated matte black finish. It features a spacious open shelf for quick access to books, devices, or d?or, and a lower cabinet with a smooth door and a stylish gold-tone knob for concealed storage. The compact, minimalist design makes it a perfect fit for bedrooms, offices, or living areas with limited space.",
+  "category": {
+    "id": "679ce361b50d498d99a59192",
+    "is_archived": false,
+    "short_name": "bedsides",
+    "name": "Bedside Pedestals",
+    "description": "Beautiful bedside tables",
+    "images": [
+      "static\\images\\categories\\level-three\\bedsides\\0.webp",
+      "static\\images\\categories\\level-three\\bedsides\\1.webp",
+      "static\\images\\categories\\level-three\\bedsides\\2.webp"
     ],
     "level_one_category": {
       "id": "679ce016c4a46633d8d871ae",
@@ -29,17 +397,17 @@
         "name": "Home",
         "description": "Home Furniture",
         "images": [
-          "static/images/categories/level-one/home/0.webp",
-          "static/images/categories/level-one/home/1.webp",
-          "static/images/categories/level-one/home/2.webp"
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
         ]
       },
       "name": "Bedroom",
       "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
       "images": [
-        "static/images/categories/level-two/bedroom/0.webp",
-        "static/images/categories/level-two/bedroom/1.webp",
-        "static/images/categories/level-two/bedroom/2.webp"
+        "static\\images\\categories\\level-two\\bedroom\\0.webp",
+        "static\\images\\categories\\level-two\\bedroom\\1.webp",
+        "static\\images\\categories\\level-two\\bedroom\\2.webp"
       ]
     }
   },
@@ -47,133 +415,60 @@
     "id": null,
     "is_archived": false,
     "short_name": null,
-    "width": 350,
-    "height": 1000,
-    "depth": 950,
-    "length": 1000,
+    "width": 500,
+    "height": 65,
+    "depth": 300,
+    "length": 500,
     "weight": null
   },
   "is_new": true,
-  "price": 250,
+  "price": 60,
   "currency": "USD",
   "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
     "#624f48",
-    "#cfd0ce"
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
   ],
   "product_variants": [
     {
       "id": null,
       "is_archived": false,
       "short_name": null,
-      "color_id": "#624f48",
+      "color_id": "#c9b195",
       "quantity_in_stock": 5,
-      "product_id": "67eed7b3c2f0d5fe393d6e3f",
+      "product_id": "68856462f67a824d7e134699",
       "images": [
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134699\\0.webp"
       ]
     },
     {
       "id": null,
       "is_archived": false,
       "short_name": null,
-      "color_id": "#624f48",
+      "color_id": "#c9b195",
       "quantity_in_stock": 5,
-      "product_id": "67eed7b3c2f0d5fe393d6e3f",
+      "product_id": "68856462f67a824d7e134699",
       "images": [
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/0.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/1.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/2.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/3.webp",
-        "static/images/products/624f48/67eed7b3c2f0d5fe393d6e3f/4.webp"
+        "static\\images\\products\\c9b195\\68856462f67a824d7e134699\\0.webp"
       ]
-    }
-  ],
-  "discount": null,
-  "views": 0,
-  "material": "663e701bc2d2b8bcb6bfd9ef"
-},
-{
-  "_id": {
-    "$oid": "67eee82ec2f0d5fe393d6e41"
-  },
-  "id": null,
-  "is_archived": false,
-  "short_name": "maita-2-door",
-  "name": "Maita 2 Door",
-  "description": "2 Door melamine tv stand suitable for at most 55inch televisions. ",
-  "category": {
-    "id": "679b902cda26810c5e3a5f1c",
-    "is_archived": false,
-    "short_name": "tv-stands",
-    "name": "TV Stands",
-    "description": "From basic  to premium , there are plenty to choose from all types.",
-    "images": [
-      "static/images/categories/level-three/tv-stands/0.webp",
-      "static/images/categories/level-three/tv-stands/1.webp",
-      "static/images/categories/level-three/tv-stands/2.webp"
-    ],
-    "level_one_category": {
-      "id": "679b8f63da26810c5e3a5f1b",
-      "is_archived": false,
-      "short_name": "living-room",
-      "category": {
-        "id": "678baf2cc8ecd5bc994edc60",
-        "is_archived": false,
-        "short_name": "home",
-        "name": "Home",
-        "description": "Home Furniture",
-        "images": [
-          "static/images/categories/level-one/home/0.webp",
-          "static/images/categories/level-one/home/1.webp",
-          "static/images/categories/level-one/home/2.webp"
-        ]
-      },
-      "name": "Living Room",
-      "description": "Living room furniture",
-      "images": [
-        "static/images/categories/level-two/living-room/0.webp",
-        "static/images/categories/level-two/living-room/1.webp",
-        "static/images/categories/level-two/living-room/2.webp"
-      ]
-    }
-  },
-  "dimensions": {
-    "id": null,
-    "is_archived": false,
-    "short_name": null,
-    "width": 350,
-    "height": 450,
-    "depth": 400,
-    "length": 1500,
-    "weight": null
-  },
-  "is_new": true,
-  "price": 150,
-  "currency": "USD",
-  "color_codes": [
-    "#ffffff",
-    "#0d0d0d",
-    "#d6c5a3",
-    "#c9b195"
-  ],
-  "product_variants": [
+    },
     {
       "id": null,
       "is_archived": false,
       "short_name": null,
       "color_id": "#ffffff",
-      "quantity_in_stock": 10,
-      "product_id": "67eee82ec2f0d5fe393d6e41",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134699",
       "images": [
-        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/0.webp",
-        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/1.webp",
-        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/2.webp",
-        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/3.webp",
-        "static/images/products/ffffff/67eee82ec2f0d5fe393d6e41/4.webp"
+        "static\\images\\products\\ffffff\\68856462f67a824d7e134699\\0.webp"
       ]
     },
     {
@@ -182,42 +477,663 @@
       "short_name": null,
       "color_id": "#0d0d0d",
       "quantity_in_stock": 5,
-      "product_id": "67eee82ec2f0d5fe393d6e41",
+      "product_id": "68856462f67a824d7e134699",
       "images": [
-        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/0.webp",
-        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/1.webp",
-        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/2.webp",
-        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/3.webp",
-        "static/images/products/0d0d0d/67eee82ec2f0d5fe393d6e41/4.webp"
+        "static\\images\\products\\0d0d0d\\68856462f67a824d7e134699\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#8d6750",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134699",
+      "images": [
+        "static\\images\\products\\8d6750\\68856462f67a824d7e134699\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#A89F91",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134699",
+      "images": [
+        "static\\images\\products\\A89F91\\68856462f67a824d7e134699\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134699",
+      "images": [
+        "static\\images\\products\\624f48\\68856462f67a824d7e134699\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#cfd0ce",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e134699",
+      "images": [
+        "static\\images\\products\\cfd0ce\\68856462f67a824d7e134699\\0.webp"
       ]
     }
   ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 7,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e13469a"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "4d-chest",
+  "name": "4D Chest",
+  "description": "4 drawer chest of drawer",
+  "category": {
+    "id": "679ce2fbb50d498d99a59191",
+    "is_archived": false,
+    "short_name": "chest-of-drawers",
+    "name": "Chest of Drawers",
+    "description": "Stunning Chest of drawers of all sizes",
+    "images": [
+      "static\\images\\categories\\level-three\\chest-of-drawers\\0.webp",
+      "static\\images\\categories\\level-three\\chest-of-drawers\\1.webp",
+      "static\\images\\categories\\level-three\\chest-of-drawers\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "679ce016c4a46633d8d871ae",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+      "images": [
+        "static\\images\\categories\\level-two\\bedroom\\0.webp",
+        "static\\images\\categories\\level-two\\bedroom\\1.webp",
+        "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 400,
+    "height": 650,
+    "depth": 400,
+    "length": 400,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 260,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469a",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469a\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469a\\1.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 10,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e13469b"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "wooden-headboard-double",
+  "name": "Classic Panel Headboard (Double)",
+  "description": "Elevate your bedroom decor with this timeless Classic Panel Headboard finished in rich African Wenge. Designed for durability and simplicity, this headboard features a wide central panel framed by sturdy vertical supports and a clean, straight-edged top. The wood grain texture enhances its natural elegance, making it a perfect fit for both modern and traditional interiors. Ideal for queen or double beds, this headboard brings warmth and sophistication to any room.",
+  "category": {
+    "id": "67eed619c2f0d5fe393d6e3e",
+    "is_archived": false,
+    "short_name": "headboards",
+    "name": "Headboards",
+    "description": "Fancy but affordable headboard designs.",
+    "images": [
+      "static\\images\\categories\\level-three\\headboards\\0.webp",
+      "static\\images\\categories\\level-three\\headboards\\1.webp",
+      "static\\images\\categories\\level-three\\headboards\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eec026c2f0d5fe393d6e39",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+      "images": [
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 16,
+    "height": 1350,
+    "depth": 32,
+    "length": 1370,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 130,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469b",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\1.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\2.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469b\\3.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469b",
+      "images": [
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469b\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#3A2E2A",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469b",
+      "images": [
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469b\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#A89F91",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469b",
+      "images": [
+        "static\\images\\products\\A89F91\\68856462f67a824d7e13469b\\0.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#B2B1AD",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469b",
+      "images": [
+        "static\\images\\products\\B2B1AD\\68856462f67a824d7e13469b\\0.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 11,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e13469c"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "wooden-headboard-queen",
+  "name": "Classic Panel Headboard(Queen)",
+  "description": "Elevate your bedroom decor with this timeless Classic Panel Headboard finished in rich African Wenge. Designed for durability and simplicity, this headboard features a wide central panel framed by sturdy vertical supports and a clean, straight-edged top. The wood grain texture enhances its natural elegance, making it a perfect fit for both modern and traditional interiors. Ideal for queen or double beds, this headboard brings warmth and sophistication to any room.",
+  "category": {
+    "id": "67eed619c2f0d5fe393d6e3e",
+    "is_archived": false,
+    "short_name": "headboards",
+    "name": "Headboards",
+    "description": "Fancy but affordable headboard designs.",
+    "images": [
+      "static\\images\\categories\\level-three\\headboards\\0.webp",
+      "static\\images\\categories\\level-three\\headboards\\1.webp",
+      "static\\images\\categories\\level-three\\headboards\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eec026c2f0d5fe393d6e39",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+      "images": [
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 16,
+    "height": 1350,
+    "depth": 32,
+    "length": 1520,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 170,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469c",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\1.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469c\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#D8D1C5",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469c",
+      "images": [
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\0.webp",
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\1.webp",
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e13469c\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#3A2E2A",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469c",
+      "images": [
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\0.webp",
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\1.webp",
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469c\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#8d6750",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469c",
+      "images": [
+        "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\0.webp",
+        "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\1.webp",
+        "static\\images\\products\\8d6750\\68856462f67a824d7e13469c\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469c",
+      "images": [
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\0.webp",
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\1.webp",
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469c\\2.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 2,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e13469d"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "wooden-headboard-king",
+  "name": "Classic Panel Headboard (King)",
+  "description": "Elevate your bedroom decor with this timeless Classic Panel Headboard finished in rich African Wenge. Designed for durability and simplicity, this headboard features a wide central panel framed by sturdy vertical supports and a clean, straight-edged top. The wood grain texture enhances its natural elegance, making it a perfect fit for both modern and traditional interiors. Ideal for queen or double beds, this headboard brings warmth and sophistication to any room.",
+  "category": {
+    "id": "67eed619c2f0d5fe393d6e3e",
+    "is_archived": false,
+    "short_name": "headboards",
+    "name": "Headboards",
+    "description": "Fancy but affordable headboard designs.",
+    "images": [
+      "static\\images\\categories\\level-three\\headboards\\0.webp",
+      "static\\images\\categories\\level-three\\headboards\\1.webp",
+      "static\\images\\categories\\level-three\\headboards\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eec026c2f0d5fe393d6e39",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Bedroom decor including bedside tables, chest of drawers, and so much more,",
+      "images": [
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\0.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\1.webp",
+        "static\\images\\categories\\level-one\\bedroom\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 16,
+    "height": 1350,
+    "depth": 32,
+    "length": 1830,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 220,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469d",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469d\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469d\\1.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#624f48",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469d",
+      "images": [
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469d\\0.webp",
+        "static\\images\\products\\624f48\\68856462f67a824d7e13469d\\1.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#3A2E2A",
+      "quantity_in_stock": 1,
+      "product_id": "68856462f67a824d7e13469d",
+      "images": [
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469d\\0.webp",
+        "static\\images\\products\\3A2E2A\\68856462f67a824d7e13469d\\1.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
   "discount": null,
   "views": 1,
   "material": "663e701bc2d2b8bcb6bfd9ef"
 },
 {
   "_id": {
-    "$oid": "67eee944c2f0d5fe393d6e42"
+    "$oid": "68856462f67a824d7e13469e"
   },
   "id": null,
   "is_archived": false,
-  "short_name": "savannah-pine-steel",
-  "name": "Savannah Pine and Steel Tv Stand",
-  "description": "Simple, elegant but strong tv stand with steel legs.",
+  "short_name": "1-drawer-bedside",
+  "name": "1Drawer Bedside",
+  "description": "Keep your essentials within reach with this sleek Modern Bedside Cabinet in a sophisticated matte black finish. It features a spacious open shelf for quick access to books, devices, or d?or, and a lower cabinet with a smooth door and a stylish gold-tone knob for concealed storage. The compact, minimalist design makes it a perfect fit for bedrooms, offices, or living areas with limited space.",
   "category": {
-    "id": "679b902cda26810c5e3a5f1c",
+    "id": "679ce361b50d498d99a59192",
     "is_archived": false,
-    "short_name": "tv-stands",
-    "name": "TV Stands",
-    "description": "From basic  to premium , there are plenty to choose from all types.",
+    "short_name": "bedsides",
+    "name": "Bedside Pedestals",
+    "description": "Beautiful bedside tables",
     "images": [
-      "static/images/categories/level-three/tv-stands/0.webp",
-      "static/images/categories/level-three/tv-stands/1.webp",
-      "static/images/categories/level-three/tv-stands/2.webp"
+      "static\\images\\categories\\level-three\\bedsides\\0.webp",
+      "static\\images\\categories\\level-three\\bedsides\\1.webp",
+      "static\\images\\categories\\level-three\\bedsides\\2.webp"
     ],
     "level_one_category": {
-      "id": "679b8f63da26810c5e3a5f1b",
+      "id": "679ce016c4a46633d8d871ae",
+      "is_archived": false,
+      "short_name": "bedroom",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Bedroom",
+      "description": "Chest of drawers, Wardrobes, Bedsides, dressers.",
+      "images": [
+        "static\\images\\categories\\level-two\\bedroom\\0.webp",
+        "static\\images\\categories\\level-two\\bedroom\\1.webp",
+        "static\\images\\categories\\level-two\\bedroom\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 320,
+    "height": 650,
+    "depth": 350,
+    "length": 350,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 65,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#c9b195",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469e",
+      "images": [
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\0.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\1.webp",
+        "static\\images\\products\\c9b195\\68856462f67a824d7e13469e\\2.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 1,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e13469f"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "pine-steel",
+  "name": "Pine and Steel",
+  "description": "Tv stand with varnished pine and painted steel legs",
+  "category": {
+    "id": "67eed26fc2f0d5fe393d6e3a",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "Tv Stands",
+    "description": "Beautiful tv stands in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
       "is_archived": false,
       "short_name": "living-room",
       "category": {
@@ -227,17 +1143,17 @@
         "name": "Home",
         "description": "Home Furniture",
         "images": [
-          "static/images/categories/level-one/home/0.webp",
-          "static/images/categories/level-one/home/1.webp",
-          "static/images/categories/level-one/home/2.webp"
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
         ]
       },
       "name": "Living Room",
-      "description": "Living room furniture",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
       "images": [
-        "static/images/categories/level-two/living-room/0.webp",
-        "static/images/categories/level-two/living-room/1.webp",
-        "static/images/categories/level-two/living-room/2.webp"
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
       ]
     }
   },
@@ -246,8 +1162,8 @@
     "is_archived": false,
     "short_name": null,
     "width": 350,
-    "height": 340,
-    "depth": 300,
+    "height": 400,
+    "depth": 0,
     "length": 1500,
     "weight": null
   },
@@ -255,10 +1171,434 @@
   "price": 280,
   "currency": "USD",
   "color_codes": [
-    "#fec76j"
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
   ],
-  "product_variants": [],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#fec76j",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e13469f",
+      "images": [
+        "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\0.webp",
+        "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\1.webp",
+        "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\2.webp",
+        "static\\images\\products\\fec76j\\68856462f67a824d7e13469f\\3.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
   "discount": null,
-  "views": 1,
+  "views": 103,
   "material": "66db2ae059c1f33bc0754e22"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e1346a0"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "4d-pattern",
+  "name": "4D Pattern",
+  "description": "Coffee Table",
+  "category": {
+    "id": "67eed26fc2f0d5fe393d6e3a",
+    "is_archived": false,
+    "short_name": "tv-stands",
+    "name": "Tv Stands",
+    "description": "Beautiful tv stands in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\tv-stands\\0.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\1.webp",
+      "static\\images\\categories\\level-three\\tv-stands\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 400,
+    "height": 450,
+    "depth": 400,
+    "length": 2000,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 350,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": " #FF5733",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a0",
+      "images": [
+        "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\0.webp",
+        "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\1.webp",
+        "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\2.webp",
+        "static\\images\\products\\ FF5733\\68856462f67a824d7e1346a0\\3.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 11,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e1346a1"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "2d-pattern",
+  "name": "4D Pattern Coffee Table",
+  "description": "Coffee Table",
+  "category": {
+    "id": "67eed30dc2f0d5fe393d6e3b",
+    "is_archived": false,
+    "short_name": "coffee-tables",
+    "name": "Coffee Tables",
+    "description": "Beautiful coffee tables in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 900,
+    "height": 450,
+    "depth": 900,
+    "length": 1200,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 200,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#8d6750",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a1",
+      "images": [
+        "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\0.webp",
+        "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\1.webp",
+        "static\\images\\products\\8d6750\\68856462f67a824d7e1346a1\\2.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#D8D1C5",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a1",
+      "images": [
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\0.webp",
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\1.webp",
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\2.webp",
+        "static\\images\\products\\D8D1C5\\68856462f67a824d7e1346a1\\3.webp"
+      ]
+    },
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#A89F91",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a1",
+      "images": [
+        "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\0.webp",
+        "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\1.webp",
+        "static\\images\\products\\A89F91\\68856462f67a824d7e1346a1\\2.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 18,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e1346a2"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "t-table",
+  "name": "T Table",
+  "description": "Coffee Table",
+  "category": {
+    "id": "67eed30dc2f0d5fe393d6e3b",
+    "is_archived": false,
+    "short_name": "coffee-tables",
+    "name": "Coffee Tables",
+    "description": "Beautiful coffee tables in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 600,
+    "height": 550,
+    "depth": 600,
+    "length": 1200,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 240,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#d6c5a3",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a2",
+      "images": [
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\0.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\1.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\2.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a2\\3.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 8,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
+},
+{
+  "_id": {
+    "$oid": "68856462f67a824d7e1346a3"
+  },
+  "id": null,
+  "is_archived": false,
+  "short_name": "primero",
+  "name": "Primero Coffee Table",
+  "description": "Coffee Table",
+  "category": {
+    "id": "67eed30dc2f0d5fe393d6e3b",
+    "is_archived": false,
+    "short_name": "coffee-tables",
+    "name": "Coffee Tables",
+    "description": "Beautiful coffee tables in melamine and pine wood variants.",
+    "images": [
+      "static\\images\\categories\\level-three\\coffee-tables\\0.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\1.webp",
+      "static\\images\\categories\\level-three\\coffee-tables\\2.webp"
+    ],
+    "level_one_category": {
+      "id": "67eebf21c2f0d5fe393d6e38",
+      "is_archived": false,
+      "short_name": "living-room",
+      "category": {
+        "id": "678baf2cc8ecd5bc994edc60",
+        "is_archived": false,
+        "short_name": "home",
+        "name": "Home",
+        "description": "Home Furniture",
+        "images": [
+          "static\\images\\categories\\level-one\\home\\0.webp",
+          "static\\images\\categories\\level-one\\home\\1.webp",
+          "static\\images\\categories\\level-one\\home\\2.webp"
+        ]
+      },
+      "name": "Living Room",
+      "description": "Living room decor including tv stands, coffee tables and much more.",
+      "images": [
+        "static\\images\\categories\\level-one\\living-room\\living-room\\0.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\1.webp",
+        "static\\images\\categories\\level-one\\living-room\\living-room\\2.webp"
+      ]
+    }
+  },
+  "dimensions": {
+    "id": null,
+    "is_archived": false,
+    "short_name": null,
+    "width": 600,
+    "height": 350,
+    "depth": 600,
+    "length": 1200,
+    "weight": null
+  },
+  "is_new": true,
+  "price": 220,
+  "currency": "USD",
+  "color_codes": [
+    "#d6c5a3",
+    "#cfd0ce",
+    "#f3eac3",
+    "#624f48",
+    "#ffffff",
+    "#0d0d0d",
+    "#c9b195",
+    "#8d6750",
+    "#A89F91",
+    "#5C4033",
+    "#3A2E2A"
+  ],
+  "product_variants": [
+    {
+      "id": null,
+      "is_archived": false,
+      "short_name": null,
+      "color_id": "#d6c5a3",
+      "quantity_in_stock": 5,
+      "product_id": "68856462f67a824d7e1346a3",
+      "images": [
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\0.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\1.webp",
+        "static\\images\\products\\d6c5a3\\68856462f67a824d7e1346a3\\2.webp"
+      ]
+    }
+  ],
+  "product_features": [],
+  "product_reviews": [],
+  "discount": null,
+  "views": 7,
+  "material": "663e701bc2d2b8bcb6bfd9ef"
 }]

@@ -14,9 +14,9 @@
   "name": "Home",
   "description": "Home Furniture",
   "images": [
-    "static/images/categories/level-one/home/0.webp",
-    "static/images/categories/level-one/home/1.webp",
-    "static/images/categories/level-one/home/2.webp"
+    "static\\images\\categories\\level-one\\home\\0.webp",
+    "static\\images\\categories\\level-one\\home\\1.webp",
+    "static\\images\\categories\\level-one\\home\\2.webp"
   ]
 },
 {
@@ -35,8 +35,8 @@
   "name": "office",
   "description": "Office Furniture",
   "images": [
-    "static/images/categories/level-one/office/0.webp",
-    "static/images/categories/level-one/office/1.webp",
-    "static/images/categories/level-one/office/2.webp"
+    "static\\images\\categories\\level-one\\office\\0.webp",
+    "static\\images\\categories\\level-one\\office\\1.webp",
+    "static\\images\\categories\\level-one\\office\\2.webp"
   ]
 }]
