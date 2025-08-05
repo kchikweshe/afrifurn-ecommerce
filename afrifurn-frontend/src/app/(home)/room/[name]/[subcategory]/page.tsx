@@ -16,11 +16,11 @@ export function formatSubcategoryName(slug: string): string {
 
 // ✅ SEO Metadata Function
 export async function generateMetadata(
-    { params }: PageProps
+    { params }: { params: Promise<{ shortName: string ,subcategory:string,name:string}> }
 ): Promise<Metadata> {
 
 
-    const { name, subcategory } = params;
+    const { name, subcategory } = await params;
 
     const formattedName = formatSubcategoryName(subcategory);
     const fullUrl = `https://afri-furn.co.zw/room/${name}/${subcategory}`
