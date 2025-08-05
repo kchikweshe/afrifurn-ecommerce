@@ -11,14 +11,15 @@ interface PageProps {
 }
 // ✅ SEO Metadata Function
 export async function generateMetadata(
-    { params }: PageProps
+    { params }: { params: Promise<{ shortName: string ,subcategory:string,name:string}> }
+
 ): Promise<Metadata> {
 
 
-    const { name } = params;
+    const { name } = await params;
 
     const formattedName = formatSubcategoryName(name);
-    const fullUrl = `https://afri-furn.co.zw/room/${name}/`
+    const fullUrl = `https://afri-furn.co.zw/room/${name}`
     console.log(fullUrl)
     return {
         title: `${formattedName} | Afri Furn`,
