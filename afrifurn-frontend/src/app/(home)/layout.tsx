@@ -35,28 +35,19 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <DataProvider>
-
         <CartProvider>
-
-
-
+          
           <Header logoUrl={logoUrl} />
-          <div className='bg-gray-50 px-6 text-sm md:text-base'>
+          <div className='bg-secondary  text-sm md:text-base'>
             {usePathname() !== '/' && <Breadcrumbs />}
           </div>
-
-
-          <main className={"mx-6"}>
+          <main className={" mx-3 "}>
             {children}
           </main>
-
           <Footer />
           <Toaster />
         </CartProvider>
       </DataProvider>
     </AuthProvider>
-
-
-
   );
 }

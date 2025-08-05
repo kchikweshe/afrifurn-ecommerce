@@ -27,11 +27,14 @@ export function ProductList({ products, productsPerPage = 12 }: ProductListProps
     return (
         <div>
             <div >
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {currentProducts.map((product) => (
-                        <Link href={`/room/${product.category.level_one_category.short_name}/${product.category.short_name}/${product.short_name}`} key={product._id}>
-                            <ProductCard key={product._id} product={product} />
-                        </Link>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {currentProducts.map((product, idx) => (
+                        <div className={" rounded-2xl"} key={idx}>
+                            <Link href={`/room/${product.category.level_one_category.short_name}/${product.category.short_name}/${product.short_name}`} key={product._id}>
+                                <ProductCard key={product._id} product={product} />
+                            </Link>
+                        </div>
+
                     ))}
                 </div>
             </div>

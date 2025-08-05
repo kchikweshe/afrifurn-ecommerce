@@ -39,7 +39,7 @@ export default function Breadcrumbs() {
   ]
 
   return (
-    <nav className="py-0.5 px-1 bg-gray-50" aria-label="Breadcrumb">
+    <nav className="p-4  bg-gray-50" aria-label="Breadcrumb">
       <ol className="flex items-center space-x-0.5 px-0 py-0 text-xs md:text-sm leading-tight">
         {crumbs.map((crumb, idx) => (
           <li key={crumb.href} className="flex items-center">
@@ -49,7 +49,7 @@ export default function Breadcrumbs() {
             {idx < crumbs.length - 1 ? (
               <Link
                 href={crumb.href}
-                className="text-gray-500 hover:text-primary-600 transition-colors px-0.5 py-0 rounded font-normal text-xs md:text-sm"
+                className="text-gray-500  hover:text-primary-600 transition-colors px-0.5 py-0 rounded font-normal text-xs md:text-sm"
               >
                 {crumb.name}
               </Link>

@@ -156,7 +156,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
 
     return (
         <>
-            <header className="bg-white shadow-sm w-full z-50 text-base">
+            <header className="bg-[#ffffffe5] shadow-sm w-full z-50 text-base px-3">
                 <div className="mx-auto flex items-center justify-between h-24 px-2 md:px-6 relative">
                     {/* Left: Menu (mobile) */}
                     <div className="flex items-center gap-2 min-w-0 md:static absolute left-0 top-0 h-full z-10">
@@ -170,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                         </Button>
                     </div>
                     {/* Center: Logo (always centered on mobile, left on desktop) */}
-                    <div className="flex flex-shrink-0 justify-center  absolute md:static left-0 right-0 top-0 h-full pointer-events-none md:pointer-events-auto">
+                    <div className="flex  flex-shrink-0 justify-center  absolute md:static left-3 right-0 top-0 h-full pointer-events-none md:pointer-events-auto">
                         <div className="pointer-events-auto flex items-center">
                             <Link href="/" className="flex items-center min-w-0 ">
                                 <Image
@@ -185,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     </div>
                     {/* Center: SearchBar (desktop only) */}
                     <div className="hidden md:flex flex-1 justify-center px-4">
-                        <div className="w-full">
+                        <div className="w-5/6">
                             <SearchBar />
                         </div>
                     </div>
@@ -196,11 +196,11 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                             <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
                             <Link href="/deals" className="text-gray-700 hover:text-primary transition-colors">Sales</Link>
                         </nav>
-                        <UserMenu
+                        {/* <UserMenu
                             isAuthenticated={user != null}
                             userImage={user?.photoURL}
                             userName={user?.displayName}
-                        />
+                        /> */}
                         <div className="relative">
                             <button
                                 className="relative text-gray-700 hover:text-primary transition-colors"
@@ -245,17 +245,13 @@ const Header: React.FC<HeaderProps> = ({ logoUrl }) => {
                     { name: "Sales", href: "/deals" }
                 ]}
                 logo={
-                    <div className="relative h-12 w-24">
-                        <Image
-                            src={logoUrl}
-                            alt="Afrifurn Logo"
-                            fill
-                            className="object-contain"
-                            priority
-                            sizes="96px"
-                            quality={90}
-                        />
-                    </div>
+                    <Image
+                    src={logoUrl}
+                    alt="Afrifurn Logo"
+                    width={128}
+                    height={128}
+                    className="h-22 w-full object-contain"
+                />
                 }
             />
             <MobileSearchModal />

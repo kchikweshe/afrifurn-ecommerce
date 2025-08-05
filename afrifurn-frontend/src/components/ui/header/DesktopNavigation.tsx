@@ -6,9 +6,9 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 interface DesktopNavigationProps {
-    mainCategories: Category[]|undefined;
-    level_one_categories: Level1Category[]|undefined;
-    level_two_categories: Level2Category[]|undefined;
+    mainCategories: Category[] | undefined;
+    level_one_categories: Level1Category[] | undefined;
+    level_two_categories: Level2Category[] | undefined;
     hoveredCategory: string | null;
     setHoveredCategory: (data: string | null) => void;
 }
@@ -76,7 +76,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
                             <div
                                 className={`
                                     absolute left-1/2 -translate-x-1/2 mt-2
-                                    w-[1100px] max-w-screen-xl
+                                     max-w-screen-xl
                                     bg-white rounded-2xl shadow-2xl border border-gray-100
                                     transition-all duration-300 ease-in-out transform origin-top z-50
                                     overflow-hidden
@@ -93,7 +93,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
                                     <div className="w-4 h-4 bg-white border-t border-l border-gray-100 rotate-45 shadow-md"></div>
                                 </div>
                                 <div className="p-12 pt-8">
-                                    <div className="grid grid-cols-5 gap-x-12 gap-y-10">
+                                    <div className="grid grid-cols-3 gap-3">
                                         {getLevelOneByMainCategory(category._id).map((levelOne) => (
                                             <div key={levelOne._id} className="space-y-5">
                                                 {/* Level One Category as header */}
@@ -119,7 +119,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
                                                 {/* View All link */}
                                                 <Link
                                                     href={`/room/${levelOne.short_name}`}
-                                                    className="block text-sm text-primary font-semibold mt-4 hover:underline"
+                                                    className="block  text-sm text-primary font-semibold mt-4 hover:underline"
                                                 >
                                                     View All &rarr;
                                                 </Link>

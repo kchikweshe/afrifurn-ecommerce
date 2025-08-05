@@ -31,8 +31,8 @@ export const FilterSection = React.forwardRef<HTMLDivElement, FilterSectionProps
             <div className="flex flex-wrap gap-4 items-center justify-between">
 
                 <div className="flex flex-wrap gap-4 items-center">
-               {categories.length > 0 && <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories}/> }
-                {/* <Select onValueChange={(value) => onFilterChange({ sort_by: value })}>
+                    {categories.length > 0 && <Level2CategoriesFilter onFilterChange={onFilterChange} arr={categories} />}
+                    {/* <Select onValueChange={(value) => onFilterChange({ sort_by: value })}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Sort by Name" />
                         </SelectTrigger>
@@ -91,8 +91,8 @@ const ColorFilter = ({ colors, selectedColors, onColorToggle }: { colors: any[],
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
             <ScrollArea className="h-[300px] p-4">
-                {colors.map((color) => (
-                    <div key={color.color_code} className="flex items-center space-x-2 mb-2">
+                {colors.sort((a, b) => a.name.localeCompare(b.name)).map((color) => (
+                    <div key={color.color_code} className="flex items-center space-x-2 py-1 mb-2">
                         <Checkbox
                             id={`color-${color.color_code}`}
                             checked={selectedColors.includes(color.color_code as string)}
@@ -106,7 +106,7 @@ const ColorFilter = ({ colors, selectedColors, onColorToggle }: { colors: any[],
                                 className="w-4 h-4 rounded-full mr-2"
                                 style={{ backgroundColor: color.color_code as string }}
                             />
-                            <span>{color.name}</span>
+                            <span className={"font-normal"}>{color.name}</span>
                         </label>
                     </div>
                 ))}
@@ -125,8 +125,8 @@ const MaterialFilter = ({ materials, selectedMaterials, onMaterialToggle }: { ma
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
             <ScrollArea className="h-[300px] p-4">
-                {materials.map((material: Material) => (
-                    <div key={material._id} className="flex items-center space-x-2 mb-2">
+                {materials.sort((a, b) => a.name.localeCompare(b.name)).map((material: Material) => (
+                    <div key={material._id} className="flex items-center space-x-2 mb-2 p-1">
                         <Checkbox
                             id={`material-${material._id}`}
                             className='text-base font-semibold'
@@ -154,25 +154,27 @@ const Level2CategoriesFilter = ({
     onFilterChange: (filters: Partial<FilterParams>) => void;
 }) => (
     <Select
-    onValueChange={(value) =>
-        onFilterChange({
-            category_short_name: value === "" ? undefined : value,
-        })
-    }
->
-    <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select Category" />
-    </SelectTrigger>
-    <SelectContent>
-        {arr.map((cat: Level2Category) => (
-            <SelectItem key={cat.short_name} value={cat.short_name}>
-                <span className='text-base font-semibold'>
-                    {cat.name}
-                </span>
-            </SelectItem>
-        ))}
-    </SelectContent>
-</Select>
+    
+        onValueChange={(value) =>
+            onFilterChange({
+                category_short_name: value === "" ? undefined : value,
+            })
+        }
+        
+    >
+        <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Category" />
+        </SelectTrigger>
+        <SelectContent className={"p-2"}>
+            {arr.sort((a, b) => a.name.localeCompare(b.name)).map((cat: Level2Category) => (
+                <SelectItem key={cat.short_name} value={cat.short_name}>
+                    <span className='text-base px-3'>
+                        {cat.name}
+                    </span>
+                </SelectItem>
+            ))}
+        </SelectContent>
+    </Select>
 );
 
 const PriceFilter = ({ startPrice, endPrice, onPriceChange }: { startPrice: number, endPrice: number, onPriceChange: (start: number, end: number) => void }) => (

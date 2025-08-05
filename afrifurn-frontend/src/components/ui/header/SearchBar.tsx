@@ -62,7 +62,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     };
 
     return (
-        <div className="md:w-full relative">
+        <div className="md:w-full relative bg-[#fffffff6] ">
             <div className="relative " ref={containerRef}>
                 <div 
                     className={`
@@ -84,8 +84,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
                             if (searchTerm) setIsOpen(true);
                         }}
                         placeholder="Search products..."
-                        className="border-0 focus:ring-0 focus:outline-none bg-transparent h-12 px-3 text-base font-medium placeholder:text-gray-400/80"
-                        autoComplete="off"
+                        className="rounded-full border-0 focus:ring-0 focus:outline-none  h-12 px-3 text-base font-medium placeholder:text-gray-400/80"
+                        autoComplete="on"
                     />
                     {searchTerm && (
                         <button
@@ -99,7 +99,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 </div>
                 
                 {isOpen && (
-                    <div className="absolute left-0 right-0 mt-2 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200/70 max-h-[calc(100vh-180px)] overflow-y-auto z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-200/70 max-h-[calc(100vh-180px)] overflow-y-auto z-30 animate-in fade-in slide-in-from-top-2 duration-200">
                         {loading ? (
                             <div className="p-6 text-center text-gray-500">
                                 <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-primary mx-auto"></div>

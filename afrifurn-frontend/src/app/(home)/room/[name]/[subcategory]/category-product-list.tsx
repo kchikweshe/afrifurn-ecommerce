@@ -115,10 +115,13 @@ export function CategoryProductsGrid({ categoryProducts, short_name }: { categor
                         <>
                             <p className="text-sm mb-4">{filteredProducts?.length || 0} products</p>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-3">
                                 {currentProducts?.map((product) => (
-                                    <Link href={'/room/' +product.category.level_one_category.short_name+'/'+product.category.short_name+'/'+ product.short_name} key={product._id}>
-                                        <ProductCard key={product._id} product={product} />
+                                    <Link href={'/room/' + product.category.level_one_category.short_name + '/' + product.category.short_name + '/' + product.short_name} key={product._id}>
+                                        <div key={product._id}>
+                                            <ProductCard product={product} />
+
+                                        </div>
                                     </Link>
                                 ))}
                             </div>
