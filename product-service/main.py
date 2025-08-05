@@ -2,7 +2,6 @@ import logging
 import os
 import time
 from starlette.middleware.base import BaseHTTPMiddleware
-from decorators.redis_provider import RedisCacheProvider
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -12,7 +11,7 @@ from config.eureka import get_app_info, lifespan
 from constants.paths import STATIC_DIR
 from routers import api_router
 
-from fastapi import Header, HTTPException, Depends
+from fastapi import Header, HTTPException
 
 API_KEY = "your-super-secret-api-key"
 

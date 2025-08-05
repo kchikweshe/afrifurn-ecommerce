@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     service_name: str = "product-service"
     service_port: int = 8000
 
-    model_config = SettingsConfigDict(env_file=".env", extra='allow')
+    model_config = SettingsConfigDict(env_file=".env.production", extra='allow')
 
 @lru_cache()
 def get_settings() -> Settings:
