@@ -16,6 +16,8 @@ from models.products import CategoryProducts, Dimensions, Product, ProductFeatur
 from models.common import ResponseModel
 from utils.query_builder import build_product_query
 from database import db
+
+
 API_KEY = "your-super-secret-api-key"
 
 def verify_api_key(x_api_key: str = Header(...)):

@@ -1,13 +1,13 @@
 from typing import Optional
 from fastapi import UploadFile, HTTPException
-from services.base_service import BaseService
 from services.image_processor import ColorImageProcessor
 from services.repository.color_repository import ColorRepository
 from models.products import Color
+from core.interfaces import IService
 
-class ColorService(BaseService[Color]):
+class ColorService(IService[Color]):
     def __init__(self, repository: ColorRepository):
-        super().__init__(repository=repository)
+        self.repository=repository
         self.image_processor = ColorImageProcessor()
 
     async def create(self, name: str, color_code: str, image: UploadFile) -> bool:
@@ -23,14 +23,10 @@ class ColorService(BaseService[Color]):
             )
 
             # Create a Color object
-            color = Color(
-                name=name,
-                color_code=color_code,
-                image=image_path
-            )
+          
 
             # Save the color to the repository
-            is_created = await super().create(color)
+            is_created = await self.repository.create_color(color_code=color_code, image=image, name=name)
             if not is_created:
                 raise HTTPException(status_code=500, detail="Failed to create color")
 

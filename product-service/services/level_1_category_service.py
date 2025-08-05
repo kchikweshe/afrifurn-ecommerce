@@ -5,17 +5,18 @@ from typing import Any, Coroutine, List
 from fastapi import UploadFile
 from constants.paths import LEVEL_ONE_IMAGES_DIR, PRODUCT_IMAGES_DIR
 from models.products import Level1Category
-from services.base_service import BaseService
 from services.image_processor import WebPImageProcessor
 from services.repository.level_1_category_repository import Level1CategoryRepository
-class Level1CategoryService(BaseService[Level1Category]):
+from core.interfaces import IService
+
+class Level1CategoryService(IService[Level1Category]):
 
     def __init__(
         self,
         repository: Level1CategoryRepository,
         image_proccessor:WebPImageProcessor
     ):
-        super().__init__(repository=repository)
+        self.repository=repository
         self.image_proccessor=image_proccessor
 
   

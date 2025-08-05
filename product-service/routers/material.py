@@ -42,7 +42,6 @@ async def create_material(
 
 @router.get("/{name}", response_model=Material)
 @cache_response(key="material", response_model=Material)
-
 async def get_material(name: str):
     """Get a material by name"""
     try:
