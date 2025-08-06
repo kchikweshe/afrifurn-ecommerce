@@ -52,7 +52,7 @@ services:
     ports:
       - 8761:8761
     volumes:
-      - /etc/letsencrypt/live/afri-furn.co.zw:/app/ssl:ro
+      - /etc/letsencrypt/archive/afri-furn.co.zw:/app/ssl:ro
     
   api-gateway:
     container_name: api-gateway
@@ -68,7 +68,7 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - /etc/letsencrypt/live/afri-furn.co.zw:/app/ssl:ro
+      - /etc/letsencrypt/archive/afri-furn.co.zw:/app/ssl:ro
     depends_on:
       - eureka-service
   product-service:
@@ -129,7 +129,7 @@ services:
       - afrifurn-network
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /etc/letsencrypt/live/afri-furn.co.zw:/etc/nginx/ssl:ro
+      - /etc/letsencrypt/archive/afri-furn.co.zw:/etc/nginx/ssl:ro
       # - ./data/certbot/conf:/etc/letsencrypt
       # - ./data/certbot/www:/var/www/certbot
 
