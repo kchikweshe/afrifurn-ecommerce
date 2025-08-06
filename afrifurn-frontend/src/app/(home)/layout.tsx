@@ -41,7 +41,7 @@ export default function RootLayout({
           <div className='bg-secondary  text-sm md:text-base'>
             {usePathname() !== '/' && <Breadcrumbs />}
           </div>
-          <main className={" mx-3 "}>
+          <main className={" mx-3"}>
             {children}
           </main>
           <Footer />

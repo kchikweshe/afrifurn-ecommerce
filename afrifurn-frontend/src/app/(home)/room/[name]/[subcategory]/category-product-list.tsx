@@ -114,17 +114,24 @@ export function CategoryProductsGrid({ categoryProducts, short_name }: { categor
                     ) : (
                         <>
                             <p className="text-sm mb-4">{filteredProducts?.length || 0} products</p>
+                            <div className="h-[70vh] 
+                overflow-y-auto
+                 pr-1 scroll-smooth 
+                 scrollbar-thin 
+                 scrollbar-thumb-gray-400 
+                 scrollbar-track-transparent">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-3">
+                                    {currentProducts?.map((product) => (
+                                        <Link href={'/room/' + product.category.level_one_category.short_name + '/' + product.category.short_name + '/' + product.short_name} key={product._id}>
+                                            <div key={product._id}>
+                                                <ProductCard product={product} />
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-3">
-                                {currentProducts?.map((product) => (
-                                    <Link href={'/room/' + product.category.level_one_category.short_name + '/' + product.category.short_name + '/' + product.short_name} key={product._id}>
-                                        <div key={product._id}>
-                                            <ProductCard product={product} />
-
-                                        </div>
-                                    </Link>
-                                ))}
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
+
 
                             {totalPages > 1 && (
                                 <Pagination

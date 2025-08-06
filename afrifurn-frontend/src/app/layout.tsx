@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="en" >
 
 
-      <body className={`${inter.className}  bg-[#fffffff6]  text-gray-800  text-base`}>
+      <body className={`${inter.className}  bg-[#ffffffb6]  text-gray-800  text-base`}>
         {children}
         <Toaster />
       </body>

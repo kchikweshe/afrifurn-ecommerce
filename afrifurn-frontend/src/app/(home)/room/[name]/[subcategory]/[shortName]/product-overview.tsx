@@ -160,7 +160,7 @@ export default function ProductOverview({ product }: ProductOverviewProps) {
     }
 
     return (
-        <div className=" px-2 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-9 items-stretch">
+        <div className="scale-[0.97] px-2 min-h-screen flex flex-col lg:flex-row gap-10 lg:gap-9 items-stretch">
             {/* Gallery */}
             <div className="relative">
                 <ProductGallery

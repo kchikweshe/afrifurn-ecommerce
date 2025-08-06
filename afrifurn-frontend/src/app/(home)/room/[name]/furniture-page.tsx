@@ -80,7 +80,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
     };
 
     return (
-        <main className="min-h-screen bg-white font-sans rounded-lg">
+        <main className="  font-sans rounded-lg">
             <div className="container mx-auto px-6 py-8">
                 <section>
                     <div className="mb-8">
@@ -113,7 +113,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                                     </span>
                                 )}
                             </div>
-                            
+
                             {/* Desktop Filter Button */}
                             <div className="hidden lg:block mb-4">
                                 <Button
@@ -126,18 +126,18 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                                 </Button>
                             </div>
                             <div className='hidden lg:block'>
-                            <FilterSection
-                                isVisible={isFilterVisible}
-                                isSticky={false}
-                                filters={filters as any}
-                                colors={colors}
-                                categories={categories}
-                                materials={materials}
-                                onFilterChange={handleFilterChange}
-                                onClearFilters={resetFilters}
-                            />
+                                <FilterSection
+                                    isVisible={isFilterVisible}
+                                    isSticky={false}
+                                    filters={filters as any}
+                                    colors={colors}
+                                    categories={categories}
+                                    materials={materials}
+                                    onFilterChange={handleFilterChange}
+                                    onClearFilters={resetFilters}
+                                />
                             </div>
-                     
+
                         </div>
 
                         {/* Filter Section */}
@@ -146,20 +146,26 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                 </section>
 
                 {/* Product Grid/List */}
-                <div >
+                <div className="h-[70vh] 
+                overflow-y-auto
+                 pr-1 scroll-smooth 
+                 scrollbar-thin 
+                 scrollbar-thumb-gray-400 
+                 scrollbar-track-transparent">
                     <ProductList products={products || []} />
                 </div>
+
             </div>
 
             {/* Mobile Filter Modal */}
             {isMobileFilterOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
                     {/* Backdrop with blur */}
-                    <div 
+                    <div
                         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
                         onClick={toggleMobileFilters}
                     />
-                    
+
                     {/* Filter Modal */}
                     <div className="relative bg-white rounded-2xl shadow-2xl mx-4 max-w-md w-full max-h-[80vh] overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
                         <div className="p-6">
@@ -172,7 +178,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                                     <X className="h-5 w-5 text-gray-500" />
                                 </button>
                             </div>
-                            
+
                             <div className="space-y-6">
                                 <FilterSection
                                     isVisible={true}
@@ -185,7 +191,7 @@ export default function FurniturePage({ shortName, title, categories }: Furnitur
                                     onClearFilters={resetFilters}
                                 />
                             </div>
-                            
+
                             <div className="flex gap-3 mt-6 pt-4 border-t border-gray-200">
                                 <Button
                                     variant="outline"

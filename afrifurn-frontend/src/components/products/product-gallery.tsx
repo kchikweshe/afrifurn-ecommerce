@@ -19,17 +19,18 @@ export function ProductGallery({
   setMainImage
 }: ProductGalleryProps) {
   const hasMultipleImages = selectedVariant.images.length > 1;
+
   return (
-    <div className="flex flex-col gap-4">
-      {/* Main Image - Full width on mobile and desktop, taller on large screens */}
-      <div className="relative shadow-lg border rounded-2xl border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200 flex ">
-        <div className=" overflow-hidden rounded-2xl border" />
+    <div className="flex flex-col gap-3 scale-[0.97] max-w-5xl mx-auto">
+      {/* Main Image */}
+      <div className="relative shadow-md border rounded-xl border-gray-200 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-200 flex justify-center">
         <Image
           src={PRODUCT_IMAGE_URLS + selectedVariant!.images[mainImage]}
           alt={`${product.name} - ${selectedVariant.color_id} - View ${mainImage + 1}`}
-          width={800}
-          height={800}
-          className="rounded-2xl object-cover w-auto h-auto"        />
+          width={720}
+          height={720}
+          className="rounded-xl object-contain max-h-[75vh] w-full"
+        />
         {/* Left Arrow */}
         {hasMultipleImages && (
           <button
@@ -44,9 +45,8 @@ export function ProductGallery({
         {/* Right Arrow */}
         {hasMultipleImages && (
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow z-30 disabled:opacity-50"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow z-30 disabled={mainImage === selectedVariant.images.length - 1}"
             onClick={() => setMainImage(mainImage + 1)}
-            disabled={mainImage === selectedVariant.images.length - 1}
             aria-label="Next image"
           >
             <FaChevronRight className="h-5 w-5" />
@@ -54,16 +54,17 @@ export function ProductGallery({
         )}
       </div>
 
-      {/* Thumbnails - Always below the main image, fill up horizontally */}
-      <div className="flex gap-3 overflow-x-auto pb-2 justify-center w-full">
+      {/* Thumbnails */}
+      <div className="flex gap-2 md:gap-3 overflow-x-auto pb-1 justify-center w-full">
         {selectedVariant.images.map((img, index) => (
           <button
             key={index}
-            className={`flex-shrink-0 w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-lg overflow-hidden border transition-all duration-200 shadow-sm bg-white/80 hover:scale-105 hover:shadow-md ${
-              index === mainImage ? 'ring-2 ring-primary border-primary scale-105' : 'border-gray-200'
+            className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border transition-transform duration-150 shadow-sm hover:scale-105 hover:shadow-md ${
+              index === mainImage
+                ? 'ring-2 ring-primary border-primary scale-105'
+                : 'border-gray-200'
             }`}
             onClick={() => setMainImage(index)}
-            style={{ position: 'relative' }}
             aria-label={`Show image ${index + 1}`}
           >
             <div className="relative w-full h-full">
@@ -74,9 +75,6 @@ export function ProductGallery({
                 className="object-cover rounded-lg"
               />
             </div>
-            {index === mainImage && (
-              <span className="absolute inset-0 border-2 border-primary rounded-lg pointer-events-none" />
-            )}
           </button>
         ))}
       </div>
